@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Any
 import math
+from concurrent.futures import ThreadPoolExecutor
+from functools import lru_cache
 
 @dataclass
 class HouseStrength:
@@ -12,6 +14,8 @@ class HouseStrength:
     total_strength: float
     functional_nature: str  # Benefic, Malefic, Mixed
     significations: List[str]
+    temporal_strength: float  # New field for time-based strength
+    dispositorship_strength: float  # New field for dispositorship analysis
 
 class EnhancedHouseAnalysisEngine:
     def __init__(self):
@@ -82,9 +86,34 @@ class EnhancedHouseAnalysisEngine:
             'maraka': {2, 7},        # Death-inflicting houses
             'dusthana': {6, 8, 12}   # Malefic houses
         }
-    
+        
+        # Add temporal strength factors
+        self.temporal_factors = {
+            'day': {
+                'fire_houses': {1, 5, 9},  # Fire houses stronger during day
+                'air_houses': {3, 7, 11},  # Air houses moderate during day
+                'multiplier': 1.2
+            },
+            'night': {
+                'water_houses': {4, 8, 12},  # Water houses stronger at night
+                'earth_houses': {2, 6, 10},  # Earth houses moderate at night
+                'multiplier': 1.15
+            }
+        }
+        
+        # Add dispositorship relationships
+        self.dispositorship_rules = {
+            'mutual_reception': 1.3,  # Lords in mutual reception
+            'parivartana': 1.25,     # Lords exchanging houses
+            'temporary': 1.1         # Temporary dispositorship
+        }
+        
+        # Initialize thread pool for parallel calculations
+        self.executor = ThreadPoolExecutor(max_workers=4)
+
+    @lru_cache(maxsize=128)
     def _calculate_natural_strength(self, house: int) -> float:
-        """Calculate natural strength of house based on position"""
+        """Calculate natural strength of house based on position with caching"""
         base_strength = self.natural_house_strengths[house]
         
         # Modify based on special combinations
@@ -97,42 +126,71 @@ class EnhancedHouseAnalysisEngine:
         
         return min(100, base_strength)
     
-    def _calculate_occupant_strength(
+    async def _calculate_occupant_strength(
         self,
         house: int,
         occupants: List[Dict[str, Any]]
     ) -> float:
-        """Calculate strength based on planetary occupants"""
+        """Calculate strength based on planetary occupants with parallel processing"""
         if not occupants:
-            return 50  # Base strength for empty house
-        
-        total_strength = 0
+            return 50
+            
+        # Process each occupant in parallel
+        futures = []
         for planet in occupants:
-            # Base planetary strength
-            planet_strength = planet.get('strength', 50)
+            futures.append(
+                self.executor.submit(
+                    self._process_single_occupant,
+                    house,
+                    planet
+                )
+            )
             
-            # Modify based on dignity
-            dignity_factor = {
-                'exalted': 1.3,
-                'moolatrikona': 1.2,
-                'own': 1.1,
-                'friend': 1.0,
-                'neutral': 0.9,
-                'enemy': 0.8,
-                'debilitated': 0.7
-            }
-            dignity = planet.get('dignity', 'neutral')
-            planet_strength *= dignity_factor[dignity]
-            
-            # Consider retrograde status
-            if planet.get('is_retrograde', False):
-                planet_strength *= 0.9
-            
-            total_strength += planet_strength
+        # Gather results
+        strengths = [f.result() for f in futures]
+        return min(100, sum(strengths) / len(strengths))
+
+    def _process_single_occupant(
+        self,
+        house: int,
+        planet: Dict[str, Any]
+    ) -> float:
+        """Process a single occupant's strength calculation"""
+        planet_strength = planet.get('strength', 50)
         
-        # Average and normalize
-        return min(100, total_strength / len(occupants))
-    
+        # Enhanced dignity calculations
+        dignity_factor = {
+            'exalted': 1.3,
+            'moolatrikona': 1.2,
+            'own': 1.1,
+            'friend': 1.0,
+            'neutral': 0.9,
+            'enemy': 0.8,
+            'debilitated': 0.7,
+            'combust': 0.6,  # New factor for combust planets
+            'retrograde': 0.85  # Updated retrograde factor
+        }
+        
+        # Get base dignity
+        dignity = planet.get('dignity', 'neutral')
+        planet_strength *= dignity_factor[dignity]
+        
+        # Apply additional factors
+        if planet.get('is_retrograde', False):
+            planet_strength *= dignity_factor['retrograde']
+        if planet.get('is_combust', False):
+            planet_strength *= dignity_factor['combust']
+            
+        # Consider house-specific effects
+        if house in self.special_combinations['kendra']:
+            if planet.get('name') in ['Jupiter', 'Sun', 'Mars']:
+                planet_strength *= 1.1
+        elif house in self.special_combinations['trikona']:
+            if planet.get('name') in ['Jupiter', 'Venus', 'Mercury']:
+                planet_strength *= 1.05
+                
+        return planet_strength
+
     def _calculate_aspect_strength(
         self,
         house: int,
@@ -167,7 +225,7 @@ class EnhancedHouseAnalysisEngine:
         
         # Average the total strength
         return min(100, total_strength / len(aspects))
-    
+
     def _calculate_lord_strength(
         self,
         house: int,
@@ -246,44 +304,102 @@ class EnhancedHouseAnalysisEngine:
         # Default to neutral for other relationships
         return 'neutral'
     
-    def analyze_house(
+    def _calculate_temporal_strength(
+        self,
+        house: int,
+        time_of_day: str
+    ) -> float:
+        """Calculate temporal strength based on time of day"""
+        base_strength = 50
+        factors = self.temporal_factors[time_of_day]
+        
+        # Check if house belongs to element groups
+        if time_of_day == 'day':
+            if house in factors['fire_houses']:
+                base_strength *= factors['multiplier']
+            elif house in factors['air_houses']:
+                base_strength *= (factors['multiplier'] * 0.9)
+        else:  # night
+            if house in factors['water_houses']:
+                base_strength *= factors['multiplier']
+            elif house in factors['earth_houses']:
+                base_strength *= (factors['multiplier'] * 0.9)
+                
+        return min(100, base_strength)
+
+    def _calculate_dispositorship_strength(
+        self,
+        house: int,
+        lord: Dict[str, Any],
+        all_house_lords: Dict[int, Dict[str, Any]]
+    ) -> float:
+        """Calculate strength based on dispositorship relationships"""
+        base_strength = 50
+        lord_planet = lord.get('planet')
+        lord_house = lord.get('house')
+        
+        # Check for mutual reception
+        for other_house, other_lord in all_house_lords.items():
+            if other_house != house:
+                if (other_lord.get('planet') == lord_planet and 
+                    other_lord.get('house') == house):
+                    base_strength *= self.dispositorship_rules['mutual_reception']
+                    break
+                    
+        # Check for parivartana yoga
+        if lord_house in all_house_lords:
+            other_lord = all_house_lords[lord_house]
+            if other_lord.get('house') == house:
+                base_strength *= self.dispositorship_rules['parivartana']
+                
+        # Check for temporary dispositorship
+        if lord.get('temporary_ruler', False):
+            base_strength *= self.dispositorship_rules['temporary']
+            
+        return min(100, base_strength)
+
+    async def analyze_house(
         self,
         house: int,
         occupants: List[Dict[str, Any]],
         aspects: List[Dict[str, Any]],
-        lord: Dict[str, Any]
+        lord: Dict[str, Any],
+        time_of_day: str = 'day',
+        all_house_lords: Optional[Dict[int, Dict[str, Any]]] = None
     ) -> HouseStrength:
-        """
-        Perform comprehensive house analysis
-        
-        Args:
-            house: House number (1-12)
-            occupants: List of planets occupying the house
-            aspects: List of aspects to the house
-            lord: Details of house lord
-            
-        Returns:
-            HouseStrength object with analysis results
-        """
-        # Calculate component strengths
+        """Enhanced house analysis with temporal and dispositorship factors"""
+        # Calculate all strength components
         natural_strength = self._calculate_natural_strength(house)
-        occupant_strength = self._calculate_occupant_strength(house, occupants)
+        occupant_strength = await self._calculate_occupant_strength(house, occupants)
         aspect_strength = self._calculate_aspect_strength(house, aspects)
         lord_strength = self._calculate_lord_strength(house, lord)
+        temporal_strength = self._calculate_temporal_strength(house, time_of_day)
+        dispositorship_strength = self._calculate_dispositorship_strength(
+            house,
+            lord,
+            all_house_lords or {}
+        )
         
-        # Calculate total strength (weighted average)
+        # Calculate total strength with weighted components
         weights = {
-            'natural': 0.2,
-            'occupant': 0.3,
-            'aspect': 0.2,
-            'lord': 0.3
+            'natural': 0.15,
+            'occupant': 0.25,
+            'aspect': 0.15,
+            'lord': 0.20,
+            'temporal': 0.10,
+            'dispositorship': 0.15
         }
         
-        total_strength = (
-            natural_strength * weights['natural'] +
-            occupant_strength * weights['occupant'] +
-            aspect_strength * weights['aspect'] +
-            lord_strength * weights['lord']
+        total_strength = sum(
+            strength * weights[component]
+            for strength, component in [
+                (natural_strength, 'natural'),
+                (occupant_strength, 'occupant'),
+                (aspect_strength, 'aspect'),
+                (lord_strength, 'lord'),
+                (temporal_strength, 'temporal'),
+                (dispositorship_strength, 'dispositorship')
+            ]
         )
         
         return HouseStrength(
@@ -294,7 +410,9 @@ class EnhancedHouseAnalysisEngine:
             lord_strength=round(lord_strength, 2),
             total_strength=round(total_strength, 2),
             functional_nature=self.house_nature[house],
-            significations=self.house_significations[house]
+            significations=self.house_significations[house],
+            temporal_strength=round(temporal_strength, 2),
+            dispositorship_strength=round(dispositorship_strength, 2)
         )
     
     def analyze_house_combinations(

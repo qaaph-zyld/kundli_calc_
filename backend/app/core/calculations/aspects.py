@@ -80,10 +80,17 @@ class EnhancedAspectCalculator:
         planet1_speed: float,
         planet2_speed: float
     ) -> float:
-        """Calculate strength based on planetary speeds"""
-        relative_speed = abs(planet1_speed - planet2_speed)
-        return max(0, 100 - relative_speed * 10)
-    
+        """Calculate strength based on planetary speeds."""
+        speed_diff = abs(planet1_speed - planet2_speed)
+        if speed_diff < 0.1:
+            return 100.0
+        elif speed_diff < 0.5:
+            return 75.0
+        elif speed_diff < 1.0:
+            return 50.0
+        else:
+            return max(0, 100 - (speed_diff * 50))
+
     def _calculate_dignity_strength(
         self,
         planet1_dignity: str,
@@ -129,6 +136,68 @@ class EnhancedAspectCalculator:
             return 75
         return 50
     
+    def calculate_aspect_angle(self, long1: float, long2: float) -> float:
+        """Calculate the aspect angle between two longitudes."""
+        diff = abs(long1 - long2)
+        if diff > 180:
+            diff = 360 - diff
+        return diff
+
+    def is_aspect_within_orb(self, angle1: float, angle2: float, orb: float) -> bool:
+        """Check if two angles form an aspect within the given orb."""
+        return abs(angle1 - angle2) <= orb
+
+    def get_aspect_type(self, angle: float, orb: float) -> Optional[str]:
+        """Get the type of aspect based on the angle."""
+        for aspect_name, aspect in self.ASPECTS.items():
+            if aspect.is_major and self.is_aspect_within_orb(aspect.angle, angle, orb):
+                return aspect_name.lower()
+        return None
+
+    def calculate_planet_aspects(self, planet_positions: Dict[str, float], orb: float) -> List[Dict[str, Any]]:
+        """Calculate aspects between planets."""
+        aspects = []
+        planets = list(planet_positions.keys())
+
+        for i, planet1 in enumerate(planets):
+            for planet2 in planets[i+1:]:
+                angle = self.calculate_aspect_angle(
+                    planet_positions[planet1],
+                    planet_positions[planet2]
+                )
+                aspect_type = self.get_aspect_type(angle, orb)
+                if aspect_type:
+                    aspects.append({
+                        "planet1": planet1,
+                        "planet2": planet2,
+                        "angle": angle,
+                        "aspect": aspect_type,
+                        "orb": abs(angle - self.ASPECTS[aspect_type.title()].angle)
+                    })
+        return aspects
+
+    @staticmethod
+    def _is_applying(planet1: Dict[str, Any], planet2: Dict[str, Any]) -> bool:
+        """Enhanced determination of applying vs separating aspect"""
+        if "speed" not in planet1 or "speed" not in planet2:
+            return False
+            
+        # Consider both longitudinal and latitudinal motion
+        relative_speed = (
+            planet1.get("speed", 0) - planet2.get("speed", 0)
+        )
+        
+        # Consider retrograde motion
+        is_p1_retro = planet1.get("is_retrograde", False)
+        is_p2_retro = planet2.get("is_retrograde", False)
+        
+        if is_p1_retro and is_p2_retro:
+            return relative_speed > 0
+        elif is_p1_retro or is_p2_retro:
+            return relative_speed < 0
+            
+        return relative_speed < 0  # Normal case
+
     def calculate_aspect_strength(
         self,
         aspect: Aspect,
@@ -189,7 +258,7 @@ class EnhancedAspectCalculator:
         """Calculate enhanced aspects between planets"""
         aspects = []
         planets = list(planetary_positions.keys())
-        
+
         for i, planet1 in enumerate(planets):
             for planet2 in planets[i+1:]:
                 # Get planet details
@@ -199,13 +268,11 @@ class EnhancedAspectCalculator:
                 # Calculate basic angular difference
                 long1 = p1_data["longitude"]
                 long2 = p2_data["longitude"]
-                diff = abs(long1 - long2)
-                if diff > 180:
-                    diff = 360 - diff
+                diff = self.calculate_aspect_angle(long1, long2)
                 
                 # Check for aspects
                 for aspect in self.ASPECTS.values():
-                    if abs(diff - aspect.angle) <= aspect.orb:
+                    if self.is_aspect_within_orb(aspect.angle, diff, aspect.orb):
                         # Calculate if aspect is applying
                         is_applying = self._is_applying(p1_data, p2_data)
                         
@@ -258,25 +325,3 @@ class EnhancedAspectCalculator:
             aspected_houses.append(aspected_house)
         
         return aspected_houses
-    
-    @staticmethod
-    def _is_applying(planet1: Dict[str, Any], planet2: Dict[str, Any]) -> bool:
-        """Enhanced determination of applying vs separating aspect"""
-        if "speed" not in planet1 or "speed" not in planet2:
-            return False
-            
-        # Consider both longitudinal and latitudinal motion
-        relative_speed = (
-            planet1.get("speed", 0) - planet2.get("speed", 0)
-        )
-        
-        # Consider retrograde motion
-        is_p1_retro = planet1.get("is_retrograde", False)
-        is_p2_retro = planet2.get("is_retrograde", False)
-        
-        if is_p1_retro and is_p2_retro:
-            return relative_speed > 0
-        elif is_p1_retro or is_p2_retro:
-            return relative_speed < 0
-            
-        return relative_speed < 0  # Normal case

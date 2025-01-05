@@ -1,0 +1,92 @@
+name: Frontend CI
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'frontend-new/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'frontend-new/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        cache: 'npm'
+        cache-dependency-path: frontend-new/package-lock.json
+
+    - name: Install dependencies
+      run: |
+        cd frontend-new
+        npm ci
+
+    - name: Run tests
+      run: |
+        cd frontend-new
+        npm run test -- --coverage --watchAll=false
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        file: ./frontend-new/coverage/lcov.info
+        flags: frontend
+        fail_ci_if_error: true
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        cache: 'npm'
+        cache-dependency-path: frontend-new/package-lock.json
+
+    - name: Install dependencies
+      run: |
+        cd frontend-new
+        npm ci
+
+    - name: Run linters
+      run: |
+        cd frontend-new
+        npm run lint
+        npm run prettier:check
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        cache: 'npm'
+        cache-dependency-path: frontend-new/package-lock.json
+
+    - name: Install dependencies
+      run: |
+        cd frontend-new
+        npm ci
+
+    - name: Build
+      run: |
+        cd frontend-new
+        npm run build
+
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: frontend-build
+        path: frontend-new/build/

@@ -1,0 +1,102 @@
+groups:
+- name: kundli_alerts
+  rules:
+  # High Response Time
+  - alert: HighResponseTime
+    expr: histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le, service)) > 2
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: High response time (instance {{ $labels.instance }})
+      description: "95th percentile of response time is above 2 seconds\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  # High Error Rate
+  - alert: HighErrorRate
+    expr: sum(rate(http_requests_total{status=~"5.."}[5m])) / sum(rate(http_requests_total[5m])) * 100 > 5
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: High error rate (instance {{ $labels.instance }})
+      description: "Error rate is above 5%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  # High CPU Usage
+  - alert: HighCPUUsage
+    expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: High CPU usage (instance {{ $labels.instance }})
+      description: "CPU usage is above 80%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  # High Memory Usage
+  - alert: HighMemoryUsage
+    expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: High memory usage (instance {{ $labels.instance }})
+      description: "Memory usage is above 85%\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  # MongoDB Alerts
+  - alert: MongoDBDown
+    expr: mongodb_up == 0
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: MongoDB down (instance {{ $labels.instance }})
+      description: "MongoDB instance is down\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  # Redis Alerts
+  - alert: RedisDown
+    expr: redis_up == 0
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: Redis down (instance {{ $labels.instance }})
+      description: "Redis instance is down\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  # Service Health
+  - alert: ServiceDown
+    expr: up == 0
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: Service down (instance {{ $labels.instance }})
+      description: "Service {{ $labels.job }} is down\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  # API Endpoint Latency
+  - alert: APIEndpointLatency
+    expr: http_request_duration_seconds{quantile="0.9"} > 1
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: API endpoint latency (instance {{ $labels.instance }})
+      description: "API endpoint {{ $labels.path }} is responding slowly\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  # Rate Limiting
+  - alert: HighRateLimiting
+    expr: rate(rate_limit_exceeded_total[5m]) > 10
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: High rate limiting (instance {{ $labels.instance }})
+      description: "Many requests are being rate limited\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+
+  # JWT Token Errors
+  - alert: HighJWTErrors
+    expr: rate(jwt_validation_errors_total[5m]) > 5
+    for: 5m
+    labels:
+      severity: warning
+    annotations:
+      summary: High JWT validation errors (instance {{ $labels.instance }})
+      description: "Many JWT validation errors occurring\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"

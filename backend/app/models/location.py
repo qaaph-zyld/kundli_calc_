@@ -1,20 +1,32 @@
-"""Location model for astrological calculations."""
-from dataclasses import dataclass
-from typing import Optional
+"""
+Location Model
+PGF Protocol: LOC_001
+Gate: GATE_4
+Version: 1.0.0
+"""
 
+from pydantic import BaseModel, Field
 
-@dataclass
-class Location:
-    """Location data for astrological calculations."""
-    latitude: float
-    longitude: float
-    altitude: Optional[float] = 0
-
-    def __post_init__(self):
-        """Validate location data."""
-        if not -90 <= self.latitude <= 90:
-            raise ValueError("Latitude must be between -90 and 90 degrees")
-        if not -180 <= self.longitude <= 180:
-            raise ValueError("Longitude must be between -180 and 180 degrees")
-        if self.altitude is not None and self.altitude < 0:
-            raise ValueError("Altitude cannot be negative")
+class Location(BaseModel):
+    """Location model for astronomical calculations"""
+    
+    latitude: float = Field(
+        ...,
+        description="Latitude in decimal degrees",
+        ge=-90,
+        le=90
+    )
+    longitude: float = Field(
+        ...,
+        description="Longitude in decimal degrees",
+        ge=-180,
+        le=180
+    )
+    altitude: float = Field(
+        0.0,
+        description="Altitude in meters above sea level"
+    )
+    timezone: str = Field(
+        ...,
+        description="Timezone name (e.g., 'Asia/Kolkata')"
+    )

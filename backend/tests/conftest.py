@@ -2,6 +2,24 @@
 import os
 import sys
 from unittest.mock import Mock
+from datetime import datetime, timezone
+from typing import Generator, Dict, Any
+
+# Set test environment before importing any modules
+os.environ["ENV"] = "test"
+
+import pytest
+from fastapi.testclient import TestClient
+from sqlalchemy.orm import Session
+from app.core.database import get_db, init_test_db, cleanup_test_db
+from app.core.testing.framework import (
+    TestFramework,
+    TestConfig,
+    TestCase,
+    TestScope,
+    TestPriority
+)
+from app.main import app
 
 # Set test environment before importing any modules
 os.environ["ENV"] = "test"
@@ -130,3 +148,46 @@ def mock_swisseph():
     sys.modules["swisseph"] = mock_swe
     yield mock_swe
     del sys.modules["swisseph"]
+
+@pytest.fixture
+def test_framework(test_client: TestClient) -> TestFramework:
+    """Get test framework instance."""
+    return TestFramework(
+        TestConfig(
+            app=app,
+            base_url="http://test",
+            test_data_dir="./test_data",
+            artifacts_dir="./test_artifacts",
+            timeout=30,
+            retries=3,
+            parallel=True,
+            options={
+                "mock_external_services": True,
+                "use_test_database": True
+            }
+        )
+    )
+
+@pytest.fixture
+def test_client() -> Generator[TestClient, None, None]:
+    """Get test client."""
+    with TestClient(app) as client:
+        yield client
+
+@pytest.fixture
+def test_auth_headers() -> Dict[str, str]:
+    """Get test authentication headers."""
+    return {
+        "Authorization": "Bearer test_token"
+    }
+
+@pytest.fixture
+def test_kundli_data() -> Dict[str, Any]:
+    """Get test Kundli data."""
+    return {
+        "date": datetime.now(timezone.utc).date().isoformat(),
+        "time": datetime.now(timezone.utc).time().isoformat(),
+        "latitude": 28.6139,
+        "longitude": 77.2090,
+        "timezone": "Asia/Kolkata"
+    }

@@ -1,0 +1,342 @@
+openapi: 3.0.3
+info:
+  title: Kundli Calculation Service API
+  description: API for calculating and analyzing astrological birth charts (Kundli)
+  version: 1.0.0
+  contact:
+    name: API Support
+    email: api-support@kundli-service.com
+    url: https://docs.kundli-service.com
+
+servers:
+  - url: https://api.kundli-service.com/v1
+    description: Production server
+  - url: https://staging-api.kundli-service.com/v1
+    description: Staging server
+  - url: http://localhost:8000/v1
+    description: Local development server
+
+security:
+  - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: JWT token for authentication
+
+  schemas:
+    KundliRequest:
+      type: object
+      required:
+        - date
+        - time
+        - latitude
+        - longitude
+        - timezone
+      properties:
+        date:
+          type: string
+          format: date
+          example: "1990-01-01"
+          description: Birth date in YYYY-MM-DD format
+        time:
+          type: string
+          pattern: "^([0-1]?[0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$"
+          example: "12:00:00"
+          description: Birth time in HH:MM:SS format
+        latitude:
+          type: number
+          format: float
+          minimum: -90
+          maximum: 90
+          example: 28.6139
+          description: Birth place latitude in decimal degrees
+        longitude:
+          type: number
+          format: float
+          minimum: -180
+          maximum: 180
+          example: 77.2090
+          description: Birth place longitude in decimal degrees
+        timezone:
+          type: string
+          example: "Asia/Kolkata"
+          description: Timezone name from IANA Time Zone Database
+        ayanamsa:
+          type: string
+          enum: [lahiri, raman, krishnamurti]
+          default: lahiri
+          description: Ayanamsa system to use
+        house_system:
+          type: string
+          enum: [placidus, koch, equal, whole_sign]
+          default: placidus
+          description: House system to use
+        calculation_options:
+          type: object
+          description: Additional calculation options
+          properties:
+            include_upagrahas:
+              type: boolean
+              default: false
+            include_special_points:
+              type: boolean
+              default: false
+
+    KundliResponse:
+      type: object
+      required:
+        - request_id
+        - timestamp
+        - input_data
+        - planets
+        - houses
+      properties:
+        request_id:
+          type: string
+          example: "req_123abc"
+        timestamp:
+          type: string
+          format: date-time
+        input_data:
+          $ref: '#/components/schemas/KundliRequest'
+        planets:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              longitude:
+                type: number
+              latitude:
+                type: number
+              speed:
+                type: number
+              house:
+                type: integer
+        houses:
+          type: object
+          additionalProperties:
+            type: number
+        aspects:
+          type: array
+          items:
+            type: object
+            properties:
+              planet1:
+                type: string
+              planet2:
+                type: string
+              aspect_type:
+                type: string
+              orb:
+                type: number
+        yogas:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              description:
+                type: string
+              strength:
+                type: number
+        metadata:
+          type: object
+          properties:
+            calculation_time:
+              type: string
+            ayanamsa_used:
+              type: string
+            house_system:
+              type: string
+
+    ErrorResponse:
+      type: object
+      required:
+        - code
+        - message
+        - category
+        - severity
+        - timestamp
+      properties:
+        code:
+          type: string
+          example: "VAL001"
+        message:
+          type: string
+        category:
+          type: string
+          enum: [authentication, authorization, validation, calculation, database, cache, system]
+        severity:
+          type: string
+          enum: [info, warning, error, critical]
+        timestamp:
+          type: string
+          format: date-time
+        details:
+          type: object
+        request_id:
+          type: string
+
+paths:
+  /kundli/calculate:
+    post:
+      summary: Calculate a new birth chart
+      description: Calculate a new Kundli based on birth details
+      operationId: calculateKundli
+      tags:
+        - Kundli
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KundliRequest'
+      responses:
+        '200':
+          description: Successful calculation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KundliResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '429':
+          description: Too many requests
+          headers:
+            X-RateLimit-Limit:
+              schema:
+                type: integer
+            X-RateLimit-Remaining:
+              schema:
+                type: integer
+            X-RateLimit-Reset:
+              schema:
+                type: integer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /kundli/{kundli_id}:
+    get:
+      summary: Retrieve a birth chart
+      description: Get a previously calculated Kundli by ID
+      operationId: getKundli
+      tags:
+        - Kundli
+      parameters:
+        - name: kundli_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful retrieval
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KundliResponse'
+        '404':
+          description: Kundli not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    delete:
+      summary: Delete a birth chart
+      description: Delete a previously calculated Kundli by ID
+      operationId: deleteKundli
+      tags:
+        - Kundli
+      parameters:
+        - name: kundli_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successfully deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: success
+                  message:
+                    type: string
+                  kundli_id:
+                    type: string
+
+  /kundli/validate:
+    post:
+      summary: Validate birth details
+      description: Validate input data before calculation
+      operationId: validateKundli
+      tags:
+        - Validation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KundliRequest'
+      responses:
+        '200':
+          description: Validation results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  is_valid:
+                    type: boolean
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        rule:
+                          type: string
+                        message:
+                          type: string
+                  warnings:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        rule:
+                          type: string
+                        message:
+                          type: string
+                  metadata:
+                    type: object

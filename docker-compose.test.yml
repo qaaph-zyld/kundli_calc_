@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  test-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.test
+    environment:
+      - APP_ENV=test
+      - MONGODB_URL=mongodb://test-mongodb:27017
+      - MONGODB_DB_NAME=kundli_test
+      - REDIS_URL=redis://test-redis:6379/0
+      - SECRET_KEY=test-secret-key
+    depends_on:
+      - test-mongodb
+      - test-redis
+    volumes:
+      - ./backend:/app
+      - ./backend/tests/reports:/app/tests/reports
+
+  test-frontend:
+    build:
+      context: ./frontend-new
+      dockerfile: Dockerfile.test
+    environment:
+      - NODE_ENV=test
+      - REACT_APP_API_URL=http://test-backend:8000
+    volumes:
+      - ./frontend-new:/app
+      - ./frontend-new/coverage:/app/coverage
+
+  test-mongodb:
+    image: mongo:5.0
+    command: mongod --replSet rs0
+    ports:
+      - "27018:27017"
+    volumes:
+      - test-mongodb-data:/data/db
+
+  test-redis:
+    image: redis:6.2-alpine
+    ports:
+      - "6380:6379"
+    volumes:
+      - test-redis-data:/data
+
+  k6:
+    image: loadimpact/k6:latest
+    volumes:
+      - ./tests/performance:/scripts
+    environment:
+      - K6_OUT=influxdb=http://influxdb:8086/k6
+
+  influxdb:
+    image: influxdb:1.8
+    ports:
+      - "8086:8086"
+    environment:
+      - INFLUXDB_DB=k6
+    volumes:
+      - influxdb-data:/var/lib/influxdb
+
+  zap:
+    image: owasp/zap2docker-stable
+    command: zap.sh -daemon -host 0.0.0.0 -port 8080 -config api.disablekey=true
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./tests/security:/zap/wrk
+
+volumes:
+  test-mongodb-data:
+  test-redis-data:
+  influxdb-data:

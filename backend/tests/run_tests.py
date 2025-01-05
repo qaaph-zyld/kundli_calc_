@@ -8,8 +8,22 @@ import pytest
 import psutil
 import time
 import json
+import platform
+import asyncio
 from datetime import datetime
 from pathlib import Path
+from typing import Dict, Any, List
+
+from app.core.testing.framework import (
+    TestFramework,
+    TestConfig,
+    TestCase,
+    TestScope,
+    TestPriority,
+    TestStatus,
+    TestSuite
+)
+from app.main import app
 
 class TestRunner:
     """Test execution and performance monitoring framework"""
@@ -21,8 +35,24 @@ class TestRunner:
             'test_results': {},
             'performance_metrics': {}
         }
+        
+        self.test_framework = TestFramework(
+            TestConfig(
+                app=app,
+                base_url="http://test",
+                test_data_dir="./test_data",
+                artifacts_dir="./test_artifacts",
+                timeout=30,
+                retries=3,
+                parallel=True,
+                options={
+                    "mock_external_services": True,
+                    "use_test_database": True
+                }
+            )
+        )
     
-    def _get_system_info(self):
+    def _get_system_info(self) -> Dict[str, Any]:
         """Gather system information"""
         return {
             'cpu_count': psutil.cpu_count(),
@@ -31,7 +61,48 @@ class TestRunner:
             'platform': platform.platform()
         }
     
-    def run_tests(self):
+    async def run_framework_tests(self) -> Dict[str, Any]:
+        """Run tests using testing framework"""
+        framework_results = []
+        
+        # Import test suites
+        from tests.api.test_kundli import test_suite as kundli_suite
+        
+        # Run test suites
+        suites = [kundli_suite]
+        for suite in suites:
+            suite_results = await self.test_framework.run_suite(suite)
+            framework_results.extend(suite_results)
+        
+        # Process results
+        test_stats = {
+            'total': len(framework_results),
+            'passed': len([r for r in framework_results if r.status == TestStatus.PASSED]),
+            'failed': len([r for r in framework_results if r.status == TestStatus.FAILED]),
+            'skipped': len([r for r in framework_results if r.status == TestStatus.SKIPPED]),
+            'error': len([r for r in framework_results if r.status == TestStatus.ERROR])
+        }
+        
+        # Calculate success rate
+        success_rate = (test_stats['passed'] / test_stats['total']) * 100 if test_stats['total'] > 0 else 0
+        
+        return {
+            'framework_stats': test_stats,
+            'success_rate': success_rate,
+            'results': [
+                {
+                    'name': result.case.name,
+                    'scope': result.case.scope,
+                    'priority': result.case.priority,
+                    'status': result.status,
+                    'duration': result.duration,
+                    'error': result.error if result.error else None
+                }
+                for result in framework_results
+            ]
+        }
+    
+    def run_tests(self) -> Dict[str, Any]:
         """Execute test suite with performance monitoring"""
         test_start = time.time()
         initial_memory = psutil.Process().memory_info().rss
@@ -41,10 +112,13 @@ class TestRunner:
             '-v',
             '--durations=10',
             '--maxfail=5',
-            'test_ayanamsa.py'
+            'tests'
         ]
         
         test_result = pytest.main(pytest_args)
+        
+        # Run framework tests
+        framework_results = asyncio.run(self.run_framework_tests())
         
         # Calculate metrics
         test_duration = time.time() - test_start
@@ -58,13 +132,16 @@ class TestRunner:
         }
         
         self.results['test_results'] = {
-            'exit_code': test_result,
-            'status': 'Success' if test_result == 0 else 'Failed'
+            'pytest': {
+                'exit_code': test_result,
+                'status': 'Success' if test_result == 0 else 'Failed'
+            },
+            'framework': framework_results
         }
         
         return self.results
     
-    def generate_report(self):
+    def generate_report(self) -> Path:
         """Generate detailed test report"""
         report_path = Path('test_reports')
         report_path.mkdir(exist_ok=True)
@@ -83,7 +160,19 @@ if __name__ == '__main__':
     report_file = runner.generate_report()
     
     print("\nTest Execution Summary:")
-    print(f"Status: {results['test_results']['status']}")
+    print("\nPytest Results:")
+    print(f"Status: {results['test_results']['pytest']['status']}")
+    
+    print("\nFramework Results:")
+    framework_stats = results['test_results']['framework']['framework_stats']
+    print(f"Total Tests: {framework_stats['total']}")
+    print(f"Passed: {framework_stats['passed']}")
+    print(f"Failed: {framework_stats['failed']}")
+    print(f"Skipped: {framework_stats['skipped']}")
+    print(f"Errors: {framework_stats['error']}")
+    print(f"Success Rate: {results['test_results']['framework']['success_rate']:.2f}%")
+    
+    print("\nPerformance Metrics:")
     print(f"Duration: {results['performance_metrics']['test_duration_seconds']}s")
     print(f"Memory Usage: {results['performance_metrics']['memory_usage_mb']}MB")
     print(f"Report saved to: {report_file}")

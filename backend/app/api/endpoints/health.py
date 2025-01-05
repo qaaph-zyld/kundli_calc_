@@ -1,58 +1,20 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-from datetime import datetime
-import swisseph as swe
+"""
+Health Check Endpoint
+PGF Protocol: API_001
+Gate: GATE_4
+Version: 1.0.0
+"""
 
-from ...core.database import get_db
+from fastapi import APIRouter, HTTPException
 
 router = APIRouter()
 
-@router.get("/health")
+@router.get("")
 async def health_check():
-    """Basic health check endpoint."""
-    return {
-        "status": "healthy",
-        "timestamp": datetime.utcnow().isoformat()
-    }
+    """Health check endpoint"""
+    return {"status": "healthy"}
 
-@router.get("/health/db")
-async def database_health_check(db: Session = Depends(get_db)):
-    """Check database connectivity."""
-    try:
-        # Execute a simple query
-        db.execute("SELECT 1")
-        return {
-            "status": "healthy",
-            "component": "database",
-            "timestamp": datetime.utcnow().isoformat()
-        }
-    except Exception as e:
-        return {
-            "status": "unhealthy",
-            "component": "database",
-            "error": str(e),
-            "timestamp": datetime.utcnow().isoformat()
-        }
-
-@router.get("/health/ephemeris")
-async def ephemeris_health_check():
-    """Check Swiss Ephemeris functionality."""
-    try:
-        # Try a simple calculation
-        julian_day = swe.julday(2024, 1, 1, 12.0)
-        sun_pos = swe.calc_ut(julian_day, swe.SUN)[0]
-        return {
-            "status": "healthy",
-            "component": "ephemeris",
-            "test_calculation": {
-                "sun_longitude": sun_pos[0]
-            },
-            "timestamp": datetime.utcnow().isoformat()
-        }
-    except Exception as e:
-        return {
-            "status": "unhealthy",
-            "component": "ephemeris",
-            "error": str(e),
-            "timestamp": datetime.utcnow().isoformat()
-        }
+@router.get("/simulate-error")
+async def simulate_error():
+    """Endpoint to simulate a 500 error for testing"""
+    raise HTTPException(status_code=500, detail="Simulated server error")

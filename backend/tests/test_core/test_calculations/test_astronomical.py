@@ -25,7 +25,11 @@ def test_calculate_planet_position(calculator):
     """Test planet position calculation."""
     # Test case: Sun's position at J2000.0
     dt = datetime(2000, 1, 1, 12, 0)
-    location = Location(latitude=0.0, longitude=0.0)
+    location = Location(
+        latitude=0.0,
+        longitude=0.0,
+        timezone='UTC'
+    )
     
     position = calculator.calculate_planet_position(dt, Planet.SUN, location)
     assert isinstance(position, dict)
@@ -38,7 +42,11 @@ def test_calculate_house_cusps(calculator):
     """Test house cusps calculation."""
     # Test case: Greenwich at J2000.0
     dt = datetime(2000, 1, 1, 12, 0)
-    location = Location(latitude=51.4777, longitude=0.0)  # Greenwich
+    location = Location(
+        latitude=51.4777,
+        longitude=0.0,
+        timezone='Europe/London'  # Greenwich timezone
+    )
     
     cusps = calculator.calculate_house_cusps(dt, location)
     assert isinstance(cusps, list)

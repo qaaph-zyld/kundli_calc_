@@ -48,3 +48,24 @@ async def health_check(db: Session = Depends(get_db)) -> Dict[str, Dict[str, str
         health_status["redis"]["details"] = f"Unexpected error: {str(e)}"
 
     return health_status
+
+
+"""
+Health Check Endpoint
+PGF Protocol: HEALTH_001
+Gate: GATE_4
+Version: 1.0.0
+"""
+
+from fastapi import APIRouter
+
+router_health = APIRouter()
+
+@router_health.get("/health")
+async def health_check():
+    """Health check endpoint
+    
+    Returns:
+        Dict with status
+    """
+    return {"status": "healthy"}
