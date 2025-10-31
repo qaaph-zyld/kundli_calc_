@@ -3,6 +3,7 @@ from typing import Dict
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 from datetime import datetime
+import swisseph as swe
 
 router = APIRouter()
 
@@ -29,9 +30,25 @@ async def calculate_ayanamsa(request: AyanamsaRequest):
         Dictionary containing ayanamsa value
     """
     try:
-        # For now, return a mock value
-        # TODO: Implement actual calculation using Swiss Ephemeris
-        return {"ayanamsa": 24.5}
+        # Map ayanamsa type to Swiss Ephemeris mode
+        amap = {
+            "lahiri": swe.SIDM_LAHIRI,
+            "raman": swe.SIDM_RAMAN,
+            "krishnamurti": swe.SIDM_KRISHNAMURTI,
+            "fagan_bradley": swe.SIDM_FAGAN_BRADLEY,
+            "fagan": swe.SIDM_FAGAN_BRADLEY,
+        }
+        mode = amap.get(request.ayanamsa_type.lower(), swe.SIDM_LAHIRI)
+        swe.set_sid_mode(mode)
+
+        jd = swe.julday(
+            request.date.year,
+            request.date.month,
+            request.date.day,
+            request.date.hour + request.date.minute / 60.0 + request.date.second / 3600.0,
+        )
+        val = float(swe.get_ayanamsa_ut(jd))
+        return {"ayanamsa": val}
     except Exception as e:
         raise HTTPException(
             status_code=500,

@@ -40,6 +40,10 @@ class Settings(BaseSettings):
         "http://localhost:8000",
         "http://localhost:3000",
     ]
+    ALLOWED_ORIGINS: List[str] = [
+        "http://localhost:8000",
+        "http://localhost:3000",
+    ]
 
     # Redis settings
     REDIS_HOST: str = os.getenv("REDIS_HOST", "localhost")
@@ -79,3 +83,4 @@ else:
         f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}"
         f"@{settings.POSTGRES_HOST}:{settings.POSTGRES_PORT}/{settings.POSTGRES_DB}"
     )
+

@@ -8,6 +8,7 @@ Version: 1.0.0
 from typing import Any, Dict, Optional
 from fastapi import HTTPException, Request
 from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 from datetime import datetime
 from enum import Enum
@@ -99,7 +100,7 @@ class ErrorHandler:
         
         return JSONResponse(
             status_code=exc.status_code,
-            content=error.dict()
+            content=jsonable_encoder(error)
         )
     
     @staticmethod
@@ -117,7 +118,7 @@ class ErrorHandler:
         
         return JSONResponse(
             status_code=422,
-            content=error.dict()
+            content=jsonable_encoder(error)
         )
     
     @staticmethod
@@ -135,7 +136,7 @@ class ErrorHandler:
         
         return JSONResponse(
             status_code=500,
-            content=error.dict()
+            content=jsonable_encoder(error)
         )
     
     @staticmethod
@@ -153,7 +154,7 @@ class ErrorHandler:
         
         return JSONResponse(
             status_code=503,
-            content=error.dict()
+            content=jsonable_encoder(error)
         )
     
     @staticmethod

@@ -11,7 +11,6 @@ from datetime import datetime, timezone
 from dataclasses import dataclass
 import math
 from pydantic import BaseModel, Field
-import ephem
 import swisseph as swe
 from ..errors import (
     AppError,
@@ -168,13 +167,13 @@ class AstronomicalCalculator:
         
         # Set ayanamsa
         if self.ayanamsa_system == AyanamsaSystem.LAHIRI:
-            swe.set_sid_mode(swe.SID_LAHIRI)
+            swe.set_sid_mode(swe.SIDM_LAHIRI)
         elif self.ayanamsa_system == AyanamsaSystem.RAMAN:
-            swe.set_sid_mode(swe.SID_RAMAN)
+            swe.set_sid_mode(swe.SIDM_RAMAN)
         elif self.ayanamsa_system == AyanamsaSystem.KRISHNAMURTI:
-            swe.set_sid_mode(swe.SID_KRISHNAMURTI)
+            swe.set_sid_mode(swe.SIDM_KRISHNAMURTI)
         elif self.ayanamsa_system == AyanamsaSystem.FAGAN_BRADLEY:
-            swe.set_sid_mode(swe.SID_FAGAN_BRADLEY)
+            swe.set_sid_mode(swe.SIDM_FAGAN_BRADLEY)
     
     def _get_julian_day(self, dt: datetime) -> float:
         """Get Julian day number"""
@@ -296,24 +295,46 @@ class AstronomicalCalculator:
             # Calculate planet position
             planet_id = self._get_planet_id(body)
             calc_flags = (
-                swe.FLG_TOPOCENTRIC
+                (swe.FLG_TOPOCENTRIC | swe.FLG_SWIEPH)
                 if self.coordinate_system == CoordinateSystem.TOPOCENTRIC
                 else swe.FLG_SWIEPH
             )
-            
-            if body == CelestialBody.KETU:
-                # Calculate Ketu as opposite to Rahu
-                res = swe.calc_ut(jd, swe.MEAN_NODE, calc_flags)
-                longitude = (res[0][0] + 180) % 360
-                latitude = -res[0][1]
-                distance = res[0][2]
-                speed = -res[0][3]
-            else:
-                res = swe.calc_ut(jd, planet_id, calc_flags)
-                longitude = res[0][0]
-                latitude = res[0][1]
-                distance = res[0][2]
-                speed = res[0][3]
+
+            def _calc(planet: int, flags: int):
+                return swe.calc_ut(jd, planet, flags)
+
+            try:
+                if body == CelestialBody.KETU:
+                    res = _calc(swe.MEAN_NODE, calc_flags)
+                    longitude = (res[0][0] + 180) % 360
+                    latitude = -res[0][1]
+                    distance = res[0][2]
+                    speed = -res[0][3]
+                else:
+                    res = _calc(planet_id, calc_flags)
+                    longitude = res[0][0]
+                    latitude = res[0][1]
+                    distance = res[0][2]
+                    speed = res[0][3]
+            except Exception:
+                # Fallback to Moshier ephemeris if Swiss ephemeris files are unavailable
+                fallback_flags = (
+                    (swe.FLG_TOPOCENTRIC | swe.FLG_MOSEPH)
+                    if self.coordinate_system == CoordinateSystem.TOPOCENTRIC
+                    else swe.FLG_MOSEPH
+                )
+                if body == CelestialBody.KETU:
+                    res = _calc(swe.MEAN_NODE, fallback_flags)
+                    longitude = (res[0][0] + 180) % 360
+                    latitude = -res[0][1]
+                    distance = res[0][2]
+                    speed = -res[0][3]
+                else:
+                    res = _calc(planet_id, fallback_flags)
+                    longitude = res[0][0]
+                    latitude = res[0][1]
+                    distance = res[0][2]
+                    speed = res[0][3]
             
             # Calculate houses
             houses = swe.houses(

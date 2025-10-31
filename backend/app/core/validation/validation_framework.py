@@ -9,7 +9,8 @@ from typing import Dict, Any, List, Optional
 from datetime import datetime
 from enum import Enum
 from pydantic import BaseModel, Field, validator
-from app.core.cache import cache
+import json
+from app.core.cache import redis_cache
 
 class ValidationLevel(str, Enum):
     """Validation levels"""
@@ -143,9 +144,13 @@ class ValidationFramework:
         
         # Get cached validation result if available
         cache_key = f"validation:{hash(str(data))}"
-        cached_result = await cache.get(cache_key)
-        if cached_result:
-            return ValidationResult(**cached_result)
+        cached_result_str = redis_cache.get(cache_key)
+        if cached_result_str:
+            try:
+                cached_obj = json.loads(cached_result_str)
+                return ValidationResult(**cached_obj)
+            except Exception:
+                pass
             
         for rule in self.rules.values():
             if not rule.enabled:
@@ -175,7 +180,10 @@ class ValidationFramework:
         })
         
         # Cache validation result
-        await cache.set(cache_key, result.dict(), expire=300)
+        try:
+            redis_cache.set(cache_key, json.dumps(result.model_dump()), expire=300)
+        except Exception:
+            pass
         
         return result
         

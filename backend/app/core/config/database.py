@@ -1,15 +1,19 @@
 """Database configuration module."""
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from .settings import settings
 
-# Database configuration
-DATABASE_URL = "sqlite:///./kundli.db"
+# Database configuration: prefer Settings.DATABASE_URL with SQLite fallback
+DATABASE_URL = settings.DATABASE_URL or "sqlite:///./kundli.db"
 
 # Create SQLAlchemy engine
-engine = create_engine(
-    DATABASE_URL,
-    connect_args={"check_same_thread": False}  # Needed for SQLite
-)
+if str(DATABASE_URL).startswith("sqlite"):
+    engine = create_engine(
+        str(DATABASE_URL),
+        connect_args={"check_same_thread": False}
+    )
+else:
+    engine = create_engine(str(DATABASE_URL))
 
 # Create SessionLocal class
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

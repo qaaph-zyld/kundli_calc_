@@ -8,6 +8,7 @@ Version: 1.0.0
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 from app.core.validation.house_validator import HouseValidator, HouseValidationError
+import swisseph as swe
 
 class HouseCalculator:
     """Calculator for house cusps and related calculations"""
@@ -86,45 +87,37 @@ class HouseCalculator:
         if not self.validator.validate_house_system(house_system):
             raise HouseValidationError("Invalid house system")
         
-        # Mock house cusps for testing - use different values for different systems
-        if house_system == 'KOCH':  # Koch
-            house_cusps = [
-                0.0,    # Ascendant
-                35.0,   # House 2 (different from Placidus)
-                65.0,   # House 3 (different from Placidus)
-                90.0,   # IC
-                125.0,  # House 5 (different from Placidus)
-                155.0,  # House 6 (different from Placidus)
-                180.0,  # Descendant
-                215.0,  # House 8 (different from Placidus)
-                245.0,  # House 9 (different from Placidus)
-                270.0,  # MC
-                305.0,  # House 11 (different from Placidus)
-                335.0   # House 12 (different from Placidus)
-            ]
-        else:  # Placidus (default) and others
-            house_cusps = [
-                0.0,    # Ascendant
-                30.0,   # House 2
-                60.0,   # House 3
-                90.0,   # IC
-                120.0,  # House 5
-                150.0,  # House 6
-                180.0,  # Descendant
-                210.0,  # House 8
-                240.0,  # House 9
-                270.0,  # MC
-                300.0,  # House 11
-                330.0   # House 12
-            ]
+        # Compute Julian day
+        jd = swe.julday(
+            date.year,
+            date.month,
+            date.day,
+            date.hour + date.minute / 60.0 + date.second / 3600.0
+        )
+        
+        # Resolve Swiss Ephemeris house system code
+        system_cfg = self.house_systems.get(house_system, self.house_systems['PLACIDUS'])
+        sys_code = system_cfg['id'].encode('ascii')
+        
+        # Calculate houses using Swiss Ephemeris
+        cusps, ascmc = swe.houses(jd, latitude, longitude, sys_code)
+        
+        if len(cusps) >= 13:
+            house_cusps = [cusps[i] for i in range(1, 13)]
+        else:
+            house_cusps = list(cusps[:12])
+        ascendant = ascmc[0] if len(ascmc) > 0 else 0.0
+        midheaven = ascmc[1] if len(ascmc) > 1 else 0.0
+        armc = ascmc[2] if len(ascmc) > 2 else 0.0
+        vertex = ascmc[3] if len(ascmc) > 3 else 0.0
         
         # Return the required dictionary format
         return {
             "cusps": house_cusps,
-            "ascendant": house_cusps[0],  # First house cusp is ascendant
-            "midheaven": house_cusps[9],  # 10th house cusp is midheaven
-            "armc": 270.0,  # Mock ARMC value
-            "vertex": 90.0   # Mock vertex value
+            "ascendant": ascendant,
+            "midheaven": midheaven,
+            "armc": armc,
+            "vertex": vertex
         }
     
     def get_house_system_info(self) -> Dict[str, Dict[str, str]]:

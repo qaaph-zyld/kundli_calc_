@@ -8,14 +8,21 @@ services:
     ports:
       - "8000:8000"
     environment:
+      - ENV=development
       - APP_ENV=development
       - MONGODB_URL=mongodb://mongodb:27017
       - REDIS_URL=redis://redis:6379/0
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=kundli_db
     depends_on:
       - mongodb
       - redis
+      - postgres
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -26,7 +33,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend-new
+      context: ./frontend/frontend-tmp
       dockerfile: Dockerfile
     ports:
       - "80:80"
@@ -158,9 +165,26 @@ services:
     depends_on:
       - redis
 
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=kundli_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
 volumes:
   mongodb_data:
   redis_data:
+  postgres_data:
   prometheus_data:
   grafana_data:
   loki_data:

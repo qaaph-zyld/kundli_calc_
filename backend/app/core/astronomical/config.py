@@ -232,7 +232,7 @@ PLANET_PROPERTIES: Dict[CelestialBody, Dict[str, Any]] = {
     CelestialBody.MERCURY: {
         "nature": "neutral",
         "gender": "neutral",
-        "speed": variable,  # varies significantly
+        "speed": 4.09,  # approx degrees per day
         "significations": ["communication", "intelligence", "trade", "skills"],
         "metal": "mercury"
     },
@@ -246,7 +246,7 @@ PLANET_PROPERTIES: Dict[CelestialBody, Dict[str, Any]] = {
     CelestialBody.VENUS: {
         "nature": "cold and moist",
         "gender": "feminine",
-        "speed": variable,  # varies significantly
+        "speed": 1.6,  # approx degrees per day
         "significations": ["love", "pleasure", "arts", "luxury"],
         "metal": "copper"
     },

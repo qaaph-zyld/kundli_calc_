@@ -7,7 +7,7 @@ Version: 1.0.0
 
 from typing import Dict, Any, Optional, List, Tuple, Union, Set
 from enum import Enum
-from datetime import datetime
+from datetime import datetime, timedelta
 from dataclasses import dataclass
 from pydantic import BaseModel, Field
 import swisseph as swe

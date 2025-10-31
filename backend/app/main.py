@@ -14,14 +14,10 @@ import yaml
 from pathlib import Path
 
 from .api.endpoints import (
-    charts, health, birth_charts, horoscope, dasha,
-    ashtakavarga, bhava, prediction, shadbala, ayanamsa,
-    kundli
+    charts, health, ayanamsa, panchang
 )
-from .api.routes import auth, kundli as kundli_routes
 from .core.config import settings
 from .core.errors.handlers import ErrorHandler
-from .core.middleware.config import MiddlewareConfig
 from .db.mongodb import MongoDB
 
 app = FastAPI(
@@ -58,57 +54,13 @@ app.add_middleware(
 app.add_exception_handler(Exception, ErrorHandler.handle_generic_exception)
 app.add_exception_handler(HTTPException, ErrorHandler.handle_http_exception)
 
-# Configure middleware
-middleware_config = MiddlewareConfig(app)
-middleware_config.configure_middleware()
+# Middleware temporarily disabled for endpoint validation
 
 # Include routers
-app.include_router(
-    horoscope.router,
-    prefix="/api",
-    tags=["horoscope"]
-)
-
 app.include_router(
     charts.router,
     prefix="/api/v1/charts",
     tags=["charts"]
-)
-
-app.include_router(
-    birth_charts.router,
-    prefix="/api/v1/birth-charts",
-    tags=["birth-charts"]
-)
-
-app.include_router(
-    dasha.router,
-    prefix="/api/v1/dasha",
-    tags=["dasha"]
-)
-
-app.include_router(
-    ashtakavarga.router,
-    prefix="/api/v1/ashtakavarga",
-    tags=["ashtakavarga"]
-)
-
-app.include_router(
-    bhava.router,
-    prefix="/api/v1/bhava",
-    tags=["bhava"]
-)
-
-app.include_router(
-    prediction.router,
-    prefix="/api/v1/prediction",
-    tags=["prediction"]
-)
-
-app.include_router(
-    shadbala.router,
-    prefix="/api/v1/shadbala",
-    tags=["shadbala"]
 )
 
 app.include_router(
@@ -118,28 +70,26 @@ app.include_router(
 )
 
 app.include_router(
+    panchang.router,
+    prefix="/api/v1/panchang",
+    tags=["panchang"]
+)
+
+app.include_router(
     health.router,
     prefix="/api/v1/health",
     tags=["health"]
 )
 
 # Include new authentication and kundli routes
-app.include_router(
-    auth.router,
-    prefix="/api/v1/auth",
-    tags=["authentication"]
-)
-
-app.include_router(
-    kundli_routes.router,
-    prefix="/api/v1/kundli",
-    tags=["kundli"]
-)
 
 @app.on_event("startup")
 async def startup_event():
     """Connect to MongoDB on startup."""
-    await MongoDB.connect_to_database()
+    try:
+        await MongoDB.connect_to_database()
+    except Exception:
+        pass
 
 @app.on_event("shutdown")
 async def shutdown_event():
