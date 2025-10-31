@@ -69,13 +69,24 @@ async def calculate_chart(
             altitude=float(request.altitude),
         )
         
-        # Ayanamsa mapping
-        ay_map = {
+        # Ayanamsa mapping (int or string)
+        ay_map_int = {
             1: AyanamsaSystem.LAHIRI,
             2: AyanamsaSystem.RAMAN,
             3: AyanamsaSystem.KRISHNAMURTI,
         }
-        swe_calc = SweCalculator(ayanamsa_system=ay_map.get(int(request.ayanamsa), AyanamsaSystem.LAHIRI))
+        ay_map_str = {
+            "lahiri": AyanamsaSystem.LAHIRI,
+            "raman": AyanamsaSystem.RAMAN,
+            "krishnamurti": AyanamsaSystem.KRISHNAMURTI,
+            "fagan_bradley": AyanamsaSystem.FAGAN_BRADLEY,
+            "fagan": AyanamsaSystem.FAGAN_BRADLEY,
+        }
+        if getattr(request, "ayanamsa_type", None):
+            ay_system = ay_map_str.get(str(request.ayanamsa_type).lower(), AyanamsaSystem.LAHIRI)
+        else:
+            ay_system = ay_map_int.get(int(request.ayanamsa or 1), AyanamsaSystem.LAHIRI)
+        swe_calc = SweCalculator(ayanamsa_system=ay_system)
         house_calc = HouseCalculator()
         
         # Planetary positions via Swiss Ephemeris

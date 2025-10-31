@@ -57,6 +57,10 @@ class ChartRequest(BaseModel):
         default=1,
         description="Ayanamsa system (1: Lahiri, 2: Raman, 3: KP)"
     )
+    ayanamsa_type: Optional[str] = Field(
+        default=None,
+        description="Ayanamsa name (e.g., lahiri, raman, krishnamurti). If provided, overrides ayanamsa number."
+    )
     house_system: str = Field(
         default="P",
         description="House system (P: Placidus, K: Koch, R: Regiomontanus)"
