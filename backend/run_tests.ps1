@@ -21,9 +21,18 @@ function Log-ErrorBody {
   } catch {}
 }
 
+# Determine API base URL (prefer local dev 8099, fallback to Docker 8000)
+$BaseUrl = 'http://127.0.0.1:8099'
+try {
+  Invoke-RestMethod -Uri "$BaseUrl/api/v1/health" -Method Get | Out-Null
+} catch {
+  $BaseUrl = 'http://127.0.0.1:8000'
+}
+Log-Header -title "BaseUrl: $BaseUrl"
+
 try {
   Log-Header -title 'Health'
-  Invoke-RestMethod -Uri 'http://127.0.0.1:8099/api/v1/health' -Method Get |
+  Invoke-RestMethod -Uri "$BaseUrl/api/v1/health" -Method Get |
     ConvertTo-Json -Depth 8 | Tee-Object -FilePath $log -Append
 }
 catch { $_ | Out-String | Tee-Object -FilePath $log -Append; Log-ErrorBody $_ }
@@ -40,7 +49,7 @@ try {
   "division": 9
 }
 '@
-  Invoke-RestMethod -Uri 'http://127.0.0.1:8099/api/v1/divisional/calculate' -Method Post -ContentType 'application/json' -Body $d9 |
+  Invoke-RestMethod -Uri "$BaseUrl/api/v1/divisional/calculate" -Method Post -ContentType 'application/json' -Body $d9 |
     ConvertTo-Json -Depth 8 | Tee-Object -FilePath $log -Append
 }
 catch { $_ | Out-String | Tee-Object -FilePath $log -Append; Log-ErrorBody $_ }
@@ -54,7 +63,7 @@ try {
   "longitude": 19.206766
 }
 '@
-  Invoke-RestMethod -Uri 'http://127.0.0.1:8099/api/v1/panchang/sun_times' -Method Post -ContentType 'application/json' -Body $sun |
+  Invoke-RestMethod -Uri "$BaseUrl/api/v1/panchang/sun_times" -Method Post -ContentType 'application/json' -Body $sun |
     ConvertTo-Json -Depth 8 | Tee-Object -FilePath $log -Append
 }
 catch { $_ | Out-String | Tee-Object -FilePath $log -Append; Log-ErrorBody $_ }
@@ -67,7 +76,7 @@ try {
   "ayanamsa_type": "lahiri"
 }
 '@
-  Invoke-RestMethod -Uri 'http://127.0.0.1:8099/api/v1/ayanamsa/calculate' -Method Post -ContentType 'application/json' -Body $ay |
+  Invoke-RestMethod -Uri "$BaseUrl/api/v1/ayanamsa/calculate" -Method Post -ContentType 'application/json' -Body $ay |
     ConvertTo-Json -Depth 8 | Tee-Object -FilePath $log -Append
 }
 catch { $_ | Out-String | Tee-Object -FilePath $log -Append; Log-ErrorBody $_ }
@@ -77,7 +86,7 @@ try {
   $p = @'
 { "date_time": "1990-10-09T07:10:00Z" }
 '@
-  Invoke-RestMethod -Uri 'http://127.0.0.1:8099/api/v1/panchang/calculate' -Method Post -ContentType 'application/json' -Body $p |
+  Invoke-RestMethod -Uri "$BaseUrl/api/v1/panchang/calculate" -Method Post -ContentType 'application/json' -Body $p |
     ConvertTo-Json -Depth 8 | Tee-Object -FilePath $log -Append
 }
 catch { $_ | Out-String | Tee-Object -FilePath $log -Append; Log-ErrorBody $_ }
@@ -94,7 +103,7 @@ try {
   "house_system": "P"
 }
 '@
-  Invoke-RestMethod -Uri 'http://127.0.0.1:8099/api/v1/charts/calculate' -Method Post -ContentType 'application/json' -Body $json |
+  Invoke-RestMethod -Uri "$BaseUrl/api/v1/charts/calculate" -Method Post -ContentType 'application/json' -Body $json |
     ConvertTo-Json -Depth 12 | Tee-Object -FilePath $log -Append
 }
 catch { $_ | Out-String | Tee-Object -FilePath $log -Append; Log-ErrorBody $_ }
@@ -108,7 +117,7 @@ try {
   "moon_longitude": 81.46558689539434
 }
 '@
-  Invoke-RestMethod -Uri 'http://127.0.0.1:8099/api/v1/dasha/vimshottari' -Method Post -ContentType 'application/json' -Body $dasha |
+  Invoke-RestMethod -Uri "$BaseUrl/api/v1/dasha/vimshottari" -Method Post -ContentType 'application/json' -Body $dasha |
     ConvertTo-Json -Depth 6 | Tee-Object -FilePath $log -Append
 }
 catch { $_ | Out-String | Tee-Object -FilePath $log -Append; Log-ErrorBody $_ }
