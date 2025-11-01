@@ -28,6 +28,37 @@ try {
 }
 catch { $_ | Out-String | Tee-Object -FilePath $log -Append; Log-ErrorBody $_ }
 
+# Divisional - D9 Navamsa
+try {
+  Log-Header -title 'Divisional - D9'
+  $d9 = @'
+{
+  "date_time": "1990-10-09T07:10:00Z",
+  "latitude": 44.531346,
+  "longitude": 19.206766,
+  "altitude": 0,
+  "division": 9
+}
+'@
+  Invoke-RestMethod -Uri 'http://127.0.0.1:8099/api/v1/divisional/calculate' -Method Post -ContentType 'application/json' -Body $d9 |
+    ConvertTo-Json -Depth 8 | Tee-Object -FilePath $log -Append
+}
+catch { $_ | Out-String | Tee-Object -FilePath $log -Append; Log-ErrorBody $_ }
+
+try {
+  Log-Header -title 'Sun Times'
+  $sun = @'
+{
+  "date": "1990-10-09T00:00:00Z",
+  "latitude": 44.531346,
+  "longitude": 19.206766
+}
+'@
+  Invoke-RestMethod -Uri 'http://127.0.0.1:8099/api/v1/panchang/sun_times' -Method Post -ContentType 'application/json' -Body $sun |
+    ConvertTo-Json -Depth 8 | Tee-Object -FilePath $log -Append
+}
+catch { $_ | Out-String | Tee-Object -FilePath $log -Append; Log-ErrorBody $_ }
+
 try {
   Log-Header -title 'Ayanamsa'
   $ay = @'
