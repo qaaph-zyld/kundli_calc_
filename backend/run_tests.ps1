@@ -1,5 +1,5 @@
 $ErrorActionPreference = 'Stop'
-$log = Join-Path $PSScriptRoot 'terminal.txt'
+$log = Join-Path $PSScriptRoot 'terminal.md'
 
 function Log-Header {
   param([string]$title)
