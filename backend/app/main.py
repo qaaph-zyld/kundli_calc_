@@ -14,7 +14,7 @@ import yaml
 from pathlib import Path
 
 from .api.endpoints import (
-    charts, health, ayanamsa, panchang
+    charts, health, ayanamsa, panchang, dasha
 )
 from .core.config import settings
 from .core.errors.handlers import ErrorHandler
@@ -79,6 +79,12 @@ app.include_router(
     health.router,
     prefix="/api/v1/health",
     tags=["health"]
+)
+
+app.include_router(
+    dasha.router,
+    prefix="/api/v1",
+    tags=["dasha"]
 )
 
 # Include new authentication and kundli routes

@@ -67,3 +67,17 @@ try {
     ConvertTo-Json -Depth 12 | Tee-Object -FilePath $log -Append
 }
 catch { $_ | Out-String | Tee-Object -FilePath $log -Append; Log-ErrorBody $_ }
+
+# Dasha - Vimshottari
+try {
+  Log-Header -title 'Dasha - Vimshottari'
+  $dasha = @'
+{
+  "birth_date": "1990-10-09T07:10:00Z",
+  "moon_longitude": 81.46558689539434
+}
+'@
+  Invoke-RestMethod -Uri 'http://127.0.0.1:8099/api/v1/dasha/vimshottari' -Method Post -ContentType 'application/json' -Body $dasha |
+    ConvertTo-Json -Depth 6 | Tee-Object -FilePath $log -Append
+}
+catch { $_ | Out-String | Tee-Object -FilePath $log -Append; Log-ErrorBody $_ }

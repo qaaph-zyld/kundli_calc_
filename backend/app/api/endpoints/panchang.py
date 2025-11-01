@@ -38,6 +38,15 @@ class PanchangResponse(BaseModel):
     yoga_number: int
     karana_number: int
 
+class SunTimesRequest(BaseModel):
+    date: datetime = Field(..., description="Date in UTC (time ignored; sunrise/sunset computed for that day)")
+    latitude: float = Field(..., description="Latitude")
+    longitude: float = Field(..., description="Longitude")
+
+class SunTimesResponse(BaseModel):
+    sunrise_utc: datetime
+    sunset_utc: datetime
+
 @router.post("/calculate", response_model=PanchangResponse)
 async def calculate_panchang(request: PanchangRequest):
     """
@@ -83,3 +92,32 @@ async def calculate_panchang(request: PanchangRequest):
         )
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error calculating Panchang: {str(e)}")
+
+@router.post("/sun_times", response_model=SunTimesResponse)
+async def calculate_sun_times(request: SunTimesRequest):
+    """
+    Calculate sunrise and sunset UTC for a given date and location.
+    """
+    try:
+        d = request.date
+        jd0 = swe.julday(d.year, d.month, d.day, 0.0)
+        flags_rise = swe.CALC_RISE | swe.BIT_DISC_CENTER
+        flags_set = swe.CALC_SET | swe.BIT_DISC_CENTER
+        # Returns (retflag, (tret0, tret1, tret2, tret3))
+        sr = swe.rise_trans(jd0, swe.SUN, request.longitude, request.latitude, flags_rise)
+        ss = swe.rise_trans(jd0, swe.SUN, request.longitude, request.latitude, flags_set)
+        sr_jd = sr[1][0]
+        ss_jd = ss[1][0]
+        y, m, day, ut = swe.revjul(sr_jd, swe.GREG_CAL)
+        hr = int(ut)
+        mi = int((ut - hr) * 60)
+        se = int(round((((ut - hr) * 60) - mi) * 60))
+        sunrise = datetime(y, m, day, hr, mi, se)
+        y2, m2, day2, ut2 = swe.revjul(ss_jd, swe.GREG_CAL)
+        hr2 = int(ut2)
+        mi2 = int((ut2 - hr2) * 60)
+        se2 = int(round((((ut2 - hr2) * 60) - mi2) * 60))
+        sunset = datetime(y2, m2, day2, hr2, mi2, se2)
+        return SunTimesResponse(sunrise_utc=sunrise, sunset_utc=sunset)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Error calculating sun times: {str(e)}")
