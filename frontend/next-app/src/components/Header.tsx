@@ -43,6 +43,13 @@ export default function Header() {
           </div>
 
           <nav className={styles.nav}>
+            <button 
+              onClick={() => router.push('/compare')}
+              className={styles.compareBtn}
+            >
+              ⚖️ Compare Charts
+            </button>
+
             {user ? (
               <div className={styles.userSection}>
                 <button 

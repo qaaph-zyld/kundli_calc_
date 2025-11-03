@@ -1,0 +1,54 @@
+feat: Add My Charts page, divisional charts D2/D3/D10/D12, and PDF export
+
+MAJOR FEATURES ADDED:
+
+1. My Saved Charts Page (Feature Complete!)
+   - List all user's saved charts with grid layout
+   - View/delete functionality
+   - Chart preview cards with birth details
+   - Empty state with CTA
+   - Loading states and error handling
+   - Navigation from user menu
+   - Beautiful responsive design
+
+2. More Divisional Charts (Feature Complete!)
+   - D2 (Hora) - Wealth & Prosperity
+   - D3 (Drekkana) - Siblings & Courage
+   - D10 (Dasamsa) - Career & Profession
+   - D12 (Dwadasamsa) - Parents & Ancestry
+   - Generic DivisionalChart component
+   - Color-coded by chart type
+   - Accurate divisional calculations
+   - Updated chart switcher with 6 chart types
+
+3. PDF Export (Feature Complete!)
+   - Export charts as PDF with jsPDF
+   - Includes chart image via html2canvas
+   - Birth details and planetary positions
+   - Professional PDF layout
+   - Download with custom filename
+   - Export PDF button in UI
+
+4. UI/UX Improvements
+   - Chart switcher wraps nicely with 6 buttons
+   - Load saved charts from My Charts page
+   - PDF export button (orange)
+   - Save chart button (green, auth only)
+   - Better mobile responsiveness
+   - Educational info for each chart type
+
+Dependencies Added:
+- jspdf - PDF generation
+- html2canvas - Chart to image conversion
+
+Files Created:
+- app/my-charts/page.tsx + page.module.css
+- src/components/DivisionalChart.tsx
+- src/lib/pdfExport.ts
+
+Files Updated:
+- src/components/ChartDemo.tsx (all charts + PDF)
+- src/components/Header.tsx (My Charts link)
+- src/components/ChartDemo.module.css (new buttons)
+
+Next: Chart comparison feature + deployment!
