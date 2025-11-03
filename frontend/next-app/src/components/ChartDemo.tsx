@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { API_BASE, calculateChart } from '../lib/api';
 import BirthDetailsForm, { BirthDetails } from './BirthDetailsForm';
 import SouthIndianChart from './SouthIndianChart';
+import NavamsaChart from './NavamsaChart';
 import SaveChartModal from './SaveChartModal';
 import { useAuth } from '../contexts/AuthContext';
 import styles from './ChartDemo.module.css';
@@ -14,6 +15,7 @@ export default function ChartDemo() {
   const [birthDetails, setBirthDetails] = useState<BirthDetails | null>(null);
   const [showRawData, setShowRawData] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [chartType, setChartType] = useState<'rasi' | 'navamsa'>('rasi');
   const { user } = useAuth();
 
   async function handleFormSubmit(details: BirthDetails) {
@@ -85,9 +87,38 @@ export default function ChartDemo() {
             </div>
           </div>
 
-          {/* South Indian Chart Visualization */}
+          {/* Chart Type Switcher */}
+          <div className={styles.chartSwitcher}>
+            <button
+              className={`${styles.switcherBtn} ${chartType === 'rasi' ? styles.active : ''}`}
+              onClick={() => setChartType('rasi')}
+            >
+              Rasi Chart (D1)
+            </button>
+            <button
+              className={`${styles.switcherBtn} ${chartType === 'navamsa' ? styles.active : ''}`}
+              onClick={() => setChartType('navamsa')}
+            >
+              Navamsa Chart (D9)
+            </button>
+          </div>
+
+          {/* Chart Visualization */}
           <div className={styles.chartContainer}>
-            <SouthIndianChart data={result} size={600} />
+            {chartType === 'rasi' ? (
+              <SouthIndianChart data={result} size={600} />
+            ) : (
+              <NavamsaChart data={result} size={600} />
+            )}
+          </div>
+
+          {/* Chart Info */}
+          <div className={styles.chartInfo}>
+            <p>
+              {chartType === 'rasi' 
+                ? '📊 Rasi Chart (D1) - Your birth chart showing planetary positions at time of birth'
+                : '💑 Navamsa Chart (D9) - Shows marriage, relationships, and spiritual path (1/9th division)'}
+            </p>
           </div>
 
           {/* Chart Summary */}

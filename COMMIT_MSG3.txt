@@ -1,0 +1,22 @@
+feat: Add Supabase authentication and save charts feature
+
+Phase 2A - Complete Authentication System:
+- Added Supabase SSR integration (@supabase/supabase-js, @supabase/ssr)
+- Created AuthContext for managing auth state
+- Built AuthModal component (login/signup with email/password)
+- Created Header component with user menu and auth buttons
+- Added SaveChartModal for saving charts with custom titles
+- Implemented complete database schema with RLS policies
+- Added chart CRUD operations (save, load, update, delete)
+- Updated ChartDemo with save functionality (only for logged-in users)
+- Created comprehensive SUPABASE_SETUP.md guide
+- Updated layout with AuthProvider and global styles
+
+Features:
+- Email/password authentication
+- User-specific chart storage
+- Row Level Security (users only see their own charts)
+- Beautiful UI with modals and animations
+- Automatic timestamp tracking
+
+Next: Deploy to Vercel + Add Navamsa chart
