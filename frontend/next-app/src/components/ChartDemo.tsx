@@ -1,16 +1,20 @@
 "use client";
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { API_BASE, calculateChart } from '../lib/api';
 import BirthDetailsForm, { BirthDetails } from './BirthDetailsForm';
 import SouthIndianChart from './SouthIndianChart';
+import NorthIndianChart from './NorthIndianChart';
 import NavamsaChart from './NavamsaChart';
 import DivisionalChart from './DivisionalChart';
 import SaveChartModal from './SaveChartModal';
 import { useAuth } from '../contexts/AuthContext';
 import { exportChartWithImage } from '../lib/pdfExport';
+import { detectYogas } from '../lib/yogas';
+import { detectDoshas, calculateDoshaScore } from '../lib/doshas';
+import { ASCENDANT_TRAITS } from '../lib/interpretations';
 import styles from './ChartDemo.module.css';
 
-type ChartType = 'rasi' | 'navamsa' | 'd2' | 'd3' | 'd10' | 'd12';
+type ChartType = 'rasi' | 'north' | 'navamsa' | 'd2' | 'd3' | 'd10' | 'd12';
 
 export default function ChartDemo() {
   const [loading, setLoading] = useState(false);
@@ -19,10 +23,16 @@ export default function ChartDemo() {
   const [birthDetails, setBirthDetails] = useState<BirthDetails | null>(null);
   const [showRawData, setShowRawData] = useState(false);
   const [showSaveModal, setShowSaveModal] = useState(false);
+  const [showAnalysis, setShowAnalysis] = useState(false);
   const [chartType, setChartType] = useState<ChartType>('rasi');
   const [exportingPDF, setExportingPDF] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
   const { user} = useAuth();
+
+  // Calculate yogas and doshas
+  const yogas = useMemo(() => result ? detectYogas(result) : [], [result]);
+  const doshas = useMemo(() => result ? detectDoshas(result) : [], [result]);
+  const doshaScore = useMemo(() => calculateDoshaScore(doshas), [doshas]);
 
   // Check if viewing a saved chart from sessionStorage
   useEffect(() => {
@@ -125,6 +135,12 @@ export default function ChartDemo() {
                 </button>
               )}
               <button 
+                onClick={() => setShowAnalysis(!showAnalysis)}
+                className={styles.analysisBtn}
+              >
+                {showAnalysis ? 'Hide' : 'Show'} Analysis
+              </button>
+              <button 
                 onClick={() => setShowRawData(!showRawData)}
                 className={styles.toggleBtn}
               >
@@ -133,13 +149,92 @@ export default function ChartDemo() {
             </div>
           </div>
 
+          {/* Yogas and Doshas Analysis */}
+          {showAnalysis && (
+            <div className={styles.analysisSection}>
+              <h3>Chart Analysis</h3>
+              
+              {/* Ascendant Description */}
+              {result?.houses?.ascendant?.sign && (
+                <div className={styles.analysisCard}>
+                  <h4>🌟 Ascendant: {result.houses.ascendant.sign}</h4>
+                  <p>{ASCENDANT_TRAITS[result.houses.ascendant.sign]}</p>
+                </div>
+              )}
+
+              {/* Yogas */}
+              {yogas.length > 0 && (
+                <div className={styles.analysisCard}>
+                  <h4>✨ Yogas Detected ({yogas.length})</h4>
+                  <div className={styles.yogasList}>
+                    {yogas.map((yoga, idx) => (
+                      <div key={idx} className={`${styles.yogaItem} ${styles[yoga.type]}`}>
+                        <div className={styles.yogaHeader}>
+                          <strong>{yoga.name}</strong>
+                          <span className={styles.yogaStrength}>{yoga.strength}</span>
+                        </div>
+                        <p className={styles.yogaDesc}>{yoga.description}</p>
+                        <p className={styles.yogaEffects}><strong>Effects:</strong> {yoga.effects}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Doshas */}
+              {doshas.length > 0 && (
+                <div className={styles.analysisCard}>
+                  <h4>⚠️ Doshas Detected ({doshas.length})</h4>
+                  <div className={styles.doshaScore}>
+                    <span>Chart Health Score:</span>
+                    <strong style={{color: doshaScore.score >= 70 ? '#4caf50' : doshaScore.score >= 40 ? '#ff9800' : '#f44336'}}>
+                      {doshaScore.score}/100 ({doshaScore.level})
+                    </strong>
+                  </div>
+                  <div className={styles.doshasList}>
+                    {doshas.map((dosha, idx) => (
+                      <div key={idx} className={`${styles.doshaItem} ${styles[dosha.severity]}`}>
+                        <div className={styles.doshaHeader}>
+                          <strong>{dosha.name}</strong>
+                          <span className={styles.doshaSeverity}>{dosha.severity}</span>
+                        </div>
+                        <p className={styles.doshaDesc}>{dosha.description}</p>
+                        <p className={styles.doshaEffects}><strong>Effects:</strong> {dosha.effects}</p>
+                        <details className={styles.doshaRemedies}>
+                          <summary>🌿 Remedies</summary>
+                          <ul>
+                            {dosha.remedies.map((remedy, i) => (
+                              <li key={i}>{remedy}</li>
+                            ))}
+                          </ul>
+                        </details>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {yogas.length === 0 && doshas.length === 0 && (
+                <div className={styles.analysisCard}>
+                  <p>No significant yogas or doshas detected in this chart.</p>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Chart Type Switcher */}
           <div className={styles.chartSwitcher}>
             <button
               className={`${styles.switcherBtn} ${chartType === 'rasi' ? styles.active : ''}`}
               onClick={() => setChartType('rasi')}
             >
-              Rasi (D1)
+              South Indian (D1)
+            </button>
+            <button
+              className={`${styles.switcherBtn} ${chartType === 'north' ? styles.active : ''}`}
+              onClick={() => setChartType('north')}
+            >
+              North Indian (D1)
             </button>
             <button
               className={`${styles.switcherBtn} ${chartType === 'd2' ? styles.active : ''}`}
@@ -176,6 +271,7 @@ export default function ChartDemo() {
           {/* Chart Visualization */}
           <div className={styles.chartContainer} ref={chartRef}>
             {chartType === 'rasi' && <SouthIndianChart data={result} size={600} />}
+            {chartType === 'north' && <NorthIndianChart data={result} size={600} />}
             {chartType === 'navamsa' && <NavamsaChart data={result} size={600} />}
             {chartType === 'd2' && <DivisionalChart data={result} size={600} division={2} />}
             {chartType === 'd3' && <DivisionalChart data={result} size={600} division={3} />}
@@ -186,7 +282,8 @@ export default function ChartDemo() {
           {/* Chart Info */}
           <div className={styles.chartInfo}>
             <p>
-              {chartType === 'rasi' && '📊 Rasi Chart (D1) - Birth chart showing planetary positions at time of birth'}
+              {chartType === 'rasi' && '📊 South Indian Chart (D1) - Birth chart in South Indian (square) style'}
+              {chartType === 'north' && '◇ North Indian Chart (D1) - Birth chart in North Indian (diamond) style'}
               {chartType === 'd2' && '💰 Hora Chart (D2) - Wealth, prosperity, and material gains'}
               {chartType === 'd3' && '👫 Drekkana Chart (D3) - Siblings, courage, and mental strength'}
               {chartType === 'navamsa' && '💑 Navamsa Chart (D9) - Marriage, relationships, and spiritual path'}

@@ -127,6 +127,27 @@
   cursor: not-allowed;
 }
 
+.analysisBtn {
+  background: #9c27b0;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.analysisBtn:hover {
+  background: #7b1fa2;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
 .chartSwitcher {
   display: flex;
   justify-content: center;
@@ -274,4 +295,182 @@
     align-items: flex-start;
     gap: 12px;
   }
+}
+
+/* Analysis Section Styles */
+.analysisSection {
+  margin: 24px 0;
+  padding: 20px;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.analysisSection h3 {
+  margin: 0 0 20px 0;
+  font-size: 22px;
+  color: #333;
+}
+
+.analysisCard {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.analysisCard h4 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.analysisCard p {
+  margin: 8px 0;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* Yogas Styles */
+.yogasList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.yogaItem {
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 4px solid;
+}
+
+.yogaItem.beneficial {
+  background: #e8f5e9;
+  border-color: #4caf50;
+}
+
+.yogaItem.malefic {
+  background: #ffebee;
+  border-color: #f44336;
+}
+
+.yogaItem.neutral {
+  background: #fff3e0;
+  border-color: #ff9800;
+}
+
+.yogaHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.yogaStrength {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.1);
+  text-transform: capitalize;
+}
+
+.yogaDesc {
+  font-size: 14px;
+  color: #555;
+  font-style: italic;
+  margin: 4px 0 8px 0;
+}
+
+.yogaEffects {
+  font-size: 14px;
+  margin: 8px 0 0 0;
+}
+
+/* Doshas Styles */
+.doshaScore {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: #f5f5f5;
+  border-radius: 6px;
+  margin-bottom: 16px;
+}
+
+.doshasList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.doshaItem {
+  padding: 16px;
+  border-radius: 8px;
+  border-left: 4px solid;
+}
+
+.doshaItem.mild {
+  background: #fff8e1;
+  border-color: #ffc107;
+}
+
+.doshaItem.moderate {
+  background: #ffe0b2;
+  border-color: #ff9800;
+}
+
+.doshaItem.severe {
+  background: #ffebee;
+  border-color: #f44336;
+}
+
+.doshaHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.doshaSeverity {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background: rgba(0,0,0,0.1);
+  text-transform: capitalize;
+}
+
+.doshaDesc {
+  font-size: 14px;
+  color: #555;
+  font-style: italic;
+  margin: 4px 0 8px 0;
+}
+
+.doshaEffects {
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.doshaRemedies {
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.doshaRemedies summary {
+  font-weight: 600;
+  color: #4caf50;
+  padding: 8px 0;
+  user-select: none;
+}
+
+.doshaRemedies ul {
+  margin: 8px 0;
+  padding-left: 20px;
+}
+
+.doshaRemedies li {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
 }
