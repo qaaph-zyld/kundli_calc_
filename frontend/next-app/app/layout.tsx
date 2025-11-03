@@ -1,7 +1,10 @@
 import type { ReactNode } from 'react';
+import { AuthProvider } from '../src/contexts/AuthContext';
+import './globals.css';
+
 export const metadata = {
-  title: 'Kundli Calc',
-  description: 'World-class Kundli calculations',
+  title: 'Kundli Calculator - Vedic Astrology Charts',
+  description: 'Generate accurate Vedic astrology birth charts with South Indian and Navamsa chart styles',
 };
 
 export default function RootLayout({
@@ -11,8 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, sans-serif', margin: 0 }}>
-        {children}
+      <body>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );

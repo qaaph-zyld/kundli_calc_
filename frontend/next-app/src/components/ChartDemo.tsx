@@ -3,18 +3,24 @@ import { useState } from 'react';
 import { API_BASE, calculateChart } from '../lib/api';
 import BirthDetailsForm, { BirthDetails } from './BirthDetailsForm';
 import SouthIndianChart from './SouthIndianChart';
+import SaveChartModal from './SaveChartModal';
+import { useAuth } from '../contexts/AuthContext';
 import styles from './ChartDemo.module.css';
 
 export default function ChartDemo() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<any | null>(null);
+  const [birthDetails, setBirthDetails] = useState<BirthDetails | null>(null);
   const [showRawData, setShowRawData] = useState(false);
+  const [showSaveModal, setShowSaveModal] = useState(false);
+  const { user } = useAuth();
 
   async function handleFormSubmit(details: BirthDetails) {
     setLoading(true);
     setError(null);
     setResult(null);
+    setBirthDetails(details);
     
     try {
       // Combine date and time into ISO format
@@ -61,12 +67,22 @@ export default function ChartDemo() {
         <section className={styles.resultSection}>
           <div className={styles.resultHeader}>
             <h2>Your Birth Chart</h2>
-            <button 
-              onClick={() => setShowRawData(!showRawData)}
-              className={styles.toggleBtn}
-            >
-              {showRawData ? 'Hide' : 'Show'} Raw Data
-            </button>
+            <div className={styles.headerActions}>
+              {user && (
+                <button 
+                  onClick={() => setShowSaveModal(true)}
+                  className={styles.saveBtn}
+                >
+                  💾 Save Chart
+                </button>
+              )}
+              <button 
+                onClick={() => setShowRawData(!showRawData)}
+                className={styles.toggleBtn}
+              >
+                {showRawData ? 'Hide' : 'Show'} Raw Data
+              </button>
+            </div>
           </div>
 
           {/* South Indian Chart Visualization */}
@@ -112,6 +128,20 @@ export default function ChartDemo() {
             </div>
           )}
         </section>
+      )}
+
+      {/* Save Chart Modal */}
+      {birthDetails && result && (
+        <SaveChartModal
+          isOpen={showSaveModal}
+          onClose={() => setShowSaveModal(false)}
+          birthDetails={birthDetails}
+          chartData={result}
+          onSaved={() => {
+            // Could add a toast notification here
+            console.log('Chart saved successfully!');
+          }}
+        />
       )}
     </div>
   );
