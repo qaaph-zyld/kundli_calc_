@@ -1,0 +1,8 @@
+feat: Add South Indian chart visualization and birth details form
+
+- Created SouthIndianChart component with SVG-based visualization  
+- Added BirthDetailsForm with date/time/location inputs
+- Updated ChartDemo to integrate form and chart display
+- Added loading states, error handling, and raw data toggle
+- Responsive design for mobile devices
+- Phase 1 Core UX complete

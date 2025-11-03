@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import styles from './BirthDetailsForm.module.css';
 
 export interface BirthDetails {
   date: string; // YYYY-MM-DD
@@ -64,13 +65,13 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
   };
 
   return (
-    <form onSubmit={handleSubmit} className="birth-details-form">
-      <div className="form-grid">
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.grid}>
         {/* Date and Time */}
-        <div className="form-section">
+        <div className={styles.section}>
           <h3>Birth Date & Time</h3>
-          <div className="form-row">
-            <div className="form-group">
+          <div className={styles.row}>
+            <div className={styles.group}>
               <label htmlFor="date">Date *</label>
               <input
                 id="date"
@@ -80,10 +81,10 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
                 disabled={loading}
                 required
               />
-              {errors.date && <span className="error">{errors.date}</span>}
+              {errors.date && <span className={styles.error}>{errors.date}</span>}
             </div>
 
-            <div className="form-group">
+            <div className={styles.group}>
               <label htmlFor="time">Time (24h) *</label>
               <input
                 id="time"
@@ -93,15 +94,15 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
                 disabled={loading}
                 required
               />
-              {errors.time && <span className="error">{errors.time}</span>}
+              {errors.time && <span className={styles.error}>{errors.time}</span>}
             </div>
           </div>
         </div>
 
         {/* Location */}
-        <div className="form-section">
+        <div className={styles.section}>
           <h3>Birth Location</h3>
-          <div className="form-group">
+          <div className={styles.group}>
             <label htmlFor="locationName">Location Name *</label>
             <input
               id="locationName"
@@ -112,11 +113,11 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
               disabled={loading}
               required
             />
-            {errors.locationName && <span className="error">{errors.locationName}</span>}
+            {errors.locationName && <span className={styles.error}>{errors.locationName}</span>}
           </div>
 
-          <div className="form-row">
-            <div className="form-group">
+          <div className={styles.row}>
+            <div className={styles.group}>
               <label htmlFor="latitude">Latitude *</label>
               <input
                 id="latitude"
@@ -130,10 +131,10 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
                 disabled={loading}
                 required
               />
-              {errors.latitude && <span className="error">{errors.latitude}</span>}
+              {errors.latitude && <span className={styles.error}>{errors.latitude}</span>}
             </div>
 
-            <div className="form-group">
+            <div className={styles.group}>
               <label htmlFor="longitude">Longitude *</label>
               <input
                 id="longitude"
@@ -147,11 +148,11 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
                 disabled={loading}
                 required
               />
-              {errors.longitude && <span className="error">{errors.longitude}</span>}
+              {errors.longitude && <span className={styles.error}>{errors.longitude}</span>}
             </div>
           </div>
 
-          <div className="form-group">
+          <div className={styles.group}>
             <label htmlFor="timezone">Timezone</label>
             <select
               id="timezone"
@@ -170,10 +171,10 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
         </div>
 
         {/* Calculation Settings */}
-        <div className="form-section">
+        <div className={styles.section}>
           <h3>Settings</h3>
-          <div className="form-row">
-            <div className="form-group">
+          <div className={styles.row}>
+            <div className={styles.group}>
               <label htmlFor="ayanamsa">Ayanamsa</label>
               <select
                 id="ayanamsa"
@@ -188,7 +189,7 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
               </select>
             </div>
 
-            <div className="form-group">
+            <div className={styles.group}>
               <label htmlFor="houseSystem">House System</label>
               <select
                 id="houseSystem"
@@ -206,122 +207,11 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
         </div>
       </div>
 
-      <div className="form-actions">
-        <button type="submit" disabled={loading} className="btn-primary">
+      <div className={styles.actions}>
+        <button type="submit" disabled={loading} className={styles.btnPrimary}>
           {loading ? 'Calculating...' : 'Generate Kundli'}
         </button>
       </div>
-
-      <style jsx>{`
-        .birth-details-form {
-          background: white;
-          border: 1px solid #ddd;
-          border-radius: 8px;
-          padding: 24px;
-          max-width: 800px;
-        }
-
-        .form-grid {
-          display: flex;
-          flex-direction: column;
-          gap: 24px;
-        }
-
-        .form-section {
-          border-bottom: 1px solid #eee;
-          padding-bottom: 20px;
-        }
-
-        .form-section:last-child {
-          border-bottom: none;
-          padding-bottom: 0;
-        }
-
-        .form-section h3 {
-          margin: 0 0 16px 0;
-          font-size: 16px;
-          font-weight: 600;
-          color: #333;
-        }
-
-        .form-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-        }
-
-        .form-group {
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
-        }
-
-        label {
-          font-size: 14px;
-          font-weight: 500;
-          color: #555;
-        }
-
-        input, select {
-          padding: 10px 12px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          font-size: 14px;
-          transition: border-color 0.2s;
-        }
-
-        input:focus, select:focus {
-          outline: none;
-          border-color: #1976d2;
-        }
-
-        input:disabled, select:disabled {
-          background: #f5f5f5;
-          cursor: not-allowed;
-        }
-
-        .error {
-          color: #d32f2f;
-          font-size: 12px;
-        }
-
-        .form-actions {
-          margin-top: 24px;
-          display: flex;
-          justify-content: center;
-        }
-
-        .btn-primary {
-          background: #1976d2;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          padding: 12px 32px;
-          font-size: 16px;
-          font-weight: 500;
-          cursor: pointer;
-          transition: background 0.2s;
-        }
-
-        .btn-primary:hover:not(:disabled) {
-          background: #1565c0;
-        }
-
-        .btn-primary:disabled {
-          background: #ccc;
-          cursor: not-allowed;
-        }
-
-        @media (max-width: 640px) {
-          .form-row {
-            grid-template-columns: 1fr;
-          }
-
-          .birth-details-form {
-            padding: 16px;
-          }
-        }
-      `}</style>
     </form>
   );
 }

@@ -184,7 +184,6 @@ export default function SouthIndianChart({ data, size = 600 }: SouthIndianChartP
                   y={y + 50 + idx * 20}
                   fontSize="18"
                   fill="#1976d2"
-                  title={planet.name}
                 >
                   {PLANET_SYMBOLS[planet.name] || planet.name.slice(0, 2)}
                 </text>
@@ -264,16 +263,6 @@ export default function SouthIndianChart({ data, size = 600 }: SouthIndianChartP
           </text>
         </g>
       </svg>
-
-      <style jsx>{`
-        .south-indian-chart {
-          display: inline-block;
-        }
-        .south-indian-chart svg {
-          max-width: 100%;
-          height: auto;
-        }
-      `}</style>
     </div>
   );
 }
