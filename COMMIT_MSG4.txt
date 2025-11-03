@@ -1,0 +1,31 @@
+feat: Add Navamsa (D9) chart and deployment guides
+
+Phase 2B - Navamsa Chart & Deployment:
+- Created NavamsaChart component with D9 divisional chart calculations
+- Added chart type switcher (toggle between Rasi D1 and Navamsa D9)
+- Implemented Navamsa calculation formula (3°20' divisions)
+- Added chart info banner explaining each chart type
+- Updated ChartDemo with conditional chart rendering
+- Created comprehensive DEPLOYMENT.md guide (Vercel + Railway + Supabase)
+- Added vercel.json configuration for frontend deployment
+- Styled chart switcher with active state indicators
+
+Features:
+- Navamsa (D9) chart for marriage/relationship analysis
+- Beautiful chart switcher UI
+- Educational tooltips for each chart type
+- Ready for production deployment
+
+Navamsa Chart Details:
+- Each sign divided into 9 parts (3°20' each)
+- Shows spiritual path and marriage prospects
+- Color-coded differently from Rasi chart (green theme)
+- Accurate calculation using longitude-based formula
+
+Deployment Ready:
+- Vercel configuration complete
+- Environment variables documented
+- Step-by-step deployment guide
+- Cost estimates provided
+
+Next: Follow DEPLOYMENT.md to go live!

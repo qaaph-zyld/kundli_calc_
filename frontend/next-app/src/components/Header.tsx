@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
 import styles from './Header.module.css';
 
 export default function Header() {
+  const router = useRouter();
   const { user, signOut, loading } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
@@ -59,8 +61,17 @@ export default function Header() {
                     <div className={styles.userInfo}>
                       <div className={styles.userEmail}>{user.email}</div>
                     </div>
+                    <button 
+                      onClick={() => { 
+                        router.push('/my-charts'); 
+                        setShowUserMenu(false);
+                      }} 
+                      className={styles.menuItem}
+                    >
+                      📊 My Charts
+                    </button>
                     <button onClick={handleSignOut} className={styles.menuItem}>
-                      Sign Out
+                      🚪 Sign Out
                     </button>
                   </div>
                 )}
