@@ -225,3 +225,181 @@
     padding: 24px;
   }
 }
+
+/* Ashtakoot Section Styles */
+.ashtakootSection {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 32px 0;
+  color: white;
+}
+
+.ashtakootSection h2 {
+  margin: 0 0 24px 0;
+  font-size: 28px;
+  text-align: center;
+}
+
+.ashtakootScore {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.mainScore {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.percentage {
+  font-size: 48px;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.compatibilityBadge {
+  padding: 12px 24px;
+  border-radius: 24px;
+  font-weight: bold;
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.compatibilityBadge.excellent {
+  background: #4caf50;
+  color: white;
+}
+
+.compatibilityBadge.verygood {
+  background: #8bc34a;
+  color: white;
+}
+
+.compatibilityBadge.good {
+  background: #ffc107;
+  color: #333;
+}
+
+.compatibilityBadge.average {
+  background: #ff9800;
+  color: white;
+}
+
+.compatibilityBadge.poor {
+  background: #f44336;
+  color: white;
+}
+
+.recommendation {
+  border-top: 2px solid #eee;
+  padding-top: 20px;
+}
+
+.recommendation h3 {
+  margin: 0 0 12px 0;
+  color: #667eea;
+  font-size: 20px;
+}
+
+.recommendation p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
+.ashtakootDetails {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.kootaGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.kootaCard {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  color: #333;
+  transition: transform 0.2s;
+}
+
+.kootaCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.kootaCard.critical {
+  border: 2px solid #f44336;
+  background: #ffebee;
+}
+
+.kootaHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.kootaHeader h4 {
+  margin: 0;
+  font-size: 16px;
+  color: #667eea;
+}
+
+.kootaScore {
+  background: #667eea;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.kootaCard p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #666;
+}
+
+.criticalWarning {
+  margin-top: 12px;
+  padding: 12px;
+  background: #fff3e0;
+  border-left: 4px solid #f44336;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.criticalWarning strong {
+  color: #f44336;
+}
+
+@media (max-width: 768px) {
+  .kootaGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .ashtakootSection {
+    padding: 20px;
+  }
+
+  .mainScore {
+    flex-direction: column;
+  }
+
+  .percentage {
+    font-size: 36px;
+  }
+}

@@ -5,6 +5,7 @@ import Header from '../../src/components/Header';
 import BirthDetailsForm, { BirthDetails } from '../../src/components/BirthDetailsForm';
 import SouthIndianChart from '../../src/components/SouthIndianChart';
 import { calculateChart } from '../../src/lib/api';
+import { calculateAshtakoot, type AshtakootResult } from '../../src/lib/ashtakoot';
 import styles from './page.module.css';
 
 export default function ComparePage() {
@@ -39,6 +40,17 @@ export default function ComparePage() {
       setError(`Failed to calculate Chart ${chartNum}: ${e?.message || String(e)}`);
     } finally {
       setLoading(null);
+    }
+  };
+
+  const getAshtakootResults = (): AshtakootResult | null => {
+    if (!chart1 || !chart2) return null;
+
+    try {
+      return calculateAshtakoot(chart1.data, chart2.data);
+    } catch (error) {
+      console.error('Ashtakoot calculation error:', error);
+      return null;
     }
   };
 
@@ -151,6 +163,7 @@ export default function ComparePage() {
   };
 
   const compatibility = chart1 && chart2 ? calculateCompatibility() : null;
+  const ashtakoot = getAshtakootResults();
 
   return (
     <>
@@ -236,6 +249,129 @@ export default function ComparePage() {
                   <li key={idx}>{note}</li>
                 ))}
               </ul>
+            </div>
+          </div>
+        )}
+
+        {/* Ashtakoot Matching (36 Points) */}
+        {ashtakoot && (
+          <div className={styles.ashtakootSection}>
+            <h2>🔮 Ashtakoot Matching (Traditional 36-Point System)</h2>
+            
+            <div className={styles.ashtakootScore}>
+              <div className={styles.mainScore}>
+                <div className={styles.scoreCircle}>
+                  <div className={styles.scoreValue}>{ashtakoot.total}</div>
+                  <div className={styles.scoreLabel}>out of 36</div>
+                </div>
+                <div className={styles.percentage}>{ashtakoot.percentage.toFixed(1)}%</div>
+                <div className={`${styles.compatibilityBadge} ${styles[ashtakoot.compatibility.toLowerCase().replace(' ', '')]}`}>
+                  {ashtakoot.compatibility}
+                </div>
+              </div>
+              
+              <div className={styles.recommendation}>
+                <h3>Recommendation</h3>
+                <p>{ashtakoot.recommendation}</p>
+              </div>
+            </div>
+
+            <div className={styles.ashtakootDetails}>
+              <div className={styles.kootaGrid}>
+                {/* Varna */}
+                <div className={styles.kootaCard}>
+                  <div className={styles.kootaHeader}>
+                    <h4>1. Varna (Caste)</h4>
+                    <span className={styles.kootaScore}>
+                      {ashtakoot.varna.points}/{ashtakoot.varna.maxPoints}
+                    </span>
+                  </div>
+                  <p>{ashtakoot.varna.description}</p>
+                </div>
+
+                {/* Vashya */}
+                <div className={styles.kootaCard}>
+                  <div className={styles.kootaHeader}>
+                    <h4>2. Vashya (Attraction)</h4>
+                    <span className={styles.kootaScore}>
+                      {ashtakoot.vashya.points}/{ashtakoot.vashya.maxPoints}
+                    </span>
+                  </div>
+                  <p>{ashtakoot.vashya.description}</p>
+                </div>
+
+                {/* Tara */}
+                <div className={styles.kootaCard}>
+                  <div className={styles.kootaHeader}>
+                    <h4>3. Tara (Birth Star)</h4>
+                    <span className={styles.kootaScore}>
+                      {ashtakoot.tara.points}/{ashtakoot.tara.maxPoints}
+                    </span>
+                  </div>
+                  <p>{ashtakoot.tara.description}</p>
+                </div>
+
+                {/* Yoni */}
+                <div className={styles.kootaCard}>
+                  <div className={styles.kootaHeader}>
+                    <h4>4. Yoni (Physical)</h4>
+                    <span className={styles.kootaScore}>
+                      {ashtakoot.yoni.points}/{ashtakoot.yoni.maxPoints}
+                    </span>
+                  </div>
+                  <p>{ashtakoot.yoni.description}</p>
+                </div>
+
+                {/* Graha Maitri */}
+                <div className={styles.kootaCard}>
+                  <div className={styles.kootaHeader}>
+                    <h4>5. Graha Maitri (Mental)</h4>
+                    <span className={styles.kootaScore}>
+                      {ashtakoot.graha_maitri.points}/{ashtakoot.graha_maitri.maxPoints}
+                    </span>
+                  </div>
+                  <p>{ashtakoot.graha_maitri.description}</p>
+                </div>
+
+                {/* Gana */}
+                <div className={styles.kootaCard}>
+                  <div className={styles.kootaHeader}>
+                    <h4>6. Gana (Temperament)</h4>
+                    <span className={styles.kootaScore}>
+                      {ashtakoot.gana.points}/{ashtakoot.gana.maxPoints}
+                    </span>
+                  </div>
+                  <p>{ashtakoot.gana.description}</p>
+                </div>
+
+                {/* Bhakoot */}
+                <div className={styles.kootaCard}>
+                  <div className={styles.kootaHeader}>
+                    <h4>7. Bhakoot (Rasi)</h4>
+                    <span className={styles.kootaScore}>
+                      {ashtakoot.bhakoot.points}/{ashtakoot.bhakoot.maxPoints}
+                    </span>
+                  </div>
+                  <p>{ashtakoot.bhakoot.description}</p>
+                </div>
+
+                {/* Nadi */}
+                <div className={`${styles.kootaCard} ${ashtakoot.nadi.points === 0 ? styles.critical : ''}`}>
+                  <div className={styles.kootaHeader}>
+                    <h4>8. Nadi (Health/Genes) ⚠️</h4>
+                    <span className={styles.kootaScore}>
+                      {ashtakoot.nadi.points}/{ashtakoot.nadi.maxPoints}
+                    </span>
+                  </div>
+                  <p>{ashtakoot.nadi.description}</p>
+                  {ashtakoot.nadi.points === 0 && (
+                    <div className={styles.criticalWarning}>
+                      <strong>⚠️ IMPORTANT:</strong> Nadi dosha is considered very serious in traditional matching.
+                      Please consult an experienced astrologer for exceptions and remedies.
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         )}

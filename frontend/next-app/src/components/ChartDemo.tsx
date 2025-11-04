@@ -12,6 +12,7 @@ import { exportChartWithImage } from '../lib/pdfExport';
 import { detectYogas } from '../lib/yogas';
 import { detectDoshas, calculateDoshaScore } from '../lib/doshas';
 import { ASCENDANT_TRAITS } from '../lib/interpretations';
+import { calculatePlanetaryStrength, calculateSpecialPoints, getChartStrengthSummary } from '../lib/planetaryStrength';
 import styles from './ChartDemo.module.css';
 
 type ChartType = 'rasi' | 'north' | 'navamsa' | 'd2' | 'd3' | 'd10' | 'd12';
@@ -33,6 +34,11 @@ export default function ChartDemo() {
   const yogas = useMemo(() => result ? detectYogas(result) : [], [result]);
   const doshas = useMemo(() => result ? detectDoshas(result) : [], [result]);
   const doshaScore = useMemo(() => calculateDoshaScore(doshas), [doshas]);
+  
+  // Calculate planetary strength and special points
+  const planetaryStrengths = useMemo(() => result ? calculatePlanetaryStrength(result) : [], [result]);
+  const specialPoints = useMemo(() => result ? calculateSpecialPoints(result) : null, [result]);
+  const strengthSummary = useMemo(() => getChartStrengthSummary(planetaryStrengths), [planetaryStrengths]);
 
   // Check if viewing a saved chart from sessionStorage
   useEffect(() => {
@@ -214,9 +220,117 @@ export default function ChartDemo() {
                 </div>
               )}
 
-              {yogas.length === 0 && doshas.length === 0 && (
+              {/* Planetary Strength */}
+              {planetaryStrengths.length > 0 && (
                 <div className={styles.analysisCard}>
-                  <p>No significant yogas or doshas detected in this chart.</p>
+                  <h4>💪 Planetary Strength (Shadbala)</h4>
+                  <div className={styles.strengthSummary}>
+                    <div className={styles.summaryStats}>
+                      <div className={styles.statItem}>
+                        <span>Overall Rating:</span>
+                        <strong>{strengthSummary.overallRating}</strong>
+                      </div>
+                      <div className={styles.statItem}>
+                        <span>Average Strength:</span>
+                        <strong>{strengthSummary.averageStrength.toFixed(1)}%</strong>
+                      </div>
+                      <div className={styles.statItem}>
+                        <span>Strongest:</span>
+                        <strong style={{color: '#4caf50'}}>{strengthSummary.strongestPlanet}</strong>
+                      </div>
+                      <div className={styles.statItem}>
+                        <span>Weakest:</span>
+                        <strong style={{color: '#f44336'}}>{strengthSummary.weakestPlanet}</strong>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={styles.strengthList}>
+                    {planetaryStrengths.map((ps, idx) => (
+                      <div key={idx} className={`${styles.strengthItem} ${styles[ps.strength.toLowerCase().replace(' ', '')]}`}>
+                        <div className={styles.strengthHeader}>
+                          <strong>{ps.planet}</strong>
+                          <span className={styles.strengthBadge}>{ps.strength}</span>
+                        </div>
+                        <div className={styles.strengthBar}>
+                          <div 
+                            className={styles.strengthFill} 
+                            style={{
+                              width: `${Math.min(100, ps.percentage)}%`,
+                              backgroundColor: ps.percentage >= 100 ? '#4caf50' : ps.percentage >= 70 ? '#ff9800' : '#f44336'
+                            }}
+                          />
+                        </div>
+                        <p className={styles.strengthStats}>
+                          {ps.totalStrength.toFixed(0)} / {ps.minimumRequired} Rupas ({ps.percentage.toFixed(1)}%)
+                        </p>
+                        <p className={styles.strengthInterp}>{ps.interpretation}</p>
+                      </div>
+                    ))}
+                  </div>
+                  {strengthSummary.recommendations.length > 0 && (
+                    <div className={styles.recommendations}>
+                      <h5>🌟 Recommendations:</h5>
+                      <ul>
+                        {strengthSummary.recommendations.map((rec, i) => (
+                          <li key={i}>{rec}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Special Points */}
+              {specialPoints && (
+                <div className={styles.analysisCard}>
+                  <h4>⭐ Special Points</h4>
+                  <div className={styles.specialPointsList}>
+                    <div className={styles.specialPointItem}>
+                      <h5>Brighu Bindu (Destiny Point)</h5>
+                      <p className={styles.pointLocation}>
+                        📍 {specialPoints.brighaBindu.sign} ({specialPoints.brighaBindu.longitude.toFixed(2)}°) - House {specialPoints.brighaBindu.house}
+                      </p>
+                      <p>{specialPoints.brighaBindu.description}</p>
+                    </div>
+                    
+                    <div className={styles.specialPointItem}>
+                      <h5>Gulika (Malefic Point)</h5>
+                      <p className={styles.pointLocation}>
+                        📍 {specialPoints.gulika.sign} ({specialPoints.gulika.longitude.toFixed(2)}°) - House {specialPoints.gulika.house}
+                      </p>
+                      <p>{specialPoints.gulika.description}</p>
+                    </div>
+
+                    <div className={styles.specialPointItem}>
+                      <h5>Mandi (Saturn's Agent)</h5>
+                      <p className={styles.pointLocation}>
+                        📍 {specialPoints.mandi.sign} ({specialPoints.mandi.longitude.toFixed(2)}°) - House {specialPoints.mandi.house}
+                      </p>
+                      <p>{specialPoints.mandi.description}</p>
+                    </div>
+
+                    <div className={styles.specialPointItem}>
+                      <h5>Bhava Lagna</h5>
+                      <p className={styles.pointLocation}>
+                        📍 {specialPoints.bhavaLagna.sign} ({specialPoints.bhavaLagna.longitude.toFixed(2)}°)
+                      </p>
+                      <p>{specialPoints.bhavaLagna.description}</p>
+                    </div>
+
+                    <div className={styles.specialPointItem}>
+                      <h5>Hora Lagna (Wealth Point)</h5>
+                      <p className={styles.pointLocation}>
+                        📍 {specialPoints.horaLagna.sign} ({specialPoints.horaLagna.longitude.toFixed(2)}°)
+                      </p>
+                      <p>{specialPoints.horaLagna.description}</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {yogas.length === 0 && doshas.length === 0 && planetaryStrengths.length === 0 && (
+                <div className={styles.analysisCard}>
+                  <p>No analysis data available.</p>
                 </div>
               )}
             </div>

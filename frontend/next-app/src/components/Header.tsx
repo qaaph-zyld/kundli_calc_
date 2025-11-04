@@ -47,7 +47,21 @@ export default function Header() {
               onClick={() => router.push('/compare')}
               className={styles.compareBtn}
             >
-              ⚖️ Compare Charts
+              ⚖️ Compare
+            </button>
+            
+            <button 
+              onClick={() => router.push('/transits')}
+              className={styles.compareBtn}
+            >
+              🌍 Transits
+            </button>
+            
+            <button 
+              onClick={() => router.push('/rectification')}
+              className={styles.compareBtn}
+            >
+              ⏰ Rectify
             </button>
 
             {user ? (
