@@ -11,6 +11,7 @@ from typing import Dict, List, Tuple
 
 # Configuration
 API_BASE = "http://localhost:8000"
+API_V1 = "/api/v1"
 VERBOSE = True
 
 # Test cases
@@ -82,7 +83,7 @@ def test_health_check() -> bool:
     """Test if backend is running"""
     print_test("Testing backend health...", "info")
     try:
-        response = requests.get(f"{API_BASE}/health", timeout=5)
+        response = requests.get(f"{API_BASE}{API_V1}/health", timeout=5)
         if response.status_code == 200:
             print_test("Backend is running!", "pass")
             return True
@@ -103,7 +104,7 @@ def test_calculate_chart(test_case: Dict) -> Tuple[bool, Dict]:
     
     try:
         response = requests.post(
-            f"{API_BASE}/api/calculate",
+            f"{API_BASE}{API_V1}/charts/calculate",
             json=test_case['data'],
             timeout=10
         )
@@ -217,7 +218,7 @@ def test_invalid_inputs() -> bool:
     for case in invalid_cases:
         try:
             response = requests.post(
-                f"{API_BASE}/api/calculate",
+                f"{API_BASE}{API_V1}/charts/calculate",
                 json=case['data'],
                 timeout=5
             )
@@ -250,7 +251,7 @@ def test_performance() -> bool:
     try:
         import time
         start = time.time()
-        response = requests.post(f"{API_BASE}/api/calculate", json=test_data, timeout=10)
+        response = requests.post(f"{API_BASE}{API_V1}/charts/calculate", json=test_data, timeout=10)
         elapsed = time.time() - start
         
         if response.status_code == 200:
