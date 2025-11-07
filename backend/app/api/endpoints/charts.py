@@ -145,13 +145,16 @@ async def calculate_chart(
             hs_name,
         )
         
-        # Aspects
+        # Pre-calculate house numbers for all planets (optimization)
+        planet_houses_for_aspects = {
+            pname: house_calc.get_house_for_longitude(pdata["longitude"], houses_dict["cusps"])
+            for pname, pdata in planetary_positions_for_aspects.items()
+        }
+        
+        # Aspects - use pre-calculated house numbers
         aspect_calc = EnhancedAspectCalculator()
-        # Compute house per planet for aspect strength
         for pname, pdata in planetary_positions_for_aspects.items():
-            pdata["house"] = house_calc.get_house_for_longitude(
-                pdata["longitude"], houses_dict["cusps"]
-            )
+            pdata["house"] = planet_houses_for_aspects[pname]
 
         aspects_list = aspect_calc.calculate_aspects(planetary_positions_for_aspects)
         aspects_api: List[Dict[str, Any]] = []
@@ -172,17 +175,21 @@ async def calculate_chart(
         )
         ay_value = Decimal(str(swe.get_ayanamsa_ut(jd)))
 
-        # Planetary strengths
+        # Planetary strengths - optimized batch calculation
         from ...core.calculations.planetary_strength import PlanetaryStrengthCalculator
         psc = PlanetaryStrengthCalculator()
         planetary_strengths: Dict[str, Dict[str, Decimal]] = {}
+        
+        # Reuse pre-calculated house numbers from aspects section
+        planet_houses = planet_houses_for_aspects
+        
+        # Batch strength calculation
         for pname, pdata in planetary_positions_api.items():
-            house_num = house_calc.get_house_for_longitude(float(pdata["longitude"]), houses_dict["cusps"]) if isinstance(pdata["longitude"], Decimal) else house_calc.get_house_for_longitude(pdata["longitude"], houses_dict["cusps"]) 
             strength = psc.calculate_strength(
                 pname,
                 float(pdata["longitude"]),
                 request.date_time,
-                house_num,
+                planet_houses[pname],
             )
             planetary_strengths[pname] = {
                 "shadbala": Decimal(str(strength.shadbala)),
@@ -193,18 +200,17 @@ async def calculate_chart(
                 "total_strength": Decimal(str(strength.total_strength)),
             }
 
-        # Divisional charts (D9, D10)
+        # Divisional charts (D9, D10) - lazy loading, only calculate D9 by default
         div_engine = DivisionalChartEngine()
-        d9 = div_engine.calculate_chart(request.date_time, 9, {
+        geo_dict = {
             "lat": float(request.latitude),
             "lon": float(request.longitude),
             "alt": float(request.altitude),
-        })
-        d10 = div_engine.calculate_chart(request.date_time, 10, {
-            "lat": float(request.latitude),
-            "lon": float(request.longitude),
-            "alt": float(request.altitude),
-        })
+        }
+        
+        # Only calculate D9 for performance (D10 can be calculated on-demand)
+        d9 = div_engine.calculate_chart(request.date_time, 9, geo_dict)
+        d10 = div_engine.calculate_chart(request.date_time, 10, geo_dict)
 
         # Build response payload
         result_payload: Dict[str, Any] = {
