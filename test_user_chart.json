@@ -1,0 +1,26 @@
+{
+  "test_name": "User Birth Chart - Loznica Serbia",
+  "birth_details": {
+    "date": "1990-10-09",
+    "time": "09:10:00",
+    "location": "Loznica, Serbia",
+    "latitude": 44.5333,
+    "longitude": 19.2333,
+    "timezone": "Europe/Belgrade",
+    "altitude": 0
+  },
+  "api_request": {
+    "date_time": "1990-10-09T09:10:00+02:00",
+    "latitude": 44.5333,
+    "longitude": 19.2333,
+    "altitude": 0,
+    "ayanamsa_type": "LAHIRI",
+    "house_system": "PLACIDUS"
+  },
+  "expected_results": {
+    "ascendant_sign": "Scorpio or Libra (need to verify)",
+    "sun_sign": "Libra",
+    "moon_sign": "To be calculated",
+    "verification_needed": true
+  }
+}
