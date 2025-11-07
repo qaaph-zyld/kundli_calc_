@@ -1,0 +1,181 @@
+{
+  "app": {
+    "title": "Kundli Calculator",
+    "subtitle": "Generate your Vedic astrology chart"
+  },
+  "nav": {
+    "home": "Home",
+    "compare": "Compare",
+    "transits": "Transits",
+    "rectification": "Rectify Time",
+    "myCharts": "My Charts",
+    "signIn": "Sign In",
+    "signOut": "Sign Out"
+  },
+  "form": {
+    "name": "Name",
+    "date": "Date of Birth",
+    "time": "Time of Birth",
+    "location": "Location",
+    "latitude": "Latitude",
+    "longitude": "Longitude",
+    "generate": "Generate Chart",
+    "calculating": "Calculating...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "load": "Load",
+    "delete": "Delete"
+  },
+  "chart": {
+    "types": {
+      "south": "South Indian (D1)",
+      "north": "North Indian (D1)",
+      "navamsa": "Navamsa (D9)",
+      "hora": "Hora (D2)",
+      "drekkana": "Drekkana (D3)",
+      "dasamsa": "Dasamsa (D10)",
+      "dwadasamsa": "Dwadasamsa (D12)"
+    },
+    "info": "Chart Information",
+    "planetaryPositions": "Planetary Positions",
+    "houses": "Houses",
+    "ascendant": "Ascendant"
+  },
+  "analysis": {
+    "yogas": "Yogas",
+    "doshas": "Doshas",
+    "planetaryStrength": "Planetary Strength",
+    "specialPoints": "Special Points",
+    "showAnalysis": "Show Analysis",
+    "hideAnalysis": "Hide Analysis",
+    "showRemedies": "Show Remedies",
+    "hideRemedies": "Hide Remedies",
+    "chartHealth": "Chart Health Score",
+    "noYogas": "No major yogas detected",
+    "noDoshas": "No major doshas detected",
+    "remedies": "Remedies"
+  },
+  "yogas": {
+    "beneficial": "Beneficial",
+    "malefic": "Malefic",
+    "neutral": "Neutral",
+    "strength": {
+      "strong": "Strong",
+      "moderate": "Moderate",
+      "weak": "Weak"
+    }
+  },
+  "doshas": {
+    "severity": {
+      "severe": "Severe",
+      "moderate": "Moderate",
+      "mild": "Mild"
+    }
+  },
+  "planets": {
+    "Sun": "Sun",
+    "Moon": "Moon",
+    "Mars": "Mars",
+    "Mercury": "Mercury",
+    "Jupiter": "Jupiter",
+    "Venus": "Venus",
+    "Saturn": "Saturn",
+    "Rahu": "Rahu",
+    "Ketu": "Ketu"
+  },
+  "signs": {
+    "Aries": "Aries",
+    "Taurus": "Taurus",
+    "Gemini": "Gemini",
+    "Cancer": "Cancer",
+    "Leo": "Leo",
+    "Virgo": "Virgo",
+    "Libra": "Libra",
+    "Scorpio": "Scorpio",
+    "Sagittarius": "Sagittarius",
+    "Capricorn": "Capricorn",
+    "Aquarius": "Aquarius",
+    "Pisces": "Pisces"
+  },
+  "ashtakoot": {
+    "title": "Ashtakoot Matching",
+    "subtitle": "Traditional 36-point compatibility",
+    "score": "Score",
+    "outOf": "out of",
+    "compatibility": "Compatibility",
+    "rating": {
+      "excellent": "Excellent",
+      "good": "Good",
+      "average": "Average",
+      "poor": "Poor",
+      "veryPoor": "Very Poor"
+    },
+    "kootas": {
+      "varna": "Varna",
+      "vashya": "Vashya",
+      "tara": "Tara",
+      "yoni": "Yoni",
+      "grahaMaitri": "Graha Maitri",
+      "gana": "Gana",
+      "bhakoot": "Bhakoot",
+      "nadi": "Nadi"
+    },
+    "nadiDosha": "Nadi Dosha Detected",
+    "nadiDoshaWarning": "Zero points in Nadi koota indicates potential health issues for offspring. Consult an experienced astrologer before proceeding."
+  },
+  "compare": {
+    "title": "Chart Comparison",
+    "person1": "Person 1",
+    "person2": "Person 2",
+    "compatibility": "Compatibility Analysis",
+    "calculate": "Calculate Charts"
+  },
+  "transits": {
+    "title": "Transit Calculations",
+    "currentPositions": "Current Planetary Positions",
+    "transitDate": "Transit Date",
+    "today": "Today",
+    "aspects": "Important Aspects",
+    "effects": "Transit Effects"
+  },
+  "rectification": {
+    "title": "Birth Time Rectification",
+    "subtitle": "Correct your birth time using life events",
+    "approximateTime": "Approximate Birth Time",
+    "uncertainty": "Time Uncertainty",
+    "lifeEvents": "Life Events",
+    "addEvent": "Add Another Event",
+    "removeEvent": "Remove",
+    "eventType": "Event Type",
+    "eventDate": "Event Date",
+    "eventDescription": "Description",
+    "suggestedTime": "Suggested Birth Time",
+    "confidence": "Confidence",
+    "beforeAfter": "Before → After",
+    "reasoning": "Reasoning",
+    "nextSteps": "Next Steps",
+    "rectify": "Rectify Birth Time"
+  },
+  "pdf": {
+    "title": "Birth Chart",
+    "download": "Download PDF",
+    "generating": "Generating PDF..."
+  },
+  "errors": {
+    "invalidDate": "Invalid date format",
+    "invalidTime": "Invalid time format",
+    "invalidCoordinates": "Invalid coordinates",
+    "calculationFailed": "Chart calculation failed",
+    "networkError": "Network error. Please try again.",
+    "authenticationRequired": "Please sign in to access this feature"
+  },
+  "messages": {
+    "chartSaved": "Chart saved successfully",
+    "chartDeleted": "Chart deleted successfully",
+    "chartLoaded": "Chart loaded successfully",
+    "welcome": "Welcome to Kundli Calculator",
+    "signInSuccess": "Signed in successfully",
+    "signOutSuccess": "Signed out successfully"
+  }
+}

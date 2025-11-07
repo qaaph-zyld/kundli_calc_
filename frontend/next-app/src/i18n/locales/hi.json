@@ -1,0 +1,181 @@
+{
+  "app": {
+    "title": "कुंडली कैलकुलेटर",
+    "subtitle": "अपनी वैदिक ज्योतिष कुंडली बनाएं"
+  },
+  "nav": {
+    "home": "होम",
+    "compare": "तुलना",
+    "transits": "ग्रह गोचर",
+    "rectification": "समय सुधार",
+    "myCharts": "मेरी कुंडलियाँ",
+    "signIn": "साइन इन",
+    "signOut": "साइन आउट"
+  },
+  "form": {
+    "name": "नाम",
+    "date": "जन्म तिथि",
+    "time": "जन्म समय",
+    "location": "स्थान",
+    "latitude": "अक्षांश",
+    "longitude": "देशांतर",
+    "generate": "कुंडली बनाएं",
+    "calculating": "गणना हो रही है...",
+    "submit": "जमा करें",
+    "cancel": "रद्द करें",
+    "save": "सहेजें",
+    "load": "लोड करें",
+    "delete": "हटाएं"
+  },
+  "chart": {
+    "types": {
+      "south": "दक्षिण भारतीय (D1)",
+      "north": "उत्तर भारतीय (D1)",
+      "navamsa": "नवमांश (D9)",
+      "hora": "होरा (D2)",
+      "drekkana": "द्रेष्काण (D3)",
+      "dasamsa": "दशमांश (D10)",
+      "dwadasamsa": "द्वादशांश (D12)"
+    },
+    "info": "कुंडली जानकारी",
+    "planetaryPositions": "ग्रह स्थिति",
+    "houses": "भाव",
+    "ascendant": "लग्न"
+  },
+  "analysis": {
+    "yogas": "योग",
+    "doshas": "दोष",
+    "planetaryStrength": "ग्रह बल",
+    "specialPoints": "विशेष बिंदु",
+    "showAnalysis": "विश्लेषण दिखाएं",
+    "hideAnalysis": "विश्लेषण छिपाएं",
+    "showRemedies": "उपाय दिखाएं",
+    "hideRemedies": "उपाय छिपाएं",
+    "chartHealth": "कुंडली स्वास्थ्य स्कोर",
+    "noYogas": "कोई प्रमुख योग नहीं मिला",
+    "noDoshas": "कोई प्रमुख दोष नहीं मिला",
+    "remedies": "उपाय"
+  },
+  "yogas": {
+    "beneficial": "शुभ",
+    "malefic": "अशुभ",
+    "neutral": "तटस्थ",
+    "strength": {
+      "strong": "प्रबल",
+      "moderate": "मध्यम",
+      "weak": "कमजोर"
+    }
+  },
+  "doshas": {
+    "severity": {
+      "severe": "गंभीर",
+      "moderate": "मध्यम",
+      "mild": "हल्का"
+    }
+  },
+  "planets": {
+    "Sun": "सूर्य",
+    "Moon": "चंद्र",
+    "Mars": "मंगल",
+    "Mercury": "बुध",
+    "Jupiter": "गुरु",
+    "Venus": "शुक्र",
+    "Saturn": "शनि",
+    "Rahu": "राहु",
+    "Ketu": "केतु"
+  },
+  "signs": {
+    "Aries": "मेष",
+    "Taurus": "वृषभ",
+    "Gemini": "मिथुन",
+    "Cancer": "कर्क",
+    "Leo": "सिंह",
+    "Virgo": "कन्या",
+    "Libra": "तुला",
+    "Scorpio": "वृश्चिक",
+    "Sagittarius": "धनु",
+    "Capricorn": "मकर",
+    "Aquarius": "कुंभ",
+    "Pisces": "मीन"
+  },
+  "ashtakoot": {
+    "title": "अष्टकूट मिलान",
+    "subtitle": "पारंपरिक 36 गुण मिलान",
+    "score": "अंक",
+    "outOf": "में से",
+    "compatibility": "अनुकूलता",
+    "rating": {
+      "excellent": "उत्कृष्ट",
+      "good": "अच्छा",
+      "average": "औसत",
+      "poor": "खराब",
+      "veryPoor": "बहुत खराब"
+    },
+    "kootas": {
+      "varna": "वर्ण",
+      "vashya": "वश्य",
+      "tara": "तारा",
+      "yoni": "योनि",
+      "grahaMaitri": "ग्रह मैत्री",
+      "gana": "गण",
+      "bhakoot": "भकूट",
+      "nadi": "नाड़ी"
+    },
+    "nadiDosha": "नाड़ी दोष का पता चला",
+    "nadiDoshaWarning": "नाड़ी कूट में शून्य अंक संतान के स्वास्थ्य में संभावित समस्याओं का संकेत देता है। आगे बढ़ने से पहले अनुभवी ज्योतिषी से परामर्श लें।"
+  },
+  "compare": {
+    "title": "कुंडली तुलना",
+    "person1": "व्यक्ति 1",
+    "person2": "व्यक्ति 2",
+    "compatibility": "अनुकूलता विश्लेषण",
+    "calculate": "कुंडली गणना करें"
+  },
+  "transits": {
+    "title": "ग्रह गोचर",
+    "currentPositions": "वर्तमान ग्रह स्थिति",
+    "transitDate": "गोचर तिथि",
+    "today": "आज",
+    "aspects": "महत्वपूर्ण दृष्टि",
+    "effects": "गोचर प्रभाव"
+  },
+  "rectification": {
+    "title": "जन्म समय सुधार",
+    "subtitle": "जीवन की घटनाओं से अपने जन्म समय को सही करें",
+    "approximateTime": "अनुमानित जन्म समय",
+    "uncertainty": "समय अनिश्चितता",
+    "lifeEvents": "जीवन की घटनाएं",
+    "addEvent": "और घटना जोड़ें",
+    "removeEvent": "हटाएं",
+    "eventType": "घटना का प्रकार",
+    "eventDate": "घटना की तिथि",
+    "eventDescription": "विवरण",
+    "suggestedTime": "सुझाया गया जन्म समय",
+    "confidence": "विश्वसनीयता",
+    "beforeAfter": "पहले → बाद में",
+    "reasoning": "तर्क",
+    "nextSteps": "अगले कदम",
+    "rectify": "जन्म समय सुधारें"
+  },
+  "pdf": {
+    "title": "जन्म कुंडली",
+    "download": "PDF डाउनलोड करें",
+    "generating": "PDF बन रही है..."
+  },
+  "errors": {
+    "invalidDate": "अमान्य तिथि प्रारूप",
+    "invalidTime": "अमान्य समय प्रारूप",
+    "invalidCoordinates": "अमान्य निर्देशांक",
+    "calculationFailed": "कुंडली गणना विफल",
+    "networkError": "नेटवर्क त्रुटि। कृपया पुनः प्रयास करें।",
+    "authenticationRequired": "कृपया इस सुविधा का उपयोग करने के लिए साइन इन करें"
+  },
+  "messages": {
+    "chartSaved": "कुंडली सफलतापूर्वक सहेजी गई",
+    "chartDeleted": "कुंडली सफलतापूर्वक हटाई गई",
+    "chartLoaded": "कुंडली सफलतापूर्वक लोड की गई",
+    "welcome": "कुंडली कैलकुलेटर में आपका स्वागत है",
+    "signInSuccess": "सफलतापूर्वक साइन इन हुआ",
+    "signOutSuccess": "सफलतापूर्वक साइन आउट हुआ"
+  }
+}

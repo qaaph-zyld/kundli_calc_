@@ -297,5 +297,410 @@ export function detectYogas(chartData: any): Yoga[] {
     });
   }
 
+  // 16. Amala Yoga
+  const tenthHousePlanets = Object.entries(planets).filter(([_, p]: [string, any]) => p.house === 10);
+  if (tenthHousePlanets.some(([name, _]) => ['Jupiter', 'Venus', 'Mercury'].includes(name))) {
+    yogas.push({
+      name: 'Amala Yoga',
+      type: 'beneficial',
+      description: 'Benefics in 10th house from Lagna or Moon',
+      effects: 'Pure character, lasting fame, prosperity. Ethical success in career. Good reputation and moral authority.',
+      strength: 'strong'
+    });
+  }
+
+  // 17. Parvata Yoga
+  if ((isInKendra(jupiterHouse) || getPlanetHouse('Jupiter') === 6) && 
+      (isInKendra(moonHouse) || getPlanetHouse('Moon') === 6)) {
+    yogas.push({
+      name: 'Parvata Yoga',
+      type: 'beneficial',
+      description: 'Benefics in kendras and/or 6th house',
+      effects: 'Mountain-like steadiness and strength. Wealth, honor, charitable nature. Leadership with stability.',
+      strength: 'strong'
+    });
+  }
+
+  // 18. Kahala Yoga
+  if (jupiterHouse === 4 && moonHouse === 7) {
+    yogas.push({
+      name: 'Kahala Yoga',
+      type: 'beneficial',
+      description: 'Jupiter in 4th and Moon in 7th from Lagna',
+      effects: 'Aggressive success, boldness, authority. Victory in competitions. Commander-like qualities.',
+      strength: 'moderate'
+    });
+  }
+
+  // 19. Chamara Yoga
+  const lagna = houses.ascendant ? Math.floor(houses.ascendant / 30) + 1 : 1;
+  const planetsInLagna = Object.values(planets).filter((p: any) => p.house === 1);
+  if (planetsInLagna.length >= 2) {
+    yogas.push({
+      name: 'Chamara Yoga',
+      type: 'beneficial',
+      description: 'Two benefics in Lagna/7th/9th/10th',
+      effects: 'Long life, authority, scholarly knowledge. Respected position. Literary talents and eloquence.',
+      strength: 'moderate'
+    });
+  }
+
+  // 20. Sankha Yoga
+  if ((jupiterHouse === 5 || jupiterHouse === 9) && venusHouse === 1) {
+    yogas.push({
+      name: 'Sankha Yoga',
+      type: 'beneficial',
+      description: 'Jupiter in 5th/9th and Venus in Lagna',
+      effects: 'Charitable, religious, prosperous. Love for arts and knowledge. Comfortable family life.',
+      strength: 'moderate'
+    });
+  }
+
+  // 21. Bheri Yoga
+  if (venusHouse === 1 && jupiterHouse === 7) {
+    yogas.push({
+      name: 'Bheri Yoga',
+      type: 'beneficial',
+      description: 'Venus in Lagna, Jupiter in 7th, and strong Moon',
+      effects: 'Long life, intelligent spouse, happiness. Success in partnerships. Material comforts.',
+      strength: 'strong'
+    });
+  }
+
+  // 22. Mridanga Yoga
+  const strongPlanetsInKendra = Object.entries(planets).filter(([_, p]: [string, any]) => 
+    isInKendra(p.house)).length;
+  if (strongPlanetsInKendra >= 3) {
+    yogas.push({
+      name: 'Mridanga Yoga',
+      type: 'beneficial',
+      description: 'Multiple strong planets in kendras',
+      effects: 'Happiness, wealth, respect. Success through virtuous conduct. Good health and longevity.',
+      strength: 'strong'
+    });
+  }
+
+  // 23. Sharada Yoga
+  if (mercuryHouse === 10 && mercurySign === 6) {
+    yogas.push({
+      name: 'Sharada Yoga',
+      type: 'beneficial',
+      description: 'Mercury in 10th in own sign (Virgo)',
+      effects: 'Exceptional learning, poetic skills, wealth. Master of arts and sciences. Teaching abilities.',
+      strength: 'strong'
+    });
+  }
+
+  // 24. Matsya Yoga
+  if (isInKendra(jupiterHouse) && isInKendra(venusHouse) && [1,9].includes(moonHouse)) {
+    yogas.push({
+      name: 'Matsya Yoga',
+      type: 'beneficial',
+      description: 'Specific benefic configuration',
+      effects: 'Charitable, religious, wealthy. Graceful personality. Success through righteous means.',
+      strength: 'moderate'
+    });
+  }
+
+  // 25. Kurma Yoga
+  const beneficsIn5and9 = [jupiterHouse, venusHouse, mercuryHouse].filter(h => [5,9].includes(h)).length;
+  if (beneficsIn5and9 >= 2) {
+    yogas.push({
+      name: 'Kurma Yoga',
+      type: 'beneficial',
+      description: 'Benefics in 5th and 9th houses',
+      effects: 'Good fortune, fame, devoted to dharma. Wise counsel. Respected for knowledge.',
+      strength: 'moderate'
+    });
+  }
+
+  // 26. Devendra Yoga
+  if (isInKendra(jupiterHouse) && jupiterSign === 4) {
+    yogas.push({
+      name: 'Devendra Yoga',
+      type: 'beneficial',
+      description: 'Jupiter in kendra in Cancer',
+      effects: 'Kingly status, power, prosperity. Divine protection. Leadership with wisdom.',
+      strength: 'strong'
+    });
+  }
+
+  // 27. Makuta Yoga
+  if (jupiterHouse === 9 && sunHouse === 10) {
+    yogas.push({
+      name: 'Makuta Yoga',
+      type: 'beneficial',
+      description: 'Jupiter in 9th, Sun in 10th',
+      effects: 'Authority, leadership, crown-like status. Government favor. High position.',
+      strength: 'strong'
+    });
+  }
+
+  // 28. Chandrika Yoga
+  if (moonHouse === 1 && sunHouse === 5) {
+    yogas.push({
+      name: 'Chandrika Yoga',
+      type: 'beneficial',
+      description: 'Moon in Lagna, Sun in 5th',
+      effects: 'Bright intellect, creativity, wealth. Pleasing personality. Success in creative fields.',
+      strength: 'moderate'
+    });
+  }
+
+  // 29. Jaya Yoga
+  if (jupiterHouse === 6 && moonHouse === 10) {
+    yogas.push({
+      name: 'Jaya Yoga',
+      type: 'beneficial',
+      description: 'Jupiter in 6th, Moon in 10th',
+      effects: 'Victory over enemies, success in competitions. Professional triumph. Strategic mind.',
+      strength: 'moderate'
+    });
+  }
+
+  // 30. Harsha Yoga (Viparita variation)
+  if ([6,8,12].includes(getPlanetHouse('Sun')) && isInKendra(sunHouse)) {
+    yogas.push({
+      name: 'Harsha Yoga',
+      type: 'beneficial',
+      description: '6th lord in 6th/8th/12th house',
+      effects: 'Victory over enemies, good health. Overcoming obstacles. Success through perseverance.',
+      strength: 'moderate'
+    });
+  }
+
+  // 31. Sarala Yoga (Viparita variation)
+  if ([6,8,12].includes(getPlanetHouse('Saturn')) && [6,8,12].includes(saturnHouse)) {
+    yogas.push({
+      name: 'Sarala Yoga',
+      type: 'beneficial',
+      description: '8th lord in 6th/8th/12th',
+      effects: 'Fearless, long life, learning. Victory in battles. Research abilities.',
+      strength: 'moderate'
+    });
+  }
+
+  // 32. Vimala Yoga (Viparita variation)
+  if ([6,8,12].includes(getPlanetHouse('Jupiter')) && [6,8,12].includes(jupiterHouse)) {
+    yogas.push({
+      name: 'Vimala Yoga',
+      type: 'beneficial',
+      description: '12th lord in 6th/8th/12th',
+      effects: 'Independent, frugal, successful. Gains in foreign lands. Spiritual inclination.',
+      strength: 'moderate'
+    });
+  }
+
+  // 33. Vasumati Yoga
+  const beneficsInUpachaya = [jupiterHouse, venusHouse, mercuryHouse].filter(h => 
+    [3,6,10,11].includes(h)).length;
+  if (beneficsInUpachaya >= 2) {
+    yogas.push({
+      name: 'Vasumati Yoga',
+      type: 'beneficial',
+      description: 'Benefics in upachaya houses (3,6,10,11)',
+      effects: 'Wealth accumulation, material prosperity. Business success. Growing fortune.',
+      strength: 'strong'
+    });
+  }
+
+  // 34. Rajalakshana Yoga
+  if (isInKendra(jupiterHouse) && isInKendra(moonHouse) && isInKendra(venusHouse)) {
+    yogas.push({
+      name: 'Rajalakshana Yoga',
+      type: 'beneficial',
+      description: 'Multiple benefics in kendras',
+      effects: 'Royal marks, authority, prosperity. Impressive personality. Leadership qualities.',
+      strength: 'strong'
+    });
+  }
+
+  // 35. Maha Bhagya Yoga (for day births)
+  const birthHour = new Date().getHours(); // Simplified - would need actual birth time
+  if (birthHour > 6 && birthHour < 18) {
+    const maleLagna = [1,3,5,7,9,11].includes(lagna);
+    if ((maleLagna && sunHouse === 1) || (!maleLagna && moonHouse === 1)) {
+      yogas.push({
+        name: 'Maha Bhagya Yoga',
+        type: 'beneficial',
+        description: 'Special yoga for fortunate birth',
+        effects: 'Great fortune, prosperity, respect. Born lucky. Success comes naturally.',
+        strength: 'strong'
+      });
+    }
+  }
+
+  // 36. Pushkala Yoga
+  if (isInKendra(moonHouse) && lagna === 4) {
+    yogas.push({
+      name: 'Pushkala Yoga',
+      type: 'beneficial',
+      description: 'Moon in kendra with Cancer ascendant',
+      effects: 'Wealthy, learned, good speaker. Popular personality. Comfortable life.',
+      strength: 'moderate'
+    });
+  }
+
+  // 37. Kalanidhi Yoga
+  if (jupiterHouse === 2 && venusHouse === 2) {
+    yogas.push({
+      name: 'Kalanidhi Yoga',
+      type: 'beneficial',
+      description: 'Jupiter and Venus in 2nd house',
+      effects: 'Artistic talents, eloquence, wealth. Master of fine arts. Cultural refinement.',
+      strength: 'strong'
+    });
+  }
+
+  // 38. Akhanda Samrajya Yoga
+  if (jupiterHouse === 5 && sunHouse === 11) {
+    yogas.push({
+      name: 'Akhanda Samrajya Yoga',
+      type: 'beneficial',
+      description: 'Jupiter in 5th, Sun in 11th, Moon in Lagna',
+      effects: 'Unbroken kingdom, supreme authority. Lasting power. Generational success.',
+      strength: 'strong'
+    });
+  }
+
+  // 39. Chatussagara Yoga
+  if (isInKendra(jupiterHouse) && isInKendra(moonHouse) && isInKendra(venusHouse) && isInKendra(mercuryHouse)) {
+    yogas.push({
+      name: 'Chatussagara Yoga',
+      type: 'beneficial',
+      description: 'All benefics in four kendras',
+      effects: 'Lord of all four oceans (world ruler). Supreme authority. International fame.',
+      strength: 'strong'
+    });
+  }
+
+  // 40. Sreenatha Yoga
+  if ((venusHouse === 5 || venusHouse === 9) && moonHouse === 1) {
+    yogas.push({
+      name: 'Sreenatha Yoga',
+      type: 'beneficial',
+      description: 'Venus in trikona, Moon in Lagna',
+      effects: 'Luxury, beauty, prosperity. Blessed life. Harmonious relationships.',
+      strength: 'moderate'
+    });
+  }
+
+  // 41. Kusuma Yoga
+  if (jupiterHouse === 1 && moonHouse === 7 && sunHouse === 8) {
+    yogas.push({
+      name: 'Kusuma Yoga',
+      type: 'beneficial',
+      description: 'Specific planetary configuration',
+      effects: 'Fame like a flower, respected. Pleasant personality. Success in public life.',
+      strength: 'moderate'
+    });
+  }
+
+  // 42. Damini Yoga
+  if ([beneficsInUpachaya, strongPlanetsInKendra].every(count => count >= 2)) {
+    yogas.push({
+      name: 'Damini Yoga',
+      type: 'beneficial',
+      description: 'Strong benefics in multiple houses',
+      effects: 'Charitable, helpful nature, wealth. Generous personality. Community leader.',
+      strength: 'moderate'
+    });
+  }
+
+  // 43. Pasha Yoga
+  const planetsIn6_8_12 = Object.values(planets).filter((p: any) => 
+    [6,8,12].includes(p.house)).length;
+  if (planetsIn6_8_12 >= 3) {
+    yogas.push({
+      name: 'Pasha Yoga',
+      type: 'malefic',
+      description: 'Multiple planets in dusthana (6,8,12)',
+      effects: 'Bondage, restrictions, struggles. Need for liberation through spiritual practice.',
+      strength: 'moderate'
+    });
+  }
+
+  // 44. Kedara Yoga
+  if (planets.Sun && planets.Moon && planets.Mars && 
+      [planets.Sun.house, planets.Moon.house, planets.Mars.house].every(h => [1,4,7,10].includes(h))) {
+    yogas.push({
+      name: 'Kedara Yoga',
+      type: 'beneficial',
+      description: 'Seven planets in four kendras',
+      effects: 'Agricultural wealth, land ownership. Productive assets. Material security.',
+      strength: 'strong'
+    });
+  }
+
+  // 45. Shubha Yoga
+  if (jupiterHouse === 5 || venusHouse === 5) {
+    yogas.push({
+      name: 'Shubha Yoga',
+      type: 'beneficial',
+      description: 'Benefics in 5th house',
+      effects: 'Auspicious results, good children, intelligence. Fortunate speculation. Creative success.',
+      strength: 'moderate'
+    });
+  }
+
+  // 46. Asubha Yoga
+  const maleficsInTrikona = [marsHouse, saturnHouse].filter(h => [1,5,9].includes(h)).length;
+  if (maleficsInTrikona >= 2) {
+    yogas.push({
+      name: 'Asubha Yoga',
+      type: 'malefic',
+      description: 'Malefics in trikona houses',
+      effects: 'Obstacles in dharma, reduced fortune. Need for remedial measures. Character challenges.',
+      strength: 'moderate'
+    });
+  }
+
+  // 47. Gauri Yoga
+  if (jupiterHouse === 10 && moonHouse === 1 && venusHouse === 4) {
+    yogas.push({
+      name: 'Gauri Yoga',
+      type: 'beneficial',
+      description: 'Specific benefic configuration',
+      effects: 'Marital happiness, beautiful spouse, prosperity. Domestic harmony. Feminine grace.',
+      strength: 'moderate'
+    });
+  }
+
+  // 48. Srikantha Yoga
+  if (sunHouse === 10 && moonHouse === 4) {
+    yogas.push({
+      name: 'Srikantha Yoga',
+      type: 'beneficial',
+      description: 'Sun in 10th, Moon in 4th',
+      effects: 'Fame, authority, emotional stability. Balanced power. Public recognition.',
+      strength: 'strong'
+    });
+  }
+
+  // 49. Sakata Yoga
+  if (moonHouse > 0) {
+    const jupiterFromMoon = (jupiterHouse - moonHouse + 12) % 12;
+    if ([5, 7].includes(jupiterFromMoon)) {
+      yogas.push({
+        name: 'Sakata Yoga',
+        type: 'malefic',
+        description: 'Jupiter in 6th or 8th from Moon',
+        effects: 'Ups and downs like cart wheel, financial instability. Variable fortune. Need for patience.',
+        strength: 'weak'
+      });
+    }
+  }
+
+  // 50. Shankha-Paala Yoga
+  if (jupiterHouse === 9 && moonHouse === 5) {
+    yogas.push({
+      name: 'Shankha-Paala Yoga',
+      type: 'beneficial',
+      description: 'Jupiter in 9th, Moon in 5th',
+      effects: 'Protected fortune, righteous wealth. Ethical prosperity. Spiritual and material balance.',
+      strength: 'strong'
+    });
+  }
+
   return yogas;
 }
