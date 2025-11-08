@@ -110,15 +110,25 @@ async def calculate_chart(
             }
             return name_map.get(b, str(b))
 
+        # Sign names for frontend
+        signs = [
+            "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+            "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+        ]
+        
         planetary_positions_api: Dict[str, Dict[str, Decimal]] = {}
         planetary_positions_for_aspects: Dict[str, Dict[str, Any]] = {}
         for body, pos in positions.items():
             name = body_name(body)
+            sign_num = int(float(pos.longitude) / 30)
+            
             planetary_positions_api[name] = {
                 "longitude": Decimal(str(pos.longitude)),
                 "latitude": Decimal(str(pos.latitude)),
                 "distance": Decimal(str(pos.distance)),
                 "speed": Decimal(str(pos.speed)),
+                "sign_num": sign_num,
+                "sign": signs[sign_num],
             }
             planetary_positions_for_aspects[name] = {
                 "longitude": float(pos.longitude),
@@ -211,6 +221,16 @@ async def calculate_chart(
         # Only calculate D9 for performance (D10 can be calculated on-demand)
         d9 = div_engine.calculate_chart(request.date_time, 9, geo_dict)
         d10 = div_engine.calculate_chart(request.date_time, 10, geo_dict)
+
+        # Add house numbers to planetary positions (for frontend yoga detection)
+        asc_deg = float(houses_dict["ascendant"])
+        asc_sign_num = int(asc_deg / 30)
+        
+        for pname, pdata in planetary_positions_api.items():
+            planet_sign_num = pdata["sign_num"]
+            # Whole Sign house calculation
+            house_num = ((planet_sign_num - asc_sign_num) % 12) + 1
+            pdata["house"] = house_num
 
         # Build response payload
         result_payload: Dict[str, Any] = {
