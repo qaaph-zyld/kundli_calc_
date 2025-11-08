@@ -1,0 +1,610 @@
+{
+  "planetary_positions": {
+    "Sun": {
+      "longitude": "195.82018249275362",
+      "latitude": "0.00006295191903293356",
+      "distance": "0.9988517296478188",
+      "speed": "0.0"
+    },
+    "Moon": {
+      "longitude": "82.66328420359149",
+      "latitude": "3.366253936869532",
+      "distance": "0.0024556590430324645",
+      "speed": "0.0"
+    },
+    "Mars": {
+      "longitude": "73.63945817934477",
+      "latitude": "-0.8380074881625849",
+      "distance": "0.6423813063578263",
+      "speed": "0.0"
+    },
+    "Mercury": {
+      "longitude": "186.3810014892301",
+      "latitude": "1.8042341710523122",
+      "distance": "1.3039059794289218",
+      "speed": "0.0"
+    },
+    "Jupiter": {
+      "longitude": "129.57551048861674",
+      "latitude": "0.40358975544057674",
+      "distance": "5.574567885214903",
+      "speed": "0.0"
+    },
+    "Venus": {
+      "longitude": "189.82525009243415",
+      "latitude": "1.384983001454557",
+      "distance": "1.7052864919914574",
+      "speed": "0.0"
+    },
+    "Saturn": {
+      "longitude": "288.92031923881376",
+      "latitude": "-0.046813798000135624",
+      "distance": "9.897241167153311",
+      "speed": "0.0"
+    },
+    "Rahu": {
+      "longitude": "303.56162800716146",
+      "latitude": "0.0",
+      "distance": "0.0025695552897999894",
+      "speed": "0.0"
+    },
+    "Ketu": {
+      "longitude": "123.56162800716146",
+      "latitude": "-0.0",
+      "distance": "0.0025695552897999894",
+      "speed": "-0.0"
+    },
+    "Uranus": {
+      "longitude": "275.85834020712247",
+      "latitude": "-0.32123238887774774",
+      "distance": "19.578150100130753",
+      "speed": "0.0"
+    },
+    "Neptune": {
+      "longitude": "281.86493566840926",
+      "latitude": "0.8283817216686747",
+      "distance": "30.25661205050884",
+      "speed": "0.0"
+    },
+    "Pluto": {
+      "longitude": "226.46282982305286",
+      "latitude": "14.901398344909952",
+      "distance": "30.48803320630833",
+      "speed": "0.0"
+    }
+  },
+  "houses": {
+    "cusps": [
+      "240.0",
+      "270.0",
+      "300.0",
+      "330.0",
+      "0.0",
+      "30.0",
+      "60.0",
+      "90.0",
+      "120.0",
+      "150.0",
+      "180.0",
+      "210.0"
+    ],
+    "ascendant": "244.25873444303204",
+    "midheaven": "173.96915042008771",
+    "vertex": "107.60534405939536"
+  },
+  "aspects": [
+    {
+      "aspect_type": "Trine",
+      "strength": "57.04",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Trine",
+      "strength": "74.66",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Conjunction",
+      "strength": "32.15",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Conjunction",
+      "strength": "36.41",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Square",
+      "strength": "7.47",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Quintile",
+      "strength": "13.44",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Square",
+      "strength": "7.73",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Semisextile",
+      "strength": "11.3",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Conjunction",
+      "strength": "39.14",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Semisquare",
+      "strength": "5.23",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Biquintile",
+      "strength": "14.4",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Trine",
+      "strength": "40.35",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Sextile",
+      "strength": "37.16",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Trine",
+      "strength": "58.41",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Biquintile",
+      "strength": "14.86",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Quincunx",
+      "strength": "9.16",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Quincunx",
+      "strength": "7.39",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Sextile",
+      "strength": "31.52",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Conjunction",
+      "strength": "54.53",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Trine",
+      "strength": "58.39",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Sextile",
+      "strength": "32.64",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Square",
+      "strength": "9.58",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Square",
+      "strength": "6.9",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Sextile",
+      "strength": "37.35",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Opposition",
+      "strength": "12.92",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Conjunction",
+      "strength": "40.37",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Quincunx",
+      "strength": "7.66",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Square",
+      "strength": "6.14",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Trine",
+      "strength": "45.37",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Square",
+      "strength": "7.72",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Square",
+      "strength": "8.76",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Conjunction",
+      "strength": "37.87",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Sextile",
+      "strength": "33.73",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Opposition",
+      "strength": "17.54",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Contraparallel",
+      "strength": "17.54",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Quincunx",
+      "strength": "7.65",
+      "is_beneficial": false,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Conjunction",
+      "strength": "40.38",
+      "is_beneficial": true,
+      "special_effects": null
+    },
+    {
+      "aspect_type": "Sextile",
+      "strength": "27.31",
+      "is_beneficial": true,
+      "special_effects": null
+    }
+  ],
+  "ayanamsa_value": "23.728167543272775",
+  "planetary_strengths": {
+    "Sun": {
+      "shadbala": "0.39",
+      "dignity_score": "-0.5",
+      "positional_strength": "0.75",
+      "temporal_strength": "0.75",
+      "aspect_strength": "0.8",
+      "total_strength": "0.44"
+    },
+    "Moon": {
+      "shadbala": "0.67",
+      "dignity_score": "0.25",
+      "positional_strength": "1.0",
+      "temporal_strength": "0.75",
+      "aspect_strength": "0.8",
+      "total_strength": "0.69"
+    },
+    "Mars": {
+      "shadbala": "0.67",
+      "dignity_score": "0.25",
+      "positional_strength": "1.0",
+      "temporal_strength": "0.75",
+      "aspect_strength": "0.8",
+      "total_strength": "0.69"
+    },
+    "Mercury": {
+      "shadbala": "0.61",
+      "dignity_score": "0.25",
+      "positional_strength": "0.75",
+      "temporal_strength": "0.75",
+      "aspect_strength": "0.8",
+      "total_strength": "0.63"
+    },
+    "Jupiter": {
+      "shadbala": "0.56",
+      "dignity_score": "0.25",
+      "positional_strength": "0.5",
+      "temporal_strength": "0.75",
+      "aspect_strength": "0.8",
+      "total_strength": "0.57"
+    },
+    "Venus": {
+      "shadbala": "0.61",
+      "dignity_score": "0.25",
+      "positional_strength": "0.75",
+      "temporal_strength": "0.75",
+      "aspect_strength": "0.8",
+      "total_strength": "0.63"
+    },
+    "Saturn": {
+      "shadbala": "0.61",
+      "dignity_score": "0.25",
+      "positional_strength": "0.75",
+      "temporal_strength": "0.75",
+      "aspect_strength": "0.8",
+      "total_strength": "0.63"
+    },
+    "Rahu": {
+      "shadbala": "0.56",
+      "dignity_score": "0.25",
+      "positional_strength": "0.5",
+      "temporal_strength": "0.75",
+      "aspect_strength": "0.8",
+      "total_strength": "0.57"
+    },
+    "Ketu": {
+      "shadbala": "0.56",
+      "dignity_score": "0.25",
+      "positional_strength": "0.5",
+      "temporal_strength": "0.75",
+      "aspect_strength": "0.8",
+      "total_strength": "0.57"
+    },
+    "Uranus": {
+      "shadbala": "0.61",
+      "dignity_score": "0.25",
+      "positional_strength": "0.75",
+      "temporal_strength": "0.75",
+      "aspect_strength": "0.8",
+      "total_strength": "0.63"
+    },
+    "Neptune": {
+      "shadbala": "0.61",
+      "dignity_score": "0.25",
+      "positional_strength": "0.75",
+      "temporal_strength": "0.75",
+      "aspect_strength": "0.8",
+      "total_strength": "0.63"
+    },
+    "Pluto": {
+      "shadbala": "0.56",
+      "dignity_score": "0.25",
+      "positional_strength": "0.5",
+      "temporal_strength": "0.75",
+      "aspect_strength": "0.8",
+      "total_strength": "0.57"
+    }
+  },
+  "divisional_charts": {
+    "D9": {
+      "division": 9,
+      "planetary_positions": {
+        "Sun": {
+          "longitude": "160",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Moon": {
+          "longitude": "240",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Mars": {
+          "longitude": "160",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Mercury": {
+          "longitude": "40",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Jupiter": {
+          "longitude": "80",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Venus": {
+          "longitude": "80",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Saturn": {
+          "longitude": "200",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Rahu": {
+          "longitude": "40",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Ketu": {
+          "longitude": "40",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Uranus": {
+          "longitude": "40",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Neptune": {
+          "longitude": "120",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Pluto": {
+          "longitude": "160",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        }
+      },
+      "house_cusps": [
+        "244.25873444303204",
+        "277.1588288983487",
+        "316.5968212634154",
+        "353.9691504200877",
+        "23.20362331422865",
+        "45.620481432832946",
+        "64.25873444303204",
+        "97.1588288983487",
+        "136.5968212634154",
+        "173.96915042008771",
+        "203.20362331422865",
+        "225.62048143283295"
+      ],
+      "special_points": {}
+    },
+    "D10": {
+      "division": 10,
+      "planetary_positions": {
+        "Sun": {
+          "longitude": "195",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Moon": {
+          "longitude": "81",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Mars": {
+          "longitude": "72",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Mercury": {
+          "longitude": "186",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Jupiter": {
+          "longitude": "129",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Venus": {
+          "longitude": "189",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Saturn": {
+          "longitude": "288",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Rahu": {
+          "longitude": "303",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Ketu": {
+          "longitude": "123",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Uranus": {
+          "longitude": "273",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Neptune": {
+          "longitude": "279",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        },
+        "Pluto": {
+          "longitude": "225",
+          "latitude": "0",
+          "distance": "0",
+          "speed": "0"
+        }
+      },
+      "house_cusps": [
+        "244.25873444303204",
+        "277.1588288983487",
+        "316.5968212634154",
+        "353.9691504200877",
+        "23.20362331422865",
+        "45.620481432832946",
+        "64.25873444303204",
+        "97.1588288983487",
+        "136.5968212634154",
+        "173.96915042008771",
+        "203.20362331422865",
+        "225.62048143283295"
+      ],
+      "special_points": {}
+    }
+  }
+}
