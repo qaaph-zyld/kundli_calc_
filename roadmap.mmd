@@ -30,3 +30,7 @@ graph TD
     AC --> AD[Verified: Yoga detection data correct]
     AD --> AE[Frontend started: localhost:3100 operational]
     AE --> AF[Browser preview ready for testing]
+    AF --> AG[User: Failed to fetch error]
+    AG --> AH[Fixed: API port 8000, removed duplicate CORS]
+    AH --> AI[Verified: CORS working, connection successful]
+    AI --> AJ[Ready: Frontend can now connect to backend]
