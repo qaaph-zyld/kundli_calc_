@@ -110,7 +110,7 @@ async def calculate_chart(
             }
             return name_map.get(b, str(b))
 
-        # Sign names for frontend
+        # Sign names for frontend yoga detection
         signs = [
             "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
             "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
