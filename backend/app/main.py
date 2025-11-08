@@ -54,15 +54,6 @@ def custom_openapi():
 
 app.openapi = custom_openapi
 
-# CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 # Error handlers
 app.add_exception_handler(Exception, ErrorHandler.handle_generic_exception)
 app.add_exception_handler(HTTPException, ErrorHandler.handle_http_exception)
