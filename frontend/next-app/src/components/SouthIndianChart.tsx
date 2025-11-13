@@ -204,7 +204,7 @@ export default function SouthIndianChart({ data, size = 600 }: SouthIndianChartP
                   textAnchor="end"
                   fill="#666"
                 >
-                  {planet.longitude.toFixed(1)}°
+                  {parseFloat((planet as any).longitude as any as string | number || 0).toFixed(1)}°
                 </text>
               </g>
             ))}
