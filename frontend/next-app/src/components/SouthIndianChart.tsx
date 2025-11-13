@@ -57,17 +57,43 @@ export default function SouthIndianChart({ data, size = 600 }: SouthIndianChartP
   const chartSize = size - padding * 2;
   const cellSize = chartSize / 4;
 
-  // Get ascendant sign number (1-12, where 1=Aries)
-  const ascendantSignNum = data?.houses?.ascendant?.sign_num || 1;
+  // Helpers
+  const degToSignNum = (deg: number): number => {
+    const d = ((deg % 360) + 360) % 360;
+    return Math.floor(d / 30) + 1; // 1..12
+  };
+
+  // Get ascendant sign number (1-12, where 1=Aries). Support numeric ascendant degree from API.
+  const ascendantSignNum = (() => {
+    const maybeAsc: any = (data as any)?.houses?.ascendant;
+    if (typeof maybeAsc === 'number') {
+      return degToSignNum(maybeAsc);
+    }
+    if (typeof maybeAsc === 'string') {
+      const num = parseFloat(maybeAsc);
+      if (Number.isFinite(num)) return degToSignNum(num);
+    }
+    if (maybeAsc && typeof maybeAsc?.sign_num === 'number') {
+      // Normalize 0-11 to 1-12 if needed
+      const val = maybeAsc.sign_num;
+      return val >= 1 && val <= 12 ? val : ((val % 12) + 12) % 12 + 1;
+    }
+    return 1;
+  })();
 
   // Group planets by house
   const planetsByHouse = React.useMemo(() => {
     const houses: Record<number, Planet[]> = {};
     if (data?.planetary_positions) {
-      Object.entries(data.planetary_positions).forEach(([name, planet]) => {
-        const houseNum = planet.house || planet.sign_num;
+      Object.entries(data.planetary_positions).forEach(([name, planetAny]) => {
+        const planet = planetAny as any;
+        const rawLong = parseFloat(String(planet?.longitude ?? 0));
+        // Always derive sign number from longitude to avoid backend indexing mismatches
+        const signNum = degToSignNum(rawLong);
+        // Determine house number from WS relative to ascendant
+        const houseNum = ((signNum - ascendantSignNum + 12) % 12) + 1;
         if (!houses[houseNum]) houses[houseNum] = [];
-        houses[houseNum].push({ ...planet, name });
+        houses[houseNum].push({ ...(planet as Planet), name });
       });
     }
     return houses;
@@ -204,7 +230,7 @@ export default function SouthIndianChart({ data, size = 600 }: SouthIndianChartP
                   textAnchor="end"
                   fill="#666"
                 >
-                  {parseFloat((planet as any).longitude as any as string | number || 0).toFixed(1)}°
+                  {parseFloat(String((planet as any).longitude ?? 0)).toFixed(1)}°
                 </text>
               </g>
             ))}

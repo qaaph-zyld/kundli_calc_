@@ -40,6 +40,20 @@ export default function ChartDemo() {
   const specialPoints = useMemo(() => result ? calculateSpecialPoints(result) : null, [result]);
   const strengthSummary = useMemo(() => getChartStrengthSummary(planetaryStrengths), [planetaryStrengths]);
 
+  // Derived ascendant info from API shape (houses.ascendant is a degree number)
+  const signNames = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
+  const ascendantDegree = useMemo(() => {
+    const val = (result as any)?.houses?.ascendant;
+    if (val == null) return null;
+    const num = parseFloat(String(val));
+    return Number.isFinite(num) ? ((num % 360) + 360) % 360 : null;
+  }, [result]);
+  const ascendantSignNum = useMemo(() => {
+    if (ascendantDegree == null) return null;
+    return Math.floor(ascendantDegree / 30) + 1; // 1..12
+  }, [ascendantDegree]);
+  const ascendantSignName = ascendantSignNum ? signNames[ascendantSignNum - 1] : null;
+
   // Check if viewing a saved chart from sessionStorage
   useEffect(() => {
     const savedChartData = sessionStorage.getItem('viewChart');
@@ -410,14 +424,14 @@ export default function ChartDemo() {
           <div className={styles.summary}>
             <div className={styles.summaryCard}>
               <h3>Ascendant (Lagna)</h3>
-              <p className={styles.highlight}>{result?.houses?.ascendant?.sign || 'N/A'}</p>
-              <p className={styles.detail}>{parseFloat(result?.houses?.ascendant?.longitude || 0).toFixed(2)}°</p>
+              <p className={styles.highlight}>{ascendantSignName || 'N/A'}</p>
+              <p className={styles.detail}>{ascendantDegree != null ? ascendantDegree.toFixed(2) : 'N/A'}°</p>
             </div>
 
             <div className={styles.summaryCard}>
               <h3>Ayanamsa</h3>
-              <p className={styles.highlight}>{result?.ayanamsa_type || 'N/A'}</p>
-              <p className={styles.detail}>{parseFloat(result?.ayanamsa_value || 0).toFixed(2)}°</p>
+              <p className={styles.highlight}>{birthDetails?.ayanamsa_type || 'N/A'}</p>
+              <p className={styles.detail}>{parseFloat(String(result?.ayanamsa_value || 0)).toFixed(2)}°</p>
             </div>
 
             <div className={styles.summaryCard}>

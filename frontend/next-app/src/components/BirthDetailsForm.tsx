@@ -21,7 +21,7 @@ interface BirthDetailsFormProps {
 export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDetailsFormProps) {
   const [formData, setFormData] = useState<BirthDetails>({
     date: '1990-10-09',
-    time: '07:10',
+    time: '08:10',
     latitude: 44.5333,
     longitude: 19.2333,
     timezone: 'UTC',
