@@ -40,6 +40,42 @@ export default function ChartDemo() {
   const specialPoints = useMemo(() => result ? calculateSpecialPoints(result) : null, [result]);
   const strengthSummary = useMemo(() => getChartStrengthSummary(planetaryStrengths), [planetaryStrengths]);
 
+  // Timezone conversion: local date/time in selected timezone -> UTC ISO string
+  function getTzOffset(date: Date, timeZone: string): number {
+    try {
+      const dtf = new Intl.DateTimeFormat('en-US', {
+        timeZone,
+        hour12: false,
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit', second: '2-digit'
+      });
+      const parts = dtf.formatToParts(date);
+      let y = 0, m = 1, d = 1, h = 0, mi = 0, s = 0;
+      for (const p of parts) {
+        if (p.type === 'year') y = Number(p.value);
+        else if (p.type === 'month') m = Number(p.value);
+        else if (p.type === 'day') d = Number(p.value);
+        else if (p.type === 'hour') h = Number(p.value);
+        else if (p.type === 'minute') mi = Number(p.value);
+        else if (p.type === 'second') s = Number(p.value);
+      }
+      const asUTC = Date.UTC(y, m - 1, d, h, mi, s);
+      return asUTC - date.getTime();
+    } catch {
+      return 0;
+    }
+  }
+
+  function localToUtcISO(dateStr: string, timeStr: string, timeZone: string): string {
+    const [yy, mm, dd] = dateStr.split('-').map(Number);
+    const [hh, mi] = timeStr.split(':').map(Number);
+    // initial guess: same wall-time expressed as UTC
+    const guess = new Date(Date.UTC(yy, mm - 1, dd, hh, mi, 0));
+    const offset = getTzOffset(guess, timeZone || 'UTC');
+    const utcMs = Date.UTC(yy, mm - 1, dd, hh, mi, 0) - offset;
+    return new Date(utcMs).toISOString().replace('.000Z', 'Z');
+  }
+
   // Derived ascendant info from API shape (houses.ascendant is a degree number)
   const signNames = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces'];
   const ascendantDegree = useMemo(() => {
@@ -94,8 +130,8 @@ export default function ChartDemo() {
     setBirthDetails(details);
     
     try {
-      // Combine date and time into ISO format
-      const dateTime = `${details.date}T${details.time}:00Z`;
+      // Convert selected local time to UTC ISO
+      const dateTime = localToUtcISO(details.date, details.time, details.timezone || 'UTC');
       
       const data = await calculateChart({
         date_time: dateTime,

@@ -99,14 +99,16 @@ export default function SouthIndianChart({ data, size = 600 }: SouthIndianChartP
     return houses;
   }, [data]);
 
-  // Map zodiac sign to position in South Indian chart
-  // In South Indian chart, signs are fixed, not houses
-  // Sign 1 (Aries) is always in position 2 (top-center-right)
+  // Map zodiac sign to position in South Indian chart (fixed signs layout)
+  // Rows top->bottom (0..3), Cols left->right (0..2)
+  //  9  10  11
+  //  8   1  12
+  //  7   2   3
+  //  6   5   4
   const getSignPosition = (signNum: number): { row: number; col: number } => {
-    // Positions in South Indian chart (counter-clockwise from top-right)
     const positions = [
-      { row: 0, col: 2 }, // 1: Aries
-      { row: 1, col: 2 }, // 2: Taurus
+      { row: 1, col: 1 }, // 1: Aries
+      { row: 2, col: 1 }, // 2: Taurus
       { row: 2, col: 2 }, // 3: Gemini
       { row: 3, col: 2 }, // 4: Cancer
       { row: 3, col: 1 }, // 5: Leo
@@ -115,8 +117,8 @@ export default function SouthIndianChart({ data, size = 600 }: SouthIndianChartP
       { row: 1, col: 0 }, // 8: Scorpio
       { row: 0, col: 0 }, // 9: Sagittarius
       { row: 0, col: 1 }, // 10: Capricorn
-      { row: 1, col: 1 }, // 11: Aquarius
-      { row: 2, col: 1 }, // 12: Pisces
+      { row: 0, col: 2 }, // 11: Aquarius
+      { row: 1, col: 2 }, // 12: Pisces
     ];
     return positions[(signNum - 1 + 12) % 12];
   };
@@ -147,8 +149,7 @@ export default function SouthIndianChart({ data, size = 600 }: SouthIndianChartP
     const planetsInHouse = planetsByHouse[houseNum] || [];
     const isAscendant = houseNum === 1;
 
-    // For center cell (row 1, col 1), show ascendant sign
-    const isCenter = row === 1 && col === 1;
+    // No special center label in South Indian layout
 
     return (
       <g key={`cell-${row}-${col}`}>
@@ -237,19 +238,7 @@ export default function SouthIndianChart({ data, size = 600 }: SouthIndianChartP
           </g>
         )}
 
-        {/* Center cell - show chart title */}
-        {isCenter && (
-          <text
-            x={x + cellSize / 2}
-            y={y + cellSize / 2}
-            fontSize="14"
-            fontWeight="bold"
-            textAnchor="middle"
-            fill="#666"
-          >
-            Birth Chart
-          </text>
-        )}
+        {/* no center label */}
       </g>
     );
   };

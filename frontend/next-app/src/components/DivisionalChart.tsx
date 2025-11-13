@@ -3,16 +3,15 @@ import React from 'react';
 
 interface Planet {
   name: string;
-  sign: string;
-  sign_num: number;
+  sign?: string;
+  sign_num?: number;
   longitude: number;
 }
 
 interface ChartData {
   planetary_positions?: Record<string, Planet>;
-  houses?: {
-    ascendant: { sign: string; sign_num: number; longitude: number };
-  };
+  houses?: any;
+  divisional_charts?: any;
 }
 
 interface DivisionalChartProps {
@@ -96,48 +95,64 @@ export default function DivisionalChart({ data, size = 600, division }: Division
   const chartSize = size - padding * 2;
   const cellSize = chartSize / 4;
   const info = DIVISION_INFO[division];
+  const degToSign = (deg: number) => Math.floor((((deg % 360) + 360) % 360) / 30) + 1;
 
-  // Calculate divisional ascendant
-  const rasiAscendant = data?.houses?.ascendant;
-  const divisionalAscendantSign = rasiAscendant 
-    ? calculateDivisionalSign(rasiAscendant.sign_num, rasiAscendant.longitude, division)
-    : 1;
+  // Calculate divisional ascendant: prefer backend divisional cusps
+  const dKey = `D${division}`;
+  const dObj: any = (data as any)?.divisional_charts?.[dKey];
+  const divisionalAscendantSign = (() => {
+    if (dObj?.house_cusps && Array.isArray(dObj.house_cusps) && dObj.house_cusps.length > 0) {
+      const cusp0 = parseFloat(String(dObj.house_cusps[0]));
+      if (Number.isFinite(cusp0)) return degToSign(cusp0);
+    }
+    const rasiAscVal: any = (data as any)?.houses?.ascendant;
+    const ascDeg = parseFloat(String(rasiAscVal ?? 0));
+    const signNum = degToSign(ascDeg);
+    return calculateDivisionalSign(signNum, ascDeg % 30, division);
+  })();
 
-  // Calculate divisional positions for all planets
+  // Calculate divisional positions for all planets: prefer backend divisional longitudes
   const planetsWithDivisional = React.useMemo(() => {
-    if (!data?.planetary_positions) return {};
-    
-    const result: Record<number, Planet[]> = {};
-    
-    Object.entries(data.planetary_positions).forEach(([name, planet]) => {
-      const divisionalSign = calculateDivisionalSign(planet.sign_num, planet.longitude, division);
-      const houseNum = ((divisionalSign - divisionalAscendantSign + 12) % 12) + 1;
-      
-      if (!result[houseNum]) result[houseNum] = [];
-      result[houseNum].push({
-        ...planet,
-        name,
+    const out: Record<number, Planet[]> = {};
+    const backend = dObj?.planetary_positions;
+    if (backend) {
+      Object.entries(backend).forEach(([name, p]: any) => {
+        const lon = parseFloat(String(p?.longitude ?? 0));
+        const dSign = degToSign(lon);
+        const houseNum = ((dSign - divisionalAscendantSign + 12) % 12) + 1;
+        if (!out[houseNum]) out[houseNum] = [];
+        out[houseNum].push({ name, longitude: lon, sign: undefined, sign_num: dSign });
       });
-    });
-    
-    return result;
-  }, [data, divisionalAscendantSign, division]);
+      return out;
+    }
+    if (data?.planetary_positions) {
+      Object.entries(data.planetary_positions).forEach(([name, planet]: any) => {
+        const lon = parseFloat(String(planet?.longitude ?? 0));
+        const rasiSign = typeof planet?.sign_num === 'number' ? planet.sign_num : degToSign(lon);
+        const dSign = calculateDivisionalSign(rasiSign, lon % 30, division);
+        const houseNum = ((dSign - divisionalAscendantSign + 12) % 12) + 1;
+        if (!out[houseNum]) out[houseNum] = [];
+        out[houseNum].push({ name, longitude: lon, sign: undefined, sign_num: dSign });
+      });
+    }
+    return out;
+  }, [data, dObj, divisionalAscendantSign, division]);
 
-  // Map zodiac sign to position in South Indian chart
+  // Map zodiac sign to standard South Indian layout
   const getSignPosition = (signNum: number): { row: number; col: number } => {
     const positions = [
-      { row: 0, col: 2 }, // 1: Aries
-      { row: 1, col: 2 }, // 2: Taurus
-      { row: 2, col: 2 }, // 3: Gemini
-      { row: 3, col: 2 }, // 4: Cancer
-      { row: 3, col: 1 }, // 5: Leo
-      { row: 3, col: 0 }, // 6: Virgo
-      { row: 2, col: 0 }, // 7: Libra
-      { row: 1, col: 0 }, // 8: Scorpio
-      { row: 0, col: 0 }, // 9: Sagittarius
-      { row: 0, col: 1 }, // 10: Capricorn
-      { row: 1, col: 1 }, // 11: Aquarius
-      { row: 2, col: 1 }, // 12: Pisces
+      { row: 1, col: 1 }, // Aries
+      { row: 2, col: 1 }, // Taurus
+      { row: 2, col: 2 }, // Gemini
+      { row: 3, col: 2 }, // Cancer
+      { row: 3, col: 1 }, // Leo
+      { row: 3, col: 0 }, // Virgo
+      { row: 2, col: 0 }, // Libra
+      { row: 1, col: 0 }, // Scorpio
+      { row: 0, col: 0 }, // Sagittarius
+      { row: 0, col: 1 }, // Capricorn
+      { row: 0, col: 2 }, // Aquarius
+      { row: 1, col: 2 }, // Pisces
     ];
     return positions[(signNum - 1 + 12) % 12];
   };

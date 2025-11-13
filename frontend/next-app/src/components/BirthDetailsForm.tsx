@@ -1,6 +1,7 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './BirthDetailsForm.module.css';
+import { resolvePlace, timezoneFromCoords } from '../lib/api';
 
 export interface BirthDetails {
   date: string; // YYYY-MM-DD
@@ -19,16 +20,31 @@ interface BirthDetailsFormProps {
 }
 
 export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDetailsFormProps) {
-  const [formData, setFormData] = useState<BirthDetails>({
-    date: '1990-10-09',
-    time: '08:10',
-    latitude: 44.5333,
-    longitude: 19.2333,
-    timezone: 'UTC',
-    locationName: 'Loznica, Serbia',
-    ayanamsa_type: 'lahiri',
-    house_system: 'W',
+  const [formData, setFormData] = useState<BirthDetails>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem('birthDetails');
+        if (saved) return JSON.parse(saved);
+      } catch {}
+    }
+    return {
+      date: '1990-10-09',
+      time: '08:10',
+      latitude: 44.5333,
+      longitude: 19.2333,
+      timezone: 'UTC',
+      locationName: 'Loznica, Serbia',
+      ayanamsa_type: 'lahiri',
+      house_system: 'W',
+    };
   });
+
+  useEffect(() => {
+    try { localStorage.setItem('birthDetails', JSON.stringify(formData)); } catch {}
+  }, [formData]);
+
+  const [geoLoading, setGeoLoading] = useState(false);
+  const [geoError, setGeoError] = useState<string | null>(null);
 
   const [errors, setErrors] = useState<Partial<Record<keyof BirthDetails, string>>>({});
 
@@ -62,6 +78,34 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
     if (errors[field]) {
       setErrors(prev => ({ ...prev, [field]: undefined }));
     }
+  };
+
+  const handleResolvePlace = async () => {
+    if (!formData.locationName) { setGeoError('Enter a location name'); return; }
+    setGeoError(null); setGeoLoading(true);
+    try {
+      const res = await resolvePlace(formData.locationName);
+      const tz = await timezoneFromCoords(res.latitude, res.longitude);
+      setFormData(prev => ({
+        ...prev,
+        latitude: res.latitude,
+        longitude: res.longitude,
+        timezone: tz.timezone,
+        locationName: res.display_name,
+      }));
+    } catch (e: any) {
+      setGeoError(e?.message || String(e));
+    } finally { setGeoLoading(false); }
+  };
+
+  const handleDetectTimezone = async () => {
+    setGeoError(null); setGeoLoading(true);
+    try {
+      const tz = await timezoneFromCoords(formData.latitude, formData.longitude);
+      setFormData(prev => ({ ...prev, timezone: tz.timezone }));
+    } catch (e: any) {
+      setGeoError(e?.message || String(e));
+    } finally { setGeoLoading(false); }
   };
 
   return (
@@ -113,7 +157,12 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
               disabled={loading}
               required
             />
+            <div className={styles.inlineActions}>
+              <button type="button" onClick={handleResolvePlace} disabled={loading || geoLoading} className={styles.btnSecondary}>Search</button>
+              <button type="button" onClick={handleDetectTimezone} disabled={loading || geoLoading} className={styles.btnTertiary}>Detect Timezone</button>
+            </div>
             {errors.locationName && <span className={styles.error}>{errors.locationName}</span>}
+            {geoError && <span className={styles.error}>{geoError}</span>}
           </div>
 
           <div className={styles.row}>
