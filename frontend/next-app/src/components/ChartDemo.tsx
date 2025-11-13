@@ -411,13 +411,13 @@ export default function ChartDemo() {
             <div className={styles.summaryCard}>
               <h3>Ascendant (Lagna)</h3>
               <p className={styles.highlight}>{result?.houses?.ascendant?.sign || 'N/A'}</p>
-              <p className={styles.detail}>{result?.houses?.ascendant?.longitude?.toFixed(2)}°</p>
+              <p className={styles.detail}>{parseFloat(result?.houses?.ascendant?.longitude || 0).toFixed(2)}°</p>
             </div>
 
             <div className={styles.summaryCard}>
               <h3>Ayanamsa</h3>
               <p className={styles.highlight}>{result?.ayanamsa_type || 'N/A'}</p>
-              <p className={styles.detail}>{result?.ayanamsa_value?.toFixed(2)}°</p>
+              <p className={styles.detail}>{parseFloat(result?.ayanamsa_value || 0).toFixed(2)}°</p>
             </div>
 
             <div className={styles.summaryCard}>
