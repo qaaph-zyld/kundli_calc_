@@ -61,6 +61,13 @@ class DivisionalChartEngine:
             60: self._calculate_shashtyamsa # D60 - Shashtyamsa
         }
     
+    def _apply_division_to_single_longitude(self, division: int, longitude: float) -> float:
+        if division not in self.division_map:
+            raise ValueError(f"Unsupported division D{division}")
+        single = {"_": float(longitude)}
+        mapped = self.division_map[division](single)
+        return float(mapped["_"]) if "_" in mapped else float(longitude)
+
     def calculate_chart(self, date: datetime, division: int, location: Optional[Dict[str, float]] = None) -> DivisionalChart:
         """Calculate divisional chart for given date and division"""
         with MetricsTimer(metrics, f"divisional_chart_d{division}"):
@@ -103,7 +110,7 @@ class DivisionalChartEngine:
                 date,
                 float(chart_location["lat"]),
                 float(chart_location["lon"]),
-                "PLACIDUS",
+                "WHOLE_SIGN",
             )
             jd = swe.julday(
                 date.year, date.month, date.day,
@@ -116,11 +123,19 @@ class DivisionalChartEngine:
                 raise ValueError(f"Unsupported division D{division}")
             
             divisional_positions = self.division_map[division](planets)
-            
+
+            # Compute divisional ascendant by applying division to the natal ascendant longitude
+            asc_longitude = float(houses_dict["ascendant"]) if "ascendant" in houses_dict else 0.0
+            div_asc_longitude = self._apply_division_to_single_longitude(division, asc_longitude)
+            div_asc_sign = int(div_asc_longitude / 30) % 12
+
+            # Whole Sign house cusps for the divisional chart
+            varga_houses = [((div_asc_sign * 30) + (i * 30)) % 360 for i in range(12)]
+
             chart = DivisionalChart(
                 division=division,
                 planets=divisional_positions,
-                houses=houses_dict["cusps"],
+                houses=varga_houses,
                 ayanamsa=ayanamsa,
                 timestamp=date,
                 location=chart_location

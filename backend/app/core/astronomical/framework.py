@@ -295,9 +295,9 @@ class AstronomicalCalculator:
             # Calculate planet position
             planet_id = self._get_planet_id(body)
             calc_flags = (
-                (swe.FLG_TOPOCENTRIC | swe.FLG_SWIEPH)
+                (swe.FLG_TOPOCENTRIC | swe.FLG_SWIEPH | swe.FLG_SIDEREAL)
                 if self.coordinate_system == CoordinateSystem.TOPOCENTRIC
-                else swe.FLG_SWIEPH
+                else (swe.FLG_SWIEPH | swe.FLG_SIDEREAL)
             )
 
             def _calc(planet: int, flags: int):
@@ -319,9 +319,9 @@ class AstronomicalCalculator:
             except Exception:
                 # Fallback to Moshier ephemeris if Swiss ephemeris files are unavailable
                 fallback_flags = (
-                    (swe.FLG_TOPOCENTRIC | swe.FLG_MOSEPH)
+                    (swe.FLG_TOPOCENTRIC | swe.FLG_MOSEPH | swe.FLG_SIDEREAL)
                     if self.coordinate_system == CoordinateSystem.TOPOCENTRIC
-                    else swe.FLG_MOSEPH
+                    else (swe.FLG_MOSEPH | swe.FLG_SIDEREAL)
                 )
                 if body == CelestialBody.KETU:
                     res = _calc(swe.MEAN_NODE, fallback_flags)

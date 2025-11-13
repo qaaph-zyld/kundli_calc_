@@ -1,0 +1,3 @@
+D1: {'Sun': 12, 'Moon': 8, 'Mars': 8, 'Mercury': 12, 'Jupiter': 10, 'Venus': 12, 'Saturn': 3, 'Rahu': 4, 'Ketu': 10, 'Uranus': 3, 'Neptune': 3, 'Pluto': 1}
+
+Mismatches:

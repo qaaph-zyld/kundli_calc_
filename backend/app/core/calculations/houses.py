@@ -98,18 +98,29 @@ class HouseCalculator:
         # Resolve Swiss Ephemeris house system code
         system_cfg = self.house_systems.get(house_system, self.house_systems['PLACIDUS'])
         sys_code = system_cfg['id'].encode('ascii')
+
+        if house_system == 'WHOLE_SIGN':
+            cusps_tmp, ascmc = swe.houses(jd, latitude, longitude, b'P')
+            ay = swe.get_ayanamsa_ut(jd)
+            asc_trop = ascmc[0] if len(ascmc) > 0 else 0.0
+            mc_trop = ascmc[1] if len(ascmc) > 1 else 0.0
+            armc = ascmc[2] if len(ascmc) > 2 else 0.0
+            vertex = ascmc[3] if len(ascmc) > 3 else 0.0
+            ascendant = (asc_trop - ay) % 360.0
+            midheaven = (mc_trop - ay) % 360.0
+            asc_sign = int(ascendant / 30) % 12
+            house_cusps = [((asc_sign * 30) + (i * 30)) % 360 for i in range(12)]
         
-        # Calculate houses using Swiss Ephemeris
-        cusps, ascmc = swe.houses(jd, latitude, longitude, sys_code)
-        
-        if len(cusps) >= 13:
-            house_cusps = [cusps[i] for i in range(1, 13)]
         else:
-            house_cusps = list(cusps[:12])
-        ascendant = ascmc[0] if len(ascmc) > 0 else 0.0
-        midheaven = ascmc[1] if len(ascmc) > 1 else 0.0
-        armc = ascmc[2] if len(ascmc) > 2 else 0.0
-        vertex = ascmc[3] if len(ascmc) > 3 else 0.0
+            cusps, ascmc = swe.houses(jd, latitude, longitude, sys_code)
+            if len(cusps) >= 13:
+                house_cusps = [cusps[i] for i in range(1, 13)]
+            else:
+                house_cusps = list(cusps[:12])
+            ascendant = ascmc[0] if len(ascmc) > 0 else 0.0
+            midheaven = ascmc[1] if len(ascmc) > 1 else 0.0
+            armc = ascmc[2] if len(ascmc) > 2 else 0.0
+            vertex = ascmc[3] if len(ascmc) > 3 else 0.0
         
         # Return the required dictionary format
         return {

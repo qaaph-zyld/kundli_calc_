@@ -22,12 +22,12 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
   const [formData, setFormData] = useState<BirthDetails>({
     date: '1990-10-09',
     time: '07:10',
-    latitude: 44.531346,
-    longitude: 19.206766,
+    latitude: 44.5333,
+    longitude: 19.2333,
     timezone: 'UTC',
     locationName: 'Loznica, Serbia',
     ayanamsa_type: 'lahiri',
-    house_system: 'P',
+    house_system: 'W',
   });
 
   const [errors, setErrors] = useState<Partial<Record<keyof BirthDetails, string>>>({});

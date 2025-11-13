@@ -10,6 +10,126 @@ from datetime import datetime
 
 API_BASE = "http://localhost:8000/api/v1"
 
+def _parse_kundli_profile(path):
+    rows = {}
+    with open(path, "r") as f:
+        lines = [ln.strip() for ln in f.readlines() if ln.strip()]
+    header_idx = None
+    for i, ln in enumerate(lines):
+        if ln.startswith("Chart"):
+            header_idx = i
+            break
+    if header_idx is None:
+        return rows
+    cols = [c.strip() for c in lines[header_idx].split("|")]
+    key_map = {"AS":"AS","SU":"Sun","MO":"Moon","ME":"Mercury","VE":"Venus","MA":"Mars","JU":"Jupiter","SA":"Saturn","RA":"Rahu","KE":"Ketu"}
+    for ln in lines[header_idx+2:]:
+        parts = [p.strip() for p in ln.split("|")]
+        if len(parts) < len(cols):
+            continue
+        chart_name = parts[0]
+        vals = {}
+        for ci, col in enumerate(cols[1:]):
+            label = col
+            if label in key_map:
+                try:
+                    vals[key_map[label]] = int(parts[ci+1])
+                except:
+                    pass
+        rows[chart_name] = vals
+    return rows
+
+def _house_from_cusps_ws(longitude, cusps0):
+    asc_sign = int(float(cusps0) / 30)
+    p_sign = int(float(longitude) / 30)
+    return ((p_sign - asc_sign) % 12) + 1
+
+def validate_against_kundli_profile(chart, birth_data):
+    profile = _parse_kundli_profile("tests/test_profile/kundli.txt")
+    supported = ["D1","D2","D3","D4","D7","D9","D10","D12","D16","D20","D24","D27","D30","D40","D45","D60"]
+    results = []
+    signs = ['Aries','Taurus','Gemini','Cancer','Leo','Virgo','Libra','Scorpio','Sagittarius','Capricorn','Aquarius','Pisces']
+    d1_comp = {}
+    for k,v in chart.get('planetary_positions',{}).items():
+        d1_comp[k] = int(v.get('house',0))
+    results.append(("D1", d1_comp))
+    for dn in supported:
+        if dn == "D1":
+            continue
+        req = {
+            "date_time": birth_data["date_time"],
+            "latitude": birth_data["latitude"],
+            "longitude": birth_data["longitude"],
+            "altitude": birth_data["altitude"],
+            "division": int(dn[1:])
+        }
+        try:
+            r = requests.post(f"{API_BASE}/divisional/calculate", json=req, timeout=15)
+            if r.status_code != 200:
+                continue
+            dv = r.json()
+            cusps = dv.get("house_cusps", [])
+            if not cusps:
+                continue
+            comp = {}
+            # Determine asc house cusp 1 value (supports dict or list)
+            if isinstance(cusps, dict):
+                cusps0 = cusps.get("1")
+                if cusps0 is None:
+                    # attempt to pick the smallest numeric key
+                    try:
+                        cusps0 = dict(sorted(((int(k), v) for k, v in cusps.items()), key=lambda x: x[0]))[1]
+                    except Exception:
+                        continue
+            else:
+                cusps0 = cusps[0]
+            for planet, pdata in dv.get("planetary_positions", {}).items():
+                if planet not in ["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Rahu","Ketu"]:
+                    continue
+                try:
+                    if isinstance(pdata, dict):
+                        long_val = float(pdata.get("longitude", 0))
+                    else:
+                        long_val = float(pdata)
+                except Exception:
+                    continue
+                comp[planet] = _house_from_cusps_ws(long_val, cusps0)
+            results.append((dn, comp))
+        except Exception:
+            continue
+    mismatches = []
+    print("\n\n🧾 Validation vs kundli.txt")
+    print("="*60)
+    for dn, comp in results:
+        expected = profile.get(dn, {})
+        if not expected:
+            print(f"   {dn}: no reference, skipped")
+            continue
+        errs = []
+        for planet in ["Sun","Moon","Mercury","Venus","Mars","Jupiter","Saturn","Rahu","Ketu"]:
+            ev = expected.get(planet)
+            av = comp.get(planet)
+            if ev is None or av is None:
+                continue
+            if int(ev) != int(av):
+                errs.append((planet, ev, av))
+        if errs:
+            print(f"   {dn}: mismatches={len(errs)}")
+            for p, ev, av in errs[:8]:
+                print(f"      {p}: expected {ev}, got {av}")
+            mismatches.append((dn, errs))
+        else:
+            print(f"   {dn}: ✅ match")
+    try:
+        with open("kundli_validation_report.txt","w") as f:
+            for dn, comp in results:
+                f.write(f"{dn}: {comp}\n")
+            f.write("\nMismatches:\n")
+            for dn, errs in mismatches:
+                f.write(f"{dn}: {[(e[0], e[1], e[2]) for e in errs]}\n")
+    except Exception:
+        pass
+
 def test_user_chart():
     """Test complete chart calculation for user's birth data"""
     
@@ -20,12 +140,12 @@ def test_user_chart():
     
     # Birth data
     birth_data = {
-        "date_time": "1990-10-09T09:10:00",
+        "date_time": "1990-10-09T08:10:00Z",
         "latitude": 44.5333,
         "longitude": 19.2333,
         "altitude": 0,
         "ayanamsa_type": "LAHIRI",
-        "house_system": "PLACIDUS"
+        "house_system": "W"
     }
     
     print("📋 Birth Details:")
@@ -34,7 +154,7 @@ def test_user_chart():
     print(f"   Location: Loznica, Serbia")
     print(f"   Coordinates: {birth_data['latitude']}°N, {birth_data['longitude']}°E")
     print(f"   Ayanamsa: Lahiri")
-    print(f"   House System: Placidus")
+    print(f"   House System: Whole Sign")
     print()
     
     # Test 1: Chart Calculation
@@ -88,8 +208,8 @@ def test_user_chart():
                         # Get speed for retrograde check
                         speed = float(pos.get('speed', 0))
                         retro = " (R)" if speed < 0 and planet not in ['Rahu', 'Ketu'] else ""
-                        
-                        print(f"   {planet:10s}: {sign:12s} {deg_in_sign:6.2f}°{retro}")
+                        house_ws = int(chart['planetary_positions'][planet].get('house', 0))
+                        print(f"   {planet:10s}: {sign:12s} {deg_in_sign:6.2f}°  Hs(WS)={house_ws}{retro}")
             
             # Divisional Charts
             if 'divisional_charts' in chart:
@@ -98,12 +218,22 @@ def test_user_chart():
                 
                 for div_name, div_data in chart['divisional_charts'].items():
                     if isinstance(div_data, dict) and 'planetary_positions' in div_data:
-                        print(f"\n   {div_name}:")
-                        for planet, pos_data in list(div_data['planetary_positions'].items())[:3]:
+                        print(f"\n   {div_name} (Whole Sign houses):")
+                        # Compute varga asc sign from house cusps (cusps[0] is 1st house start)
+                        cusps = div_data.get('house_cusps', [])
+                        if cusps:
+                            asc_sign_num = int(float(cusps[0]) / 30)
+                        else:
+                            asc_sign_num = 0
+                        order = ['Sun','Moon','Mercury','Venus','Mars','Jupiter','Saturn','Rahu','Ketu']
+                        for planet in order:
+                            pos_data = div_data['planetary_positions'].get(planet)
                             if isinstance(pos_data, dict) and 'longitude' in pos_data:
                                 long = float(pos_data['longitude'])
-                                sign = signs[int(long / 30)]
-                                print(f"      {planet}: {sign}")
+                                p_sign_num = int(long / 30)
+                                sign = signs[p_sign_num]
+                                house_ws = ((p_sign_num - asc_sign_num) % 12) + 1
+                                print(f"      {planet:8s}: {sign:12s} Hs(WS)={house_ws}")
             
             # Save full result
             with open('user_chart_result.json', 'w') as f:
@@ -181,12 +311,12 @@ def main():
     """Run all tests"""
     
     birth_data = {
-        "date_time": "1990-10-09T09:10:00",
+        "date_time": "1990-10-09T08:10:00Z",
         "latitude": 44.5333,
         "longitude": 19.2333,
         "altitude": 0,
         "ayanamsa_type": "LAHIRI",
-        "house_system": "PLACIDUS"
+        "house_system": "W"
     }
     
     # Test chart calculation
@@ -195,6 +325,9 @@ def main():
     if success:
         # Analyze yogas
         analyze_yogas(chart)
+
+        # Validate against kundli.txt profile
+        validate_against_kundli_profile(chart, birth_data)
         
         # Test performance
         test_performance(birth_data)
