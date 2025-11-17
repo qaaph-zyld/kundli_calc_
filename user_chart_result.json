@@ -456,7 +456,7 @@
       "division": 9,
       "planetary_positions": {
         "Sun": {
-          "longitude": "240",
+          "longitude": "108.4245808866684",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -465,7 +465,7 @@
           "house": null
         },
         "Moon": {
-          "longitude": "320",
+          "longitude": "164.99530878488764",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -474,7 +474,7 @@
           "house": null
         },
         "Mars": {
-          "longitude": "200",
+          "longitude": "89.10915107076015",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -483,7 +483,7 @@
           "house": null
         },
         "Mercury": {
-          "longitude": "120",
+          "longitude": "23.18132930557797",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -492,7 +492,7 @@
           "house": null
         },
         "Jupiter": {
-          "longitude": "160",
+          "longitude": "232.53897504500407",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -501,7 +501,7 @@
           "house": null
         },
         "Venus": {
-          "longitude": "160",
+          "longitude": "54.37203440561404",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -510,7 +510,7 @@
           "house": null
         },
         "Saturn": {
-          "longitude": "280",
+          "longitude": "226.68618029723552",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -519,7 +519,7 @@
           "house": null
         },
         "Rahu": {
-          "longitude": "80",
+          "longitude": "358.48778212746777",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -528,7 +528,7 @@
           "house": null
         },
         "Ketu": {
-          "longitude": "80",
+          "longitude": "178.48778212746777",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -537,7 +537,7 @@
           "house": null
         },
         "Uranus": {
-          "longitude": "120",
+          "longitude": "109.13053679520178",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -546,7 +546,7 @@
           "house": null
         },
         "Neptune": {
-          "longitude": "200",
+          "longitude": "163.19446374980373",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -555,7 +555,7 @@
           "house": null
         },
         "Pluto": {
-          "longitude": "240",
+          "longitude": "24.565289144765035",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -565,10 +565,6 @@
         }
       },
       "house_cusps": [
-        "300",
-        "330",
-        "0",
-        "30",
         "60",
         "90",
         "120",
@@ -576,7 +572,11 @@
         "180",
         "210",
         "240",
-        "270"
+        "270",
+        "300",
+        "330",
+        "0",
+        "30"
       ],
       "special_points": {}
     },
@@ -584,7 +584,7 @@
       "division": 10,
       "planetary_positions": {
         "Sun": {
-          "longitude": "171",
+          "longitude": "250.47175654074266",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -593,7 +593,7 @@
           "house": null
         },
         "Moon": {
-          "longitude": "57",
+          "longitude": "193.32812087209737",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -602,7 +602,7 @@
           "house": null
         },
         "Mars": {
-          "longitude": "48",
+          "longitude": "109.01016785640017",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -611,7 +611,7 @@
           "house": null
         },
         "Mercury": {
-          "longitude": "162",
+          "longitude": "155.7570325617533",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -620,7 +620,7 @@
           "house": null
         },
         "Jupiter": {
-          "longitude": "105",
+          "longitude": "128.37663893889342",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -629,7 +629,7 @@
           "house": null
         },
         "Venus": {
-          "longitude": "165",
+          "longitude": "190.41337156179338",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -638,7 +638,7 @@
           "house": null
         },
         "Saturn": {
-          "longitude": "264",
+          "longitude": "131.87353366359503",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -647,7 +647,7 @@
           "house": null
         },
         "Rahu": {
-          "longitude": "279",
+          "longitude": "248.31975791940863",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -656,7 +656,7 @@
           "house": null
         },
         "Ketu": {
-          "longitude": "99",
+          "longitude": "68.31975791940863",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -665,7 +665,7 @@
           "house": null
         },
         "Uranus": {
-          "longitude": "252",
+          "longitude": "1.2561519946686417",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -674,7 +674,7 @@
           "house": null
         },
         "Neptune": {
-          "longitude": "258",
+          "longitude": "61.32718194422637",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -683,7 +683,7 @@
           "house": null
         },
         "Pluto": {
-          "longitude": "201",
+          "longitude": "47.29476571640561",
           "latitude": "0",
           "distance": "0",
           "speed": "0",
@@ -693,6 +693,9 @@
         }
       },
       "house_cusps": [
+        "90",
+        "120",
+        "150",
         "180",
         "210",
         "240",
@@ -701,10 +704,7 @@
         "330",
         "0",
         "30",
-        "60",
-        "90",
-        "120",
-        "150"
+        "60"
       ],
       "special_points": {}
     }

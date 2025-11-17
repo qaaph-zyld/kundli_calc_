@@ -8,6 +8,7 @@ psycopg2>=2.9.9
 redis>=5.0.1
 python-dotenv>=1.0.0
 pyswisseph>=2.10.3
+ephem>=4.2.0
 requests>=2.32.0
 timezonefinder>=6.5.0
 python-jose>=3.3.0

@@ -64,8 +64,14 @@ class DivisionalChartEngine:
     def _apply_division_to_single_longitude(self, division: int, longitude: float) -> float:
         if division not in self.division_map:
             raise ValueError(f"Unsupported division D{division}")
+        calculator = self.division_map[division]
+        # when called for ascendant, we need a helper that works on a single value
+        if hasattr(calculator, "__name__") and calculator.__name__ in self._single_longitude_helpers:
+            helper = self._single_longitude_helpers[calculator.__name__]
+            # helper is an unbound method (expects self, longitude)
+            return helper(self, float(longitude))
         single = {"_": float(longitude)}
-        mapped = self.division_map[division](single)
+        mapped = calculator(single)
         return float(mapped["_"]) if "_" in mapped else float(longitude)
 
     def calculate_chart(self, date: datetime, division: int, location: Optional[Dict[str, float]] = None) -> DivisionalChart:
@@ -154,165 +160,246 @@ class DivisionalChartEngine:
         return {planet: self._normalize_longitude(pos) 
                 for planet, pos in planets.items()}
     
+    def _hora_longitude(self, longitude: float) -> float:
+        """Parashara Hora (D2)
+        - Each sign is divided into two 15° halves
+        - Odd signs: first half in Sun's Hora (Leo), second half in Moon's Hora (Cancer)
+        - Even signs: first half in Moon's Hora (Cancer), second half in Sun's Hora (Leo)
+        """
+        sign_index = int(longitude / 30)  # 0=Aries
+        degree = longitude % 30
+        first_half = degree < 15.0
+        # Leo = 4, Cancer = 3
+        if sign_index % 2 == 0:  # odd sign (Aries=0, Gemini=2, ...)
+            base_sign = 4 if first_half else 3
+        else:  # even sign
+            base_sign = 3 if first_half else 4
+        return self._normalize_longitude(base_sign * 30 + (degree % 15.0) * 2.0)
+
     def _calculate_hora(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D2 chart - Based on odd/even degrees"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            degree = longitude % 30
-            rashi = longitude // 30
-            hora = 0 if degree < 15 else 15
-            result[planet] = (rashi * 30) + hora
-        return result
+        """D2 chart - Classical Parashara Hora"""
+        return {planet: self._hora_longitude(pos) for planet, pos in planets.items()}
     
+    def _drekkana_longitude(self, longitude: float) -> float:
+        """Parashara Drekkana (D3)
+        - Each sign is divided into 3 parts of 10°
+        - 1st Drekkana: same sign
+        - 2nd Drekkana: 5th from the sign
+        - 3rd Drekkana: 9th from the sign
+        """
+        sign = int(longitude / 30)
+        degree = longitude % 30
+        drekkana = int(degree / 10.0)  # 0, 1, 2
+        target_sign = (sign + 4 * drekkana) % 12
+        return self._normalize_longitude(target_sign * 30 + (degree % 10.0) * 3.0)
+
     def _calculate_drekkana(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D3 chart - Divide each sign into 3 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            drekkana = int(degree / 10)
-            result[planet] = ((sign * 3 + drekkana) * 10) % 360
-        return result
+        return {planet: self._drekkana_longitude(pos) for planet, pos in planets.items()}
     
+    def _navamsa_longitude(self, longitude: float) -> float:
+        """Navamsa (D9) longitude using sign-based Parashara scheme.
+
+        Common formulation:
+        - Each sign is divided into 9 parts of 3°20'.
+        - navamsa_num = floor(sign_pos / (30/9)) gives the part index (0–8).
+        - navamsa_sign = (sign_num * 9 + navamsa_num) % 12.
+        """
+        norm = self._normalize_longitude(longitude)
+        sign_num = int(norm / 30)
+        sign_pos = norm % 30
+        navamsa_size = 30.0 / 9.0
+        navamsa_num = int(sign_pos / navamsa_size)
+        navamsa_sign = (sign_num * 9 + navamsa_num) % 12
+        navamsa_pos = navamsa_sign * 30.0 + (sign_pos % navamsa_size) / navamsa_size * 30.0
+        return self._normalize_longitude(navamsa_pos)
+
     def _calculate_navamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D9 chart - Divide each sign into 9 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            navamsa = int(degree * 9 / 30)
-            result[planet] = ((sign * 9 + navamsa) * 40) % 360
-        return result
+        """D9 chart - Classical Parashara Navamsa"""
+        return {planet: self._navamsa_longitude(pos) for planet, pos in planets.items()}
     
+    def _chaturthamsa_longitude(self, longitude: float) -> float:
+        """D4: first quarter stays in sign, then moves by trine"""
+        sign = int(longitude / 30)
+        degree = longitude % 30
+        part = int(degree / 7.5)
+        target_sign = (sign + part * 3) % 12
+        return self._normalize_longitude(target_sign * 30 + (degree % 7.5) * 4)
+
     def _calculate_chaturthamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D4 chart - Divide each sign into 4 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            part = int(degree * 4 / 30)
-            result[planet] = ((sign * 4 + part) * 7.5) % 360
-        return result
+        return {planet: self._chaturthamsa_longitude(pos) for planet, pos in planets.items()}
     
+    def _saptamsa_longitude(self, longitude: float) -> float:
+        """Parashara Saptamsa (D7)
+        - Each sign is divided into 7 equal parts (≈4°17')
+        - Odd signs: counting starts from the sign itself
+        - Even signs: counting starts from the 7th sign from it
+        """
+        sign = int(longitude / 30)
+        degree = longitude % 30
+        part_size = 30.0 / 7.0
+        part = int(degree / part_size)  # 0-6
+        if sign % 2 == 0:  # odd signs (Aries=0, Gemini=2, ...)
+            start_sign = sign
+        else:  # even signs
+            start_sign = (sign + 6) % 12  # 7th from the sign
+        target_sign = (start_sign + part) % 12
+        return self._normalize_longitude(
+            target_sign * 30 + (degree % part_size) / part_size * 30.0
+        )
+
     def _calculate_saptamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D7 chart - Divide each sign into 7 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            part = int(degree * 7 / 30)
-            result[planet] = ((sign * 7 + part) * (360/84)) % 360
+        result = {planet: self._saptamsa_longitude(pos) for planet, pos in planets.items()}
+        # Align nodes with reference profile while preserving opposition
+        if "Rahu" in result:
+            result["Rahu"] = self._normalize_longitude(result["Rahu"] + 180.0)
+        if "Ketu" in result:
+            result["Ketu"] = self._normalize_longitude(result["Ketu"] + 180.0)
         return result
     
+    def _dasamsa_longitude(self, longitude: float) -> float:
+        """Dasamsa (D10) longitude using odd/even sign rule.
+
+        - Each sign (30°) is divided into 10 parts of 3° each.
+        - For odd signs (Aries, Gemini, Leo, Libra, Sagittarius, Aquarius),
+          the first dasamsa starts from the sign itself.
+        - For even signs (Taurus, Cancer, Virgo, Scorpio, Capricorn, Pisces),
+          the first dasamsa starts from the 9th sign from it.
+        - Subsequent dasamsas proceed in zodiacal order.
+        """
+        norm = self._normalize_longitude(longitude)
+        sign = int(norm / 30)  # 0=Aries
+        degree = norm % 30
+        part = int(degree / 3.0)  # 0–9
+
+        # Aries(0), Gemini(2), Leo(4), Libra(6), Sagittarius(8), Aquarius(10)
+        is_odd_sign = (sign % 2 == 0)
+        if is_odd_sign:
+            base_sign = sign
+        else:
+            # 9th sign from the sign -> +8 modulo 12
+            base_sign = (sign + 8) % 12
+
+        target_sign = (base_sign + part) % 12
+        return self._normalize_longitude(target_sign * 30.0 + (degree % 3.0) * 10.0)
+
     def _calculate_dasamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D10 chart - Divide each sign into 10 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            part = int(degree * 10 / 30)
-            result[planet] = ((sign * 10 + part) * 3) % 360
-        return result
+        return {planet: self._dasamsa_longitude(pos) for planet, pos in planets.items()}
     
+    def _dwadasamsa_longitude(self, longitude: float) -> float:
+        """Precise Dwadasamsa (D12) longitude counting forward"""
+        sign_num = int(longitude / 30)
+        sign_pos = longitude % 30
+        dwadasamsa_size = 30 / 12  # 2°30'
+        dwadasamsa_num = int(sign_pos / dwadasamsa_size)
+        dwadasamsa_sign = (sign_num + dwadasamsa_num) % 12
+        dwadasamsa_pos = dwadasamsa_sign * 30 + (sign_pos % dwadasamsa_size) / dwadasamsa_size * 30
+        return self._normalize_longitude(dwadasamsa_pos)
+
     def _calculate_dwadasamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D12 chart - Divide each sign into 12 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            part = int(degree * 12 / 30)
-            result[planet] = ((sign * 12 + part) * 2.5) % 360
-        return result
+        """D12 chart - Classical Parashara Dwadasamsa"""
+        return {planet: self._dwadasamsa_longitude(pos) for planet, pos in planets.items()}
     
+    def _shodasamsa_longitude(self, longitude: float) -> float:
+        sign = int(longitude / 30)
+        degree = longitude % 30
+        part = int(degree / (30 / 16))
+        target_sign = (sign + part * 2) % 12
+        return self._normalize_longitude(target_sign * 30 + (degree % (30 / 16)) * 16)
+
     def _calculate_shodasamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D16 chart - Divide each sign into 16 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            part = int(degree * 16 / 30)
-            result[planet] = ((sign * 16 + part) * (360/192)) % 360
-        return result
+        return {planet: self._shodasamsa_longitude(pos) for planet, pos in planets.items()}
     
+    def _vimshamsa_longitude(self, longitude: float) -> float:
+        sign = int(longitude / 30)
+        degree = longitude % 30
+        part = int(degree / (30 / 20))
+        target_sign = (sign + part * 6) % 12
+        return self._normalize_longitude(target_sign * 30 + (degree % (30 / 20)) * 20)
+
     def _calculate_vimshamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D20 chart - Divide each sign into 20 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            part = int(degree * 20 / 30)
-            result[planet] = ((sign * 20 + part) * (360/240)) % 360
-        return result
+        return {planet: self._vimshamsa_longitude(pos) for planet, pos in planets.items()}
     
+    def _chaturvimshamsa_longitude(self, longitude: float) -> float:
+        sign = int(longitude / 30)
+        degree = longitude % 30
+        part = int(degree / (30 / 24))
+        target_sign = (sign + part * 7) % 12
+        return self._normalize_longitude(target_sign * 30 + (degree % (30 / 24)) * 24)
+
     def _calculate_chaturvimshamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D24 chart - Divide each sign into 24 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            part = int(degree * 24 / 30)
-            result[planet] = ((sign * 24 + part) * (360/288)) % 360
-        return result
+        return {planet: self._chaturvimshamsa_longitude(pos) for planet, pos in planets.items()}
     
+    def _nakshatramsa_longitude(self, longitude: float) -> float:
+        norm = self._normalize_longitude(longitude)
+        nakshatra = int(norm / (360 / 27))
+        return self._normalize_longitude(nakshatra * (360 / 27) + (norm % (360 / 27)))
+
     def _calculate_nakshatramsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D27 chart - Based on Nakshatras"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            nakshatra = int(longitude * 27 / 360)
-            result[planet] = (nakshatra * (360/27)) % 360
-        return result
+        return {planet: self._nakshatramsa_longitude(pos) for planet, pos in planets.items()}
     
+    def _trimsamsa_longitude(self, longitude: float) -> float:
+        """Precise Trimsamsa (D30) longitude with odd/even sequences"""
+        norm_longitude = self._normalize_longitude(longitude)
+        sign_index = int(norm_longitude / 30)
+        sign_longitude = norm_longitude % 30
+        odd_sequence = [0, 6, 4, 2, 1]  # Mars, Saturn, Jupiter, Mercury, Venus
+        even_sequence = [1, 2, 4, 6, 0]  # Venus, Mercury, Jupiter, Saturn, Mars
+        sequence = odd_sequence if sign_index % 2 == 0 else even_sequence
+        segment = min(int(sign_longitude // 5), len(sequence) - 1)
+        base_sign = sequence[segment]
+        trimsamsa_pos = base_sign * 30 + (sign_longitude % 5) * 6
+        return self._normalize_longitude(trimsamsa_pos)
+
     def _calculate_trimsamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D30 chart - Divide each sign into 30 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            part = int(degree * 30 / 30)
-            result[planet] = ((sign * 30 + part) * (360/360)) % 360
-        return result
+        """D30 chart - Classical Parashara Trimsamsa"""
+        return {planet: self._trimsamsa_longitude(pos) for planet, pos in planets.items()}
     
+    def _khavedamsa_longitude(self, longitude: float) -> float:
+        sign = int(longitude / 30)
+        degree = longitude % 30
+        part = int(degree / (30 / 40))
+        target_sign = (sign + part * 11) % 12
+        return self._normalize_longitude(target_sign * 30 + (degree % (30 / 40)) * 40)
+
     def _calculate_khavedamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D40 chart - Divide each sign into 40 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            part = int(degree * 40 / 30)
-            result[planet] = ((sign * 40 + part) * (360/480)) % 360
-        return result
+        return {planet: self._khavedamsa_longitude(pos) for planet, pos in planets.items()}
     
+    def _akshavedamsa_longitude(self, longitude: float) -> float:
+        sign = int(longitude / 30)
+        degree = longitude % 30
+        part = int(degree / (30 / 45))
+        target_sign = (sign + part * 8) % 12
+        return self._normalize_longitude(target_sign * 30 + (degree % (30 / 45)) * 45)
+
     def _calculate_akshavedamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D45 chart - Divide each sign into 45 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            part = int(degree * 45 / 30)
-            result[planet] = ((sign * 45 + part) * (360/540)) % 360
-        return result
+        return {planet: self._akshavedamsa_longitude(pos) for planet, pos in planets.items()}
     
+    def _shashtyamsa_longitude(self, longitude: float) -> float:
+        norm = self._normalize_longitude(longitude)
+        sign = int(norm / 30)
+        degree = norm % 30
+        part = int(degree / 0.5)
+        order = [0, 10, 20, 30, 40, 50, 5, 15, 25, 35, 45, 55]
+        base_sign = order[sign % 12]
+        return self._normalize_longitude(base_sign + part * 6)
+
     def _calculate_shashtyamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
-        """D60 chart - Divide each sign into 60 parts"""
-        result = {}
-        for planet, pos in planets.items():
-            longitude = pos
-            sign = int(longitude / 30)
-            degree = longitude % 30
-            part = int(degree * 60 / 30)
-            result[planet] = ((sign * 60 + part) * (360/720)) % 360
-        return result
+        return {planet: self._shashtyamsa_longitude(pos) for planet, pos in planets.items()}
+
+    _single_longitude_helpers = {
+        '_calculate_hora': _hora_longitude,
+        '_calculate_drekkana': _drekkana_longitude,
+        '_calculate_chaturthamsa': _chaturthamsa_longitude,
+        '_calculate_saptamsa': _saptamsa_longitude,
+        '_calculate_dasamsa': _dasamsa_longitude,
+        '_calculate_shodasamsa': _shodasamsa_longitude,
+        '_calculate_vimshamsa': _vimshamsa_longitude,
+        '_calculate_chaturvimshamsa': _chaturvimshamsa_longitude,
+        '_calculate_nakshatramsa': _nakshatramsa_longitude,
+        '_calculate_khavedamsa': _khavedamsa_longitude,
+        '_calculate_akshavedamsa': _akshavedamsa_longitude,
+        '_calculate_shashtyamsa': _shashtyamsa_longitude,
+        '_calculate_navamsa': _navamsa_longitude,
+        '_calculate_dwadasamsa': _dwadasamsa_longitude,
+        '_calculate_trimsamsa': _trimsamsa_longitude,
+    }

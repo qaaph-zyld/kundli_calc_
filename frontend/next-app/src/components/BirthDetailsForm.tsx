@@ -171,7 +171,7 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
               <input
                 id="latitude"
                 type="number"
-                step="0.000001"
+                step="any"
                 min="-90"
                 max="90"
                 placeholder="44.531346"
@@ -188,7 +188,7 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
               <input
                 id="longitude"
                 type="number"
-                step="0.000001"
+                step="any"
                 min="-180"
                 max="180"
                 placeholder="19.206766"

@@ -7,7 +7,7 @@ Version: 1.0.0
 
 from typing import Dict, List, Optional, Any, Union, Type, Callable
 from enum import Enum
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from datetime import datetime
 import pytest
 import asyncio
@@ -88,6 +88,7 @@ class TestConfig(BaseModel):
     retries: int = 3
     parallel: bool = True
     options: Dict[str, Any] = Field(default_factory=dict)
+    model_config = ConfigDict(arbitrary_types_allowed=True)
 
 class TestFramework:
     """Testing framework for automated testing"""

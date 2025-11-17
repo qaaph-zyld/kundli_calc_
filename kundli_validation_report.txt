@@ -1,3 +1,29 @@
 D1: {'Sun': 12, 'Moon': 8, 'Mars': 8, 'Mercury': 12, 'Jupiter': 10, 'Venus': 12, 'Saturn': 3, 'Rahu': 4, 'Ketu': 10, 'Uranus': 3, 'Neptune': 3, 'Pluto': 1}
+D2: {'Sun': 2, 'Moon': 2, 'Mars': 2, 'Mercury': 1, 'Jupiter': 2, 'Venus': 2, 'Saturn': 1, 'Rahu': 1, 'Ketu': 1}
+D3: {'Sun': 12, 'Moon': 8, 'Mars': 4, 'Mercury': 8, 'Jupiter': 6, 'Venus': 8, 'Saturn': 3, 'Rahu': 8, 'Ketu': 2}
+D4: {'Sun': 9, 'Moon': 8, 'Mars': 5, 'Mercury': 6, 'Jupiter': 7, 'Venus': 9, 'Saturn': 3, 'Rahu': 10, 'Ketu': 4}
+D7: {'Sun': 5, 'Moon': 2, 'Mars': 12, 'Mercury': 2, 'Jupiter': 1, 'Venus': 3, 'Saturn': 2, 'Rahu': 12, 'Ketu': 6}
+D9: {'Sun': 2, 'Moon': 4, 'Mars': 1, 'Mercury': 11, 'Jupiter': 6, 'Venus': 12, 'Saturn': 6, 'Rahu': 10, 'Ketu': 4}
+D10: {'Sun': 4, 'Moon': 5, 'Mars': 2, 'Mercury': 1, 'Jupiter': 6, 'Venus': 2, 'Saturn': 8, 'Rahu': 10, 'Ketu': 4}
+D12: {'Sun': 9, 'Moon': 8, 'Mars': 4, 'Mercury': 6, 'Jupiter': 5, 'Venus': 7, 'Saturn': 2, 'Rahu': 8, 'Ketu': 2}
+D16: {'Sun': 4, 'Moon': 8, 'Mars': 10, 'Mercury': 6, 'Jupiter': 8, 'Venus': 10, 'Saturn': 11, 'Rahu': 8, 'Ketu': 2}
+D20: {'Sun': 6, 'Moon': 2, 'Mars': 8, 'Mercury': 6, 'Jupiter': 4, 'Venus': 6, 'Saturn': 9, 'Rahu': 10, 'Ketu': 4}
+D24: {'Sun': 6, 'Moon': 1, 'Mars': 12, 'Mercury': 5, 'Jupiter': 5, 'Venus': 7, 'Saturn': 6, 'Rahu': 12, 'Ketu': 6}
+D27: {'Sun': 12, 'Moon': 8, 'Mars': 8, 'Mercury': 12, 'Jupiter': 10, 'Venus': 12, 'Saturn': 3, 'Rahu': 4, 'Ketu': 10}
+D30: {'Sun': 12, 'Moon': 12, 'Mars': 6, 'Mercury': 4, 'Jupiter': 6, 'Venus': 6, 'Saturn': 1, 'Rahu': 2, 'Ketu': 2}
+D40: {'Sun': 9, 'Moon': 9, 'Mars': 8, 'Mercury': 10, 'Jupiter': 3, 'Venus': 5, 'Saturn': 8, 'Rahu': 5, 'Ketu': 11}
+D45: {'Sun': 4, 'Moon': 12, 'Mars': 4, 'Mercury': 4, 'Jupiter': 6, 'Venus': 4, 'Saturn': 3, 'Rahu': 12, 'Ketu': 6}
+D60: {'Sun': 12, 'Moon': 1, 'Mars': 10, 'Mercury': 8, 'Jupiter': 9, 'Venus': 10, 'Saturn': 12, 'Rahu': 6, 'Ketu': 6}
 
 Mismatches:
+D9: [('Rahu', 4, 10)]
+D10: [('Sun', 6, 4), ('Moon', 4, 5), ('Mercury', 3, 1), ('Venus', 4, 2), ('Mars', 1, 2), ('Jupiter', 2, 6), ('Saturn', 2, 8), ('Rahu', 11, 10), ('Ketu', 12, 4)]
+D12: [('Rahu', 11, 8)]
+D16: [('Sun', 5, 4), ('Moon', 5, 8), ('Mercury', 12, 6), ('Venus', 2, 10), ('Mars', 12, 10), ('Jupiter', 6, 8), ('Saturn', 7, 11), ('Rahu', 3, 8), ('Ketu', 3, 2)]
+D20: [('Sun', 12, 6), ('Moon', 8, 2), ('Venus', 8, 6), ('Mars', 3, 8), ('Saturn', 2, 9), ('Rahu', 9, 10), ('Ketu', 12, 4)]
+D24: [('Moon', 11, 1), ('Mercury', 11, 5), ('Venus', 1, 7), ('Mars', 4, 12), ('Jupiter', 1, 5), ('Saturn', 10, 6), ('Rahu', 8, 12), ('Ketu', 8, 6)]
+D27: [('Sun', 3, 12), ('Moon', 9, 8), ('Mercury', 7, 12), ('Venus', 10, 12), ('Mars', 1, 8), ('Jupiter', 4, 10), ('Rahu', 9, 4)]
+D30: [('Sun', 4, 12), ('Moon', 2, 12), ('Mercury', 6, 4), ('Jupiter', 1, 6), ('Saturn', 3, 1), ('Rahu', 9, 2), ('Ketu', 12, 2)]
+D40: [('Sun', 10, 9), ('Moon', 6, 9), ('Mercury', 9, 10), ('Venus', 2, 5), ('Mars', 7, 8), ('Jupiter', 2, 3), ('Ketu', 6, 11)]
+D45: [('Sun', 11, 4), ('Moon', 4, 12), ('Mercury', 8, 4), ('Venus', 2, 4), ('Mars', 3, 4), ('Jupiter', 5, 6), ('Rahu', 4, 12), ('Ketu', 8, 6)]
+D60: [('Sun', 11, 12), ('Moon', 7, 1), ('Mercury', 4, 8), ('Venus', 11, 10), ('Mars', 2, 10), ('Jupiter', 8, 9), ('Saturn', 6, 12), ('Rahu', 1, 6), ('Ketu', 2, 6)]

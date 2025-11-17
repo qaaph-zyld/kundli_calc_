@@ -1,7 +1,7 @@
 """Settings module."""
 import os
 from typing import List, Optional
-from pydantic import PostgresDsn, Field
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from dotenv import load_dotenv
 from pathlib import Path
@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     APP_VERSION: str = "0.1.0"
 
     # Database settings
-    DATABASE_URL: Optional[PostgresDsn] = None
+    DATABASE_URL: Optional[str] = None
     POSTGRES_USER: str = os.getenv("POSTGRES_USER", "postgres")
     POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD", "postgres")
     POSTGRES_HOST: str = os.getenv("POSTGRES_HOST", "localhost")
