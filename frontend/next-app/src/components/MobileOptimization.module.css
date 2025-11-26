@@ -1,0 +1,504 @@
+/* Mobile Optimization Styles
+   Touch-friendly, responsive design for mobile devices
+*/
+
+/* Base mobile variables */
+:root {
+  --touch-target-min: 44px;
+  --mobile-padding: 16px;
+  --mobile-gap: 12px;
+  --mobile-font-base: 16px;
+  --mobile-border-radius: 12px;
+}
+
+/* Touch-friendly button base */
+.touchButton {
+  min-height: var(--touch-target-min);
+  min-width: var(--touch-target-min);
+  padding: 12px 20px;
+  font-size: var(--mobile-font-base);
+  border-radius: var(--mobile-border-radius);
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.1s ease, background-color 0.2s ease;
+}
+
+.touchButton:active {
+  transform: scale(0.97);
+}
+
+/* Mobile container */
+.mobileContainer {
+  padding: var(--mobile-padding);
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Mobile card */
+.mobileCard {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: var(--mobile-border-radius);
+  padding: var(--mobile-padding);
+  margin-bottom: var(--mobile-gap);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile header */
+.mobileHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px var(--mobile-padding);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.mobileHeader h1 {
+  font-size: 1.25rem;
+  margin: 0;
+  color: white;
+}
+
+/* Mobile navigation */
+.mobileNav {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding: 12px var(--mobile-padding);
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.mobileNav::-webkit-scrollbar {
+  display: none;
+}
+
+.mobileNavItem {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 20px;
+  color: #bdbdbd;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  touch-action: manipulation;
+}
+
+.mobileNavItem.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+/* Mobile form elements */
+.mobileInput {
+  width: 100%;
+  min-height: var(--touch-target-min);
+  padding: 12px 16px;
+  font-size: var(--mobile-font-base);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.mobileInput:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+.mobileSelect {
+  width: 100%;
+  min-height: var(--touch-target-min);
+  padding: 12px 16px;
+  font-size: var(--mobile-font-base);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  -webkit-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23fff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+/* Mobile grid */
+.mobileGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--mobile-gap);
+}
+
+.mobileGrid.single {
+  grid-template-columns: 1fr;
+}
+
+.mobileGrid.triple {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* Mobile table */
+.mobileTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.mobileTable th,
+.mobileTable td {
+  padding: 12px 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mobileTable th {
+  background: rgba(255, 255, 255, 0.05);
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+}
+
+/* Swipeable cards */
+.swipeContainer {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  gap: var(--mobile-gap);
+  padding: var(--mobile-gap) 0;
+}
+
+.swipeContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.swipeCard {
+  flex-shrink: 0;
+  width: calc(100vw - 48px);
+  scroll-snap-align: center;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: var(--mobile-border-radius);
+  padding: 20px;
+}
+
+/* Swipe indicators */
+.swipeIndicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 0;
+}
+
+.swipeIndicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transition: all 0.2s ease;
+}
+
+.swipeIndicator.active {
+  width: 24px;
+  border-radius: 4px;
+  background: #667eea;
+}
+
+/* Bottom sheet */
+.bottomSheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 24px 24px 0 0;
+  padding: 20px;
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+  z-index: 200;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.bottomSheet.open {
+  transform: translateY(0);
+}
+
+.bottomSheetHandle {
+  width: 40px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+  margin: 0 auto 16px;
+}
+
+.bottomSheetOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 199;
+}
+
+.bottomSheetOverlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Floating action button */
+.fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+  z-index: 100;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.fab:active {
+  transform: scale(0.95);
+}
+
+/* Pull to refresh indicator */
+.pullToRefresh {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  color: #667eea;
+}
+
+.pullToRefresh.loading {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeletonText {
+  height: 16px;
+  margin-bottom: 8px;
+}
+
+.skeletonTitle {
+  height: 24px;
+  width: 60%;
+  margin-bottom: 12px;
+}
+
+.skeletonCard {
+  height: 120px;
+  margin-bottom: 12px;
+}
+
+/* Collapsible section */
+.collapsible {
+  border-radius: var(--mobile-border-radius);
+  background: rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  margin-bottom: var(--mobile-gap);
+}
+
+.collapsibleHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.collapsibleHeader h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.collapsibleIcon {
+  transition: transform 0.2s ease;
+}
+
+.collapsibleIcon.open {
+  transform: rotate(180deg);
+}
+
+.collapsibleContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.collapsibleContent.open {
+  max-height: 1000px;
+}
+
+.collapsibleInner {
+  padding: 0 16px 16px;
+}
+
+/* Mobile chart container */
+.mobileChart {
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  aspect-ratio: 1;
+}
+
+.mobileChart svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Touch scroll hint */
+.scrollHint {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.scrollHint.hidden {
+  opacity: 0;
+}
+
+/* Haptic feedback simulation */
+@media (hover: none) and (pointer: coarse) {
+  .touchFeedback:active {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Safe area handling for notched devices */
+@supports (padding-top: env(safe-area-inset-top)) {
+  .mobileHeader {
+    padding-top: calc(12px + env(safe-area-inset-top));
+  }
+  
+  .bottomSheet {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+  
+  .fab {
+    bottom: calc(24px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Responsive breakpoints */
+@media (max-width: 480px) {
+  .mobileGrid.triple {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .swipeCard {
+    width: calc(100vw - 32px);
+  }
+}
+
+@media (max-width: 360px) {
+  :root {
+    --mobile-padding: 12px;
+    --mobile-gap: 10px;
+  }
+  
+  .mobileNavItem {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Landscape orientation */
+@media (orientation: landscape) and (max-height: 500px) {
+  .mobileHeader {
+    padding: 8px var(--mobile-padding);
+  }
+  
+  .mobileNav {
+    padding: 8px var(--mobile-padding);
+  }
+  
+  .bottomSheet {
+    max-height: 90vh;
+  }
+}
+
+/* Accessibility - reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .touchButton,
+  .collapsibleContent,
+  .bottomSheet,
+  .collapsibleIcon,
+  .skeleton {
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+  .mobileCard {
+    background: linear-gradient(135deg, #0d0d1a 0%, #0f1729 100%);
+  }
+}
+
+/* Print styles - hide mobile-specific elements */
+@media print {
+  .mobileNav,
+  .fab,
+  .bottomSheet,
+  .bottomSheetOverlay {
+    display: none !important;
+  }
+}

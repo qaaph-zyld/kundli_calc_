@@ -11,6 +11,8 @@ import KPSystemPanel from './KPSystemPanel';
 import ExtendedYogasPanel from './ExtendedYogasPanel';
 import TransitDashboard from './TransitDashboard';
 import DashaTimeline from './DashaTimeline';
+import MuhurtaPanel from './MuhurtaPanel';
+import CompatibilityPanel from './CompatibilityPanel';
 import { useAuth } from '../contexts/AuthContext';
 import { exportChartWithImage } from '../lib/pdfExport';
 import { detectYogas } from '../lib/yogas';
@@ -20,7 +22,7 @@ import { calculatePlanetaryStrength, calculateSpecialPoints, getChartStrengthSum
 import styles from './ChartDemo.module.css';
 
 type ChartType = 'rasi' | 'north' | 'navamsa' | 'd2' | 'd3' | 'd10' | 'd12';
-type AnalysisTab = 'basic' | 'kp' | 'yogas' | 'transits' | 'dashas';
+type AnalysisTab = 'basic' | 'kp' | 'yogas' | 'transits' | 'dashas' | 'muhurta' | 'compatibility';
 
 export default function ChartDemo() {
   const [loading, setLoading] = useState(false);
@@ -246,6 +248,18 @@ export default function ChartDemo() {
                 >
                   📅 Dashas
                 </button>
+                <button
+                  className={`${styles.analysisTab} ${analysisTab === 'muhurta' ? styles.active : ''}`}
+                  onClick={() => setAnalysisTab('muhurta')}
+                >
+                  🕉️ Muhurta
+                </button>
+                <button
+                  className={`${styles.analysisTab} ${analysisTab === 'compatibility' ? styles.active : ''}`}
+                  onClick={() => setAnalysisTab('compatibility')}
+                >
+                  💑 Compatibility
+                </button>
               </div>
 
               {/* KP System Panel */}
@@ -272,6 +286,19 @@ export default function ChartDemo() {
                   chartData={result} 
                   birthDatetime={`${birthDetails.date}T${birthDetails.time}`}
                 />
+              )}
+
+              {/* Muhurta Panel */}
+              {analysisTab === 'muhurta' && (
+                <MuhurtaPanel 
+                  chartData={result}
+                  birthDatetime={birthDetails ? `${birthDetails.date}T${birthDetails.time}` : undefined}
+                />
+              )}
+
+              {/* Compatibility Panel */}
+              {analysisTab === 'compatibility' && (
+                <CompatibilityPanel chartData={result} />
               )}
 
               {/* Basic Analysis (existing) */}

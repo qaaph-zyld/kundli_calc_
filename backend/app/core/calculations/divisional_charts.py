@@ -47,9 +47,13 @@ class DivisionalChartEngine:
             2: self._calculate_hora,       # D2 - Hora
             3: self._calculate_drekkana,   # D3 - Drekkana
             4: self._calculate_chaturthamsa,# D4 - Chaturthamsa
+            5: self._calculate_panchamsa,  # D5 - Panchamsa (NEW)
+            6: self._calculate_shashthamsa,# D6 - Shashthamsa (NEW)
             7: self._calculate_saptamsa,   # D7 - Saptamsa
+            8: self._calculate_ashtamsa,   # D8 - Ashtamsa (NEW)
             9: self._calculate_navamsa,    # D9 - Navamsa
             10: self._calculate_dasamsa,   # D10 - Dasamsa
+            11: self._calculate_ekadashamsa,# D11 - Ekadashamsa (NEW)
             12: self._calculate_dwadasamsa,# D12 - Dwadasamsa
             16: self._calculate_shodasamsa,# D16 - Shodasamsa
             20: self._calculate_vimshamsa, # D20 - Vimshamsa
@@ -228,6 +232,59 @@ class DivisionalChartEngine:
     def _calculate_chaturthamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
         return {planet: self._chaturthamsa_longitude(pos) for planet, pos in planets.items()}
     
+    # ==================== D5 - PANCHAMSA (NEW) ====================
+    def _panchamsa_longitude(self, longitude: float) -> float:
+        """Panchamsa (D5) - Spiritual merit, past life credit
+        
+        Division into 5 parts of 6 degrees each.
+        For odd signs: starts from same sign
+        For even signs: starts from 5th sign
+        """
+        sign = int(longitude / 30)
+        degree = longitude % 30
+        part_size = 6.0  # 30/5
+        part = int(degree / part_size)
+        
+        if sign % 2 == 0:  # Odd signs
+            base = sign
+        else:  # Even signs
+            base = (sign + 4) % 12  # 5th from sign
+        
+        target_sign = (base + part) % 12
+        return self._normalize_longitude(target_sign * 30 + (degree % part_size) / part_size * 30)
+    
+    def _calculate_panchamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
+        """D5 chart - Past life merits, spiritual inclinations"""
+        return {planet: self._panchamsa_longitude(pos) for planet, pos in planets.items()}
+    
+    # ==================== D6 - SHASHTHAMSA (NEW) ====================
+    def _shashthamsa_longitude(self, longitude: float) -> float:
+        """Shashthamsa (D6) - Health, diseases, enemies
+        
+        Division into 6 parts of 5 degrees each.
+        For odd signs: Mars, Saturn, Mercury, Venus, Jupiter, Rahu sequence
+        For even signs: Jupiter, Venus, Mercury, Saturn, Mars, Ketu sequence
+        Starting signs for each part based on ruling planet.
+        """
+        sign = int(longitude / 30)
+        degree = longitude % 30
+        part_size = 5.0  # 30/6
+        part = int(degree / part_size)
+        
+        # Simplified: cycle through signs
+        if sign % 2 == 0:  # Odd signs
+            # Parts ruled by: Mars, Saturn, Mercury, Venus, Jupiter, Rahu
+            base_signs = [0, 9, 2, 1, 8, 6]  # Aries, Capricorn, Gemini, etc.
+        else:  # Even signs
+            base_signs = [8, 1, 2, 9, 0, 10]  # Sagittarius, Taurus, etc.
+        
+        target_sign = base_signs[part]
+        return self._normalize_longitude(target_sign * 30 + (degree % part_size) / part_size * 30)
+    
+    def _calculate_shashthamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
+        """D6 chart - Health, obstacles, enemies"""
+        return {planet: self._shashthamsa_longitude(pos) for planet, pos in planets.items()}
+    
     def _saptamsa_longitude(self, longitude: float) -> float:
         """Parashara Saptamsa (D7)
         - Each sign is divided into 7 equal parts (≈4°17')
@@ -255,6 +312,37 @@ class DivisionalChartEngine:
         if "Ketu" in result:
             result["Ketu"] = self._normalize_longitude(result["Ketu"] + 180.0)
         return result
+    
+    # ==================== D8 - ASHTAMSA (NEW) ====================
+    def _ashtamsa_longitude(self, longitude: float) -> float:
+        """Ashtamsa (D8) - Unexpected troubles, chronic issues
+        
+        Division into 8 parts of 3°45' each.
+        For movable signs: starts from Aries
+        For fixed signs: starts from Sagittarius
+        For dual signs: starts from Leo
+        """
+        sign = int(longitude / 30)
+        degree = longitude % 30
+        part_size = 30.0 / 8.0  # 3.75 degrees
+        part = int(degree / part_size)
+        
+        # Sign modality: 0,3,6,9=movable, 1,4,7,10=fixed, 2,5,8,11=dual
+        modality = sign % 3
+        
+        if modality == 0:  # Movable (Aries, Cancer, Libra, Capricorn)
+            base = 0  # Aries
+        elif modality == 1:  # Fixed (Taurus, Leo, Scorpio, Aquarius)
+            base = 8  # Sagittarius
+        else:  # Dual (Gemini, Virgo, Sagittarius, Pisces)
+            base = 4  # Leo
+        
+        target_sign = (base + part) % 12
+        return self._normalize_longitude(target_sign * 30 + (degree % part_size) / part_size * 30)
+    
+    def _calculate_ashtamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
+        """D8 chart - Obstacles, hidden issues, chronic problems"""
+        return {planet: self._ashtamsa_longitude(pos) for planet, pos in planets.items()}
     
     def _dasamsa_longitude(self, longitude: float) -> float:
         """Dasamsa (D10) longitude using odd/even sign rule.
@@ -284,6 +372,31 @@ class DivisionalChartEngine:
 
     def _calculate_dasamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
         return {planet: self._dasamsa_longitude(pos) for planet, pos in planets.items()}
+    
+    # ==================== D11 - EKADASHAMSA (NEW) ====================
+    def _ekadashamsa_longitude(self, longitude: float) -> float:
+        """Ekadashamsa (D11) - Wealth from different sources
+        
+        Division into 11 parts of 2°43'38" each.
+        For odd signs: starts from same sign
+        For even signs: starts from 12th sign (previous sign)
+        """
+        sign = int(longitude / 30)
+        degree = longitude % 30
+        part_size = 30.0 / 11.0  # ~2.727 degrees
+        part = int(degree / part_size)
+        
+        if sign % 2 == 0:  # Odd signs
+            base = sign
+        else:  # Even signs
+            base = (sign + 11) % 12  # 12th from sign (previous)
+        
+        target_sign = (base + part) % 12
+        return self._normalize_longitude(target_sign * 30 + (degree % part_size) / part_size * 30)
+    
+    def _calculate_ekadashamsa(self, planets: Dict[str, float]) -> Dict[str, float]:
+        """D11 chart - Income, gains, elder siblings, prosperity sources"""
+        return {planet: self._ekadashamsa_longitude(pos) for planet, pos in planets.items()}
     
     def _dwadasamsa_longitude(self, longitude: float) -> float:
         """Precise Dwadasamsa (D12) longitude counting forward"""
