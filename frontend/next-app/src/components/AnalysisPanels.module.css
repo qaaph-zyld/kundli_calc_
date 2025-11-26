@@ -1,0 +1,1040 @@
+/* Analysis Panels - Shared Styles */
+
+.panel {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  color: #e0e0e0;
+}
+
+.panelHeader {
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 16px;
+}
+
+.panelHeader h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin: 0 0 8px 0;
+}
+
+.subtitle {
+  color: #9e9e9e;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.noData {
+  text-align: center;
+  color: #757575;
+  padding: 40px;
+}
+
+/* Tab Navigation */
+.tabNav {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tab {
+  padding: 10px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  color: #bdbdbd;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: transparent;
+  color: #fff;
+}
+
+/* Stats Row */
+.statsRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.statCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.statValue {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  display: block;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: #9e9e9e;
+  display: block;
+  margin-top: 4px;
+}
+
+/* Table Styles */
+.tableContainer {
+  overflow-x: auto;
+  margin: 16px 0;
+}
+
+.kpTable, .transitTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.kpTable th, .kpTable td,
+.transitTable th, .transitTable td {
+  padding: 12px 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.kpTable th, .transitTable th {
+  background: rgba(255, 255, 255, 0.05);
+  color: #bdbdbd;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.kpTable tr:hover, .transitTable tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.planetCell, .cuspCell {
+  font-weight: 600;
+  color: #fff;
+}
+
+.planetSymbol {
+  margin-right: 8px;
+  font-size: 1.1rem;
+}
+
+.lordCell { color: #FFC107; }
+.starLord { color: #4CAF50; }
+.subLord { color: #2196F3; }
+.subSubLord { color: #9C27B0; }
+
+.beneficRow { background: rgba(76, 175, 80, 0.1); }
+.maleficRow { background: rgba(244, 67, 54, 0.1); }
+
+.houseCell {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.resultBadge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.resultBadge.good {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+}
+
+.resultBadge.challenging {
+  background: rgba(244, 67, 54, 0.2);
+  color: #F44336;
+}
+
+.effectsCell {
+  color: #9e9e9e;
+  font-size: 0.85rem;
+}
+
+/* Ruling Planets Section */
+.rpSection {
+  padding: 16px 0;
+}
+
+.rpGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.rpCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.rpCard h4 {
+  font-size: 0.75rem;
+  color: #9e9e9e;
+  margin: 0 0 8px 0;
+}
+
+.rpValue {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.strongRp {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.strongRp h4 {
+  margin: 0 0 12px 0;
+  color: #FFC107;
+}
+
+.rpTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.rpTag {
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  font-weight: 600;
+}
+
+.rpTag.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.rpNote {
+  color: #757575;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Significators Section */
+.sigSection {
+  padding: 16px 0;
+}
+
+.sigExplanation {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.sigExplanation h4 {
+  margin: 0 0 12px 0;
+  color: #fff;
+}
+
+.sigLegend {
+  display: grid;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: #bdbdbd;
+}
+
+.sigGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+}
+
+.sigCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.sigCard h5 {
+  margin: 0 0 8px 0;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.sigDetails {
+  font-size: 0.8rem;
+}
+
+.sigRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sigLabel { color: #9e9e9e; }
+.sigValue { color: #4CAF50; font-weight: 600; }
+
+/* KP Footer */
+.kpFooter, .yogaSummary, .transitFooter, .dashaFooter {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: #757575;
+  font-size: 0.85rem;
+}
+
+/* Filters */
+.filters {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.filterSelect {
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.filterSelect option {
+  background: #1a1a2e;
+}
+
+.filterCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #bdbdbd;
+  cursor: pointer;
+}
+
+.filterCheckbox input {
+  width: 18px;
+  height: 18px;
+  accent-color: #667eea;
+}
+
+/* Yogas List */
+.yogasList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.noYogas {
+  text-align: center;
+  padding: 40px;
+  color: #757575;
+}
+
+.yogaCard {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 20px;
+  border-left: 4px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.yogaCard.benefic {
+  border-left-color: #4CAF50;
+}
+
+.yogaCard.malefic {
+  border-left-color: #F44336;
+}
+
+.yogaCard:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.yogaHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.yogaTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.categoryBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.yogaTitle h4 {
+  margin: 4px 0 0 0;
+  color: #fff;
+  font-size: 1.1rem;
+}
+
+.sanskritName {
+  color: #9e9e9e;
+  font-size: 0.85rem;
+}
+
+.strengthBadge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.yogaDesc {
+  color: #bdbdbd;
+  font-size: 0.9rem;
+  margin: 0 0 12px 0;
+}
+
+.yogaPlanets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.planetTag, .houseTag {
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  font-size: 0.8rem;
+  color: #e0e0e0;
+}
+
+.houseTag {
+  background: rgba(33, 150, 243, 0.2);
+  color: #2196F3;
+}
+
+.yogaEffects {
+  font-size: 0.85rem;
+}
+
+.yogaEffects strong {
+  color: #FFC107;
+}
+
+.yogaEffects ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+  color: #bdbdbd;
+}
+
+.yogaEffects li {
+  margin: 4px 0;
+}
+
+.yogaNotes {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  color: #ff9800;
+  font-size: 0.85rem;
+}
+
+/* Sade Sati Alert */
+.sadeSatiAlert {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+
+.sadeSatiAlert.rising {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.2) 0%, rgba(255, 152, 0, 0.1) 100%);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.sadeSatiAlert.peak {
+  background: linear-gradient(135deg, rgba(244, 67, 54, 0.2) 0%, rgba(183, 28, 28, 0.1) 100%);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+}
+
+.sadeSatiAlert.setting {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.2) 0%, rgba(56, 142, 60, 0.1) 100%);
+  border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.alertIcon {
+  font-size: 2rem;
+}
+
+.alertContent h4 {
+  margin: 0 0 8px 0;
+  color: #fff;
+}
+
+.alertContent p {
+  margin: 0;
+  color: #bdbdbd;
+}
+
+.alertContent details {
+  margin-top: 12px;
+}
+
+.alertContent summary {
+  cursor: pointer;
+  color: #FFC107;
+  font-weight: 600;
+}
+
+.alertContent ul {
+  margin: 8px 0 0 0;
+  padding-left: 20px;
+  color: #9e9e9e;
+}
+
+/* Transit Score */
+.transitScore {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.scoreCircle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.scoreInner {
+  width: 90px;
+  height: 90px;
+  background: #1a1a2e;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.scoreValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.scoreLabel {
+  font-size: 0.75rem;
+  color: #9e9e9e;
+}
+
+.scoreDetails p {
+  margin: 4px 0;
+  color: #bdbdbd;
+}
+
+/* Sade Sati Details */
+.sadeSatiDetails {
+  padding: 16px 0;
+}
+
+.sadeSatiCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.sadeSatiCard h4 {
+  margin: 0 0 12px 0;
+  color: #fff;
+}
+
+.sadeSatiCard p {
+  margin: 0;
+  color: #bdbdbd;
+  line-height: 1.6;
+}
+
+.phaseCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.phaseCard {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 16px;
+  border: 2px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.phaseCard.activePhase {
+  border-color: #FFC107;
+  background: rgba(255, 193, 7, 0.1);
+}
+
+.phaseCard h5 {
+  margin: 0 0 8px 0;
+  color: #fff;
+}
+
+.phaseCard p {
+  margin: 4px 0;
+  font-size: 0.85rem;
+  color: #9e9e9e;
+}
+
+.phaseEffect {
+  color: #bdbdbd !important;
+}
+
+.duration {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  font-size: 0.75rem;
+  color: #FFC107;
+}
+
+.currentStatus {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.currentStatus h4 {
+  margin: 0 0 16px 0;
+  color: #fff;
+}
+
+.activeStatus, .inactiveStatus {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.statusIcon {
+  font-size: 2rem;
+}
+
+/* Predictions */
+.predictions {
+  padding: 16px 0;
+}
+
+.predictionCategories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+
+.predictionCard {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.predictionHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.predictionIcon {
+  font-size: 1.5rem;
+}
+
+.predictionHeader h4 {
+  margin: 0;
+  flex: 1;
+  color: #fff;
+}
+
+.outlookBadge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.outlookBadge.positive {
+  background: rgba(76, 175, 80, 0.2);
+  color: #4CAF50;
+}
+
+.outlookBadge.cautious {
+  background: rgba(255, 152, 0, 0.2);
+  color: #FF9800;
+}
+
+.predictionPlanets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.miniTransit {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.miniTransit.good {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4CAF50;
+}
+
+.miniTransit.bad {
+  background: rgba(244, 67, 54, 0.1);
+  color: #F44336;
+}
+
+.predictionText {
+  color: #9e9e9e;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* Dasha Timeline */
+.currentDashaRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.currentDashaCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+
+.dashaLabel {
+  font-size: 0.75rem;
+  color: #9e9e9e;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dashaValue {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 8px 0;
+}
+
+.dashaSymbol {
+  font-size: 1.8rem;
+}
+
+.dashaValue span:last-child {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.dashaDate {
+  font-size: 0.8rem;
+  color: #757575;
+}
+
+/* Timeline */
+.timeline {
+  padding: 16px 0;
+}
+
+.timelineHeader {
+  margin-bottom: 20px;
+}
+
+.timelineHeader h4 {
+  margin: 0 0 4px 0;
+  color: #fff;
+}
+
+.timelineHeader p {
+  margin: 0;
+  color: #757575;
+  font-size: 0.85rem;
+}
+
+.timelinePeriods {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 24px;
+  min-height: 60px;
+}
+
+.periodBar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  min-width: 40px;
+}
+
+.periodBar:hover {
+  transform: scaleY(1.1);
+  z-index: 1;
+}
+
+.periodBar.current {
+  transform: scaleY(1.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+
+.periodLabel {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.periodYears {
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.periodDetails {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a2e;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 12px;
+  min-width: 180px;
+  z-index: 10;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.periodDetails p {
+  margin: 4px 0;
+  font-size: 0.8rem;
+  color: #bdbdbd;
+}
+
+.periodDetails strong {
+  color: #fff;
+}
+
+.currentDetails {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.currentDetails h4 {
+  margin: 0 0 16px 0;
+  color: #fff;
+}
+
+.progressSection {
+  margin-bottom: 16px;
+}
+
+.progressInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.8rem;
+  color: #9e9e9e;
+}
+
+.largeProgress, .progressBar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.periodEffects h5 {
+  margin: 0 0 8px 0;
+  color: #FFC107;
+  font-size: 0.9rem;
+}
+
+.periodEffects p {
+  margin: 0;
+  color: #bdbdbd;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.yoginiLegend {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.yoginiLegend h5 {
+  margin: 0 0 16px 0;
+  color: #fff;
+}
+
+.legendGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.legendItem span:first-child {
+  font-size: 1.2rem;
+}
+
+.legendPlanet {
+  color: #757575;
+  font-size: 0.75rem;
+}
+
+/* Comparison */
+.comparison {
+  padding: 16px 0;
+}
+
+.comparisonTable {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.comparisonTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparisonTable th, .comparisonTable td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.comparisonTable th {
+  background: rgba(255, 255, 255, 0.05);
+  color: #9e9e9e;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.comparisonNote {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.comparisonNote h5 {
+  margin: 0 0 12px 0;
+  color: #FFC107;
+}
+
+.comparisonNote ul {
+  margin: 0;
+  padding-left: 20px;
+  color: #bdbdbd;
+}
+
+.comparisonNote li {
+  margin: 8px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .panel {
+    padding: 16px;
+  }
+
+  .tabNav {
+    flex-direction: column;
+  }
+
+  .tab {
+    width: 100%;
+    text-align: center;
+  }
+
+  .transitScore {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .timelinePeriods {
+    flex-wrap: wrap;
+  }
+
+  .periodBar {
+    flex: 1 1 auto;
+    min-width: 60px;
+  }
+}

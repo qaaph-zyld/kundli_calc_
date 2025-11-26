@@ -7,6 +7,10 @@ import NorthIndianChart from './NorthIndianChart';
 import NavamsaChart from './NavamsaChart';
 import DivisionalChart from './DivisionalChart';
 import SaveChartModal from './SaveChartModal';
+import KPSystemPanel from './KPSystemPanel';
+import ExtendedYogasPanel from './ExtendedYogasPanel';
+import TransitDashboard from './TransitDashboard';
+import DashaTimeline from './DashaTimeline';
 import { useAuth } from '../contexts/AuthContext';
 import { exportChartWithImage } from '../lib/pdfExport';
 import { detectYogas } from '../lib/yogas';
@@ -16,6 +20,7 @@ import { calculatePlanetaryStrength, calculateSpecialPoints, getChartStrengthSum
 import styles from './ChartDemo.module.css';
 
 type ChartType = 'rasi' | 'north' | 'navamsa' | 'd2' | 'd3' | 'd10' | 'd12';
+type AnalysisTab = 'basic' | 'kp' | 'yogas' | 'transits' | 'dashas';
 
 export default function ChartDemo() {
   const [loading, setLoading] = useState(false);
@@ -26,6 +31,7 @@ export default function ChartDemo() {
   const [showSaveModal, setShowSaveModal] = useState(false);
   const [showAnalysis, setShowAnalysis] = useState(false);
   const [chartType, setChartType] = useState<ChartType>('rasi');
+  const [analysisTab, setAnalysisTab] = useState<AnalysisTab>('basic');
   const [exportingPDF, setExportingPDF] = useState(false);
   const chartRef = useRef<HTMLDivElement>(null);
   const { user} = useAuth();
@@ -205,9 +211,72 @@ export default function ChartDemo() {
             </div>
           </div>
 
-          {/* Yogas and Doshas Analysis */}
+          {/* Advanced Analysis Panels */}
           {showAnalysis && (
             <div className={styles.analysisSection}>
+              {/* Analysis Tab Switcher */}
+              <div className={styles.analysisTabNav}>
+                <button
+                  className={`${styles.analysisTab} ${analysisTab === 'basic' ? styles.active : ''}`}
+                  onClick={() => setAnalysisTab('basic')}
+                >
+                  📊 Basic Analysis
+                </button>
+                <button
+                  className={`${styles.analysisTab} ${analysisTab === 'kp' ? styles.active : ''}`}
+                  onClick={() => setAnalysisTab('kp')}
+                >
+                  🎯 KP System
+                </button>
+                <button
+                  className={`${styles.analysisTab} ${analysisTab === 'yogas' ? styles.active : ''}`}
+                  onClick={() => setAnalysisTab('yogas')}
+                >
+                  ✨ Yogas (60+)
+                </button>
+                <button
+                  className={`${styles.analysisTab} ${analysisTab === 'transits' ? styles.active : ''}`}
+                  onClick={() => setAnalysisTab('transits')}
+                >
+                  🌍 Transits
+                </button>
+                <button
+                  className={`${styles.analysisTab} ${analysisTab === 'dashas' ? styles.active : ''}`}
+                  onClick={() => setAnalysisTab('dashas')}
+                >
+                  📅 Dashas
+                </button>
+              </div>
+
+              {/* KP System Panel */}
+              {analysisTab === 'kp' && (
+                <KPSystemPanel 
+                  chartData={result} 
+                  birthDatetime={birthDetails ? `${birthDetails.date}T${birthDetails.time}` : undefined}
+                />
+              )}
+
+              {/* Extended Yogas Panel */}
+              {analysisTab === 'yogas' && (
+                <ExtendedYogasPanel chartData={result} />
+              )}
+
+              {/* Transit Dashboard */}
+              {analysisTab === 'transits' && (
+                <TransitDashboard chartData={result} />
+              )}
+
+              {/* Dasha Timeline */}
+              {analysisTab === 'dashas' && birthDetails && (
+                <DashaTimeline 
+                  chartData={result} 
+                  birthDatetime={`${birthDetails.date}T${birthDetails.time}`}
+                />
+              )}
+
+              {/* Basic Analysis (existing) */}
+              {analysisTab === 'basic' && (
+                <>
               <h3>Chart Analysis</h3>
               
               {/* Ascendant Description */}
@@ -382,6 +451,8 @@ export default function ChartDemo() {
                 <div className={styles.analysisCard}>
                   <p>No analysis data available.</p>
                 </div>
+              )}
+                </>
               )}
             </div>
           )}

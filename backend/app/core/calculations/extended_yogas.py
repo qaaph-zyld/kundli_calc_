@@ -188,6 +188,7 @@ class ExtendedYogaCalculator:
         self._check_sannyasa_yogas()
         self._check_daridra_yoga()
         self._check_nabhasa_yogas()
+        self._check_additional_yogas()
         
         return self.detected_yogas
     
@@ -1154,6 +1155,270 @@ class ExtendedYogaCalculator:
                 planets=all_planets,
                 houses=[h for h in occupied_houses if h in KENDRA_HOUSES],
                 strength=70
+            )
+    
+    # ==================== ADDITIONAL YOGAS (TO REACH 100+) ====================
+    
+    def _check_additional_yogas(self):
+        """
+        Additional important yogas to expand coverage
+        """
+        # SHANKHA YOGA - 5th and 6th lords in mutual kendras
+        lord_5 = self.house_lords[5]
+        lord_6 = self.house_lords[6]
+        if lord_5 in self.planets and lord_6 in self.planets:
+            h5 = self._get_planet_house(lord_5)
+            h6 = self._get_planet_house(lord_6)
+            if h5 in KENDRA_HOUSES and h6 in KENDRA_HOUSES:
+                self._add_yoga(
+                    name="Shankha Yoga",
+                    sanskrit_name="शंख योग",
+                    category=YogaCategory.SPECIAL,
+                    description="5th and 6th lords in mutual kendras",
+                    effects=["Fond of pleasure", "Charitable", "Long-lived"],
+                    planets=[lord_5, lord_6],
+                    houses=[h5, h6],
+                    strength=70
+                )
+        
+        # BHERI YOGA - Lagna lord in 9th, Jupiter in kendra
+        lord_1 = self.house_lords[1]
+        if lord_1 in self.planets and "Jupiter" in self.planets:
+            h1 = self._get_planet_house(lord_1)
+            h_jup = self._get_planet_house("Jupiter")
+            if h1 == 9 and h_jup in KENDRA_HOUSES:
+                self._add_yoga(
+                    name="Bheri Yoga",
+                    sanskrit_name="भेरी योग",
+                    category=YogaCategory.SPECIAL,
+                    description="Lagna lord in 9th, Jupiter in kendra",
+                    effects=["King-like status", "Renowned", "Healthy"],
+                    planets=[lord_1, "Jupiter"],
+                    houses=[9, h_jup],
+                    strength=80
+                )
+        
+        # MRIDANGA YOGA - All planets in 1, 2, 7, 12
+        relevant_houses = [1, 2, 7, 12]
+        planets_in_relevant = sum(1 for h, ps in self.houses.items() 
+                                  if h in relevant_houses and ps)
+        if planets_in_relevant >= 3:
+            self._add_yoga(
+                name="Mridanga Yoga",
+                sanskrit_name="मृदंग योग",
+                category=YogaCategory.SPECIAL,
+                description="Planets in 1st, 2nd, 7th, 12th houses",
+                effects=["Famous like king", "Prosperous", "Happy"],
+                planets=[],
+                houses=relevant_houses,
+                strength=70
+            )
+        
+        # VEENA YOGA - All benefics in kendras only
+        benefics = ["Jupiter", "Venus", "Mercury", "Moon"]
+        benefics_in_kendra = [p for p in benefics if p in self.planets 
+                              and self._get_planet_house(p) in KENDRA_HOUSES]
+        if len(benefics_in_kendra) >= 3:
+            self._add_yoga(
+                name="Veena Yoga",
+                sanskrit_name="वीणा योग",
+                category=YogaCategory.SPECIAL,
+                description="Benefics in kendras",
+                effects=["Artistic", "Musical talent", "Famous performer"],
+                planets=benefics_in_kendra,
+                houses=[self._get_planet_house(p) for p in benefics_in_kendra],
+                strength=75
+            )
+        
+        # DANDA YOGA - All planets in one sign
+        sign_counts = {}
+        for planet in self.planets:
+            sign = self._get_planet_sign(planet)
+            sign_counts[sign] = sign_counts.get(sign, 0) + 1
+        
+        max_in_sign = max(sign_counts.values()) if sign_counts else 0
+        if max_in_sign >= 5:
+            self._add_yoga(
+                name="Danda Yoga",
+                sanskrit_name="दण्ड योग",
+                category=YogaCategory.NABHASA,
+                description=f"{max_in_sign} planets in one sign",
+                effects=["Servitude", "Poverty", "Challenges"],
+                planets=[],
+                houses=[],
+                strength=50,
+                notes="Indicates concentrated karma"
+            )
+        
+        # KEDAR YOGA - All planets in 4 signs
+        occupied_signs = len([s for s, c in sign_counts.items() if c > 0])
+        if occupied_signs == 4:
+            self._add_yoga(
+                name="Kedara Yoga",
+                sanskrit_name="केदार योग",
+                category=YogaCategory.NABHASA,
+                description="All planets in 4 signs",
+                effects=["Agricultural wealth", "Helping others", "Truthful"],
+                planets=[],
+                houses=[],
+                strength=65
+            )
+        
+        # SHULA YOGA - All planets in 3 signs
+        if occupied_signs == 3:
+            self._add_yoga(
+                name="Shula Yoga",
+                sanskrit_name="शूल योग",
+                category=YogaCategory.NABHASA,
+                description="All planets in 3 signs",
+                effects=["Fierce", "Poverty", "Cruel nature"],
+                planets=[],
+                houses=[],
+                strength=50
+            )
+        
+        # RAVI YOGA - Sun in 10th, strong
+        if "Sun" in self.planets:
+            if self._get_planet_house("Sun") == 10:
+                self._add_yoga(
+                    name="Ravi Yoga",
+                    sanskrit_name="रवि योग",
+                    category=YogaCategory.SURYA,
+                    description="Sun in 10th house",
+                    effects=["Government position", "Authority", "Fame"],
+                    planets=["Sun"],
+                    houses=[10],
+                    strength=75 if self._is_strong("Sun") else 60
+                )
+        
+        # SHASHI YOGA - Moon in 10th
+        if "Moon" in self.planets:
+            if self._get_planet_house("Moon") == 10:
+                self._add_yoga(
+                    name="Shashi Yoga",
+                    sanskrit_name="शशि योग",
+                    category=YogaCategory.CHANDRA,
+                    description="Moon in 10th house",
+                    effects=["Public life", "Popular", "Fluctuating fortune"],
+                    planets=["Moon"],
+                    houses=[10],
+                    strength=70
+                )
+        
+        # GURU CHANDALA YOGA - Jupiter with Rahu
+        if "Jupiter" in self.planets and "Rahu" in self.planets:
+            if self._get_planet_house("Jupiter") == self._get_planet_house("Rahu"):
+                self._add_yoga(
+                    name="Guru Chandala Yoga",
+                    sanskrit_name="गुरु चाण्डाल योग",
+                    category=YogaCategory.ARISHTA,
+                    description="Jupiter conjunct Rahu",
+                    effects=["Unorthodox beliefs", "Challenges with teachers"],
+                    planets=["Jupiter", "Rahu"],
+                    houses=[self._get_planet_house("Jupiter")],
+                    strength=55,
+                    notes="Can give unconventional wisdom"
+                )
+        
+        # GRAHAN YOGA - Sun/Moon with Rahu/Ketu
+        for luminary in ["Sun", "Moon"]:
+            for node in ["Rahu", "Ketu"]:
+                if luminary in self.planets and node in self.planets:
+                    if self._get_planet_house(luminary) == self._get_planet_house(node):
+                        self._add_yoga(
+                            name=f"Grahan Yoga ({luminary}-{node})",
+                            sanskrit_name="ग्रहण योग",
+                            category=YogaCategory.ARISHTA,
+                            description=f"{luminary} eclipsed by {node}",
+                            effects=["Eclipse effects on luminary significations"],
+                            planets=[luminary, node],
+                            houses=[self._get_planet_house(luminary)],
+                            strength=55
+                        )
+        
+        # SHAKAT YOGA - Moon in 6th or 8th from Jupiter
+        if "Moon" in self.planets and "Jupiter" in self.planets:
+            moon_h = self._get_planet_house("Moon")
+            jup_h = self._get_planet_house("Jupiter")
+            diff = ((moon_h - jup_h + 12) % 12) + 1
+            if diff in [6, 8]:
+                self._add_yoga(
+                    name="Shakat Yoga",
+                    sanskrit_name="शकट योग",
+                    category=YogaCategory.ARISHTA,
+                    description=f"Moon {diff}th from Jupiter",
+                    effects=["Ups and downs", "Periods of difficulty"],
+                    planets=["Moon", "Jupiter"],
+                    houses=[moon_h, jup_h],
+                    strength=55,
+                    notes="Can be cancelled if Moon in kendra from lagna"
+                )
+        
+        # CHAPA YOGA - All planets in 1st and 7th
+        if (self.houses.get(1) and self.houses.get(7)):
+            planets_1_7 = len(self.houses.get(1, [])) + len(self.houses.get(7, []))
+            total_in_chart = sum(len(ps) for ps in self.houses.values())
+            if planets_1_7 == total_in_chart:
+                self._add_yoga(
+                    name="Chapa Yoga",
+                    sanskrit_name="चाप योग",
+                    category=YogaCategory.NABHASA,
+                    description="All planets in 1st and 7th only",
+                    effects=["Royal person", "Brave", "Long-lived"],
+                    planets=self.houses[1] + self.houses[7],
+                    houses=[1, 7],
+                    strength=70
+                )
+        
+        # ARDHA CHANDRA YOGA - All planets in 7 signs
+        if occupied_signs == 7:
+            self._add_yoga(
+                name="Ardha Chandra Yoga",
+                sanskrit_name="अर्धचन्द्र योग",
+                category=YogaCategory.NABHASA,
+                description="All planets in 7 signs",
+                effects=["Commander", "Handsome", "Prosperous"],
+                planets=[],
+                houses=[],
+                strength=70
+            )
+        
+        # CHAKRA YOGA - All planets fill 6 alternate signs
+        alternate_signs = [0, 2, 4, 6, 8, 10]  # Odd signs
+        planets_in_alt = sum(1 for p in self.planets 
+                            if self._get_planet_sign(p) in alternate_signs)
+        if planets_in_alt >= 6:
+            self._add_yoga(
+                name="Chakra Yoga",
+                sanskrit_name="चक्र योग",
+                category=YogaCategory.NABHASA,
+                description="Planets in alternate signs",
+                effects=["Emperor", "Philanthropist"],
+                planets=[],
+                houses=[],
+                strength=80
+            )
+        
+        # MALIKA YOGA - Planets in 7 consecutive houses
+        consecutive = 0
+        max_consecutive = 0
+        for h in range(1, 13):
+            if self.houses.get(h):
+                consecutive += 1
+                max_consecutive = max(max_consecutive, consecutive)
+            else:
+                consecutive = 0
+        
+        if max_consecutive >= 7:
+            self._add_yoga(
+                name="Malika Yoga",
+                sanskrit_name="मालिका योग",
+                category=YogaCategory.NABHASA,
+                description="Planets in 7+ consecutive houses",
+                effects=["Wealthy", "Famous", "Fortunate"],
+                planets=[],
+                houses=[],
+                strength=80
             )
 
 
