@@ -21,7 +21,11 @@ from app.api.endpoints import (
     ashtakavarga,
     bhava,
     prediction,
-    shadbala
+    shadbala,
+    kp_system,
+    yogas,
+    transits,
+    additional_dashas
 )
 
 # Initialize FastAPI app
@@ -133,6 +137,12 @@ api_router.include_router(ashtakavarga.router, prefix="/ashtakavarga", tags=["as
 api_router.include_router(bhava.router, prefix="/bhava", tags=["bhava"])
 api_router.include_router(prediction.router, prefix="/prediction", tags=["prediction"])
 api_router.include_router(shadbala.router, prefix="/shadbala", tags=["shadbala"])
+
+# New enhanced endpoints
+api_router.include_router(kp_system.router, prefix="/kp", tags=["kp-system"])
+api_router.include_router(yogas.router, prefix="/yogas", tags=["yogas"])
+api_router.include_router(transits.router, prefix="/transits", tags=["transits"])
+api_router.include_router(additional_dashas.router, prefix="/dashas", tags=["additional-dashas"])
 
 # Add metrics endpoint
 @api_router.get("/metrics")
