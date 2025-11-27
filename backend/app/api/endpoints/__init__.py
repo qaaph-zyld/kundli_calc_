@@ -18,6 +18,9 @@ from . import panchang
 from . import charts
 from . import horoscope
 from . import divisional
+from . import debug
+from . import location
+from . import famous_charts
 
 __all__ = [
     "health",
@@ -34,5 +37,8 @@ __all__ = [
     "panchang",
     "charts",
     "horoscope",
-    "divisional"
+    "divisional",
+    "debug",
+    "location",
+    "famous_charts",
 ]

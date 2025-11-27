@@ -14,7 +14,7 @@ import yaml
 from pathlib import Path
 
 from .api.endpoints import (
-    charts, health, ayanamsa, panchang, dasha, geo, divisional
+    charts, health, ayanamsa, panchang, dasha, geo, divisional, debug, location, famous_charts
 )
 from .core.config import settings
 from .core.errors.handlers import ErrorHandler
@@ -96,6 +96,24 @@ app.include_router(
     divisional.router,
     prefix="/api/v1",
     tags=["divisional"]
+)
+
+app.include_router(
+    debug.router,
+    prefix="/api/v1/debug",
+    tags=["debug"]
+)
+
+app.include_router(
+    location.router,
+    prefix="/api/v1/location",
+    tags=["location"]
+)
+
+app.include_router(
+    famous_charts.router,
+    prefix="/api/v1/famous-charts",
+    tags=["famous-charts"]
 )
 
 # Include new authentication and kundli routes
