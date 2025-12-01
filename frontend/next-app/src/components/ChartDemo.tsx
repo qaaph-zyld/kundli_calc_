@@ -19,10 +19,33 @@ import { detectYogas } from '../lib/yogas';
 import { detectDoshas, calculateDoshaScore } from '../lib/doshas';
 import { ASCENDANT_TRAITS } from '../lib/interpretations';
 import { calculatePlanetaryStrength, calculateSpecialPoints, getChartStrengthSummary } from '../lib/planetaryStrength';
+import Button from './ui/Button';
+import { Card, CardHeader, CardBody } from './ui/Card';
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from './ui/Tabs';
 import styles from './ChartDemo.module.css';
 
 type ChartType = 'rasi' | 'north' | 'navamsa' | 'd2' | 'd3' | 'd10' | 'd12';
 type AnalysisTab = 'basic' | 'kp' | 'yogas' | 'transits' | 'dashas' | 'muhurta' | 'compatibility';
+
+const ANALYSIS_TABS: { key: AnalysisTab; label: string; icon: string }[] = [
+  { key: 'basic', label: 'Basic Analysis', icon: '📊' },
+  { key: 'kp', label: 'KP System', icon: '🎯' },
+  { key: 'yogas', label: 'Yogas (60+)', icon: '✨' },
+  { key: 'transits', label: 'Transits', icon: '🌍' },
+  { key: 'dashas', label: 'Dashas', icon: '📅' },
+  { key: 'muhurta', label: 'Muhurta', icon: '🕉️' },
+  { key: 'compatibility', label: 'Compatibility', icon: '💑' },
+];
+
+const CHART_TYPES: { key: ChartType; label: string }[] = [
+  { key: 'rasi', label: 'South Indian (D1)' },
+  { key: 'north', label: 'North Indian (D1)' },
+  { key: 'd2', label: 'Hora (D2)' },
+  { key: 'd3', label: 'Drekkana (D3)' },
+  { key: 'navamsa', label: 'Navamsa (D9)' },
+  { key: 'd10', label: 'Dasamsa (D10)' },
+  { key: 'd12', label: 'Dwadasamsa (D12)' },
+];
 
 export default function ChartDemo() {
   const [loading, setLoading] = useState(false);
@@ -183,84 +206,60 @@ export default function ChartDemo() {
           <div className={styles.resultHeader}>
             <h2>Your Birth Chart</h2>
             <div className={styles.headerActions}>
-              <button 
+              <Button 
+                variant="secondary"
+                size="sm"
                 onClick={handleExportPDF}
-                className={styles.pdfBtn}
                 disabled={exportingPDF}
+                isLoading={exportingPDF}
+                leftIcon={exportingPDF ? undefined : <span>📄</span>}
               >
-                {exportingPDF ? '⏳' : '📄'} {exportingPDF ? 'Exporting...' : 'Export PDF'}
-              </button>
+                {exportingPDF ? 'Exporting...' : 'Export PDF'}
+              </Button>
               {user && (
-                <button 
+                <Button 
+                  variant="secondary"
+                  size="sm"
                   onClick={() => setShowSaveModal(true)}
-                  className={styles.saveBtn}
+                  leftIcon={<span>💾</span>}
                 >
-                  💾 Save Chart
-                </button>
+                  Save Chart
+                </Button>
               )}
-              <button 
+              <Button 
+                variant={showAnalysis ? 'primary' : 'secondary'}
+                size="sm"
                 onClick={() => setShowAnalysis(!showAnalysis)}
-                className={styles.analysisBtn}
               >
-                {showAnalysis ? 'Hide' : 'Show'} Analysis
-              </button>
-              <button 
+                {showAnalysis ? '📊 Hide Analysis' : '📊 Show Analysis'}
+              </Button>
+              <Button 
+                variant="ghost"
+                size="sm"
                 onClick={() => setShowRawData(!showRawData)}
-                className={styles.toggleBtn}
               >
-                {showRawData ? 'Hide' : 'Show'} Raw Data
-              </button>
+                {showRawData ? 'Hide Raw Data' : 'Show Raw Data'}
+              </Button>
             </div>
           </div>
 
           {/* Advanced Analysis Panels */}
           {showAnalysis && (
             <div className={styles.analysisSection}>
-              {/* Analysis Tab Switcher */}
-              <div className={styles.analysisTabNav}>
-                <button
-                  className={`${styles.analysisTab} ${analysisTab === 'basic' ? styles.active : ''}`}
-                  onClick={() => setAnalysisTab('basic')}
-                >
-                  📊 Basic Analysis
-                </button>
-                <button
-                  className={`${styles.analysisTab} ${analysisTab === 'kp' ? styles.active : ''}`}
-                  onClick={() => setAnalysisTab('kp')}
-                >
-                  🎯 KP System
-                </button>
-                <button
-                  className={`${styles.analysisTab} ${analysisTab === 'yogas' ? styles.active : ''}`}
-                  onClick={() => setAnalysisTab('yogas')}
-                >
-                  ✨ Yogas (60+)
-                </button>
-                <button
-                  className={`${styles.analysisTab} ${analysisTab === 'transits' ? styles.active : ''}`}
-                  onClick={() => setAnalysisTab('transits')}
-                >
-                  🌍 Transits
-                </button>
-                <button
-                  className={`${styles.analysisTab} ${analysisTab === 'dashas' ? styles.active : ''}`}
-                  onClick={() => setAnalysisTab('dashas')}
-                >
-                  📅 Dashas
-                </button>
-                <button
-                  className={`${styles.analysisTab} ${analysisTab === 'muhurta' ? styles.active : ''}`}
-                  onClick={() => setAnalysisTab('muhurta')}
-                >
-                  🕉️ Muhurta
-                </button>
-                <button
-                  className={`${styles.analysisTab} ${analysisTab === 'compatibility' ? styles.active : ''}`}
-                  onClick={() => setAnalysisTab('compatibility')}
-                >
-                  💑 Compatibility
-                </button>
-              </div>
+              {/* Analysis Tab Switcher using new Tabs component */}
+              <Tabs 
+                index={ANALYSIS_TABS.findIndex(t => t.key === analysisTab)}
+                onChange={(idx) => setAnalysisTab(ANALYSIS_TABS[idx].key)}
+                variant="pills"
+              >
+                <TabList className={styles.analysisTabNav}>
+                  {ANALYSIS_TABS.map((tab) => (
+                    <Tab key={tab.key}>
+                      {tab.icon} {tab.label}
+                    </Tab>
+                  ))}
+                </TabList>
+              </Tabs>
 
               {/* KP System Panel */}
               {analysisTab === 'kp' && (
@@ -486,48 +485,16 @@ export default function ChartDemo() {
 
           {/* Chart Type Switcher */}
           <div className={styles.chartSwitcher}>
-            <button
-              className={`${styles.switcherBtn} ${chartType === 'rasi' ? styles.active : ''}`}
-              onClick={() => setChartType('rasi')}
-            >
-              South Indian (D1)
-            </button>
-            <button
-              className={`${styles.switcherBtn} ${chartType === 'north' ? styles.active : ''}`}
-              onClick={() => setChartType('north')}
-            >
-              North Indian (D1)
-            </button>
-            <button
-              className={`${styles.switcherBtn} ${chartType === 'd2' ? styles.active : ''}`}
-              onClick={() => setChartType('d2')}
-            >
-              Hora (D2)
-            </button>
-            <button
-              className={`${styles.switcherBtn} ${chartType === 'd3' ? styles.active : ''}`}
-              onClick={() => setChartType('d3')}
-            >
-              Drekkana (D3)
-            </button>
-            <button
-              className={`${styles.switcherBtn} ${chartType === 'navamsa' ? styles.active : ''}`}
-              onClick={() => setChartType('navamsa')}
-            >
-              Navamsa (D9)
-            </button>
-            <button
-              className={`${styles.switcherBtn} ${chartType === 'd10' ? styles.active : ''}`}
-              onClick={() => setChartType('d10')}
-            >
-              Dasamsa (D10)
-            </button>
-            <button
-              className={`${styles.switcherBtn} ${chartType === 'd12' ? styles.active : ''}`}
-              onClick={() => setChartType('d12')}
-            >
-              Dwadasamsa (D12)
-            </button>
+            {CHART_TYPES.map((chart) => (
+              <Button
+                key={chart.key}
+                variant={chartType === chart.key ? 'primary' : 'secondary'}
+                size="sm"
+                onClick={() => setChartType(chart.key)}
+              >
+                {chart.label}
+              </Button>
+            ))}
           </div>
 
           {/* Chart Visualization */}
