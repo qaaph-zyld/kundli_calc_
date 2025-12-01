@@ -1009,26 +1009,106 @@
   margin: 8px 0;
 }
 
-/* Responsive */
+/* ========================================
+   COMPREHENSIVE MOBILE RESPONSIVE STYLES
+   ======================================== */
+
 @media (max-width: 768px) {
   .panel {
     padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
   }
 
+  .panelHeader {
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+  }
+
+  .panelHeader h3 {
+    font-size: 1.25rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  /* Horizontal scrollable tabs on mobile */
   .tabNav {
-    flex-direction: column;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    gap: 8px;
+    padding-bottom: 8px;
+    margin: 0 -16px 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .tabNav::-webkit-scrollbar {
+    display: none;
   }
 
   .tab {
-    width: 100%;
-    text-align: center;
+    flex-shrink: 0;
+    min-height: 44px;
+    padding: 10px 16px;
+    font-size: 0.85rem;
+    white-space: nowrap;
   }
 
+  /* Stats */
+  .statsRow {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .statCard {
+    padding: 12px;
+  }
+
+  .statValue {
+    font-size: 1.4rem;
+  }
+
+  .statLabel {
+    font-size: 0.75rem;
+  }
+
+  /* Tables - smaller text, tighter padding */
+  .tableContainer {
+    margin: 12px -16px;
+    padding: 0 16px;
+  }
+
+  .kpTable, .transitTable {
+    font-size: 0.8rem;
+  }
+
+  .kpTable th, .kpTable td,
+  .transitTable th, .transitTable td {
+    padding: 10px 6px;
+  }
+
+  .kpTable th, .transitTable th {
+    font-size: 0.7rem;
+  }
+
+  .planetSymbol {
+    font-size: 1rem;
+    margin-right: 4px;
+  }
+
+  /* Transit score */
   .transitScore {
     flex-direction: column;
     text-align: center;
+    gap: 12px;
   }
 
+  /* Timeline */
   .timelinePeriods {
     flex-wrap: wrap;
   }
@@ -1036,5 +1116,112 @@
   .periodBar {
     flex: 1 1 auto;
     min-width: 60px;
+    padding: 8px 6px;
+  }
+
+  /* Form elements */
+  .inputRow {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .inputGroup {
+    width: 100%;
+  }
+
+  .inputGroup input,
+  .inputGroup select {
+    min-height: 48px;
+    font-size: 16px;
+  }
+
+  /* Score display */
+  .compatScore {
+    padding: 16px;
+  }
+
+  .scoreNumber {
+    font-size: 2.5rem;
+  }
+
+  /* Koota list */
+  .kootaList {
+    gap: 12px;
+  }
+
+  .kootaItem {
+    padding: 12px;
+  }
+
+  /* Buttons */
+  .calculateBtn, .button {
+    min-height: 48px;
+    font-size: 15px;
+    padding: 12px 20px;
+    width: 100%;
+  }
+
+  /* Collapsible sections */
+  .detailsToggle {
+    min-height: 44px;
+    padding: 12px 16px;
+  }
+
+  /* Badges */
+  .resultBadge {
+    padding: 4px 10px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Extra small screens */
+@media (max-width: 375px) {
+  .panel {
+    padding: 12px;
+  }
+
+  .panelHeader h3 {
+    font-size: 1.1rem;
+  }
+
+  .statsRow {
+    grid-template-columns: 1fr;
+  }
+
+  .tab {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+
+  .kpTable, .transitTable {
+    font-size: 0.75rem;
+  }
+
+  .kpTable th, .kpTable td,
+  .transitTable th, .transitTable td {
+    padding: 8px 4px;
+  }
+
+  .scoreNumber {
+    font-size: 2rem;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .tab:active,
+  .calculateBtn:active,
+  .button:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+}
+
+/* Safe area for notched devices */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  @media (max-width: 768px) {
+    .panel:last-child {
+      padding-bottom: calc(16px + env(safe-area-inset-bottom));
+    }
   }
 }

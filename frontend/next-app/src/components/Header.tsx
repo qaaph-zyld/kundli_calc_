@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../contexts/AuthContext';
 import AuthModal from './AuthModal';
@@ -11,6 +11,31 @@ export default function Header() {
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState<'login' | 'signup'>('login');
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Close mobile menu on route change or escape key
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMobileMenuOpen(false);
+    };
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+
+  const handleMobileNav = (path: string) => {
+    router.push(path);
+    setMobileMenuOpen(false);
+  };
 
   const handleAuthClick = (mode: 'login' | 'signup') => {
     setAuthMode(mode);
@@ -114,8 +139,112 @@ export default function Header() {
               </div>
             )}
           </nav>
+
+          {/* Mobile menu button */}
+          <button 
+            className={styles.mobileMenuBtn}
+            onClick={() => setMobileMenuOpen(true)}
+            aria-label="Open menu"
+          >
+            ☰
+          </button>
         </div>
       </header>
+
+      {/* Mobile menu overlay */}
+      <div 
+        className={`${styles.mobileMenuOverlay} ${mobileMenuOpen ? styles.open : ''}`}
+        onClick={() => setMobileMenuOpen(false)}
+      />
+
+      {/* Mobile slide-out menu */}
+      <div className={`${styles.mobileMenu} ${mobileMenuOpen ? styles.open : ''}`}>
+        <div className={styles.mobileMenuHeader}>
+          <span className={styles.mobileMenuTitle}>Menu</span>
+          <button 
+            className={styles.mobileMenuClose}
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu"
+          >
+            ✕
+          </button>
+        </div>
+
+        <nav className={styles.mobileNavLinks}>
+          <button 
+            className={styles.mobileNavLink}
+            onClick={() => handleMobileNav('/')}
+          >
+            🏠 Home
+          </button>
+          <button 
+            className={styles.mobileNavLink}
+            onClick={() => handleMobileNav('/compare')}
+          >
+            ⚖️ Compatibility
+          </button>
+          <button 
+            className={styles.mobileNavLink}
+            onClick={() => handleMobileNav('/transits')}
+          >
+            🌍 Transits
+          </button>
+          <button 
+            className={styles.mobileNavLink}
+            onClick={() => handleMobileNav('/rectification')}
+          >
+            ⏰ Birth Rectification
+          </button>
+          {user && (
+            <button 
+              className={styles.mobileNavLink}
+              onClick={() => handleMobileNav('/my-charts')}
+            >
+              📊 My Charts
+            </button>
+          )}
+        </nav>
+
+        <div className={styles.mobileAuthSection}>
+          {user ? (
+            <>
+              <div className={styles.mobileUserInfo}>
+                <div className={styles.mobileUserEmail}>{user.email}</div>
+              </div>
+              <button 
+                className={styles.mobileNavLink}
+                onClick={() => {
+                  handleSignOut();
+                  setMobileMenuOpen(false);
+                }}
+              >
+                🚪 Sign Out
+              </button>
+            </>
+          ) : (
+            <>
+              <button 
+                className={styles.mobileNavLink}
+                onClick={() => {
+                  handleAuthClick('login');
+                  setMobileMenuOpen(false);
+                }}
+              >
+                🔑 Login
+              </button>
+              <button 
+                className={styles.mobileNavLink}
+                onClick={() => {
+                  handleAuthClick('signup');
+                  setMobileMenuOpen(false);
+                }}
+              >
+                ✨ Sign Up
+              </button>
+            </>
+          )}
+        </div>
+      </div>
 
       <AuthModal 
         isOpen={showAuthModal}
