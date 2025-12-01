@@ -322,3 +322,118 @@ def _get_general_transit_advice(score: float) -> str:
         return "Challenging transit period. Focus on consolidation rather than expansion. Remedial measures recommended."
     else:
         return "Difficult transit phase. Prioritize stability, avoid major decisions, focus on remedies and self-care. This too shall pass."
+
+
+# =============================================================================
+# REAL-TIME TRANSIT ENDPOINTS
+# =============================================================================
+
+from app.core.calculations.transit_analysis import (
+    get_current_transit_positions,
+    get_transit_to_natal_aspects,
+    get_upcoming_transits
+)
+
+
+class CurrentTransitsRequest(BaseModel):
+    """Request for current transit positions"""
+    datetime: Optional[str] = Field(None, description="Target datetime (defaults to now)")
+    ayanamsa: str = Field(default="lahiri", description="Ayanamsa: lahiri, raman, krishnamurti")
+
+
+class TransitAspectsRequest(BaseModel):
+    """Request for transit-to-natal aspects"""
+    natal_positions: Dict[str, float] = Field(..., description="Natal planet longitudes")
+    transit_positions: Optional[Dict[str, float]] = Field(None, description="Transit positions (defaults to current)")
+    orb: float = Field(default=10.0, ge=1, le=15, description="Aspect orb in degrees")
+
+
+class UpcomingTransitsRequest(BaseModel):
+    """Request for upcoming transits"""
+    natal_moon_sign: int = Field(..., ge=0, le=11, description="Natal Moon sign (0-11)")
+    days_ahead: int = Field(default=30, ge=1, le=365, description="Days to look ahead")
+
+
+@router.get("/current")
+async def get_current_transits(
+    datetime_str: Optional[str] = Query(None, alias="datetime", description="Target datetime ISO format"),
+    ayanamsa: str = Query("lahiri", description="Ayanamsa type")
+) -> Dict[str, Any]:
+    """
+    Get current planetary transit positions using Swiss Ephemeris.
+    
+    Returns real-time positions with sign, nakshatra, and retrograde status.
+    Uses Lahiri ayanamsa by default.
+    """
+    try:
+        target_dt = None
+        if datetime_str:
+            target_dt = datetime.fromisoformat(datetime_str.replace('Z', '+00:00'))
+        
+        result = get_current_transit_positions(target_dt, ayanamsa)
+        
+        return {
+            "success": True,
+            "data": result
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/aspects")
+async def calculate_transit_aspects(request: TransitAspectsRequest) -> Dict[str, Any]:
+    """
+    Calculate aspects between transit and natal planets.
+    
+    Includes standard aspects (conjunction, opposition, trine, square, sextile)
+    and special Vedic aspects (Mars 4th/8th, Saturn 3rd/10th, Jupiter 5th/9th).
+    """
+    try:
+        # Get current positions if not provided
+        transit_pos = request.transit_positions
+        if transit_pos is None:
+            current = get_current_transit_positions()
+            transit_pos = {p: data["longitude"] for p, data in current["positions"].items()}
+        
+        aspects = get_transit_to_natal_aspects(
+            transit_pos,
+            request.natal_positions,
+            request.orb
+        )
+        
+        return {
+            "success": True,
+            "total_aspects": len(aspects),
+            "aspects": aspects,
+            "note": "Aspects sorted by tightness (orb). Lower orb = stronger influence."
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/upcoming")
+async def get_upcoming_transit_events(request: UpcomingTransitsRequest) -> Dict[str, Any]:
+    """
+    Get upcoming significant transit events.
+    
+    Tracks sign changes for slow-moving planets (Saturn, Jupiter, Rahu)
+    and their effects relative to natal Moon.
+    """
+    try:
+        upcoming = get_upcoming_transits(
+            request.natal_moon_sign,
+            request.days_ahead
+        )
+        
+        return {
+            "success": True,
+            "natal_moon_sign": request.natal_moon_sign,
+            "days_ahead": request.days_ahead,
+            "events_count": len(upcoming),
+            "upcoming_events": upcoming
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

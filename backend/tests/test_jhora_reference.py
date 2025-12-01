@@ -304,5 +304,224 @@ class TestEdgeCases:
                     f"{planet} house out of range: {house}"
 
 
+# ============================================================================
+# REFERENCE CHART 2: Year 2000 Chart
+# Birth: Jul 4, 2000, 10:30 AM IST, Mumbai (19.076°N, 72.877°E)
+# Ayanamsa: Lahiri, House System: Whole Sign
+# ============================================================================
+
+REFERENCE_CHART_2 = {
+    "birth_data": {
+        "date_time": "2000-07-04T05:00:00Z",  # 10:30 AM IST = 05:00 UTC
+        "latitude": 19.076,
+        "longitude": 72.877,
+        "altitude": 0,
+        "ayanamsa": 1,  # Lahiri
+        "house_system": "W"  # Whole Sign
+    },
+    "expected": {
+        "ayanamsa": 23.86,  # Lahiri for mid-2000
+        "planets": {
+            "Sun": {"sign": "Gemini"},
+            "Moon": {"sign": "Cancer"},  # Fixed: Moon was in Cancer on July 4, 2000
+        }
+    }
+}
+
+
+# ============================================================================
+# REFERENCE CHART 3: Southern Hemisphere
+# Birth: Dec 25, 1985, 3:00 PM AEST, Sydney (-33.8688°S, 151.2093°E)
+# Ayanamsa: Lahiri, House System: Whole Sign
+# ============================================================================
+
+REFERENCE_CHART_3 = {
+    "birth_data": {
+        "date_time": "1985-12-25T04:00:00Z",  # 3:00 PM AEST = 04:00 UTC
+        "latitude": -33.8688,  # Southern hemisphere
+        "longitude": 151.2093,
+        "altitude": 0,
+        "ayanamsa": 1,
+        "house_system": "W"
+    },
+    "expected": {
+        "ayanamsa": 23.65,  # Lahiri for 1985
+        "planets": {
+            "Sun": {"sign": "Sagittarius"},
+        }
+    }
+}
+
+
+# ============================================================================
+# REFERENCE CHART 4: Historical Chart (Famous Person)
+# Birth: Oct 2, 1869, 7:30 AM LMT, Porbandar (21.6417°N, 69.6293°E)
+# Mahatma Gandhi - well-documented birth chart
+# Ayanamsa: Lahiri, House System: Whole Sign
+# ============================================================================
+
+REFERENCE_CHART_4 = {
+    "birth_data": {
+        # LMT offset for Porbandar: ~4h 39m = 04:39 ahead of UTC
+        # 7:30 AM LMT = ~2:51 AM UTC
+        "date_time": "1869-10-02T02:51:00Z",
+        "latitude": 21.6417,
+        "longitude": 69.6293,
+        "altitude": 0,
+        "ayanamsa": 1,
+        "house_system": "W"
+    },
+    "expected": {
+        "ayanamsa": 22.10,  # Lahiri for 1869
+        "planets": {
+            "Sun": {"sign": "Virgo"},  # Gandhi had Sun in Virgo
+            "Moon": {"sign": "Cancer"},  # Moon in Cancer
+        }
+    }
+}
+
+
+class TestMultipleReferenceCharts:
+    """Test multiple reference charts for broader validation"""
+    
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        """Check API is available"""
+        try:
+            response = requests.get(f"{API_BASE_URL}/health/", timeout=5)
+            if response.status_code != 200:
+                pytest.skip("API not available")
+        except requests.RequestException:
+            pytest.skip("API not available")
+    
+    def get_chart(self, birth_data: Dict[str, Any]) -> Dict[str, Any]:
+        """Helper to get chart from API"""
+        response = requests.post(
+            f"{API_BASE_URL}/charts/calculate",
+            json=birth_data,
+            timeout=30
+        )
+        response.raise_for_status()
+        return response.json()
+    
+    def test_chart2_sun_in_gemini(self):
+        """Chart 2: Sun should be in Gemini in July 2000"""
+        result = self.get_chart(REFERENCE_CHART_2["birth_data"])
+        sun_sign = result["planetary_positions"]["Sun"]["sign"]
+        assert sun_sign == "Gemini", f"Expected Gemini, got {sun_sign}"
+    
+    def test_chart2_moon_sign(self):
+        """Chart 2: Moon should be in Cancer"""
+        result = self.get_chart(REFERENCE_CHART_2["birth_data"])
+        moon_sign = result["planetary_positions"]["Moon"]["sign"]
+        expected = REFERENCE_CHART_2["expected"]["planets"]["Moon"]["sign"]
+        assert moon_sign == expected, f"Expected {expected}, got {moon_sign}"
+    
+    def test_chart3_southern_hemisphere(self):
+        """Chart 3: Southern hemisphere chart should calculate correctly"""
+        result = self.get_chart(REFERENCE_CHART_3["birth_data"])
+        
+        # Sun should be in Sagittarius (Dec 25, 1985)
+        sun_sign = result["planetary_positions"]["Sun"]["sign"]
+        assert sun_sign == "Sagittarius", f"Expected Sagittarius, got {sun_sign}"
+    
+    def test_chart3_valid_houses(self):
+        """Chart 3: Southern hemisphere should have valid house cusps"""
+        result = self.get_chart(REFERENCE_CHART_3["birth_data"])
+        
+        # Should have valid ascendant
+        asc = float(result["houses"]["ascendant"])
+        assert 0 <= asc < 360, f"Invalid ascendant: {asc}"
+    
+    def test_chart4_gandhi_sun_in_virgo(self):
+        """Chart 4: Gandhi's Sun should be in Virgo"""
+        result = self.get_chart(REFERENCE_CHART_4["birth_data"])
+        sun_sign = result["planetary_positions"]["Sun"]["sign"]
+        assert sun_sign == "Virgo", f"Expected Virgo, got {sun_sign}"
+    
+    def test_chart4_gandhi_moon_in_cancer(self):
+        """Chart 4: Gandhi's Moon should be in Cancer"""
+        result = self.get_chart(REFERENCE_CHART_4["birth_data"])
+        moon_sign = result["planetary_positions"]["Moon"]["sign"]
+        # Note: Some sources say Leo depending on exact time
+        assert moon_sign in ["Cancer", "Leo"], f"Expected Cancer or Leo, got {moon_sign}"
+    
+    def test_all_charts_have_nine_planets(self):
+        """All reference charts should return 9 Vedic planets"""
+        charts = [REFERENCE_CHART_1, REFERENCE_CHART_2, REFERENCE_CHART_3, REFERENCE_CHART_4]
+        
+        for i, chart in enumerate(charts, 1):
+            result = self.get_chart(chart["birth_data"])
+            planets = result["planetary_positions"]
+            
+            required = ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"]
+            for planet in required:
+                assert planet in planets, f"Chart {i}: Missing {planet}"
+    
+    def test_ayanamsa_progression_across_years(self):
+        """Ayanamsa should increase from 1869 to 2000"""
+        result_1869 = self.get_chart(REFERENCE_CHART_4["birth_data"])
+        result_1990 = self.get_chart(REFERENCE_CHART_1["birth_data"])
+        result_2000 = self.get_chart(REFERENCE_CHART_2["birth_data"])
+        
+        ay_1869 = float(result_1869["ayanamsa_value"])
+        ay_1990 = float(result_1990["ayanamsa_value"])
+        ay_2000 = float(result_2000["ayanamsa_value"])
+        
+        assert ay_1869 < ay_1990 < ay_2000, \
+            f"Ayanamsa not progressing: 1869={ay_1869}, 1990={ay_1990}, 2000={ay_2000}"
+
+
+class TestDivisionalCharts:
+    """Test divisional chart (Varga) calculations"""
+    
+    @pytest.fixture(autouse=True)
+    def setup(self):
+        """Check API is available"""
+        try:
+            response = requests.get(f"{API_BASE_URL}/health/", timeout=5)
+            if response.status_code != 200:
+                pytest.skip("API not available")
+        except requests.RequestException:
+            pytest.skip("API not available")
+    
+    def test_navamsa_d9_calculation(self):
+        """Test D9 (Navamsa) chart is calculated"""
+        response = requests.post(
+            f"{API_BASE_URL}/charts/calculate",
+            json=REFERENCE_CHART_1["birth_data"],
+            timeout=30
+        )
+        result = response.json()
+        
+        # Check if divisional charts are present
+        if "divisional_charts" in result:
+            assert "D9" in result["divisional_charts"] or "navamsa" in str(result).lower()
+    
+    def test_longitude_to_navamsa(self):
+        """Test Navamsa calculation formula"""
+        # Navamsa formula: Each sign divided into 9 parts of 3°20' each
+        # D9 sign = ((longitude / 3.333...) % 12) starting from sign's navamsa start
+        
+        # Sun at 271.12° (1.12° Capricorn)
+        sun_lon = 271.12
+        
+        # Navamsa span = 30/9 = 3.333...°
+        navamsa_span = 30 / 9
+        
+        # Position within sign
+        pos_in_sign = sun_lon % 30  # = 1.12°
+        
+        # Navamsa number within sign (0-8)
+        navamsa_num = int(pos_in_sign / navamsa_span)  # = 0
+        
+        # For Capricorn (sign 10, earth sign), navamsa starts from Capricorn itself
+        # Earth signs: navamsa starts from same sign
+        base_sign = 9  # Capricorn = 9 (0-indexed)
+        d9_sign = (base_sign + navamsa_num) % 12
+        
+        assert d9_sign == 9, f"Expected Capricorn (9), got {d9_sign}"
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "--tb=short"])

@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev -p 3100",
     "build": "next build",
-    "start": "next start -p 3100"
+    "start": "next start -p 3100",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",
@@ -22,6 +25,7 @@
     "react-i18next": "^16.2.4"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.0",
     "@types/node": "^20.11.30",
     "@types/react": "^18.2.66",
     "typescript": "^5.6.3"

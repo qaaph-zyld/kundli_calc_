@@ -722,3 +722,259 @@ def get_current_transits_summary(
         summary["overall"] = "Challenging major transits - focus on remedies"
     
     return summary
+
+
+# =============================================================================
+# REAL-TIME TRANSIT CALCULATIONS USING SWISS EPHEMERIS
+# =============================================================================
+
+def get_current_transit_positions(
+    target_datetime: datetime = None,
+    ayanamsa_type: str = "lahiri"
+) -> Dict[str, Dict[str, Any]]:
+    """
+    Get current (or specified) planetary positions using Swiss Ephemeris.
+    
+    Args:
+        target_datetime: DateTime for positions (defaults to now)
+        ayanamsa_type: Ayanamsa to use (lahiri, raman, krishnamurti)
+        
+    Returns:
+        Dictionary of planet positions with longitude, sign, nakshatra, retrograde status
+    """
+    import swisseph as swe
+    
+    if target_datetime is None:
+        target_datetime = datetime.now()
+    
+    # Set ayanamsa
+    ayanamsa_modes = {
+        "lahiri": swe.SIDM_LAHIRI,
+        "raman": swe.SIDM_RAMAN,
+        "krishnamurti": swe.SIDM_KRISHNAMURTI,
+    }
+    swe.set_sid_mode(ayanamsa_modes.get(ayanamsa_type.lower(), swe.SIDM_LAHIRI))
+    
+    # Calculate Julian Day
+    jd = swe.julday(
+        target_datetime.year,
+        target_datetime.month,
+        target_datetime.day,
+        target_datetime.hour + target_datetime.minute / 60.0 + target_datetime.second / 3600.0
+    )
+    
+    # Get ayanamsa value
+    ayanamsa = swe.get_ayanamsa_ut(jd)
+    
+    # Planet mappings
+    planets = {
+        "Sun": swe.SUN,
+        "Moon": swe.MOON,
+        "Mars": swe.MARS,
+        "Mercury": swe.MERCURY,
+        "Jupiter": swe.JUPITER,
+        "Venus": swe.VENUS,
+        "Saturn": swe.SATURN,
+        "Rahu": swe.MEAN_NODE,
+    }
+    
+    positions = {}
+    
+    for planet_name, planet_id in planets.items():
+        try:
+            # Calculate position with sidereal flag
+            flags = swe.FLG_SWIEPH | swe.FLG_SIDEREAL
+            result = swe.calc_ut(jd, planet_id, flags)
+            
+            longitude = result[0][0]
+            speed = result[0][3]
+            is_retrograde = speed < 0
+            
+            # Calculate Ketu (opposite of Rahu)
+            if planet_name == "Rahu":
+                ketu_lon = (longitude + 180) % 360
+            
+            # Get sign and nakshatra
+            sign_num = int(longitude / 30)
+            nakshatra_num = int(longitude / (360 / 27))
+            degree_in_sign = longitude % 30
+            
+            positions[planet_name] = {
+                "longitude": round(longitude, 4),
+                "sign": SIGN_NAMES[sign_num],
+                "sign_num": sign_num,
+                "degree_in_sign": round(degree_in_sign, 2),
+                "nakshatra": NAKSHATRAS[nakshatra_num],
+                "nakshatra_num": nakshatra_num,
+                "is_retrograde": is_retrograde,
+                "speed": round(speed, 4)
+            }
+            
+        except Exception as e:
+            positions[planet_name] = {
+                "error": str(e),
+                "longitude": 0,
+                "sign": "Unknown",
+                "is_retrograde": False
+            }
+    
+    # Add Ketu
+    if "Rahu" in positions and "error" not in positions["Rahu"]:
+        rahu_lon = positions["Rahu"]["longitude"]
+        ketu_lon = (rahu_lon + 180) % 360
+        ketu_sign = int(ketu_lon / 30)
+        ketu_nak = int(ketu_lon / (360 / 27))
+        
+        positions["Ketu"] = {
+            "longitude": round(ketu_lon, 4),
+            "sign": SIGN_NAMES[ketu_sign],
+            "sign_num": ketu_sign,
+            "degree_in_sign": round(ketu_lon % 30, 2),
+            "nakshatra": NAKSHATRAS[ketu_nak],
+            "nakshatra_num": ketu_nak,
+            "is_retrograde": True,  # Rahu/Ketu always retrograde
+            "speed": -positions["Rahu"]["speed"]
+        }
+    
+    return {
+        "timestamp": target_datetime.isoformat(),
+        "ayanamsa": round(ayanamsa, 4),
+        "ayanamsa_type": ayanamsa_type,
+        "positions": positions
+    }
+
+
+def get_transit_to_natal_aspects(
+    transit_positions: Dict[str, float],
+    natal_positions: Dict[str, float],
+    orb: float = 10.0
+) -> List[Dict[str, Any]]:
+    """
+    Calculate aspects between transit and natal planets.
+    
+    Args:
+        transit_positions: Current planetary longitudes
+        natal_positions: Natal chart planetary longitudes
+        orb: Maximum orb for aspects in degrees
+        
+    Returns:
+        List of active transit-to-natal aspects
+    """
+    # Aspect definitions (Vedic drishti)
+    aspects = {
+        0: "Conjunction",
+        60: "Sextile",
+        90: "Square", 
+        120: "Trine",
+        180: "Opposition"
+    }
+    
+    # Mars aspects 4th and 8th houses (90° and 210°)
+    # Saturn aspects 3rd and 10th houses (60° and 270°)
+    # Jupiter aspects 5th and 9th houses (120° and 240°)
+    special_aspects = {
+        "Mars": [90, 210],
+        "Saturn": [60, 270],
+        "Jupiter": [120, 240]
+    }
+    
+    active_aspects = []
+    
+    for t_planet, t_lon in transit_positions.items():
+        for n_planet, n_lon in natal_positions.items():
+            # Calculate angular distance
+            diff = abs(t_lon - n_lon)
+            if diff > 180:
+                diff = 360 - diff
+            
+            # Check standard aspects
+            for aspect_angle, aspect_name in aspects.items():
+                if abs(diff - aspect_angle) <= orb:
+                    active_aspects.append({
+                        "transit_planet": t_planet,
+                        "natal_planet": n_planet,
+                        "aspect": aspect_name,
+                        "angle": aspect_angle,
+                        "orb": round(abs(diff - aspect_angle), 2),
+                        "exact_degree_diff": round(diff, 2),
+                        "applying": t_lon < n_lon  # Simplified
+                    })
+            
+            # Check special aspects for Mars, Saturn, Jupiter
+            if t_planet in special_aspects:
+                for special_angle in special_aspects[t_planet]:
+                    if abs(diff - special_angle) <= orb:
+                        active_aspects.append({
+                            "transit_planet": t_planet,
+                            "natal_planet": n_planet,
+                            "aspect": f"Special ({t_planet} Drishti)",
+                            "angle": special_angle,
+                            "orb": round(abs(diff - special_angle), 2),
+                            "exact_degree_diff": round(diff, 2),
+                            "applying": t_lon < n_lon
+                        })
+    
+    # Sort by orb (tightest aspects first)
+    active_aspects.sort(key=lambda x: x["orb"])
+    
+    return active_aspects
+
+
+def get_upcoming_transits(
+    natal_moon_sign: int,
+    days_ahead: int = 30
+) -> List[Dict[str, Any]]:
+    """
+    Get upcoming significant transits for the next N days.
+    
+    Args:
+        natal_moon_sign: Moon's sign in natal chart (0-11)
+        days_ahead: Number of days to look ahead
+        
+    Returns:
+        List of upcoming significant transits with dates
+    """
+    import swisseph as swe
+    
+    upcoming = []
+    current_date = datetime.now()
+    
+    # Get current positions of slow planets
+    current = get_current_transit_positions(current_date)
+    
+    # Track sign changes for slow planets (Saturn, Jupiter, Rahu)
+    slow_planets = ["Saturn", "Jupiter", "Rahu"]
+    
+    for planet in slow_planets:
+        if planet in current["positions"]:
+            current_sign = current["positions"][planet]["sign_num"]
+            
+            # Check each day for sign change
+            for day_offset in range(1, days_ahead + 1):
+                check_date = current_date + timedelta(days=day_offset)
+                future_pos = get_current_transit_positions(check_date)
+                
+                if planet in future_pos["positions"]:
+                    future_sign = future_pos["positions"][planet]["sign_num"]
+                    
+                    if future_sign != current_sign:
+                        # Sign change detected
+                        house_from_moon = (future_sign - natal_moon_sign + 12) % 12 + 1
+                        
+                        upcoming.append({
+                            "date": check_date.date().isoformat(),
+                            "planet": planet,
+                            "event": "Sign Change",
+                            "from_sign": SIGN_NAMES[current_sign],
+                            "to_sign": SIGN_NAMES[future_sign],
+                            "house_from_moon": house_from_moon,
+                            "is_favorable": house_from_moon in GOCHARA_BENEFIC_HOUSES.get(planet, []),
+                            "significance": "High" if planet in ["Saturn", "Jupiter"] else "Medium"
+                        })
+                        
+                        current_sign = future_sign
+    
+    # Sort by date
+    upcoming.sort(key=lambda x: x["date"])
+    
+    return upcoming
