@@ -1,5 +1,9 @@
 "use client";
 import React, { useEffect, useState } from 'react';
+import { Card, CardHeader, CardBody } from './ui/Card';
+import Button from './ui/Button';
+import Input from './ui/Input';
+import Select from './ui/Select';
 import styles from './BirthDetailsForm.module.css';
 import { resolvePlace, timezoneFromCoords } from '../lib/api';
 
@@ -108,158 +112,182 @@ export default function BirthDetailsForm({ onSubmit, loading = false }: BirthDet
     } finally { setGeoLoading(false); }
   };
 
+  // Option arrays for Select components
+  const timezoneOptions = [
+    { value: 'UTC', label: 'UTC' },
+    { value: 'Asia/Kolkata', label: 'IST (India)' },
+    { value: 'America/New_York', label: 'EST (New York)' },
+    { value: 'America/Los_Angeles', label: 'PST (Los Angeles)' },
+    { value: 'Europe/London', label: 'GMT (London)' },
+    { value: 'Europe/Belgrade', label: 'CET (Belgrade)' },
+  ];
+
+  const ayanamsaOptions = [
+    { value: 'lahiri', label: 'Lahiri (Most Common)' },
+    { value: 'raman', label: 'Raman' },
+    { value: 'krishnamurti', label: 'Krishnamurti (KP)' },
+    { value: 'yukteshwar', label: 'Yukteshwar' },
+  ];
+
+  const houseSystemOptions = [
+    { value: 'P', label: 'Placidus' },
+    { value: 'K', label: 'Koch' },
+    { value: 'E', label: 'Equal House' },
+    { value: 'W', label: 'Whole Sign' },
+  ];
+
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <div className={styles.grid}>
-        {/* Date and Time */}
-        <div className={styles.section}>
-          <h3>Birth Date & Time</h3>
-          <div className={styles.row}>
-            <div className={styles.group}>
-              <label htmlFor="date">Date *</label>
-              <input
+        {/* Date and Time Card */}
+        <Card variant="default" padding="md">
+          <CardHeader title="Birth Date & Time" subtitle="Enter the exact birth details" />
+          <CardBody>
+            <div className={styles.row}>
+              <Input
                 id="date"
                 type="date"
+                label="Date"
                 value={formData.date}
                 onChange={(e) => handleChange('date', e.target.value)}
                 disabled={loading}
                 required
+                error={errors.date}
+                fullWidth
               />
-              {errors.date && <span className={styles.error}>{errors.date}</span>}
-            </div>
-
-            <div className={styles.group}>
-              <label htmlFor="time">Time (24h) *</label>
-              <input
+              <Input
                 id="time"
                 type="time"
+                label="Time (24h)"
                 value={formData.time}
                 onChange={(e) => handleChange('time', e.target.value)}
                 disabled={loading}
                 required
+                error={errors.time}
+                fullWidth
               />
-              {errors.time && <span className={styles.error}>{errors.time}</span>}
             </div>
-          </div>
-        </div>
+          </CardBody>
+        </Card>
 
-        {/* Location */}
-        <div className={styles.section}>
-          <h3>Birth Location</h3>
-          <div className={styles.group}>
-            <label htmlFor="locationName">Location Name *</label>
-            <input
-              id="locationName"
-              type="text"
-              placeholder="City, Country"
-              value={formData.locationName}
-              onChange={(e) => handleChange('locationName', e.target.value)}
-              disabled={loading}
-              required
-            />
-            <div className={styles.inlineActions}>
-              <button type="button" onClick={handleResolvePlace} disabled={loading || geoLoading} className={styles.btnSecondary}>Search</button>
-              <button type="button" onClick={handleDetectTimezone} disabled={loading || geoLoading} className={styles.btnTertiary}>Detect Timezone</button>
-            </div>
-            {errors.locationName && <span className={styles.error}>{errors.locationName}</span>}
-            {geoError && <span className={styles.error}>{geoError}</span>}
-          </div>
-
-          <div className={styles.row}>
+        {/* Location Card */}
+        <Card variant="default" padding="md">
+          <CardHeader title="Birth Location" subtitle="Where were you born?" />
+          <CardBody>
             <div className={styles.group}>
-              <label htmlFor="latitude">Latitude *</label>
-              <input
+              <Input
+                id="locationName"
+                type="text"
+                label="Location Name"
+                placeholder="City, Country"
+                value={formData.locationName}
+                onChange={(e) => handleChange('locationName', e.target.value)}
+                disabled={loading}
+                required
+                error={errors.locationName || geoError || undefined}
+                fullWidth
+              />
+              <div className={styles.inlineActions}>
+                <Button 
+                  type="button" 
+                  variant="secondary" 
+                  size="sm"
+                  onClick={handleResolvePlace} 
+                  disabled={loading || geoLoading}
+                  isLoading={geoLoading}
+                >
+                  🔍 Search
+                </Button>
+                <Button 
+                  type="button" 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={handleDetectTimezone} 
+                  disabled={loading || geoLoading}
+                >
+                  🌐 Detect Timezone
+                </Button>
+              </div>
+            </div>
+
+            <div className={styles.row}>
+              <Input
                 id="latitude"
                 type="number"
-                step="any"
-                min="-90"
-                max="90"
+                label="Latitude"
                 placeholder="44.531346"
-                value={formData.latitude}
-                onChange={(e) => handleChange('latitude', parseFloat(e.target.value))}
+                value={formData.latitude.toString()}
+                onChange={(e) => handleChange('latitude', parseFloat(e.target.value) || 0)}
                 disabled={loading}
                 required
+                error={errors.latitude}
+                fullWidth
               />
-              {errors.latitude && <span className={styles.error}>{errors.latitude}</span>}
-            </div>
-
-            <div className={styles.group}>
-              <label htmlFor="longitude">Longitude *</label>
-              <input
+              <Input
                 id="longitude"
                 type="number"
-                step="any"
-                min="-180"
-                max="180"
+                label="Longitude"
                 placeholder="19.206766"
-                value={formData.longitude}
-                onChange={(e) => handleChange('longitude', parseFloat(e.target.value))}
+                value={formData.longitude.toString()}
+                onChange={(e) => handleChange('longitude', parseFloat(e.target.value) || 0)}
                 disabled={loading}
                 required
+                error={errors.longitude}
+                fullWidth
               />
-              {errors.longitude && <span className={styles.error}>{errors.longitude}</span>}
             </div>
-          </div>
 
-          <div className={styles.group}>
-            <label htmlFor="timezone">Timezone</label>
-            <select
+            <Select
               id="timezone"
+              label="Timezone"
+              options={timezoneOptions}
               value={formData.timezone}
               onChange={(e) => handleChange('timezone', e.target.value)}
               disabled={loading}
-            >
-              <option value="UTC">UTC</option>
-              <option value="Asia/Kolkata">IST (India)</option>
-              <option value="America/New_York">EST (New York)</option>
-              <option value="America/Los_Angeles">PST (Los Angeles)</option>
-              <option value="Europe/London">GMT (London)</option>
-              <option value="Europe/Belgrade">CET (Belgrade)</option>
-            </select>
-          </div>
-        </div>
+              fullWidth
+            />
+          </CardBody>
+        </Card>
 
-        {/* Calculation Settings */}
-        <div className={styles.section}>
-          <h3>Settings</h3>
-          <div className={styles.row}>
-            <div className={styles.group}>
-              <label htmlFor="ayanamsa">Ayanamsa</label>
-              <select
+        {/* Calculation Settings Card */}
+        <Card variant="default" padding="md">
+          <CardHeader title="Settings" subtitle="Calculation preferences" />
+          <CardBody>
+            <div className={styles.row}>
+              <Select
                 id="ayanamsa"
+                label="Ayanamsa"
+                options={ayanamsaOptions}
                 value={formData.ayanamsa_type}
                 onChange={(e) => handleChange('ayanamsa_type', e.target.value)}
                 disabled={loading}
-              >
-                <option value="lahiri">Lahiri (Most Common)</option>
-                <option value="raman">Raman</option>
-                <option value="krishnamurti">Krishnamurti (KP)</option>
-                <option value="yukteshwar">Yukteshwar</option>
-              </select>
-            </div>
-
-            <div className={styles.group}>
-              <label htmlFor="houseSystem">House System</label>
-              <select
+                fullWidth
+              />
+              <Select
                 id="houseSystem"
+                label="House System"
+                options={houseSystemOptions}
                 value={formData.house_system}
                 onChange={(e) => handleChange('house_system', e.target.value)}
                 disabled={loading}
-              >
-                <option value="P">Placidus</option>
-                <option value="K">Koch</option>
-                <option value="E">Equal House</option>
-                <option value="W">Whole Sign</option>
-              </select>
+                fullWidth
+              />
             </div>
-          </div>
-        </div>
+          </CardBody>
+        </Card>
       </div>
 
       <div className={styles.actions}>
-        <button type="submit" disabled={loading} className={styles.btnPrimary}>
-          {loading ? 'Calculating...' : 'Generate Kundli'}
-        </button>
+        <Button 
+          type="submit" 
+          variant="primary" 
+          size="lg"
+          disabled={loading} 
+          isLoading={loading}
+          fullWidth
+        >
+          {loading ? 'Calculating...' : '✨ Generate Kundli'}
+        </Button>
       </div>
     </form>
   );

@@ -1,44 +1,43 @@
 .form {
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 24px;
-  max-width: 800px;
+  max-width: 900px;
+  margin: 0 auto;
+  /* Remove background - Cards provide their own */
+  background: transparent;
+  border: none;
+  padding: 0;
 }
 
 .grid {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
-.section {
-  border-bottom: 1px solid #eee;
-  padding-bottom: 20px;
-}
-
-.section:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
-}
-
-.section h3 {
-  margin: 0 0 16px 0;
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
+/* First card spans full width */
+.grid > *:first-child {
+  grid-column: 1 / -1;
 }
 
 .row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
+  margin-bottom: 16px;
+}
+
+.row:last-child {
+  margin-bottom: 0;
 }
 
 .group {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.group:last-child {
+  margin-bottom: 0;
 }
 
 .form label {
@@ -154,11 +153,15 @@
    MOBILE RESPONSIVE STYLES
    ======================================== */
 
-@media (max-width: 640px) {
-  .form {
-    padding: 16px;
-    border-radius: 12px;
-    margin: 0 -8px;
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  /* All cards full width on mobile */
+  .grid > * {
+    grid-column: 1;
   }
 
   .row {
@@ -166,94 +169,21 @@
     gap: 12px;
   }
 
-  .section h3 {
-    font-size: 15px;
-    margin-bottom: 12px;
-  }
-
-  /* Touch-friendly inputs */
-  .form input,
-  .form select {
-    min-height: 48px;
-    padding: 12px 16px;
-    font-size: 16px; /* Prevents iOS zoom on focus */
-    border-radius: 8px;
-    -webkit-appearance: none;
-    appearance: none;
-  }
-
-  .form select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 16px center;
-    padding-right: 40px;
-  }
-
-  .form label {
-    font-size: 13px;
-    font-weight: 600;
-  }
-
-  .group {
-    gap: 8px;
-  }
-
-  /* Stack action buttons vertically on mobile */
   .inlineActions {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     gap: 8px;
-  }
-
-  .inlineActions button {
-    width: 100%;
-    min-height: 44px;
-    justify-content: center;
-  }
-
-  .btnSecondary,
-  .btnTertiary {
-    min-height: 44px;
-    padding: 12px 16px;
-    font-size: 14px;
-    border-radius: 8px;
   }
 
   .actions {
-    margin-top: 20px;
-  }
-
-  .btnPrimary {
-    width: 100%;
-    min-height: 52px;
-    padding: 14px 24px;
-    font-size: 17px;
-    border-radius: 12px;
-    font-weight: 600;
-  }
-
-  .error {
-    font-size: 13px;
-    padding: 4px 0;
+    margin-top: 24px;
   }
 }
 
 /* Extra small screens (iPhone SE, etc.) */
 @media (max-width: 375px) {
-  .form {
-    padding: 12px;
-  }
-
-  .section {
-    padding-bottom: 16px;
-  }
-
-  .section h3 {
-    font-size: 14px;
-  }
-
-  .form input,
-  .form select {
-    padding: 10px 14px;
+  .inlineActions {
+    flex-direction: column;
   }
 }
 

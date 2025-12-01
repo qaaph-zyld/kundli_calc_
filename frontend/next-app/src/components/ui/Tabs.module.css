@@ -1,0 +1,229 @@
+/**
+ * Tabs Styles
+ * 
+ * Inspired by uiverse.io animated tab patterns
+ * Features: Sliding indicator, smooth transitions, multiple variants
+ */
+
+/* ========================================
+   CONTAINER
+   ======================================== */
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ========================================
+   TAB LIST
+   ======================================== */
+
+.tabList {
+  position: relative;
+  display: flex;
+  gap: var(--space-1);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.tabList::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========================================
+   TAB LIST VARIANTS
+   ======================================== */
+
+/* Default - with sliding underline indicator */
+.tabList.default {
+  border-bottom: 1px solid var(--border-default);
+  padding-bottom: 1px;
+}
+
+/* Pills - contained buttons */
+.tabList.pills {
+  gap: var(--space-2);
+  padding: var(--space-1);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-lg);
+}
+
+/* Underline - minimal with line */
+.tabList.underline {
+  gap: var(--space-4);
+  border-bottom: 2px solid var(--border-default);
+}
+
+/* ========================================
+   INDICATOR (animated underline)
+   ======================================== */
+
+.indicator {
+  position: absolute;
+  bottom: 0;
+  height: 2px;
+  background: var(--gradient-primary);
+  border-radius: 2px 2px 0 0;
+  transition: 
+    left var(--transition-base),
+    width var(--transition-base);
+}
+
+.tabList.underline .indicator {
+  height: 2px;
+  bottom: -2px;
+}
+
+/* ========================================
+   TAB BUTTON
+   ======================================== */
+
+.tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 
+    color var(--transition-fast),
+    background var(--transition-fast);
+  outline: none;
+}
+
+.tab:hover:not(.disabled) {
+  color: var(--text-secondary);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: -2px;
+  border-radius: var(--radius-md);
+}
+
+.tab.active {
+  color: var(--text-primary);
+}
+
+.tab.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   TAB VARIANTS
+   ======================================== */
+
+/* Default variant */
+.tab.default {
+  padding-bottom: var(--space-4);
+}
+
+.tab.default.active {
+  color: var(--color-primary-400);
+}
+
+/* Pills variant */
+.tab.pills {
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-4);
+}
+
+.tab.pills.active {
+  background: var(--gradient-primary);
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.tab.pills:hover:not(.disabled):not(.active) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Underline variant */
+.tab.underline {
+  padding: var(--space-3) 0;
+}
+
+.tab.underline.active {
+  color: var(--color-primary-400);
+}
+
+/* ========================================
+   TAB PANELS
+   ======================================== */
+
+.tabPanels {
+  margin-top: var(--space-4);
+}
+
+.tabPanel {
+  animation: fadeIn var(--transition-base) ease-out;
+  outline: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .tabList {
+    gap: 0;
+  }
+  
+  .tab {
+    flex: 1;
+    min-height: 44px;
+    padding: var(--space-3);
+    font-size: var(--text-xs);
+  }
+  
+  .tab.default {
+    padding-bottom: var(--space-3);
+  }
+  
+  .tabList.pills {
+    gap: var(--space-1);
+  }
+  
+  .tabPanels {
+    margin-top: var(--space-3);
+  }
+}
+
+/* Touch device */
+@media (hover: none) and (pointer: coarse) {
+  .tab:active:not(.disabled) {
+    opacity: 0.8;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .indicator,
+  .tab,
+  .tabPanel {
+    transition: none;
+    animation: none;
+  }
+}

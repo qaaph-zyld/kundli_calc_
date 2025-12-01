@@ -1,0 +1,307 @@
+/**
+ * Button Styles
+ * 
+ * Inspired by uiverse.io modern button patterns
+ * Features: Gradient backgrounds, glow effects, smooth animations
+ */
+
+.button {
+  /* Base layout */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  
+  /* Typography */
+  font-family: var(--font-sans);
+  font-weight: var(--font-semibold);
+  text-decoration: none;
+  white-space: nowrap;
+  
+  /* Border */
+  border: 1px solid transparent;
+  border-radius: var(--radius-lg);
+  
+  /* Interaction */
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  overflow: hidden;
+  
+  /* Transition */
+  transition: 
+    transform var(--transition-fast),
+    box-shadow var(--transition-base),
+    background var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--color-primary-400);
+  outline-offset: 2px;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ========================================
+   SIZE VARIANTS
+   ======================================== */
+
+.sm {
+  height: var(--btn-height-sm);
+  padding: 0 0.875rem;
+  font-size: var(--text-sm);
+  border-radius: var(--radius-md);
+}
+
+.md {
+  height: var(--btn-height-md);
+  padding: 0 1.25rem;
+  font-size: var(--text-sm);
+}
+
+.lg {
+  height: var(--btn-height-lg);
+  padding: 0 1.75rem;
+  font-size: var(--text-base);
+}
+
+/* ========================================
+   STYLE VARIANTS
+   ======================================== */
+
+/* Primary - Gradient with glow */
+.primary {
+  background: var(--gradient-primary);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 4px 15px rgba(102, 126, 234, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(102, 126, 234, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 
+    0 2px 10px rgba(102, 126, 234, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Secondary - Outlined with subtle fill */
+.secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+.secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.secondary:active:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(0);
+}
+
+/* Ghost - Minimal, text only */
+.ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border-color: transparent;
+}
+
+.ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+}
+
+.ghost:active:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Danger - Red gradient */
+.danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 4px 15px rgba(239, 68, 68, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.danger:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(239, 68, 68, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.danger:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Success - Green gradient */
+.success {
+  background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 4px 15px rgba(34, 197, 94, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.success:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(34, 197, 94, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.success:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* ========================================
+   MODIFIERS
+   ======================================== */
+
+.fullWidth {
+  width: 100%;
+}
+
+.loading {
+  pointer-events: none;
+}
+
+/* ========================================
+   CHILD ELEMENTS
+   ======================================== */
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.leftIcon,
+.rightIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+}
+
+/* Shine effect overlay */
+.shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+  pointer-events: none;
+}
+
+.button:hover .shine {
+  left: 100%;
+}
+
+/* ========================================
+   LOADING SPINNER
+   ======================================== */
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinnerIcon {
+  width: 1.25em;
+  height: 1.25em;
+  animation: spin 1s linear infinite;
+}
+
+.spinnerTrack {
+  opacity: 0.25;
+}
+
+.spinnerHead {
+  opacity: 0.75;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .md {
+    height: var(--btn-height-lg);
+    padding: 0 1rem;
+  }
+  
+  .lg {
+    height: var(--btn-height-xl);
+    padding: 0 1.5rem;
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .button:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+  
+  /* Disable hover animations on touch */
+  .button:hover:not(:disabled) {
+    transform: none;
+  }
+  
+  .button:hover .shine {
+    left: -100%;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .button {
+    transition: none;
+  }
+  
+  .spinnerIcon {
+    animation: none;
+  }
+  
+  .shine {
+    display: none;
+  }
+}
