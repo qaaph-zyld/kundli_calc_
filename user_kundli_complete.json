@@ -1,0 +1,499 @@
+{
+  "chart": null,
+  "panchang": {
+    "tithi_number": 21,
+    "tithi_elapsed": 0.4773,
+    "nakshatra_name": "Punarvasu",
+    "nakshatra_number": 7,
+    "nakshatra_pada": 1,
+    "yoga_name": "Siddha",
+    "yoga_number": 21,
+    "karana_number": 41
+  },
+  "dasha": null,
+  "lal_kitab": null,
+  "navamsa": null,
+  "debug": {
+    "summary": {
+      "passed": [
+        "panchang",
+        "compatibility",
+        "sahamas",
+        "critical_points",
+        "latta_system",
+        "transit_search",
+        "numerology",
+        "extended_dashas",
+        "jaimini_dashas",
+        "chakras",
+        "prashna",
+        "advanced_dashas",
+        "advanced_divisional",
+        "complete_yogas",
+        "dasa_pravesh",
+        "tajaka",
+        "mundane",
+        "chart_superimposition",
+        "additional_chakras"
+      ],
+      "failed": [
+        "birth_rectification"
+      ],
+      "all_passed": false
+    },
+    "results": {
+      "panchang": {
+        "status": "pass",
+        "data": {
+          "weekday": "Tuesday",
+          "tithi": "Dwadashi",
+          "nakshatra": "Shatabhisha",
+          "yoga": "Ganda"
+        }
+      },
+      "compatibility": {
+        "status": "pass",
+        "data": {
+          "total_score": 21.0,
+          "percentage": 58.3,
+          "recommendation": "Good match. Compatible for marriage."
+        }
+      },
+      "birth_rectification": {
+        "status": "fail",
+        "error": "'str' object has no attribute 'isoformat'"
+      },
+      "sahamas": {
+        "status": "pass",
+        "data": {
+          "total_count": 36,
+          "is_day_birth": true,
+          "key_sahamas": {
+            "fortune": {
+              "name": "Punya Saham",
+              "sanskrit": "\u092a\u0941\u0923\u094d\u092f \u0938\u0939\u092e",
+              "longitude": 342.5,
+              "sign": "Pisces",
+              "degree": 12.5,
+              "house": 6,
+              "formula": "Asc + Moon - Sun",
+              "signification": "Fortune, luck, merit, spiritual advancement"
+            },
+            "marriage": {
+              "name": "Vivaha Saham",
+              "sanskrit": "\u0935\u093f\u0935\u093e\u0939 \u0938\u0939\u092e",
+              "longitude": 80.0,
+              "sign": "Gemini",
+              "degree": 20.0,
+              "house": 9,
+              "formula": "Asc + Venus - Saturn",
+              "signification": "Marriage, partnership, spouse"
+            },
+            "children": {
+              "name": "Santana Saham",
+              "sanskrit": "\u0938\u0902\u0924\u093e\u0928 \u0938\u0939\u092e",
+              "longitude": 339.0,
+              "sign": "Pisces",
+              "degree": 9.0,
+              "house": 6,
+              "formula": "Asc + Jupiter - Moon",
+              "signification": "Children, progeny, creativity"
+            },
+            "career": {
+              "name": "Karma Saham",
+              "sanskrit": "\u0915\u0930\u094d\u092e \u0938\u0939\u092e",
+              "longitude": 57.5,
+              "sign": "Taurus",
+              "degree": 27.5,
+              "house": 8,
+              "formula": "Asc + Sun - Moon",
+              "signification": "Profession, work, duty"
+            },
+            "health": {
+              "name": "Roga Saham",
+              "sanskrit": "\u0930\u094b\u0917 \u0938\u0939\u092e",
+              "longitude": 339.0,
+              "sign": "Pisces",
+              "degree": 9.0,
+              "house": 6,
+              "formula": "Asc + Mars - Saturn",
+              "signification": "Disease, illness, health issues"
+            },
+            "longevity": {
+              "name": "Ayush Saham",
+              "sanskrit": "\u0906\u092f\u0941\u0937 \u0938\u0939\u092e",
+              "longitude": 249.0,
+              "sign": "Sagittarius",
+              "degree": 9.0,
+              "house": 3,
+              "formula": "Asc + Moon - Saturn",
+              "signification": "Longevity, lifespan"
+            }
+          }
+        }
+      },
+      "critical_points": {
+        "status": "pass",
+        "data": {
+          "summary": {
+            "mrityu_bhaga_count": 0,
+            "gandanta_count": 0,
+            "vargottama_count": 2,
+            "critical_planets": [],
+            "strong_planets": [
+              "Mars",
+              "Mercury"
+            ]
+          },
+          "mrityu_bhaga": [],
+          "navamsa_64th": {
+            "moon_navamsa_sign": "Capricorn",
+            "64th_navamsa_sign": "Leo",
+            "64th_navamsa_lord": "Sun",
+            "interpretation": "The 64th Navamsa is Leo, lorded by Sun. Sun's dasha/antardasha and transits may trigger health crises."
+          },
+          "drekkana_22nd": {
+            "moon_drekkana_sign": "Gemini",
+            "22nd_drekkana_sign": "Capricorn",
+            "22nd_drekkana_lord": "Saturn",
+            "interpretation": "The 22nd Drekkana is Capricorn, lorded by Saturn. This is another maraka point related to dangers."
+          }
+        }
+      },
+      "latta_system": {
+        "status": "pass",
+        "data": {
+          "birth_latta": {
+            "birth_nakshatra": "Shatabhisha",
+            "birth_nakshatra_index": 23,
+            "afflicting_planets": [
+              {
+                "planet": "Sun",
+                "planet_nakshatra": "Hasta",
+                "latta_count": 12
+              }
+            ],
+            "is_afflicted": true,
+            "interpretation": "Latta on Janma Nakshatra from: Sun. This indicates obstacles and challenges in life areas signified by these planets."
+          },
+          "all_lattas": {
+            "lattas_by_planet": {
+              "Sun": {
+                "planet": "Sun",
+                "planet_nakshatra": "Hasta",
+                "planet_nakshatra_index": 12,
+                "latta_count": 12,
+                "kicked_nakshatra": "Shatabhisha",
+                "kicked_nakshatra_index": 23
+              },
+              "Moon": {
+                "planet": "Moon",
+                "planet_nakshatra": "Shatabhisha",
+                "planet_nakshatra_index": 23,
+                "latta_count": 22,
+                "kicked_nakshatra": "Jyeshtha",
+                "kicked_nakshatra_index": 17
+              },
+              "Mars": {
+                "planet": "Mars",
+                "planet_nakshatra": "Rohini",
+                "planet_nakshatra_index": 3,
+                "latta_count": 3,
+                "kicked_nakshatra": "Ardra",
+                "kicked_nakshatra_index": 5
+              },
+              "Mercury": {
+                "planet": "Mercury",
+                "planet_nakshatra": "Chitra",
+                "planet_nakshatra_index": 13,
+                "latta_count": 7,
+                "kicked_nakshatra": "Purva Ashadha",
+                "kicked_nakshatra_index": 19
+              },
+              "Jupiter": {
+                "planet": "Jupiter",
+                "planet_nakshatra": "Punarvasu",
+                "planet_nakshatra_index": 6,
+                "latta_count": 6,
+                "kicked_nakshatra": "Uttara Phalguni",
+                "kicked_nakshatra_index": 11
+              },
+              "Venus": {
+                "planet": "Venus",
+                "planet_nakshatra": "Purva Phalguni",
+                "planet_nakshatra_index": 10,
+                "latta_count": 5,
+                "kicked_nakshatra": "Swati",
+                "kicked_nakshatra_index": 14
+              },
+              "Saturn": {
+                "planet": "Saturn",
+                "planet_nakshatra": "Purva Ashadha",
+                "planet_nakshatra_index": 19,
+                "latta_count": 8,
+                "kicked_nakshatra": "Revati",
+                "kicked_nakshatra_index": 26
+              },
+              "Rahu": {
+                "planet": "Rahu",
+                "planet_nakshatra": "Shravana",
+                "planet_nakshatra_index": 21,
+                "latta_count": 9,
+                "kicked_nakshatra": "Krittika",
+                "kicked_nakshatra_index": 2
+              },
+              "Ketu": {
+                "planet": "Ketu",
+                "planet_nakshatra": "Pushya",
+                "planet_nakshatra_index": 7,
+                "latta_count": 19,
+                "kicked_nakshatra": "Uttara Bhadrapada",
+                "kicked_nakshatra_index": 25
+              }
+            },
+            "lattas_by_nakshatra": {
+              "Krittika": [
+                "Rahu"
+              ],
+              "Ardra": [
+                "Mars"
+              ],
+              "Uttara Phalguni": [
+                "Jupiter"
+              ],
+              "Swati": [
+                "Venus"
+              ],
+              "Jyeshtha": [
+                "Moon"
+              ],
+              "Purva Ashadha": [
+                "Mercury"
+              ],
+              "Shatabhisha": [
+                "Sun"
+              ],
+              "Uttara Bhadrapada": [
+                "Ketu"
+              ],
+              "Revati": [
+                "Saturn"
+              ]
+            },
+            "heavily_afflicted_nakshatras": {}
+          }
+        }
+      },
+      "transit_search": {
+        "status": "pass",
+        "data": {
+          "total_events": 20,
+          "sample_event": {
+            "date": "2026-01-08",
+            "transit_planet": "Rahu",
+            "aspect": "conjunction",
+            "target": "Natal Moon",
+            "longitude": 314.3
+          }
+        }
+      },
+      "numerology": {
+        "status": "pass",
+        "data": {
+          "birth_number": {
+            "number": 9,
+            "name": "The Humanitarian",
+            "planet": "Mars",
+            "characteristics": [
+              "Compassion",
+              "Idealism",
+              "Completion",
+              "Universal love",
+              "Wisdom",
+              "Service"
+            ]
+          },
+          "destiny_number": {
+            "number": 11,
+            "name": "The Diplomat",
+            "planet": "Moon",
+            "characteristics": [
+              "Cooperation",
+              "Sensitivity",
+              "Balance",
+              "Intuition",
+              "Adaptability",
+              "Receptivity"
+            ]
+          },
+          "name_number": {
+            "number": 1,
+            "name": "The Leader",
+            "planet": "Sun"
+          }
+        }
+      },
+      "extended_dashas": {
+        "status": "pass",
+        "data": {
+          "systems": [
+            "moola_dasha",
+            "niryana_shodashottari",
+            "panchottari",
+            "shatabdika",
+            "chaturashthi_sama",
+            "dwadashottari",
+            "shashti_hayani",
+            "shat_trimsha_sama",
+            "karaka_dasha",
+            "mandooka"
+          ]
+        }
+      },
+      "jaimini_dashas": {
+        "status": "pass",
+        "data": {
+          "systems": [
+            "narayana_dasha",
+            "sudasa_dasha",
+            "dwi_saptati_sama",
+            "sthira_dasha",
+            "shoola_dasha"
+          ]
+        }
+      },
+      "chakras": {
+        "status": "pass",
+        "data": {
+          "systems": [
+            "surya_chakra",
+            "chandra_chakra",
+            "bhava_chakra",
+            "nakshatra_chakra"
+          ]
+        }
+      },
+      "prashna": {
+        "status": "pass",
+        "data": {
+          "question_category": "career",
+          "prashna_lagna": {
+            "sign": "Libra",
+            "degree": 20.0,
+            "nakshatra": "Vishakha",
+            "lord": "Venus"
+          },
+          "favorable": true
+        }
+      },
+      "advanced_dashas": {
+        "status": "pass",
+        "data": {
+          "systems": [
+            "kalachakra",
+            "ashtottari",
+            "shodasottari",
+            "tribhagi_vimsottari",
+            "chara_parasara",
+            "chara_knrao",
+            "yogardha",
+            "trikona",
+            "lagna_kendradi",
+            "niryaana_shoola",
+            "brahma",
+            "varnada",
+            "tara",
+            "patyayini",
+            "sudarsana_chakra",
+            "tithi_ashtottari",
+            "tithi_yogini",
+            "lagnaamsaka",
+            "padanaathaamsa",
+            "drig"
+          ]
+        }
+      },
+      "advanced_divisional": {
+        "status": "pass",
+        "data": {
+          "d81_sun": "Cancer",
+          "d108_sun": "Pisces",
+          "d144_sun": "Capricorn"
+        }
+      },
+      "complete_yogas": {
+        "status": "pass",
+        "data": {
+          "total_checked": 8,
+          "total_found": 8,
+          "summary": "Found 8 yogas: 2 Raja, 0 Dhana, 1 Arishta yogas"
+        }
+      },
+      "dasa_pravesh": {
+        "status": "pass",
+        "data": {
+          "dasa_lord": "Rahu",
+          "ascendant": {
+            "degree": 277.911,
+            "sign": "Capricorn"
+          }
+        }
+      },
+      "tajaka": {
+        "status": "pass",
+        "data": {
+          "year_number": 35,
+          "muntha": {
+            "sign": "Sagittarius",
+            "house": 8
+          },
+          "year_lord": "Mercury"
+        }
+      },
+      "mundane": {
+        "status": "pass",
+        "data": {
+          "chart_type": "Solar Aries Ingress 2024",
+          "ascendant": {
+            "longitude": 166.57246666666668,
+            "sign": "Virgo"
+          },
+          "government": "Moderate governmental activities"
+        }
+      },
+      "chart_superimposition": {
+        "status": "pass",
+        "data": {
+          "aspect_count": 32,
+          "harmony_score": {
+            "score": 37.5,
+            "harmonious_aspects": 10,
+            "challenging_aspects": 18,
+            "neutral_aspects": 4,
+            "assessment": "Mixed compatibility; requires effort"
+          }
+        }
+      },
+      "additional_chakras": {
+        "status": "pass",
+        "data": {
+          "tripataki": {
+            "chakra_name": "Tripataki Chakra"
+          },
+          "shoola": {
+            "chakra_name": "Shoola Chakra"
+          },
+          "sarvatobhadra": {
+            "chakra_name": "Sarvatobhadra Chakra"
+          },
+          "kalachakra": {
+            "chakra_name": "Kalachakra (Enhanced)"
+          },
+          "durga": {
+            "chakra_name": "Durga Chakra (Kota)"
+          }
+        }
+      }
+    }
+  }
+}
