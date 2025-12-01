@@ -5,7 +5,7 @@ Gate: GATE_5
 Version: 1.0.0
 """
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Path
 from pydantic import BaseModel, Field
 from typing import Dict, List, Any, Optional
 from datetime import datetime
@@ -76,7 +76,7 @@ async def calculate_kp_data(request: KPRequest) -> Dict[str, Any]:
 
 @router.get("/position/{longitude}")
 async def get_kp_position(
-    longitude: float = Query(..., ge=0, lt=360, description="Sidereal longitude")
+    longitude: float = Path(..., ge=0, lt=360, description="Sidereal longitude")
 ) -> Dict[str, Any]:
     """
     Get KP position details for any longitude
@@ -179,7 +179,7 @@ async def get_ruling_planets(request: RulingPlanetsRequest) -> Dict[str, Any]:
 
 @router.get("/significators/{house_num}")
 async def get_house_significators(
-    house_num: int = Query(..., ge=1, le=12),
+    house_num: int = Path(..., ge=1, le=12, description="House number 1-12"),
     planets: str = Query(..., description="Comma-separated planet longitudes")
 ) -> Dict[str, Any]:
     """

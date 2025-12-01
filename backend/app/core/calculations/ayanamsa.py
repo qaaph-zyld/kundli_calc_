@@ -10,6 +10,7 @@ from typing import Dict, Optional, Any, List, Set
 from app.core.validation.ayanamsa_validator import AyanamsaValidator, AyanamsaValidationError
 from app.core.monitoring.ayanamsa_monitor import AyanamsaMonitor
 from app.core.cache import CalculationCache
+import swisseph as swe
 
 def profile_performance(func):
     @wraps(func)
@@ -95,39 +96,28 @@ class EnhancedAyanamsaManager:
     
     @profile_performance
     def _calculate_precise_ayanamsa(self, date: datetime, system: str = 'LAHIRI', apply_nutation: bool = True) -> float:
-        """Internal method for ayanamsa calculation with enhanced precision"""
+        """Internal method for ayanamsa calculation using Swiss Ephemeris"""
         # Validate inputs
         if system not in self.ayanamsa_systems:
             raise ValueError(f"Invalid ayanamsa system: {system}")
         
         try:
             jd = self._to_julian_day(date)
-            system_config = self.ayanamsa_systems[system]
             
-            # Mock ayanamsa values for testing
-            ayanamsa_values = {
-                "lahiri": 23.85,      # Lahiri or Chitrapaksha
-                "raman": 22.50,       # N.C. Lahiri / K.S. Krishnamurti
-                "krishnamurti": 23.0, # K.S. Krishnamurti
-                "fagan_bradley": 24.0 # Fagan-Bradley
+            # Map system name to Swiss Ephemeris sidereal mode
+            swe_sid_modes = {
+                'LAHIRI': swe.SIDM_LAHIRI,
+                'RAMAN': swe.SIDM_RAMAN,
+                'KRISHNAMURTI': swe.SIDM_KRISHNAMURTI,
+                'YUKTESHWAR': swe.SIDM_YUKTESHWAR,
+                'JN_BHASIN': swe.SIDM_JN_BHASIN,
             }
             
-            ayanamsa = ayanamsa_values.get(system_config['id'].lower(), 23.15)
+            sid_mode = swe_sid_modes.get(system, swe.SIDM_LAHIRI)
+            swe.set_sid_mode(sid_mode)
             
-            # Apply historical correction if any
-            ayanamsa += float(system_config['historical_correction'])
-            
-            # Apply nutation if requested
-            if apply_nutation and self.include_nutation:
-                # Mock nutation value for testing
-                nutation = 0.0
-                ayanamsa += nutation / 3600.0  # Convert arcseconds to degrees
-            
-            # Apply precession correction
-            years_since_j2000 = (jd - 2451545.0) / 365.25
-            precession_correction = (float(system_config['annual_precession']) * 
-                                   years_since_j2000) / 3600.0
-            ayanamsa += precession_correction
+            # Get precise ayanamsa from Swiss Ephemeris
+            ayanamsa = swe.get_ayanamsa_ut(jd)
             
             return round(ayanamsa, self.precision)
             
@@ -137,15 +127,23 @@ class EnhancedAyanamsaManager:
     
     @lru_cache(maxsize=32)
     def _calculate_nutation(self, jd: float) -> float:
-        """Calculate nutation with minimal caching for memory efficiency"""
-        # Mock nutation value for testing
-        return 0.0
+        """Calculate nutation using Swiss Ephemeris"""
+        try:
+            # Get nutation from Swiss Ephemeris
+            nut = swe.nutation(jd)
+            return nut[0]  # Nutation in longitude (degrees)
+        except Exception:
+            return 0.0
     
     @staticmethod
     def _to_julian_day(date: datetime) -> float:
         """Convert datetime to Julian Day with high precision"""
-        # Mock Julian Day calculation for testing
-        return 2451545.0
+        return swe.julday(
+            date.year,
+            date.month,
+            date.day,
+            date.hour + date.minute / 60.0 + date.second / 3600.0
+        )
     
     def validate_system(self, system: str) -> bool:
         """Validate ayanamsa system name"""
@@ -332,11 +330,23 @@ class AyanamsaSystem:
 
 class MockAyanamsaManager:
     """
-    Ayanamsa Calculations
+    Ayanamsa Calculations using Swiss Ephemeris
     PGF Protocol: AYAN_001
     Gate: GATE_4
-    Version: 1.0.0
+    Version: 1.1.0
+    
+    Note: Despite the name "Mock", this now uses real Swiss Ephemeris calculations.
+    The name is kept for backward compatibility.
     """
+
+    # Map ayanamsa type to Swiss Ephemeris sidereal mode
+    SWE_SID_MODES = {
+        "lahiri": swe.SIDM_LAHIRI,
+        "raman": swe.SIDM_RAMAN,
+        "krishnamurti": swe.SIDM_KRISHNAMURTI,
+        "fagan_bradley": swe.SIDM_FAGAN_BRADLEY,
+        "yukteshwar": swe.SIDM_YUKTESHWAR,
+    }
 
     def __init__(self):
         """Initialize manager"""
@@ -347,7 +357,7 @@ class MockAyanamsaManager:
         date: datetime,
         ayanamsa_type: str = "lahiri"
     ) -> float:
-        """Get ayanamsa value
+        """Get ayanamsa value using Swiss Ephemeris
         
         Args:
             date: Date for calculation
@@ -356,15 +366,20 @@ class MockAyanamsaManager:
         Returns:
             Ayanamsa value in degrees
         """
-        # Mock ayanamsa values for testing
-        ayanamsa_values = {
-            "lahiri": 23.85,      # Lahiri or Chitrapaksha
-            "raman": 22.50,       # N.C. Lahiri / K.S. Krishnamurti
-            "krishnamurti": 23.0, # K.S. Krishnamurti
-            "fagan_bradley": 24.0 # Fagan-Bradley
-        }
+        # Calculate Julian Day
+        jd = swe.julday(
+            date.year,
+            date.month,
+            date.day,
+            date.hour + date.minute / 60.0 + date.second / 3600.0
+        )
         
-        return ayanamsa_values.get(ayanamsa_type.lower(), 23.15)
+        # Set the sidereal mode
+        sid_mode = self.SWE_SID_MODES.get(ayanamsa_type.lower(), swe.SIDM_LAHIRI)
+        swe.set_sid_mode(sid_mode)
+        
+        # Get ayanamsa from Swiss Ephemeris
+        return swe.get_ayanamsa_ut(jd)
     
     def apply_ayanamsa(
         self,

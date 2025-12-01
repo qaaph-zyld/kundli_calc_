@@ -17,7 +17,7 @@ class HouseCalculator:
         """Initialize calculator"""
         self.initialized = True
         self.validator = HouseValidator()
-        self.house_system = 'PLACIDUS'  # Default house system
+        self.house_system = 'WHOLE_SIGN'  # Default house system (Vedic standard)
         
         # Define supported house systems
         self.house_systems = {

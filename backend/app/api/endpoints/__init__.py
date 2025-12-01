@@ -4,7 +4,6 @@ All endpoint routers exported here
 """
 
 from . import health
-from . import kundli
 from . import ashtakavarga
 from . import bhava
 from . import prediction
@@ -24,7 +23,6 @@ from . import famous_charts
 
 __all__ = [
     "health",
-    "kundli", 
     "ashtakavarga",
     "bhava",
     "prediction",

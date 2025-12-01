@@ -212,9 +212,18 @@ class AstronomicalCalculator:
         longitude: float,
         ascendant: float
     ) -> House:
-        """Get house from longitude and ascendant"""
-        house_longitude = (longitude - ascendant + 360) % 360
-        house_index = int(house_longitude / 30)
+        """Get house from longitude and ascendant using Whole Sign system.
+        
+        In Whole Sign houses, the first house is the entire sign containing
+        the ascendant. Each subsequent house is the next sign.
+        """
+        # Get sign indices (0-11)
+        planet_sign = int(longitude / 30)
+        asc_sign = int(ascendant / 30)
+        
+        # Calculate house number using Whole Sign logic
+        # House 1 = ascendant's sign, House 2 = next sign, etc.
+        house_index = (planet_sign - asc_sign + 12) % 12
         return list(House)[house_index]
     
     def _calculate_aspect(
@@ -336,12 +345,12 @@ class AstronomicalCalculator:
                     distance = res[0][2]
                     speed = res[0][3]
             
-            # Calculate houses
+            # Calculate houses using Whole Sign (Vedic default)
             houses = swe.houses(
                 jd,
                 location.latitude,
                 location.longitude,
-                b'P'  # Placidus house system
+                b'W'  # Whole Sign house system (Vedic default)
             )
             ascendant = houses[1][0]
             
