@@ -583,11 +583,318 @@ class ManglikDosha:
             return "Strong Manglik - Should marry Manglik partner or perform Kumbh Vivah."
 
 
+class DashakootMilan:
+    """
+    Dashakoot (10-fold) Matching System
+    
+    South Indian tradition with 10 kootas (total 50 points):
+    1. Dina (Nakshatra) - 3 points
+    2. Gana - 6 points  
+    3. Mahendra - 3 points
+    4. Stree Deergha - 3 points
+    5. Yoni - 4 points
+    6. Rasi (Bhakoot) - 7 points
+    7. Rasi Lord (Graha Maitri) - 5 points
+    8. Vasya - 2 points
+    9. Rajju - 8 points
+    10. Vedha - 9 points (absence of vedha = points)
+    """
+    
+    # Rajju classification (body parts)
+    # Rajju dosha occurs when both nakshatras fall in same Rajju
+    NAKSHATRA_RAJJU = {
+        # Paada (Feet): 1, 5, 12, 14, 21, 25
+        "paada": [0, 4, 11, 13, 20, 24],  # 0-indexed
+        # Kati (Waist): 2, 6, 13, 15, 22, 26
+        "kati": [1, 5, 12, 14, 21, 25],
+        # Nabhi (Navel): 3, 7, 16, 23, 27
+        "nabhi": [2, 6, 15, 22, 26],
+        # Kantha (Neck): 4, 8, 10, 17, 19, 24
+        "kantha": [3, 7, 9, 16, 18, 23],
+        # Shira (Head): 9, 11, 18, 20
+        "shira": [8, 10, 17, 19]
+    }
+    
+    # Vedha (obstruction) pairs - these nakshatras should not match
+    VEDHA_PAIRS = [
+        (0, 17),   # Ashwini - Jyeshtha
+        (1, 16),   # Bharani - Anuradha
+        (2, 26),   # Krittika - Revati
+        (3, 21),   # Rohini - Shravana
+        (4, 22),   # Mrigashira - Dhanishta
+        (5, 20),   # Ardra - Uttara Ashadha
+        (6, 19),   # Punarvasu - Purva Ashadha
+        (7, 18),   # Pushya - Mula
+        (9, 12),   # Magha - Hasta
+        (10, 11),  # P.Phalguni - U.Phalguni
+        (13, 24),  # Chitra - P.Bhadrapada
+        (14, 25),  # Swati - U.Bhadrapada
+        (15, 23),  # Vishakha - Shatabhisha
+    ]
+    
+    def __init__(self):
+        pass
+    
+    def calculate_dashakoot(
+        self,
+        boy_moon_lon: float,
+        girl_moon_lon: float
+    ) -> Dict[str, Any]:
+        """Calculate 10-fold compatibility"""
+        boy_nak = int(boy_moon_lon / (360 / 27))
+        girl_nak = int(girl_moon_lon / (360 / 27))
+        boy_sign = int(boy_moon_lon / 30)
+        girl_sign = int(girl_moon_lon / 30)
+        
+        kootas = []
+        total = 0.0
+        max_total = 50.0
+        
+        # 1. Dina Koota (3 points)
+        dina = self._check_dina(boy_nak, girl_nak)
+        kootas.append(dina)
+        total += dina.obtained_points
+        
+        # 2. Gana Koota (6 points)
+        gana = self._check_gana(boy_nak, girl_nak)
+        kootas.append(gana)
+        total += gana.obtained_points
+        
+        # 3. Mahendra (3 points)
+        mahendra = self._check_mahendra(boy_nak, girl_nak)
+        kootas.append(mahendra)
+        total += mahendra.obtained_points
+        
+        # 4. Stree Deergha (3 points)
+        stree_deergha = self._check_stree_deergha(boy_nak, girl_nak)
+        kootas.append(stree_deergha)
+        total += stree_deergha.obtained_points
+        
+        # 5. Yoni (4 points) - same as Ashtakoot
+        yoni = self._check_yoni(boy_nak, girl_nak)
+        kootas.append(yoni)
+        total += yoni.obtained_points
+        
+        # 6. Rasi/Bhakoot (7 points)
+        rasi = self._check_rasi(boy_sign, girl_sign)
+        kootas.append(rasi)
+        total += rasi.obtained_points
+        
+        # 7. Rasi Lord (5 points)
+        rasi_lord = self._check_rasi_lord(boy_sign, girl_sign)
+        kootas.append(rasi_lord)
+        total += rasi_lord.obtained_points
+        
+        # 8. Vasya (2 points)
+        vasya = self._check_vasya(boy_sign, girl_sign)
+        kootas.append(vasya)
+        total += vasya.obtained_points
+        
+        # 9. Rajju (8 points)
+        rajju = self._check_rajju(boy_nak, girl_nak)
+        kootas.append(rajju)
+        total += rajju.obtained_points
+        
+        # 10. Vedha (9 points)
+        vedha = self._check_vedha(boy_nak, girl_nak)
+        kootas.append(vedha)
+        total += vedha.obtained_points
+        
+        percentage = (total / max_total) * 100
+        
+        return {
+            "system": "Dashakoot",
+            "total_points": total,
+            "max_points": max_total,
+            "percentage": round(percentage, 1),
+            "kootas": [
+                {
+                    "name": k.name,
+                    "max": k.max_points,
+                    "obtained": k.obtained_points,
+                    "quality": k.quality,
+                    "description": k.description
+                }
+                for k in kootas
+            ],
+            "recommendation": self._get_recommendation(total, percentage)
+        }
+    
+    def _check_dina(self, boy_nak: int, girl_nak: int) -> KootaResult:
+        """Dina Koota - Nakshatra compatibility"""
+        count = (boy_nak - girl_nak + 27) % 27
+        tara = (count % 9) + 1
+        
+        # Favorable taras: 1, 2, 4, 6, 8, 9
+        favorable = [1, 2, 4, 6, 8, 9]
+        
+        if tara in favorable:
+            return KootaResult("Dina", 3.0, 3.0, "Favorable Dina - Good", "good")
+        elif tara in [3, 5]:
+            return KootaResult("Dina", 3.0, 1.5, "Moderate Dina", "average")
+        else:
+            return KootaResult("Dina", 3.0, 0.0, "Unfavorable Dina", "poor")
+    
+    def _check_gana(self, boy_nak: int, girl_nak: int) -> KootaResult:
+        """Gana Koota - Same as Ashtakoot"""
+        boy_gana = NAKSHATRA_GANA[boy_nak]
+        girl_gana = NAKSHATRA_GANA[girl_nak]
+        
+        if boy_gana == girl_gana:
+            return KootaResult("Gana", 6.0, 6.0, f"Same Gana ({boy_gana})", "good")
+        elif (boy_gana == "Deva" and girl_gana == "Manushya") or \
+             (boy_gana == "Manushya" and girl_gana == "Deva"):
+            return KootaResult("Gana", 6.0, 5.0, "Deva-Manushya compatible", "good")
+        elif "Rakshasa" in [boy_gana, girl_gana]:
+            return KootaResult("Gana", 6.0, 0.0, "Rakshasa incompatible", "poor")
+        else:
+            return KootaResult("Gana", 6.0, 3.0, "Moderate Gana match", "average")
+    
+    def _check_mahendra(self, boy_nak: int, girl_nak: int) -> KootaResult:
+        """Mahendra Koota - For progeny and prosperity"""
+        count = (boy_nak - girl_nak + 27) % 27
+        
+        # Favorable if boy's nakshatra is 4th, 7th, 10th, 13th, 16th, 19th, 22nd, 25th from girl's
+        favorable_positions = [4, 7, 10, 13, 16, 19, 22, 25]
+        
+        if count in favorable_positions:
+            return KootaResult("Mahendra", 3.0, 3.0, "Mahendra present - Prosperity", "good")
+        else:
+            return KootaResult("Mahendra", 3.0, 0.0, "Mahendra absent", "average")
+    
+    def _check_stree_deergha(self, boy_nak: int, girl_nak: int) -> KootaResult:
+        """Stree Deergha - For longevity of wife"""
+        count = (boy_nak - girl_nak + 27) % 27
+        
+        # Boy's nakshatra should be at least 13 away from girl's
+        if count >= 13:
+            return KootaResult("Stree Deergha", 3.0, 3.0, "Stree Deergha fulfilled", "good")
+        elif count >= 7:
+            return KootaResult("Stree Deergha", 3.0, 1.5, "Partial Stree Deergha", "average")
+        else:
+            return KootaResult("Stree Deergha", 3.0, 0.0, "Stree Deergha not met", "poor")
+    
+    def _check_yoni(self, boy_nak: int, girl_nak: int) -> KootaResult:
+        """Yoni Koota - Animal compatibility"""
+        boy_yoni = NAKSHATRA_YONI[boy_nak][0]
+        girl_yoni = NAKSHATRA_YONI[girl_nak][0]
+        
+        if boy_yoni == girl_yoni:
+            return KootaResult("Yoni", 4.0, 4.0, f"Same Yoni ({boy_yoni})", "good")
+        
+        key = (boy_yoni, girl_yoni)
+        rev_key = (girl_yoni, boy_yoni)
+        
+        if key in YONI_COMPAT or rev_key in YONI_COMPAT:
+            score = YONI_COMPAT.get(key, YONI_COMPAT.get(rev_key, 2))
+            quality = "good" if score >= 3 else "poor" if score == 0 else "average"
+            return KootaResult("Yoni", 4.0, float(score), f"{boy_yoni}-{girl_yoni}", quality)
+        
+        return KootaResult("Yoni", 4.0, 2.0, "Neutral Yoni", "average")
+    
+    def _check_rasi(self, boy_sign: int, girl_sign: int) -> KootaResult:
+        """Rasi/Bhakoot Koota"""
+        diff = abs(boy_sign - girl_sign)
+        if diff > 6:
+            diff = 12 - diff
+        
+        # 6/8 and 2/12 are bad
+        rel = (boy_sign - girl_sign + 12) % 12 + 1
+        
+        if diff in [0, 4, 5]:  # Same, 5th, 6th
+            return KootaResult("Rasi", 7.0, 7.0, "Excellent Rasi match", "good")
+        elif rel in [2, 6, 8, 12]:
+            return KootaResult("Rasi", 7.0, 0.0, f"Rasi Dosha ({rel}th)", "poor")
+        else:
+            return KootaResult("Rasi", 7.0, 3.5, "Moderate Rasi", "average")
+    
+    def _check_rasi_lord(self, boy_sign: int, girl_sign: int) -> KootaResult:
+        """Rasi Lord compatibility"""
+        boy_lord = SIGN_LORDS[boy_sign]
+        girl_lord = SIGN_LORDS[girl_sign]
+        
+        if boy_lord == girl_lord:
+            return KootaResult("Rasi Lord", 5.0, 5.0, "Same lord", "good")
+        elif girl_lord in PLANET_FRIENDS.get(boy_lord, []):
+            return KootaResult("Rasi Lord", 5.0, 4.0, "Friendly lords", "good")
+        elif girl_lord in PLANET_ENEMIES.get(boy_lord, []):
+            return KootaResult("Rasi Lord", 5.0, 0.0, "Enemy lords", "poor")
+        else:
+            return KootaResult("Rasi Lord", 5.0, 2.5, "Neutral lords", "average")
+    
+    def _check_vasya(self, boy_sign: int, girl_sign: int) -> KootaResult:
+        """Vasya Koota"""
+        vashya_map = {
+            0: "chatushpada", 1: "chatushpada", 2: "dwipad", 3: "jalchar",
+            4: "vanchar", 5: "dwipad", 6: "dwipad", 7: "keet",
+            8: "dwipad", 9: "chatushpada", 10: "dwipad", 11: "jalchar"
+        }
+        
+        boy_v = vashya_map[boy_sign]
+        girl_v = vashya_map[girl_sign]
+        
+        if boy_v == girl_v:
+            return KootaResult("Vasya", 2.0, 2.0, "Same Vasya", "good")
+        elif boy_v == "dwipad":
+            return KootaResult("Vasya", 2.0, 1.0, "Partial Vasya", "average")
+        else:
+            return KootaResult("Vasya", 2.0, 0.5, "Different Vasya", "average")
+    
+    def _check_rajju(self, boy_nak: int, girl_nak: int) -> KootaResult:
+        """Rajju Koota - Most important, affects longevity"""
+        boy_rajju = None
+        girl_rajju = None
+        
+        for rajju_type, nakshatras in self.NAKSHATRA_RAJJU.items():
+            if boy_nak in nakshatras:
+                boy_rajju = rajju_type
+            if girl_nak in nakshatras:
+                girl_rajju = rajju_type
+        
+        if boy_rajju is None or girl_rajju is None:
+            return KootaResult("Rajju", 8.0, 8.0, "Rajju not applicable", "good")
+        
+        if boy_rajju != girl_rajju:
+            return KootaResult("Rajju", 8.0, 8.0, "Different Rajju - Safe", "good")
+        else:
+            rajju_desc = {
+                "paada": "Paada Rajju - Affects travel",
+                "kati": "Kati Rajju - Affects prosperity",
+                "nabhi": "Nabhi Rajju - Affects children",
+                "kantha": "Kantha Rajju - Affects family",
+                "shira": "Shira Rajju - Affects longevity"
+            }
+            return KootaResult("Rajju", 8.0, 0.0, rajju_desc.get(boy_rajju, "Same Rajju"), "poor")
+    
+    def _check_vedha(self, boy_nak: int, girl_nak: int) -> KootaResult:
+        """Vedha Koota - Obstruction check"""
+        pair = (min(boy_nak, girl_nak), max(boy_nak, girl_nak))
+        
+        for vedha_pair in self.VEDHA_PAIRS:
+            sorted_vedha = (min(vedha_pair), max(vedha_pair))
+            if pair == sorted_vedha:
+                return KootaResult("Vedha", 9.0, 0.0, "Vedha Dosha present", "poor")
+        
+        return KootaResult("Vedha", 9.0, 9.0, "No Vedha - Good", "good")
+    
+    def _get_recommendation(self, total: float, percentage: float) -> str:
+        """Get recommendation based on Dashakoot score"""
+        if percentage >= 70:
+            return "Excellent match by Dashakoot. Highly recommended."
+        elif percentage >= 55:
+            return "Good match. Compatible for marriage."
+        elif percentage >= 40:
+            return "Average match. Some remedies may help."
+        else:
+            return "Below average. Careful consideration needed."
+
+
 def calculate_compatibility(
     boy_moon_lon: float,
     girl_moon_lon: float,
     boy_mars_house: int = None,
-    girl_mars_house: int = None
+    girl_mars_house: int = None,
+    system: str = "ashtakoot"
 ) -> Dict[str, Any]:
     """
     Complete compatibility analysis
@@ -597,39 +904,57 @@ def calculate_compatibility(
         girl_moon_lon: Girl's Moon longitude
         boy_mars_house: Boy's Mars house (for Manglik check)
         girl_mars_house: Girl's Mars house (for Manglik check)
+        system: "ashtakoot" (36 points), "dashakoot" (50 points), or "both"
         
     Returns:
         Complete compatibility analysis
     """
-    ashtakoot = AshtakootMilan()
-    result = ashtakoot.calculate_compatibility(boy_moon_lon, girl_moon_lon)
+    output = {}
     
-    output = {
-        "total_score": result.total_points,
-        "max_score": result.max_points,
-        "percentage": round(result.percentage, 1),
-        "recommendation": result.recommendation,
-        "kootas": [
-            {
-                "name": k.name,
-                "max": k.max_points,
-                "obtained": k.obtained_points,
-                "quality": k.quality,
-                "description": k.description
-            }
-            for k in result.kootas
-        ],
-        "doshas": result.doshas,
-        "detailed_analysis": result.detailed_analysis
-    }
+    if system in ["ashtakoot", "both"]:
+        ashtakoot = AshtakootMilan()
+        result = ashtakoot.calculate_compatibility(boy_moon_lon, girl_moon_lon)
+        
+        output["ashtakoot"] = {
+            "total_score": result.total_points,
+            "max_score": result.max_points,
+            "percentage": round(result.percentage, 1),
+            "recommendation": result.recommendation,
+            "kootas": [
+                {
+                    "name": k.name,
+                    "max": k.max_points,
+                    "obtained": k.obtained_points,
+                    "quality": k.quality,
+                    "description": k.description
+                }
+                for k in result.kootas
+            ],
+            "doshas": result.doshas,
+            "detailed_analysis": result.detailed_analysis
+        }
+    
+    if system in ["dashakoot", "both"]:
+        dashakoot = DashakootMilan()
+        output["dashakoot"] = dashakoot.calculate_dashakoot(boy_moon_lon, girl_moon_lon)
+    
+    # For backward compatibility, if only ashtakoot requested, flatten
+    if system == "ashtakoot":
+        output = output["ashtakoot"]
     
     # Add Manglik analysis if Mars houses provided
     if boy_mars_house is not None:
         manglik = ManglikDosha()
-        output["boy_manglik"] = manglik.check_manglik(boy_mars_house, 0)
+        if isinstance(output, dict) and "ashtakoot" in output:
+            output["boy_manglik"] = manglik.check_manglik(boy_mars_house, 0)
+        else:
+            output["boy_manglik"] = manglik.check_manglik(boy_mars_house, 0)
     
     if girl_mars_house is not None:
         manglik = ManglikDosha()
-        output["girl_manglik"] = manglik.check_manglik(girl_mars_house, 0)
+        if isinstance(output, dict) and "ashtakoot" in output:
+            output["girl_manglik"] = manglik.check_manglik(girl_mars_house, 0)
+        else:
+            output["girl_manglik"] = manglik.check_manglik(girl_mars_house, 0)
     
     return output
