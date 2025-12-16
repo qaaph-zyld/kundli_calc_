@@ -226,11 +226,19 @@ async def calculate_chart(
         asc_deg = float(houses_dict["ascendant"])
         asc_sign_num = int(asc_deg / 30)
         
+        # Add house numbers and nakshatra data to planetary positions
+        nak_calc = NakshatraCalculator()
         for pname, pdata in planetary_positions_api.items():
             planet_sign_num = pdata["sign_num"]
             # Whole Sign house calculation
             house_num = ((planet_sign_num - asc_sign_num) % 12) + 1
             pdata["house"] = house_num
+            
+            # Add nakshatra data
+            nak_data = nak_calc.calculate_nakshatra(pdata["longitude"])
+            pdata["nakshatra"] = nak_data["name"]
+            pdata["nakshatra_lord"] = nak_data["lord"]
+            pdata["nakshatra_pada"] = nak_data["pada"]
 
         # Build response payload
         result_payload: Dict[str, Any] = {

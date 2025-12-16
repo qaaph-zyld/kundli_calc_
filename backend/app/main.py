@@ -15,7 +15,8 @@ from pathlib import Path
 
 from .api.endpoints import (
     charts, health, ayanamsa, panchang, dasha, geo, divisional, debug, location, famous_charts,
-    lal_kitab, varshphal
+    lal_kitab, varshphal, yogas, transits, kp_system, shadbala, ashtakavarga, bhava, prediction,
+    additional_dashas, horoscope, compatibility
 )
 from .core.config import settings
 from .core.errors.handlers import ErrorHandler
@@ -127,6 +128,66 @@ app.include_router(
     varshphal.router,
     prefix="/api/v1",
     tags=["varshphal"]
+)
+
+app.include_router(
+    yogas.router,
+    prefix="/api/v1/yogas",
+    tags=["yogas"]
+)
+
+app.include_router(
+    transits.router,
+    prefix="/api/v1/transits",
+    tags=["transits"]
+)
+
+app.include_router(
+    kp_system.router,
+    prefix="/api/v1/kp",
+    tags=["kp-system"]
+)
+
+app.include_router(
+    shadbala.router,
+    prefix="/api/v1/shadbala",
+    tags=["shadbala"]
+)
+
+app.include_router(
+    ashtakavarga.router,
+    prefix="/api/v1/ashtakavarga",
+    tags=["ashtakavarga"]
+)
+
+app.include_router(
+    bhava.router,
+    prefix="/api/v1/bhava",
+    tags=["bhava"]
+)
+
+app.include_router(
+    prediction.router,
+    prefix="/api/v1/prediction",
+    tags=["prediction"]
+)
+
+app.include_router(
+    additional_dashas.router,
+    prefix="/api/v1/dashas",
+    tags=["additional-dashas"]
+)
+
+app.include_router(
+    horoscope.router,
+    prefix="/api/v1/horoscope",
+    tags=["horoscope"]
+)
+
+app.include_router(
+    compatibility.router,
+    prefix="/api/v1",
+    tags=["compatibility"]
 )
 
 # Include new authentication and kundli routes
