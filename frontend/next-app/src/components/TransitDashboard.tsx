@@ -1,6 +1,7 @@
 "use client";
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import styles from './AnalysisPanels.module.css';
+import { getCurrentTransits, TransitPositions } from '../services/transitService';
 
 interface TransitDashboardProps {
   chartData: any;
@@ -45,31 +46,44 @@ interface SadeSatiStatus {
 
 export default function TransitDashboard({ chartData, currentTransits }: TransitDashboardProps) {
   const [activeView, setActiveView] = useState<'gochara' | 'sadesati' | 'predictions'>('gochara');
+  const [liveTransits, setLiveTransits] = useState<TransitPositions | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  // Fetch real transit positions on mount
+  useEffect(() => {
+    if (!currentTransits) {
+      setLoading(true);
+      getCurrentTransits()
+        .then(positions => setLiveTransits(positions))
+        .catch(console.error)
+        .finally(() => setLoading(false));
+    }
+  }, [currentTransits]);
 
   // Get natal Moon sign
   const natalMoonSign = useMemo(() => {
     const moonLon = chartData?.planetary_positions?.Moon?.longitude || 0;
-    return Math.floor(moonLon / 30);
+    return Math.floor(parseFloat(String(moonLon)) / 30);
   }, [chartData]);
 
-  // Simulate current transits (in real app, would fetch from ephemeris)
+  // Use live transits if available, otherwise props or fallback
   const transits = useMemo(() => {
-    // Use provided transits or simulate approximate current positions
     if (currentTransits) return currentTransits;
+    if (liveTransits) return liveTransits;
     
-    // Approximate Nov 2024 positions (for demo)
+    // Fallback to approximate Dec 2024 positions
     return {
-      Sun: 240,      // Scorpio
-      Moon: 60,      // Gemini (changes daily)
+      Sun: 265,      // Sagittarius
+      Moon: 120,     // Leo
       Mars: 95,      // Cancer
-      Mercury: 255,  // Sagittarius
+      Mercury: 270,  // Sagittarius
       Jupiter: 55,   // Taurus
-      Venus: 280,    // Capricorn
-      Saturn: 330,   // Pisces
-      Rahu: 20,      // Aries
-      Ketu: 200      // Libra
+      Venus: 300,    // Capricorn
+      Saturn: 340,   // Pisces
+      Rahu: 15,      // Aries
+      Ketu: 195      // Libra
     };
-  }, [currentTransits]);
+  }, [currentTransits, liveTransits]);
 
   // Calculate Gochara results
   const gocharaResults = useMemo<GocharaResult[]>(() => {

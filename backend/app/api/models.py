@@ -75,6 +75,9 @@ class PlanetaryPosition(BaseModel):
     sign_num: Optional[int] = Field(None, description="Sign number (0-11, Aries to Pisces)")
     sign: Optional[str] = Field(None, description="Sign name")
     house: Optional[int] = Field(None, description="House number (1-12, Whole Sign system)")
+    nakshatra: Optional[str] = Field(None, description="Nakshatra name")
+    nakshatra_lord: Optional[str] = Field(None, description="Nakshatra ruling planet")
+    nakshatra_pada: Optional[int] = Field(None, description="Nakshatra pada (1-4)")
 
 class House(BaseModel):
     """Model for house data."""
