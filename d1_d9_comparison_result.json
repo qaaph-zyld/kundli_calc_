@@ -1,0 +1,193 @@
+{
+  "birth_data": {
+    "date": "1990-10-09",
+    "time": "09:10:00",
+    "place": "Loznica, Serbia",
+    "coordinates": {
+      "lat": 44.5333,
+      "lon": 19.2222
+    },
+    "timezone": "UTC+1 (no DST in Oct 1990)"
+  },
+  "settings": {
+    "ayanamsa": "Lahiri",
+    "house_system": "Whole Sign"
+  },
+  "d1_comparison": {
+    "matches": 10,
+    "total": 10,
+    "details": [
+      {
+        "planet": "Ascendant",
+        "jhora_longitude": 209.17,
+        "jhora_sign": "Libra",
+        "backend_longitude": 208.94,
+        "backend_sign": "Libra",
+        "difference": 0.232,
+        "match": true
+      },
+      {
+        "planet": "Sun",
+        "jhora_longitude": 172.05,
+        "jhora_sign": "Virgo",
+        "backend_longitude": 172.05,
+        "backend_sign": "Virgo",
+        "difference": 0.003,
+        "match": true
+      },
+      {
+        "planet": "Moon",
+        "jhora_longitude": 58.32,
+        "jhora_sign": "Taurus",
+        "backend_longitude": 58.33,
+        "backend_sign": "Taurus",
+        "difference": 0.013,
+        "match": true
+      },
+      {
+        "planet": "Mars",
+        "jhora_longitude": 49.86,
+        "jhora_sign": "Taurus",
+        "backend_longitude": 49.9,
+        "backend_sign": "Taurus",
+        "difference": 0.041,
+        "match": true
+      },
+      {
+        "planet": "Mercury",
+        "jhora_longitude": 162.58,
+        "jhora_sign": "Virgo",
+        "backend_longitude": 162.58,
+        "backend_sign": "Virgo",
+        "difference": 0.004,
+        "match": true
+      },
+      {
+        "planet": "Jupiter",
+        "jhora_longitude": 105.82,
+        "jhora_sign": "Cancer",
+        "backend_longitude": 105.84,
+        "backend_sign": "Cancer",
+        "difference": 0.018,
+        "match": true
+      },
+      {
+        "planet": "Venus",
+        "jhora_longitude": 166.03,
+        "jhora_sign": "Virgo",
+        "backend_longitude": 166.04,
+        "backend_sign": "Virgo",
+        "difference": 0.011,
+        "match": true
+      },
+      {
+        "planet": "Saturn",
+        "jhora_longitude": 265.17,
+        "jhora_sign": "Sagittarius",
+        "backend_longitude": 265.19,
+        "backend_sign": "Sagittarius",
+        "difference": 0.017,
+        "match": true
+      },
+      {
+        "planet": "Rahu",
+        "jhora_longitude": 279.82,
+        "jhora_sign": "Capricorn",
+        "backend_longitude": 279.83,
+        "backend_sign": "Capricorn",
+        "difference": 0.012,
+        "match": true
+      },
+      {
+        "planet": "Ketu",
+        "jhora_longitude": 99.82,
+        "jhora_sign": "Cancer",
+        "backend_longitude": 99.83,
+        "backend_sign": "Cancer",
+        "difference": 0.012,
+        "match": true
+      }
+    ]
+  },
+  "d9_comparison": {
+    "matches": 10,
+    "total": 10,
+    "details": [
+      {
+        "planet": "Ascendant",
+        "expected_sign": "Gemini",
+        "backend_sign": "Gemini",
+        "backend_longitude": 60.0,
+        "match": true
+      },
+      {
+        "planet": "Sun",
+        "expected_sign": "Cancer",
+        "backend_sign": "Cancer",
+        "backend_longitude": 108.42,
+        "match": true
+      },
+      {
+        "planet": "Moon",
+        "expected_sign": "Virgo",
+        "backend_sign": "Virgo",
+        "backend_longitude": 165.0,
+        "match": true
+      },
+      {
+        "planet": "Mars",
+        "expected_sign": "Gemini",
+        "backend_sign": "Gemini",
+        "backend_longitude": 89.11,
+        "match": true
+      },
+      {
+        "planet": "Mercury",
+        "expected_sign": "Aries",
+        "backend_sign": "Aries",
+        "backend_longitude": 23.18,
+        "match": true
+      },
+      {
+        "planet": "Jupiter",
+        "expected_sign": "Scorpio",
+        "backend_sign": "Scorpio",
+        "backend_longitude": 232.54,
+        "match": true
+      },
+      {
+        "planet": "Venus",
+        "expected_sign": "Taurus",
+        "backend_sign": "Taurus",
+        "backend_longitude": 54.37,
+        "match": true
+      },
+      {
+        "planet": "Saturn",
+        "expected_sign": "Scorpio",
+        "backend_sign": "Scorpio",
+        "backend_longitude": 226.69,
+        "match": true
+      },
+      {
+        "planet": "Rahu",
+        "expected_sign": "Pisces",
+        "backend_sign": "Pisces",
+        "backend_longitude": 358.49,
+        "match": true
+      },
+      {
+        "planet": "Ketu",
+        "expected_sign": "Virgo",
+        "backend_sign": "Virgo",
+        "backend_longitude": 178.49,
+        "match": true
+      }
+    ]
+  },
+  "summary": {
+    "d1_accuracy": "10/10",
+    "d9_accuracy": "10/10",
+    "vargottama_planets": []
+  }
+}
