@@ -3,7 +3,7 @@ API endpoints for Bhava (House) analysis
 """
 from typing import Dict, List, Any
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from app.core.calculations.bhava_system import BhavaSystem
 
 router = APIRouter()
@@ -19,8 +19,9 @@ class BhavaAnalysisRequest(BaseModel):
         description="Dictionary of planet aspects to houses"
     )
     
-    @validator('planet_positions')
-    def validate_positions(cls, v):
+    @field_validator('planet_positions')
+    @classmethod
+    def validate_positions(cls, v: Dict[str, float]) -> Dict[str, float]:
         valid_planets = {
             'Sun', 'Moon', 'Mars', 'Mercury', 
             'Jupiter', 'Venus', 'Saturn'
@@ -32,8 +33,9 @@ class BhavaAnalysisRequest(BaseModel):
                 raise ValueError(f"Invalid position for {planet}: {position}")
         return v
     
-    @validator('aspects')
-    def validate_aspects(cls, v):
+    @field_validator('aspects')
+    @classmethod
+    def validate_aspects(cls, v: Dict[str, List[int]]) -> Dict[str, List[int]]:
         valid_planets = {
             'Sun', 'Moon', 'Mars', 'Mercury', 
             'Jupiter', 'Venus', 'Saturn'

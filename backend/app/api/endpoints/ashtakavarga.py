@@ -3,7 +3,7 @@ API endpoints for Ashtakavarga calculations
 """
 from typing import Dict, Any
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from app.core.calculations.ashtakavarga import Ashtakavarga
 
 router = APIRouter()
@@ -15,8 +15,9 @@ class AshtakavargaRequest(BaseModel):
         description="Dictionary of planet positions in houses (1-12)"
     )
     
-    @validator('planet_positions')
-    def validate_positions(cls, v):
+    @field_validator('planet_positions')
+    @classmethod
+    def validate_positions(cls, v: Dict[str, int]) -> Dict[str, int]:
         valid_planets = {'Sun', 'Moon', 'Mars', 'Mercury', 'Jupiter', 'Venus', 'Saturn'}
         for planet, position in v.items():
             if planet not in valid_planets:

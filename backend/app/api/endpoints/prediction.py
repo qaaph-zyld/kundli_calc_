@@ -4,7 +4,7 @@ API endpoints for Prediction Engine
 from datetime import datetime
 from typing import Dict, List, Optional
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 
 from app.core.calculations.prediction_engine import PredictionEngine
 
@@ -23,15 +23,17 @@ class MuhurtaRequest(BaseModel):
         description="Current planetary strengths"
     )
     
-    @validator('datetime_utc')
-    def validate_datetime(cls, v):
+    @field_validator('datetime_utc')
+    @classmethod
+    def validate_datetime(cls, v: str) -> datetime:
         try:
             return datetime.fromisoformat(v)
         except ValueError:
             raise ValueError("Invalid datetime format")
     
-    @validator('activity_type')
-    def validate_activity(cls, v):
+    @field_validator('activity_type')
+    @classmethod
+    def validate_activity(cls, v: str) -> str:
         valid_activities = {
             'business', 'marriage', 'travel',
             'education', 'medical', 'spiritual'
@@ -40,8 +42,9 @@ class MuhurtaRequest(BaseModel):
             raise ValueError(f"Invalid activity type. Must be one of: {valid_activities}")
         return v
     
-    @validator('planet_positions')
-    def validate_positions(cls, v):
+    @field_validator('planet_positions')
+    @classmethod
+    def validate_positions(cls, v: Dict[str, float]) -> Dict[str, float]:
         valid_planets = {
             'sun', 'moon', 'mars', 'mercury',
             'jupiter', 'venus', 'saturn'
@@ -78,15 +81,17 @@ class TransitPeriodRequest(BaseModel):
         description="List of transit positions with times"
     )
     
-    @validator('start_time', 'end_time')
-    def validate_datetime(cls, v):
+    @field_validator('start_time', 'end_time')
+    @classmethod
+    def validate_datetime(cls, v: str) -> datetime:
         try:
             return datetime.fromisoformat(v)
         except ValueError:
             raise ValueError("Invalid datetime format")
     
-    @validator('planet')
-    def validate_planet(cls, v):
+    @field_validator('planet')
+    @classmethod
+    def validate_planet(cls, v: str) -> str:
         valid_planets = {
             'sun', 'moon', 'mars', 'mercury',
             'jupiter', 'venus', 'saturn'
@@ -95,8 +100,9 @@ class TransitPeriodRequest(BaseModel):
             raise ValueError(f"Invalid planet: {v}")
         return v
     
-    @validator('transit_positions')
-    def validate_transit_positions(cls, v):
+    @field_validator('transit_positions')
+    @classmethod
+    def validate_transit_positions(cls, v: List[Dict[str, str]]) -> List:
         try:
             return [(datetime.fromisoformat(pos['time']), float(pos['position']))
                     for pos in v]
