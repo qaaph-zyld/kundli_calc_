@@ -5,6 +5,7 @@ Gate: GATE_4
 Version: 1.0.0
 """
 
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
@@ -22,11 +23,25 @@ from .core.config import settings
 from .core.errors.handlers import ErrorHandler
 from .db.mongodb import MongoDB
 
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan context manager for startup and shutdown events."""
+    # Startup
+    try:
+        await MongoDB.connect_to_database()
+    except Exception:
+        pass
+    yield
+    # Shutdown
+    await MongoDB.close_database_connection()
+
 app = FastAPI(
     title=settings.PROJECT_NAME,
     openapi_url=f"{settings.API_V1_STR}/openapi.json",
     docs_url=f"{settings.API_V1_STR}/docs",
     redoc_url=f"{settings.API_V1_STR}/redoc",
+    lifespan=lifespan,
 )
 
 app.add_middleware(
@@ -191,19 +206,7 @@ app.include_router(
 )
 
 # Include new authentication and kundli routes
-
-@app.on_event("startup")
-async def startup_event():
-    """Connect to MongoDB on startup."""
-    try:
-        await MongoDB.connect_to_database()
-    except Exception:
-        pass
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    """Close MongoDB connection on shutdown."""
-    await MongoDB.close_database_connection()
+# Note: Startup/shutdown handled by lifespan context manager above
 
 @app.get("/")
 async def root():

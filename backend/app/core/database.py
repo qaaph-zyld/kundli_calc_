@@ -56,8 +56,9 @@ def drop_tables():
 def init_test_db():
     """Initialize test database."""
     if settings.ENV == "test":
-        drop_tables()
-        create_tables()
+        # Use checkfirst=True to avoid "table already exists" errors
+        Base.metadata.drop_all(bind=engine, checkfirst=True)
+        Base.metadata.create_all(bind=engine, checkfirst=True)
 
 
 def cleanup_test_db():

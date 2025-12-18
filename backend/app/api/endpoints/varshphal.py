@@ -29,12 +29,12 @@ class VarshphalRequest(BaseModel):
     annual_planets: Dict[str, float] = Field(
         ..., 
         description="Planet longitudes at solar return",
-        example={"Sun": 270.0, "Moon": 120.0, "Mars": 45.0}
+        json_schema_extra={"example": {"Sun": 270.0, "Moon": 120.0, "Mars": 45.0}}
     )
     annual_ascendant: float = Field(..., ge=0, lt=360, description="Ascendant at solar return")
 
-    class Config:
-        json_schema_extra = {
+    model_config = {
+        "json_schema_extra": {
             "example": {
                 "birth_date": "1990-01-15T12:00:00",
                 "birth_sun_longitude": 271.0,
@@ -53,6 +53,7 @@ class VarshphalRequest(BaseModel):
                 "annual_ascendant": 120.0
             }
         }
+    }
 
 
 class MunthaRequest(BaseModel):

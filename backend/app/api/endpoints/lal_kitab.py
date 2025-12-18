@@ -33,14 +33,16 @@ class LalKitabAnalysisRequest(BaseModel):
     planet_houses: Dict[str, int] = Field(
         ...,
         description="Dictionary mapping planet names to house numbers (1-12)",
-        example={
-            "Sun": 1, "Moon": 4, "Mars": 10, "Mercury": 3,
-            "Jupiter": 5, "Venus": 7, "Saturn": 8, "Rahu": 12, "Ketu": 6
+        json_schema_extra={
+            "example": {
+                "Sun": 1, "Moon": 4, "Mars": 10, "Mercury": 3,
+                "Jupiter": 5, "Venus": 7, "Saturn": 8, "Rahu": 12, "Ketu": 6
+            }
         }
     )
 
-    class Config:
-        json_schema_extra = {
+    model_config = {
+        "json_schema_extra": {
             "example": {
                 "planet_houses": {
                     "Sun": 10,
@@ -55,6 +57,7 @@ class LalKitabAnalysisRequest(BaseModel):
                 }
             }
         }
+    }
 
 
 class PlanetRemedyRequest(BaseModel):

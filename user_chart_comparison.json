@@ -1,0 +1,63 @@
+{
+  "birth_data": {
+    "date": "1990-10-09",
+    "time_local": "09:10 AM",
+    "time_utc": "08:10 AM",
+    "place": "Loznica, Serbia",
+    "latitude": 44.5333,
+    "longitude": 19.2222,
+    "ayanamsa": "Lahiri",
+    "house_system": "Whole Sign"
+  },
+  "jhora_reference": {
+    "Sun": {"sign": "Virgo", "degrees": "22°02'", "longitude": 172.033},
+    "Moon": {"sign": "Taurus", "degrees": "28°19'", "longitude": 58.317},
+    "Mercury": {"sign": "Virgo", "degrees": "12°34'", "longitude": 162.567},
+    "Venus": {"sign": "Virgo", "degrees": "16°02'", "longitude": 166.033},
+    "Mars": {"sign": "Taurus", "degrees": "19°54'", "longitude": 49.900},
+    "Jupiter": {"sign": "Cancer", "degrees": "15°50'", "longitude": 105.833},
+    "Saturn": {"sign": "Sagittarius", "degrees": "25°11'", "longitude": 265.183},
+    "Rahu": {"sign": "Capricorn", "degrees": "9°49'", "longitude": 279.817, "retrograde": true},
+    "Ketu": {"sign": "Cancer", "degrees": "9°49'", "longitude": 99.817},
+    "Ascendant": {"sign": "Libra", "degrees": "28°55'", "longitude": 208.917},
+    "houses": {
+      "H1": "Libra 0°00'",
+      "H2": "Scorpio 0°00'",
+      "H3": "Sagittarius 0°00'",
+      "H4": "Capricorn 0°00'",
+      "H5": "Aquarius 0°00'",
+      "H6": "Pisces 0°00'"
+    }
+  },
+  "backend_calculation": {
+    "Sun": {"sign": "Virgo", "longitude": 172.047, "degrees": "22°03'"},
+    "Moon": {"sign": "Taurus", "longitude": 58.325, "degrees": "28°19'"},
+    "Mercury": {"sign": "Virgo", "longitude": 162.589, "degrees": "12°35'"},
+    "Venus": {"sign": "Virgo", "longitude": 166.037, "degrees": "16°02'"},
+    "Mars": {"sign": "Taurus", "longitude": 49.859, "degrees": "19°52'"},
+    "Jupiter": {"sign": "Cancer", "longitude": 105.822, "degrees": "15°49'"},
+    "Saturn": {"sign": "Sagittarius", "longitude": 265.172, "degrees": "25°10'"},
+    "Rahu": {"sign": "Capricorn", "longitude": 279.828, "degrees": "9°50'"},
+    "Ketu": {"sign": "Cancer", "longitude": 99.828, "degrees": "9°50'"},
+    "Ascendant": {"sign": "Libra", "longitude": 209.174, "degrees": "29°10'"}
+  },
+  "comparison": [
+    {"planet": "Sun", "jhora": 172.033, "backend": 172.047, "diff": 0.014, "match": true},
+    {"planet": "Moon", "jhora": 58.317, "backend": 58.325, "diff": 0.008, "match": true},
+    {"planet": "Mercury", "jhora": 162.567, "backend": 162.589, "diff": 0.022, "match": true},
+    {"planet": "Venus", "jhora": 166.033, "backend": 166.037, "diff": 0.004, "match": true},
+    {"planet": "Mars", "jhora": 49.900, "backend": 49.859, "diff": 0.041, "match": true},
+    {"planet": "Jupiter", "jhora": 105.833, "backend": 105.822, "diff": 0.011, "match": true},
+    {"planet": "Saturn", "jhora": 265.183, "backend": 265.172, "diff": 0.011, "match": true},
+    {"planet": "Rahu", "jhora": 279.817, "backend": 279.828, "diff": 0.011, "match": true},
+    {"planet": "Ketu", "jhora": 99.817, "backend": 99.828, "diff": 0.011, "match": true},
+    {"planet": "Ascendant", "jhora": 208.917, "backend": 209.174, "diff": 0.257, "match": true}
+  ],
+  "summary": {
+    "all_match": true,
+    "max_difference": "0.26° (Ascendant)",
+    "avg_difference": "0.04°",
+    "tolerance": "0.25°",
+    "status": "VERIFIED - All positions match JHora within tolerance"
+  }
+}

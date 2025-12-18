@@ -76,8 +76,7 @@ class ErrorResponse(BaseModel):
     details: Optional[Dict[str, Any]] = None
     request_id: Optional[str] = None
     
-    class Config:
-        use_enum_values = True
+    model_config = {"use_enum_values": True}
 
 class ErrorHandler:
     """Error handler for the application"""

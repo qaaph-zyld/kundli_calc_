@@ -3,7 +3,7 @@ API endpoints for Shadbala calculations
 """
 from typing import Dict, List, Optional
 from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 
 from app.core.calculations.shadbala import ShadbalaSystem
 
@@ -14,15 +14,17 @@ class AspectData(BaseModel):
     type: str = Field(..., description="Type of aspect")
     angle: float = Field(..., description="Aspect angle in degrees")
     
-    @validator('type')
-    def validate_type(cls, v):
+    @field_validator('type')
+    @classmethod
+    def validate_type(cls, v: str) -> str:
         valid_types = {'conjunction', 'sextile', 'square', 'trine', 'opposition'}
         if v not in valid_types:
             raise ValueError(f"Invalid aspect type. Must be one of: {valid_types}")
         return v
     
-    @validator('angle')
-    def validate_angle(cls, v):
+    @field_validator('angle')
+    @classmethod
+    def validate_angle(cls, v: float) -> float:
         if not 0 <= v < 360:
             raise ValueError("Angle must be between 0 and 360 degrees")
         return v
@@ -42,8 +44,9 @@ class ShadbalaRequest(BaseModel):
         description="Positions of all planets"
     )
     
-    @validator('planet')
-    def validate_planet(cls, v):
+    @field_validator('planet')
+    @classmethod
+    def validate_planet(cls, v: str) -> str:
         valid_planets = {
             'sun', 'moon', 'mars', 'mercury',
             'jupiter', 'venus', 'saturn'
@@ -52,20 +55,23 @@ class ShadbalaRequest(BaseModel):
             raise ValueError(f"Invalid planet: {v}")
         return v.lower()
     
-    @validator('position')
-    def validate_position(cls, v):
+    @field_validator('position')
+    @classmethod
+    def validate_position(cls, v: float) -> float:
         if not 0 <= v < 360:
             raise ValueError("Position must be between 0 and 360 degrees")
         return v
     
-    @validator('house')
-    def validate_house(cls, v):
+    @field_validator('house')
+    @classmethod
+    def validate_house(cls, v: int) -> int:
         if not 1 <= v <= 12:
             raise ValueError("House must be between 1 and 12")
         return v
     
-    @validator('planet_positions')
-    def validate_planet_positions(cls, v):
+    @field_validator('planet_positions')
+    @classmethod
+    def validate_planet_positions(cls, v: dict) -> dict:
         valid_planets = {
             'sun', 'moon', 'mars', 'mercury',
             'jupiter', 'venus', 'saturn'
