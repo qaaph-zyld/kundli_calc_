@@ -9,6 +9,7 @@ class User(BaseModel):
     """User model."""
 
     __tablename__ = "users"
+    __table_args__ = {'extend_existing': True}
 
     email = Column(String(255), unique=True, nullable=False, index=True)
     hashed_password = Column(String(255), nullable=False)

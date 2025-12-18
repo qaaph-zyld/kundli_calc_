@@ -9,6 +9,7 @@ class YogaCombination(BaseModel):
     """Yoga combination model."""
 
     __tablename__ = "yoga_combinations"
+    __table_args__ = {'extend_existing': True}
 
     birth_chart_id = Column(String(36), ForeignKey("birth_charts.id"))
     yoga_name = Column(String(100), nullable=False)

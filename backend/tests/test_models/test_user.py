@@ -3,7 +3,7 @@ import uuid
 import pytest
 from sqlalchemy.exc import IntegrityError
 from app.core.security import get_password_hash
-from app.models.users import User
+from app.models import User
 
 
 @pytest.fixture

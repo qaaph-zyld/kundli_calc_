@@ -9,6 +9,7 @@ class BirthChart(BaseModel):
     """Birth chart model."""
 
     __tablename__ = "birth_charts"
+    __table_args__ = {'extend_existing': True}
 
     user_id = Column(String(36), ForeignKey("users.id"))
     name = Column(String(255), nullable=False)

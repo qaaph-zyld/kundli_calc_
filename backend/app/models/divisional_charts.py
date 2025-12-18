@@ -9,6 +9,7 @@ class DivisionalChart(BaseModel):
     """Divisional chart model."""
 
     __tablename__ = "divisional_charts"
+    __table_args__ = {'extend_existing': True}
 
     birth_chart_id = Column(String(36), ForeignKey("birth_charts.id"))
     division_type = Column(String(50), nullable=False)  # D1, D2, D3, etc.

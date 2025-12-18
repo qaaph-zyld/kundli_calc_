@@ -3,9 +3,7 @@ import pytest
 from datetime import datetime
 import uuid
 
-from app.models.users import User
-from app.models.birth_charts import BirthChart
-from app.models.house_systems import HouseSystem
+from app.models import User, BirthChart, HouseSystem
 from app.core.security import get_password_hash
 
 

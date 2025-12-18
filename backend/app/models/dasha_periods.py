@@ -9,6 +9,7 @@ class DashaPeriod(BaseModel):
     """Dasha period model."""
 
     __tablename__ = "dasha_periods"
+    __table_args__ = {'extend_existing': True}
 
     birth_chart_id = Column(String(36), ForeignKey("birth_charts.id"))
     dasha_type = Column(String(50), nullable=False)  # Maha, Antara, etc.
