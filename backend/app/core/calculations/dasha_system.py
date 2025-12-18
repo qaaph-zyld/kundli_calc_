@@ -176,28 +176,146 @@ class VimshottariDasha:
         
         return pratyantardasha
 
+    def calculate_sookshma_dasha(
+        self,
+        prat_planet: str,
+        start_date: datetime,
+        end_date: datetime
+    ) -> List[Dict[str, Any]]:
+        """Calculate Sookshma Dasha (4th level sub-sub-sub-periods)
+        
+        Reference: BPHS Chapter 46 - Vimshottari Dasha
+        Each level divides by 120 (total dasha years)
+        
+        Args:
+            prat_planet: Pratyantardasha planet
+            start_date: Start date of pratyantardasha
+            end_date: End date of pratyantardasha
+            
+        Returns:
+            List of sookshma dasha periods
+        """
+        start_index = self.LORD_SEQUENCE.index(prat_planet)
+        planet_order = self.LORD_SEQUENCE[start_index:] + self.LORD_SEQUENCE[:start_index]
+        total_days = (end_date - start_date).total_seconds() / 86400.0
+        current_time = start_date
+        sookshma = []
+        
+        for planet in planet_order:
+            # Proportion based on dasha periods
+            proportion = self.DASHA_PERIODS[planet] / 120.0
+            sub_days = total_days * proportion
+            end_time = current_time + timedelta(days=sub_days)
+            
+            sookshma.append({
+                "planet": planet,
+                "start_date": current_time,
+                "end_date": end_time,
+                "duration_days": sub_days
+            })
+            
+            current_time = end_time
+        
+        return sookshma
+    
+    def calculate_prana_dasha(
+        self,
+        sookshma_planet: str,
+        start_date: datetime,
+        end_date: datetime
+    ) -> List[Dict[str, Any]]:
+        """Calculate Prana Dasha (5th level - finest subdivision)
+        
+        Reference: BPHS Chapter 46, Jataka Parijata
+        This is the finest practical subdivision of Vimshottari
+        
+        Args:
+            sookshma_planet: Sookshma dasha planet
+            start_date: Start date of sookshma
+            end_date: End date of sookshma
+            
+        Returns:
+            List of prana dasha periods
+        """
+        start_index = self.LORD_SEQUENCE.index(sookshma_planet)
+        planet_order = self.LORD_SEQUENCE[start_index:] + self.LORD_SEQUENCE[:start_index]
+        total_seconds = (end_date - start_date).total_seconds()
+        current_time = start_date
+        prana = []
+        
+        for planet in planet_order:
+            proportion = self.DASHA_PERIODS[planet] / 120.0
+            sub_seconds = total_seconds * proportion
+            end_time = current_time + timedelta(seconds=sub_seconds)
+            
+            prana.append({
+                "planet": planet,
+                "start_date": current_time,
+                "end_date": end_time,
+                "duration_minutes": sub_seconds / 60
+            })
+            
+            current_time = end_time
+        
+        return prana
+
     def calculate_all_dasha_levels(
         self,
         birth_time: datetime,
-        moon_longitude: float
+        moon_longitude: float,
+        include_sookshma: bool = False,
+        include_prana: bool = False
     ) -> Dict[str, Any]:
-        """Calculate Mahadasha with nested Antardasha and Pratyantardasha from birth."""
+        """Calculate Mahadasha with nested Antardasha, Pratyantardasha, Sookshma, Prana.
+        
+        Dasha Hierarchy (per BPHS):
+        1. Mahadasha (Major Period) - Years
+        2. Antardasha (Sub-Period) - Months
+        3. Pratyantardasha (Sub-Sub-Period) - Weeks
+        4. Sookshma Dasha (Sub-Sub-Sub-Period) - Days
+        5. Prana Dasha (Finest) - Hours/Minutes
+        
+        Args:
+            birth_time: Birth datetime
+            moon_longitude: Moon's sidereal longitude
+            include_sookshma: Include 4th level (computationally intensive)
+            include_prana: Include 5th level (very fine-grained)
+        """
         birth_info = self.calculate_dasha_at_birth(birth_time, moon_longitude)
         periods: List[Dict[str, Any]] = []
+        
         for maha in birth_info["dasha_sequence"]:
             m_start: datetime = maha["start_date"]
             m_end: datetime = maha["end_date"]
             m_planet: str = maha["planet"]
-            # Antardasha within mahadasha
+            
             antas = self.calculate_antardasha(m_planet, m_start, m_end)
-            # For each antardasha, compute pratyantardasha
+            
             for a in antas:
                 a_start: datetime = a["start_date"]
                 a_end: datetime = a["end_date"]
                 a_planet: str = a["planet"]
-                a["pratyantardasha"] = self.calculate_pratyantardasha(
-                    m_planet, a_planet, a_start, a_end
-                )
+                
+                prats = self.calculate_pratyantardasha(m_planet, a_planet, a_start, a_end)
+                
+                if include_sookshma:
+                    for p in prats:
+                        p_start: datetime = p["start_date"]
+                        p_end: datetime = p["end_date"]
+                        p_planet: str = p["planet"]
+                        
+                        sooksmas = self.calculate_sookshma_dasha(p_planet, p_start, p_end)
+                        
+                        if include_prana:
+                            for s in sooksmas:
+                                s["prana"] = self.calculate_prana_dasha(
+                                    s["planet"], s["start_date"], s["end_date"]
+                                )
+                        
+                        p["sookshma"] = sooksmas
+                
+                a["pratyantardasha"] = prats
+            
             periods.append({
                 "planet": m_planet,
                 "start_date": m_start.isoformat(),
@@ -208,7 +326,11 @@ class VimshottariDasha:
                         **{k: (v.isoformat() if isinstance(v, datetime) else v) for k, v in a.items() if k in {"planet", "start_date", "end_date", "duration_years"}},
                         "pratyantardasha": [
                             {
-                                **{kk: (vv.isoformat() if isinstance(vv, datetime) else vv) for kk, vv in p.items()}
+                                **{kk: (vv.isoformat() if isinstance(vv, datetime) else vv) for kk, vv in p.items() if kk != "sookshma"},
+                                **({"sookshma": [
+                                    {kkk: (vvv.isoformat() if isinstance(vvv, datetime) else vvv) for kkk, vvv in s.items() if kkk != "prana"}
+                                    for s in p.get("sookshma", [])
+                                ]} if include_sookshma and "sookshma" in p else {})
                             }
                             for p in a["pratyantardasha"]
                         ],
@@ -216,4 +338,57 @@ class VimshottariDasha:
                     for a in antas
                 ],
             })
-        return {"periods": periods}
+        
+        return {
+            "birth_nakshatra_index": birth_info["birth_nakshatra"],
+            "balance_at_birth": birth_info["balance_at_birth"],
+            "periods": periods
+        }
+    
+    def get_current_dasha(
+        self,
+        birth_time: datetime,
+        moon_longitude: float,
+        target_date: datetime = None
+    ) -> Dict[str, Any]:
+        """Get the current dasha period at a given date.
+        
+        Args:
+            birth_time: Birth datetime
+            moon_longitude: Moon's sidereal longitude
+            target_date: Date to check (default: now)
+            
+        Returns:
+            Current Mahadasha, Antardasha, Pratyantardasha, Sookshma
+        """
+        if target_date is None:
+            target_date = datetime.now()
+        
+        birth_info = self.calculate_dasha_at_birth(birth_time, moon_longitude)
+        
+        current = {"mahadasha": None, "antardasha": None, "pratyantardasha": None, "sookshma": None}
+        
+        for maha in birth_info["dasha_sequence"]:
+            if maha["start_date"] <= target_date <= maha["end_date"]:
+                current["mahadasha"] = {"planet": maha["planet"], "start": maha["start_date"], "end": maha["end_date"]}
+                
+                antas = self.calculate_antardasha(maha["planet"], maha["start_date"], maha["end_date"])
+                for anta in antas:
+                    if anta["start_date"] <= target_date <= anta["end_date"]:
+                        current["antardasha"] = {"planet": anta["planet"], "start": anta["start_date"], "end": anta["end_date"]}
+                        
+                        prats = self.calculate_pratyantardasha(maha["planet"], anta["planet"], anta["start_date"], anta["end_date"])
+                        for prat in prats:
+                            if prat["start_date"] <= target_date <= prat["end_date"]:
+                                current["pratyantardasha"] = {"planet": prat["planet"], "start": prat["start_date"], "end": prat["end_date"]}
+                                
+                                sooksmas = self.calculate_sookshma_dasha(prat["planet"], prat["start_date"], prat["end_date"])
+                                for sookshma in sooksmas:
+                                    if sookshma["start_date"] <= target_date <= sookshma["end_date"]:
+                                        current["sookshma"] = {"planet": sookshma["planet"], "start": sookshma["start_date"], "end": sookshma["end_date"]}
+                                        break
+                                break
+                        break
+                break
+        
+        return current
