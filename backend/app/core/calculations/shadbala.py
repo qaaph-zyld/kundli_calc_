@@ -1,6 +1,43 @@
-"""Shadbala calculation module."""
-from typing import Dict, List, Optional
+"""Shadbala Calculation Module
+==========================
+Implements the six-fold strength (Shadbala) calculation per BPHS.
+
+The six components are:
+1. Sthana Bala (Positional Strength) - 5 sub-components
+2. Dig Bala (Directional Strength)
+3. Kala Bala (Temporal Strength) - 9 sub-components
+4. Chesta Bala (Motional Strength)
+5. Naisargika Bala (Natural Strength)
+6. Drik Bala (Aspectual Strength)
+
+Reference: Brihat Parashara Hora Shastra, Chapter 27
+Units: Shashtiamsas (1/60th of a Rupa)
+"""
+from typing import Dict, List, Optional, Any
 import math
+from datetime import datetime
+
+# Minimum required Shadbala in Rupas for each planet (BPHS standard)
+MINIMUM_SHADBALA = {
+    "Sun": 6.5,
+    "Moon": 6.0,
+    "Mars": 5.0,
+    "Mercury": 7.0,
+    "Jupiter": 6.5,
+    "Venus": 5.5,
+    "Saturn": 5.0,
+}
+
+# Natural strength in Shashtiamsas (Naisargika Bala)
+NAISARGIKA_BALA = {
+    "Sun": 60.0,
+    "Moon": 51.43,
+    "Mars": 17.14,
+    "Mercury": 25.71,
+    "Jupiter": 34.29,
+    "Venus": 42.86,
+    "Saturn": 8.57,
+}
 
 
 class ShadbalaSystem:
@@ -66,12 +103,21 @@ class ShadbalaSystem:
         return normalized_speed * self.planet_strengths[planet]
 
     def calculate_aspect_bala(self, aspects: List[Dict]) -> float:
-        """Calculate aspectual strength."""
+        """Calculate aspectual strength (Drik Bala)."""
         total_strength = 0
         for aspect in aspects:
             strength = self.aspect_strengths.get(aspect['type'], 0)
             total_strength += strength
         return total_strength
+
+    def calculate_naisargika_bala(self, planet: str) -> float:
+        """Calculate natural strength (Naisargika Bala).
+        
+        This is fixed strength based on planet's inherent luminosity.
+        Sun is brightest, Saturn is dimmest.
+        Returns value in Shashtiamsas.
+        """
+        return NAISARGIKA_BALA.get(planet.capitalize(), 0.0)
 
     def calculate_shadbala(
         self,
@@ -80,31 +126,71 @@ class ShadbalaSystem:
         speed: float,
         aspects: List[Dict],
         is_day: bool
-    ) -> Dict:
-        """Calculate total Shadbala strength."""
+    ) -> Dict[str, Any]:
+        """Calculate total Shadbala strength (all 6 components).
+        
+        Args:
+            planet: Planet name (Sun, Moon, Mars, etc.)
+            house: House number (1-12)
+            speed: Planet's daily motion in degrees
+            aspects: List of aspects to this planet
+            is_day: Whether birth is during daytime
+            
+        Returns:
+            Dictionary with all 6 Shadbala components and total
+        """
+        planet_cap = planet.capitalize()
+        
+        # 1. Sthana Bala (Positional)
         sthan_bala = self.calculate_sthan_bala(house)
-        dig_bala = self.calculate_dig_bala(planet, house)
-        chesta_bala = self.calculate_chesta_bala(planet, speed)
-        aspect_bala = self.calculate_aspect_bala(aspects)
-
-        # Day/Night strength
+        
+        # 2. Dig Bala (Directional)
+        dig_bala = self.calculate_dig_bala(planet_cap, house)
+        
+        # 3. Kala Bala (Temporal) - simplified day/night
         kala_bala = 1.0 if is_day else -1.0
-        if planet in ['Moon', 'Venus', 'Saturn']:
-            kala_bala *= -1  # These planets are stronger at night
-
-        total_strength = (
-            sthan_bala +
-            dig_bala +
-            chesta_bala +
-            aspect_bala +
-            kala_bala
-        ) * self.planet_strengths[planet]
+        if planet_cap in ['Moon', 'Venus', 'Saturn']:
+            kala_bala *= -1  # Nocturnal planets stronger at night
+        
+        # 4. Chesta Bala (Motional)
+        chesta_bala = self.calculate_chesta_bala(planet_cap, speed)
+        
+        # 5. Naisargika Bala (Natural) - fixed per planet
+        naisargika_bala = self.calculate_naisargika_bala(planet_cap)
+        
+        # 6. Drik Bala (Aspectual)
+        drik_bala = self.calculate_aspect_bala(aspects)
+        
+        # Total in Shashtiamsas
+        total_shashtiamsas = (
+            sthan_bala * 6 +  # Scale positional
+            dig_bala * 60 +   # Scale directional  
+            kala_bala * 30 +  # Scale temporal
+            chesta_bala +     # Already scaled
+            naisargika_bala + # Fixed value
+            drik_bala * 30    # Scale aspectual
+        )
+        
+        # Convert to Rupas (60 Shashtiamsas = 1 Rupa)
+        total_rupas = total_shashtiamsas / 60.0
+        
+        # Get minimum required for this planet
+        min_required = MINIMUM_SHADBALA.get(planet_cap, 5.0)
+        is_strong = total_rupas >= min_required
 
         return {
-            'total_strength': total_strength,
-            'sthan_bala': sthan_bala,
-            'dig_bala': dig_bala,
-            'chesta_bala': chesta_bala,
-            'aspect_bala': aspect_bala,
-            'kala_bala': kala_bala
+            'planet': planet_cap,
+            'total_shashtiamsas': round(total_shashtiamsas, 2),
+            'total_rupas': round(total_rupas, 2),
+            'minimum_required': min_required,
+            'is_strong': is_strong,
+            'percentage': round((total_rupas / min_required) * 100, 1),
+            'components': {
+                'sthana_bala': round(sthan_bala * 6, 2),
+                'dig_bala': round(dig_bala * 60, 2),
+                'kala_bala': round(kala_bala * 30, 2),
+                'chesta_bala': round(chesta_bala, 2),
+                'naisargika_bala': round(naisargika_bala, 2),
+                'drik_bala': round(drik_bala * 30, 2),
+            }
         }
