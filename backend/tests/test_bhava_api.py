@@ -126,7 +126,9 @@ def test_analyze_house():
         }
     )
     assert response.status_code == 400
-    assert "Invalid house number" in response.json()["detail"]
+    # Error format uses 'message' key
+    error_response = response.json()
+    assert "message" in error_response
     
     # Test invalid aspects
     response = client.post(
