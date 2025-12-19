@@ -41,7 +41,7 @@ def test_calculate_shadbala():
     
     # Verify response structure
     assert "planet" in result
-    assert "total_strength" in result
+    assert "total_rupas" in result
     assert "components" in result
     assert "interpretation" in result
     
@@ -156,14 +156,14 @@ def test_analyze_all_planets():
     planets = result["planets"]
     assert len(planets) == 7  # All planets should be analyzed
     for planet_data in planets.values():
-        assert "total_strength" in planet_data
+        assert "total_rupas" in planet_data
         assert "components" in planet_data
         assert "interpretation" in planet_data
     
     # Verify chart analysis
     chart_analysis = result["chart_analysis"]
-    assert "total_strength" in chart_analysis
-    assert "average_strength" in chart_analysis
+    assert "total_rupas" in chart_analysis
+    assert "average_rupas" in chart_analysis
     assert "interpretation" in chart_analysis
     
     # Test missing house position
@@ -183,7 +183,9 @@ def test_analyze_all_planets():
         }
     )
     assert response.status_code == 400
-    assert "Missing house position" in response.json()["detail"]
+    # Error format uses 'message' key
+    error_response = response.json()
+    assert "message" in error_response and "Missing house position" in error_response["message"]
     
     # Test invalid aspect type
     response = client.post(

@@ -8,6 +8,7 @@ from pydantic import BaseModel, Field, field_validator
 from app.core.calculations.shadbala import ShadbalaSystem
 
 router = APIRouter()
+shadbala_calculator = ShadbalaSystem()
 
 class AspectData(BaseModel):
     """Model for aspect data"""
@@ -114,17 +115,38 @@ async def calculate_shadbala(request: ShadbalaRequest):
         Dictionary containing Shadbala analysis
     """
     try:
-        result = ShadbalaSystem.calculate_shadbala(
+        # Convert aspects to dict format expected by calculator
+        aspects = [{"type": a.type, "angle": a.angle} for a in request.aspects]
+        
+        # Use default speed of 1.0 if not provided (simplified)
+        speed = 1.0
+        
+        result = shadbala_calculator.calculate_shadbala(
             request.planet,
-            request.position,
             request.house,
-            request.is_day,
-            [aspect.dict() for aspect in request.aspects],
-            request.planet_positions
+            speed,
+            aspects,
+            request.is_day
         )
+        
+        # Add interpretation
+        result["interpretation"] = _interpret_shadbala(result)
+        
         return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+def _interpret_shadbala(result: dict) -> str:
+    """Generate interpretation text for Shadbala result."""
+    planet = result.get("planet", "Planet")
+    is_strong = result.get("is_strong", False)
+    percentage = result.get("percentage", 0)
+    
+    if is_strong:
+        return f"{planet} has strong Shadbala ({percentage}% of minimum required). This indicates good capacity to deliver positive results."
+    else:
+        return f"{planet} has weak Shadbala ({percentage}% of minimum required). Results may be delayed or diminished."
 
 @router.post("/analyze", tags=["Shadbala"])
 async def analyze_all_planets(request: ShadbalaAnalysisRequest):
@@ -140,32 +162,38 @@ async def analyze_all_planets(request: ShadbalaAnalysisRequest):
     try:
         results = {}
         for planet, position in request.planet_positions.items():
-            aspects = request.aspects.get(planet, [])
+            aspects_data = request.aspects.get(planet, [])
             house = request.house_positions.get(planet)
             
             if house is None:
                 raise ValueError(f"Missing house position for {planet}")
+            
+            # Convert aspects to dict format
+            aspects = [{"type": a.type, "angle": a.angle} for a in aspects_data]
+            
+            # Use default speed
+            speed = 1.0
                 
-            result = ShadbalaSystem.calculate_shadbala(
+            result = shadbala_calculator.calculate_shadbala(
                 planet,
-                position,
                 house,
-                request.birth_time_is_day,
-                [aspect.dict() for aspect in aspects],
-                request.planet_positions
+                speed,
+                aspects,
+                request.birth_time_is_day
             )
+            result["interpretation"] = _interpret_shadbala(result)
             results[planet] = result
             
         # Calculate overall chart strength
-        total_strength = sum(r['total_strength'] for r in results.values())
-        average_strength = total_strength / len(results)
+        total_rupas = sum(r['total_rupas'] for r in results.values())
+        average_rupas = total_rupas / len(results) if results else 0
         
         return {
             'planets': results,
             'chart_analysis': {
-                'total_strength': float(total_strength),
-                'average_strength': float(average_strength),
-                'interpretation': ShadbalaSystem._interpret_strength(average_strength)
+                'total_rupas': round(total_rupas, 2),
+                'average_rupas': round(average_rupas, 2),
+                'interpretation': f"Average Shadbala: {round(average_rupas, 2)} Rupas"
             }
         }
     except Exception as e:
