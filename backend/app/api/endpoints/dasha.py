@@ -33,7 +33,7 @@ class YogaCalculationRequest(BaseModel):
         description="Dictionary of planet longitudes (0-360)"
     )
 
-@router.post("/dasha/vimshottari", response_model=Dict[str, Any], tags=["Dasha"])
+@router.post("/vimshottari", response_model=Dict[str, Any], tags=["Dasha"])
 async def calculate_vimshottari_dasha(request: DashaRequest) -> Dict[str, Any]:
     """
     Calculate Vimshottari Dasha periods for a given birth time and Moon position
@@ -59,7 +59,7 @@ async def calculate_vimshottari_dasha(request: DashaRequest) -> Dict[str, Any]:
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Calculation failed: {str(e)}")
 
-@router.get("/dasha/current", response_model=Dict[str, Any], tags=["Dasha"])
+@router.get("/current", response_model=Dict[str, Any], tags=["Dasha"])
 async def get_current_dasha(birth_date: datetime, moon_longitude: float) -> Dict[str, Any]:
     """
     Get the currently active Dasha periods for a given birth time and Moon position
@@ -80,7 +80,7 @@ async def get_current_dasha(birth_date: datetime, moon_longitude: float) -> Dict
         all_periods = dasha_calculator.calculate_all_dasha_levels(birth_date, moon_longitude)
         
         # Get current time
-        current_time = datetime(2024, 12, 27, 4, 40, 19)  # Using provided time
+        current_time = datetime.now()
         
         # Find current periods
         current_periods = {
@@ -89,19 +89,31 @@ async def get_current_dasha(birth_date: datetime, moon_longitude: float) -> Dict
             'pratyantardasha': None
         }
         
+        def parse_date(date_val):
+            """Parse date string or return datetime as-is"""
+            if isinstance(date_val, str):
+                return datetime.fromisoformat(date_val.replace('Z', '+00:00').split('+')[0])
+            return date_val
+        
         # Find current mahadasha
         for period in all_periods['periods']:
-            if period['start_date'] <= current_time <= period['end_date']:
+            start = parse_date(period['start_date'])
+            end = parse_date(period['end_date'])
+            if start <= current_time <= end:
                 current_periods['mahadasha'] = period
                 
                 # Find current antardasha
                 for antardasha in period['antardasha']:
-                    if antardasha['start_date'] <= current_time <= antardasha['end_date']:
+                    ad_start = parse_date(antardasha['start_date'])
+                    ad_end = parse_date(antardasha['end_date'])
+                    if ad_start <= current_time <= ad_end:
                         current_periods['antardasha'] = antardasha
                         
                         # Find current pratyantardasha
                         for pratyantardasha in antardasha['pratyantardasha']:
-                            if pratyantardasha['start_date'] <= current_time <= pratyantardasha['end_date']:
+                            pd_start = parse_date(pratyantardasha['start_date'])
+                            pd_end = parse_date(pratyantardasha['end_date'])
+                            if pd_start <= current_time <= pd_end:
                                 current_periods['pratyantardasha'] = pratyantardasha
                                 break
                         break

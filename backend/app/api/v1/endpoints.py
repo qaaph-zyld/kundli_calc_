@@ -25,7 +25,11 @@ from app.api.endpoints import (
     kp_system,
     yogas,
     transits,
-    additional_dashas
+    additional_dashas,
+    dasha,
+    compatibility,
+    panchang,
+    divisional
 )
 
 # Initialize FastAPI app
@@ -143,6 +147,10 @@ api_router.include_router(kp_system.router, prefix="/kp", tags=["kp-system"])
 api_router.include_router(yogas.router, prefix="/yogas", tags=["yogas"])
 api_router.include_router(transits.router, prefix="/transits", tags=["transits"])
 api_router.include_router(additional_dashas.router, prefix="/dashas", tags=["additional-dashas"])
+api_router.include_router(dasha.router, prefix="/dasha", tags=["dasha"])
+api_router.include_router(compatibility.router, prefix="/compatibility", tags=["compatibility"])
+api_router.include_router(panchang.router, prefix="/panchang", tags=["panchang"])
+api_router.include_router(divisional.router, prefix="/divisional", tags=["divisional"])
 
 # Add metrics endpoint
 @api_router.get("/metrics")

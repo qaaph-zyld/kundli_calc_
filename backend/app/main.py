@@ -99,7 +99,7 @@ app.include_router(
 
 app.include_router(
     dasha.router,
-    prefix="/api/v1",
+    prefix="/api/v1/dasha",
     tags=["dasha"]
 )
 
