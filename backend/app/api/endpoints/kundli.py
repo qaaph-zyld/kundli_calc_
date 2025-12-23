@@ -570,7 +570,7 @@ class EnhancedKundliRequest(BaseModel):
     longitude: float = Field(..., description="Longitude in decimal degrees", ge=-180, le=180)
     timezone: str = Field(..., description="Timezone name (e.g., 'Asia/Kolkata')")
     ayanamsa: Optional[str] = Field("lahiri", description="Ayanamsa system to use")
-    house_system: Optional[str] = Field("placidus", description="House system to use")
+    house_system: Optional[str] = Field("W", description="House system to use (W=Whole Sign)")
     calculation_options: Dict[str, Any] = Field(
         default_factory=dict,
         description="Additional calculation options"

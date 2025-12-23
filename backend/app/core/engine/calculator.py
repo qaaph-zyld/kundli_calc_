@@ -43,7 +43,8 @@ class KundliCalculator:
     ]
 
     def __init__(self):
-        swe.set_ephe_path("/path/to/ephemeris")  # Set path to ephemeris files
+        from app.core.config import settings
+        swe.set_ephe_path(settings.EPHE_PATH)
 
     def _set_ayanamsa(self, ayanamsa: AyanamsaType):
         ayanamsa_map = {

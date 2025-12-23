@@ -36,7 +36,12 @@ class Settings(BaseSettings):
     ALLOWED_ORIGINS: List[str] = ["http://localhost:3000"]
     
     # Swiss Ephemeris Settings
-    EPHE_PATH: str = os.path.join(os.path.dirname(__file__), "../../../ephemeris")
+    # Use environment variable if set, otherwise use default Swiss Ephemeris path
+    EPHE_PATH: str = os.getenv("EPHE_PATH") or os.path.join(os.path.dirname(__file__), "../../../ephemeris")
+    
+    # Astrological Calculation Defaults
+    DEFAULT_AYANAMSA: str = os.getenv("DEFAULT_AYANAMSA", "lahiri")
+    DEFAULT_HOUSE_SYSTEM: str = os.getenv("DEFAULT_HOUSE_SYSTEM", "W")  # W = Whole Sign
     
     # Logging
     LOG_LEVEL: str = "INFO"

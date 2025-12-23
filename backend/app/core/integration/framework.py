@@ -100,12 +100,13 @@ class AstrologicalIntegrator:
         self.interpreter = AstrologicalInterpreter()
         
         # Initialize ephemeris
-        if mode in [
+        if self.mode in [
             IntegrationMode.SWISS_EPHEMERIS,
             IntegrationMode.HYBRID
         ]:
-            if ephemeris_path:
-                swe.set_ephe_path(ephemeris_path)
+            from app.core.config import settings
+            ephe_path = ephemeris_path if ephemeris_path else settings.EPHE_PATH
+            swe.set_ephe_path(ephe_path)
             swe.set_topo(0, 0, 0)  # Default location
     
     def calculate_chart(

@@ -22,7 +22,7 @@ class HoroscopeRequest(BaseModel):
     latitude: float
     longitude: float
     altitude: float = 0
-    ayanamsa_system: str
+    ayanamsa_system: str = "LAHIRI"
     divisional_charts: Optional[List[str]] = None
 
     @field_validator('datetime_utc')

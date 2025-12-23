@@ -162,8 +162,9 @@ class AstronomicalCalculator:
     
     def _setup_ephemeris(self) -> None:
         """Setup ephemeris"""
-        # Initialize Swiss Ephemeris
-        swe.set_ephe_path()  # Use default ephemeris path
+        # Initialize Swiss Ephemeris with configured path
+        from app.core.config import settings
+        swe.set_ephe_path(settings.EPHE_PATH)
         
         # Set ayanamsa
         if self.ayanamsa_system == AyanamsaSystem.LAHIRI:
