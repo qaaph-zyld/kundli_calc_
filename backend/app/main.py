@@ -15,7 +15,6 @@ import time
 from datetime import datetime
 
 from .core.config import settings
-from .core.database import init_db
 from .middleware.rate_limiter import setup_rate_limiting
 
 from .api.endpoints import (

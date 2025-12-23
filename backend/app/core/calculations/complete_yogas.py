@@ -308,21 +308,24 @@ class CompleteYogaCalculator:
         lagna: int
     ):
         """Check additional raja yoga combinations"""
-        # Gajakesari Yoga
-        moon_sign = planet_signs.get("Moon", 0)
-        jup_sign = planet_signs.get("Jupiter", 0)
-        diff = abs(moon_sign - jup_sign)
-        if diff in [0, 3, 6, 9] or (12 - diff) in [0, 3, 6, 9]:
-            self.yogas_found.append(Yoga(
-                name="Gajakesari Yoga",
-                category="raja",
-                present=True,
-                strength=75,
-                planets_involved=["Moon", "Jupiter"],
-                houses_involved=[planet_houses.get("Moon", 0), planet_houses.get("Jupiter", 0)],
-                description="Jupiter in kendra from Moon",
-                effects="Fame, wisdom, good fortune"
-            ))
+        # Gajakesari Yoga - Jupiter in kendra (1/4/7/10) from Moon
+        # Kendra means 1st, 4th, 7th, or 10th position from Moon
+        if "Moon" in planet_signs and "Jupiter" in planet_signs:
+            moon_sign = planet_signs["Moon"]
+            jup_sign = planet_signs["Jupiter"]
+            # Calculate house position of Jupiter from Moon's sign
+            houses_from_moon = ((jup_sign - moon_sign) % 12) + 1
+            if houses_from_moon in [1, 4, 7, 10]:
+                self.yogas_found.append(Yoga(
+                    name="Gajakesari Yoga",
+                    category="raja",
+                    present=True,
+                    strength=75,
+                    planets_involved=["Moon", "Jupiter"],
+                    houses_involved=[planet_houses.get("Moon", 0), planet_houses.get("Jupiter", 0)],
+                    description=f"Jupiter in {houses_from_moon}th house (kendra) from Moon",
+                    effects="Fame, wisdom, good fortune, prosperity"
+                ))
         
         # Sunapha Yoga
         moon_house = planet_houses.get("Moon", 0)
