@@ -15,10 +15,10 @@ class HouseCalculator:
     
     def __init__(self):
         """Initialize calculator"""
-        from app.core.config import settings
+        import os
         self.initialized = True
         self.validator = HouseValidator()
-        self.house_system = settings.DEFAULT_HOUSE_SYSTEM
+        self.house_system = os.getenv("DEFAULT_HOUSE_SYSTEM", "W")  # W = Whole Sign (Vedic default)
         
         # Define supported house systems
         self.house_systems = {

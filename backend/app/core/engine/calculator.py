@@ -43,8 +43,10 @@ class KundliCalculator:
     ]
 
     def __init__(self):
-        from app.core.config import settings
-        swe.set_ephe_path(settings.EPHE_PATH)
+        import os
+        ephe_path = os.getenv("EPHE_PATH")
+        if ephe_path:
+            swe.set_ephe_path(ephe_path)
 
     def _set_ayanamsa(self, ayanamsa: AyanamsaType):
         ayanamsa_map = {
