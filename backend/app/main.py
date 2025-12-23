@@ -6,13 +6,17 @@ Version: 1.0.0
 """
 
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.openapi.utils import get_openapi
 from fastapi.responses import JSONResponse
-from fastapi.exceptions import HTTPException
-import yaml
-from pathlib import Path
+from contextlib import asynccontextmanager
+import logging
+import time
+from datetime import datetime
+
+from .core.config import settings
+from .core.database import init_db
+from .middleware.rate_limiter import setup_rate_limiting
 
 from .api.endpoints import (
     charts, health, ayanamsa, panchang, dasha, geo, divisional, debug, location, famous_charts,
@@ -51,6 +55,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Setup rate limiting
+setup_rate_limiting(app)
 
 # Load custom OpenAPI schema
 def custom_openapi():
