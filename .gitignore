@@ -34,9 +34,12 @@ ENV/
 # Logs
 *.log
 
-# Local development settings
+# Environment files with secrets
 .env
 .env.local
+.env.production
+.env.staging
+.env.*.local
 
 # Coverage reports
 htmlcov/
