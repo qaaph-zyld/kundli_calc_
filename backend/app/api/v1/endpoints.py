@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from datetime import datetime
 from typing import Optional, Dict, Any, List
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from app.core.monitoring.monitor import MonitoringSystem
 from app.core.validation.validation_framework import ValidationFramework
 from app.core.analysis.pattern_detector import PatternDetector
@@ -95,7 +95,8 @@ class CalculationRequest(BaseModel):
     ayanamsa: Optional[float] = Field(None)
     house_system: Optional[str] = Field(None)
     
-    @validator('datetime')
+    @field_validator('datetime')
+    @classmethod
     def validate_datetime(cls, v):
         try:
             datetime.fromisoformat(v.replace('Z', '+00:00'))

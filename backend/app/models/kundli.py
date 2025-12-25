@@ -1,6 +1,6 @@
 from datetime import datetime
 from typing import List, Optional
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from enum import Enum
 
 class AyanamsaType(str, Enum):
@@ -52,7 +52,8 @@ class KundliRequest(BaseModel):
     chart_types: List[ChartType] = [ChartType.RASI]
     language: Optional[str] = "en"
 
-    @validator('date')
+    @field_validator('date')
+    @classmethod
     def validate_date(cls, v):
         if v > datetime.now():
             raise ValueError("Birth date cannot be in the future")

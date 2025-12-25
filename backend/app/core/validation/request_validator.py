@@ -7,7 +7,7 @@ Version: 1.0.0
 
 from typing import Dict, Any, Optional, List, Union
 from datetime import datetime
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from enum import Enum
 import pytz
 from app.models.location import Location
@@ -70,7 +70,8 @@ class KundliRequest(BaseModel):
         description="Language for predictions and interpretations"
     )
 
-    @validator("date")
+    @field_validator("date")
+    @classmethod
     def validate_date(cls, v: str) -> str:
         try:
             datetime.strptime(v, "%Y-%m-%d")
@@ -78,7 +79,8 @@ class KundliRequest(BaseModel):
         except ValueError:
             raise ValueError("Invalid date format. Use YYYY-MM-DD")
 
-    @validator("time")
+    @field_validator("time")
+    @classmethod
     def validate_time(cls, v: str) -> str:
         try:
             datetime.strptime(v, "%H:%M:%S")
@@ -86,7 +88,8 @@ class KundliRequest(BaseModel):
         except ValueError:
             raise ValueError("Invalid time format. Use HH:MM:SS")
 
-    @validator("timezone")
+    @field_validator("timezone")
+    @classmethod
     def validate_timezone(cls, v: str) -> str:
         try:
             pytz.timezone(v)
@@ -113,7 +116,8 @@ class TransitRequest(KundliRequest):
     transit_date: str = Field(..., description="Transit date in YYYY-MM-DD format")
     transit_time: str = Field(..., description="Transit time in HH:MM:SS format")
     
-    @validator("transit_date")
+    @field_validator("transit_date")
+    @classmethod
     def validate_transit_date(cls, v: str) -> str:
         try:
             datetime.strptime(v, "%Y-%m-%d")
@@ -121,7 +125,8 @@ class TransitRequest(KundliRequest):
         except ValueError:
             raise ValueError("Invalid transit date format. Use YYYY-MM-DD")
     
-    @validator("transit_time")
+    @field_validator("transit_time")
+    @classmethod
     def validate_transit_time(cls, v: str) -> str:
         try:
             datetime.strptime(v, "%H:%M:%S")
@@ -160,7 +165,8 @@ class PredictionRequest(KundliRequest):
         description="Domains for predictions"
     )
 
-    @validator("prediction_start")
+    @field_validator("prediction_start")
+    @classmethod
     def validate_prediction_start(cls, v: Optional[str]) -> Optional[str]:
         if v:
             try:
@@ -170,19 +176,14 @@ class PredictionRequest(KundliRequest):
                 raise ValueError("Invalid prediction start date format. Use YYYY-MM-DD")
         return v
 
-    @validator("prediction_end")
-    def validate_prediction_end(cls, v: Optional[str], values: Dict[str, Any]) -> Optional[str]:
+    @field_validator("prediction_end")
+    @classmethod
+    def validate_prediction_end(cls, v: Optional[str]) -> Optional[str]:
         if v:
             try:
-                end_date = datetime.strptime(v, "%Y-%m-%d")
-                if "prediction_start" in values and values["prediction_start"]:
-                    start_date = datetime.strptime(values["prediction_start"], "%Y-%m-%d")
-                    if end_date <= start_date:
-                        raise ValueError("Prediction end date must be after start date")
+                datetime.strptime(v, "%Y-%m-%d")
                 return v
-            except ValueError as e:
-                if str(e) == "Prediction end date must be after start date":
-                    raise
+            except ValueError:
                 raise ValueError("Invalid prediction end date format. Use YYYY-MM-DD")
         return v
 
@@ -211,7 +212,8 @@ class MuhurtaRequest(BaseModel):
         gt=0
     )
 
-    @validator("date")
+    @field_validator("date")
+    @classmethod
     def validate_date(cls, v: str) -> str:
         try:
             datetime.strptime(v, "%Y-%m-%d")

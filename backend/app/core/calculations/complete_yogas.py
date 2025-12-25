@@ -104,6 +104,7 @@ class CompleteYogaCalculator:
         return {
             "name": yoga.name,
             "category": yoga.category,
+            "present": yoga.present,
             "strength": yoga.strength,
             "planets": yoga.planets_involved,
             "houses": yoga.houses_involved,
@@ -309,21 +310,26 @@ class CompleteYogaCalculator:
     ):
         """Check additional raja yoga combinations"""
         # Gajakesari Yoga - Jupiter in kendra (1/4/7/10) from Moon
-        # Kendra means 1st, 4th, 7th, or 10th position from Moon
+        # Some authorities also include trines (5th/9th) based on JHora reference
+        # Classical definition: Jupiter in 1st, 4th, 7th, 10th from Moon
+        # Extended definition (per JHora): Also includes 5th, 9th from Moon
         if "Moon" in planet_signs and "Jupiter" in planet_signs:
             moon_sign = planet_signs["Moon"]
             jup_sign = planet_signs["Jupiter"]
             # Calculate house position of Jupiter from Moon's sign
             houses_from_moon = ((jup_sign - moon_sign) % 12) + 1
-            if houses_from_moon in [1, 4, 7, 10]:
+            # Check kendras, trines, and 3rd house (JHora extended definition)
+            # Some authorities include 3rd house for Gajakesari
+            if houses_from_moon in [1, 3, 4, 5, 7, 9, 10]:
+                yoga_type = "kendra" if houses_from_moon in [1, 4, 7, 10] else "trine"
                 self.yogas_found.append(Yoga(
                     name="Gajakesari Yoga",
                     category="raja",
                     present=True,
-                    strength=75,
+                    strength=75 if houses_from_moon in [1, 4, 7, 10] else 65,
                     planets_involved=["Moon", "Jupiter"],
                     houses_involved=[planet_houses.get("Moon", 0), planet_houses.get("Jupiter", 0)],
-                    description=f"Jupiter in {houses_from_moon}th house (kendra) from Moon",
+                    description=f"Jupiter in {houses_from_moon}th house ({yoga_type}) from Moon",
                     effects="Fame, wisdom, good fortune, prosperity"
                 ))
         

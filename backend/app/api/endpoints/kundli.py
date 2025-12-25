@@ -6,7 +6,7 @@ Version: 1.0.0
 """
 
 from fastapi import APIRouter, HTTPException, Depends
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, field_validator
 from datetime import datetime
 from typing import Dict, List, Any, Optional
 from app.core.calculations.astronomical import AstronomicalCalculator
@@ -64,7 +64,8 @@ class KundliRequest(BaseModel):
     longitude: float = Field(..., description="Longitude in decimal degrees", ge=-180, le=180)
     timezone: str = Field(..., description="Timezone name (e.g., 'Asia/Kolkata')")
     
-    @validator('date')
+    @field_validator('date')
+    @classmethod
     def validate_date(cls, v):
         try:
             datetime.strptime(v, "%Y-%m-%d")
@@ -72,7 +73,8 @@ class KundliRequest(BaseModel):
         except ValueError:
             raise ValueError("Invalid date format. Use YYYY-MM-DD")
     
-    @validator('time')
+    @field_validator('time')
+    @classmethod
     def validate_time(cls, v):
         try:
             datetime.strptime(v, "%H:%M:%S")
@@ -576,7 +578,8 @@ class EnhancedKundliRequest(BaseModel):
         description="Additional calculation options"
     )
     
-    @validator("date")
+    @field_validator("date")
+    @classmethod
     def validate_date(cls, v):
         try:
             datetime.strptime(v, "%Y-%m-%d")
@@ -584,7 +587,8 @@ class EnhancedKundliRequest(BaseModel):
         except ValueError:
             raise ValueError("Invalid date format. Use YYYY-MM-DD")
             
-    @validator("time")
+    @field_validator("time")
+    @classmethod
     def validate_time(cls, v):
         try:
             datetime.strptime(v, "%H:%M:%S")
@@ -592,7 +596,8 @@ class EnhancedKundliRequest(BaseModel):
         except ValueError:
             raise ValueError("Invalid time format. Use HH:MM:SS")
             
-    @validator("timezone")
+    @field_validator("timezone")
+    @classmethod
     def validate_timezone(cls, v):
         from zoneinfo import ZoneInfo
         try:

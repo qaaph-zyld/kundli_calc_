@@ -19,3 +19,6 @@ httpx>=0.25.0  # For testing
 pytest>=7.4.3
 pytest-asyncio>=0.23.2
 slowapi>=0.1.9  # Rate limiting
+psutil>=5.9.0  # System monitoring
+prometheus-client>=0.20.0
+motor>=3.5.0  # Async MongoDB driver

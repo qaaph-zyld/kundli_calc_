@@ -6,12 +6,13 @@ Version: 1.0.0
 """
 
 from contextlib import asynccontextmanager
+from pathlib import Path
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-from contextlib import asynccontextmanager
 import logging
 import time
+import yaml
 from datetime import datetime
 
 from .core.config import settings
@@ -22,7 +23,6 @@ from .api.endpoints import (
     lal_kitab, varshphal, yogas, transits, kp_system, shadbala, ashtakavarga, bhava, prediction,
     additional_dashas, horoscope, compatibility
 )
-from .core.config import settings
 from .core.errors.handlers import ErrorHandler
 from .db.mongodb import MongoDB
 
