@@ -2,6 +2,7 @@
 from typing import Optional, Any, Dict
 import os
 import logging
+from urllib.parse import urlparse
 
 logger = logging.getLogger(__name__)
 
@@ -30,10 +31,20 @@ class RedisCache:
                 
             try:
                 import redis as redis_lib
+                redis_url = os.environ.get("REDIS_URL")
+                if redis_url:
+                    parsed = urlparse(redis_url)
+                    redis_host = parsed.hostname or "localhost"
+                    redis_port = parsed.port or 6379
+                    redis_db = int((parsed.path or "/0").lstrip("/") or 0)
+                else:
+                    redis_host = os.environ.get("REDIS_HOST", "localhost")
+                    redis_port = int(os.environ.get("REDIS_PORT", "6379"))
+                    redis_db = int(os.environ.get("REDIS_DB", "0"))
                 self.redis = redis_lib.Redis(
-                    host='localhost',
-                    port=6379,
-                    db=0,
+                    host=redis_host,
+                    port=redis_port,
+                    db=redis_db,
                     decode_responses=True
                 )
                 self.redis.ping()  # Test connection

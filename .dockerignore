@@ -1,0 +1,16 @@
+.git
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.mypy_cache
+.env
+.env.*
+*.db
+backend/test.db
+backend/venv
+backend/.venv
+frontend
+monitoring
+node_modules

@@ -20,6 +20,7 @@ from . import divisional
 from . import debug
 from . import location
 from . import famous_charts
+from . import system_health
 
 __all__ = [
     "health",
@@ -39,4 +40,5 @@ __all__ = [
     "debug",
     "location",
     "famous_charts",
+    "system_health",
 ]

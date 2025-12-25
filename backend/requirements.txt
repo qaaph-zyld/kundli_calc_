@@ -22,3 +22,4 @@ slowapi>=0.1.9  # Rate limiting
 psutil>=5.9.0  # System monitoring
 prometheus-client>=0.20.0
 motor>=3.5.0  # Async MongoDB driver
+pytz>=2023.3

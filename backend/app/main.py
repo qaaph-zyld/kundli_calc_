@@ -21,7 +21,7 @@ from .middleware.rate_limiter import setup_rate_limiting
 from .api.endpoints import (
     charts, health, ayanamsa, panchang, dasha, geo, divisional, debug, location, famous_charts,
     lal_kitab, varshphal, yogas, transits, kp_system, shadbala, ashtakavarga, bhava, prediction,
-    additional_dashas, horoscope, compatibility
+    additional_dashas, horoscope, compatibility, system_health
 )
 from .core.errors.handlers import ErrorHandler
 from .db.mongodb import MongoDB
@@ -101,6 +101,12 @@ app.include_router(
     health.router,
     prefix="/api/v1/health",
     tags=["health"]
+)
+
+app.include_router(
+    system_health.router,
+    prefix="/api/v1/system",
+    tags=["system"]
 )
 
 app.include_router(
