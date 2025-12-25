@@ -1,8 +1,23 @@
+"""Ashtakavarga Calculation System
+===================================
+Implements complete Ashtakavarga (Eight-Fold Strength) as per BPHS Ch.51-52.
+
+Ashtakavarga measures benefic points (bindus) contributed to each house
+from 8 reference points: Lagna and 7 planets (Sun through Saturn).
+
+Reference: Brihat Parashara Hora Shastra, Chapters 51-52
+           Phaladeepika, Chapter 9
+           Saravali, Chapter 38
+
+Traditional Usage:
+- Sarvashtakavarga: Total bindus across all planets (minimum 28 per house)
+- Individual Ashtakavarga: Planet-specific strength per house
+- Transit analysis: Planet transits give results when crossing high-bindu houses
+- Dasha results: Ashtakavarga modulates Vimshottari results
 """
-Ashtakavarga calculation system for Vedic astrology
-"""
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Any
 from decimal import Decimal
+from dataclasses import dataclass
 
 class Ashtakavarga:
     """
@@ -20,27 +35,89 @@ class Ashtakavarga:
         'Saturn': [3, 5, 6, 8, 9, 10, 11]
     }
     
-    # Contribution points from each planet to others
-    contribution_matrix = {
+    # Complete BPHS Ashtakavarga Tables
+    # Format: {reference_point: {target_planet: [houses_getting_bindus]}}
+    # Reference points: Lagna, Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn
+    # Houses are numbered 1-12 from reference point
+    
+    ASHTAKAVARGA_TABLES = {
+        # SUN ASHTAKAVARGA (Ravi Ashtakavarga)
         'Sun': {
-            'Sun': [1, 2, 3, 4, 7, 8, 9, 10, 11],
-            'Moon': [3, 6, 7, 8, 10, 11],
+            'Lagna': [1, 2, 4, 7, 8, 9, 10, 11],
+            'Sun': [1, 2, 4, 7, 8, 9, 10, 11],
+            'Moon': [3, 6, 10, 11],
             'Mars': [1, 2, 4, 7, 8, 9, 10, 11],
             'Mercury': [3, 5, 6, 9, 10, 11, 12],
-            'Jupiter': [1, 2, 3, 4, 7, 8, 9, 10, 11],
-            'Venus': [8, 11, 12],
+            'Jupiter': [5, 6, 9, 11],
+            'Venus': [6, 7, 12],
             'Saturn': [1, 2, 4, 7, 8, 9, 10, 11]
         },
+        # MOON ASHTAKAVARGA (Chandra Ashtakavarga)
         'Moon': {
+            'Lagna': [3, 6, 7, 8, 10, 11],
             'Sun': [3, 6, 7, 8, 10, 11],
-            'Moon': [1, 3, 6, 7, 8, 10, 11],
+            'Moon': [1, 3, 6, 7, 10, 11],
             'Mars': [2, 3, 5, 6, 9, 10, 11],
             'Mercury': [1, 3, 4, 5, 7, 8, 10, 11],
-            'Jupiter': [2, 5, 7, 9, 11],
+            'Jupiter': [1, 4, 7, 8, 10, 11, 12],
             'Venus': [3, 4, 5, 7, 9, 10, 11],
             'Saturn': [3, 5, 6, 11]
+        },
+        # MARS ASHTAKAVARGA (Mangal/Kuja Ashtakavarga)
+        'Mars': {
+            'Lagna': [1, 2, 4, 7, 8, 10, 11],
+            'Sun': [3, 5, 6, 10, 11],
+            'Moon': [3, 6, 11],
+            'Mars': [1, 2, 4, 7, 8, 10, 11],
+            'Mercury': [3, 5, 6, 11],
+            'Jupiter': [6, 10, 11, 12],
+            'Venus': [6, 8, 11, 12],
+            'Saturn': [1, 4, 7, 8, 9, 10, 11]
+        },
+        # MERCURY ASHTAKAVARGA (Budha Ashtakavarga)
+        'Mercury': {
+            'Lagna': [1, 3, 5, 6, 9, 10, 11, 12],
+            'Sun': [5, 6, 9, 11, 12],
+            'Moon': [2, 4, 6, 8, 10, 11],
+            'Mars': [1, 2, 4, 7, 8, 9, 10, 11],
+            'Mercury': [1, 3, 5, 6, 9, 10, 11, 12],
+            'Jupiter': [6, 8, 11, 12],
+            'Venus': [1, 2, 3, 4, 5, 8, 9, 11],
+            'Saturn': [1, 2, 4, 7, 8, 9, 10, 11]
+        },
+        # JUPITER ASHTAKAVARGA (Guru Ashtakavarga)
+        'Jupiter': {
+            'Lagna': [1, 2, 3, 4, 7, 8, 9, 10, 11],
+            'Sun': [1, 2, 3, 4, 7, 8, 9, 10, 11],
+            'Moon': [2, 5, 7, 9, 11],
+            'Mars': [1, 2, 4, 7, 8, 10, 11],
+            'Mercury': [1, 2, 4, 5, 6, 9, 10, 11],
+            'Jupiter': [1, 2, 3, 4, 7, 8, 10, 11],
+            'Venus': [2, 5, 6, 9, 10, 11],
+            'Saturn': [3, 5, 6, 12]
+        },
+        # VENUS ASHTAKAVARGA (Shukra Ashtakavarga)
+        'Venus': {
+            'Lagna': [1, 2, 3, 4, 5, 8, 9, 11, 12],
+            'Sun': [8, 11, 12],
+            'Moon': [1, 2, 3, 4, 5, 8, 9, 11, 12],
+            'Mars': [3, 4, 6, 9, 11, 12],
+            'Mercury': [3, 5, 6, 9, 11],
+            'Jupiter': [5, 8, 9, 10, 11],
+            'Venus': [1, 2, 3, 4, 5, 8, 9, 10, 11],
+            'Saturn': [3, 4, 5, 8, 9, 10, 11]
+        },
+        # SATURN ASHTAKAVARGA (Shani Ashtakavarga)
+        'Saturn': {
+            'Lagna': [3, 5, 6, 11],
+            'Sun': [1, 2, 4, 7, 8, 10, 11],
+            'Moon': [3, 6, 11],
+            'Mars': [3, 5, 6, 10, 11, 12],
+            'Mercury': [6, 8, 9, 10, 11, 12],
+            'Jupiter': [5, 6, 11, 12],
+            'Venus': [6, 11, 12],
+            'Saturn': [3, 5, 6, 11]
         }
-        # ... similar matrices for other planets
     }
     
     @classmethod
