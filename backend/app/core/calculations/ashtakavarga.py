@@ -151,9 +151,9 @@ class Ashtakavarga:
             relative_house = ((house - position) % 12) + 1
             
             # Check if this relative position contributes a bindu
-            if (planet in cls.contribution_matrix and 
-                contributing_planet in cls.contribution_matrix[planet] and
-                relative_house in cls.contribution_matrix[planet][contributing_planet]):
+            if (planet in cls.ASHTAKAVARGA_TABLES and 
+                contributing_planet in cls.ASHTAKAVARGA_TABLES[planet] and
+                relative_house in cls.ASHTAKAVARGA_TABLES[planet][contributing_planet]):
                 bindus += 1
                 
         return bindus
