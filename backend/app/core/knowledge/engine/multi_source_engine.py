@@ -26,11 +26,6 @@ from backend.app.core.knowledge.sources.saravali_planets_in_houses import (
     SARAVALI_PLANETS_IN_HOUSES,
     SARAVALI_METADATA
 )
-from backend.app.core.knowledge.schemas.source_schema import (
-    SourceCitation,
-    SourceConfidence,
-    SourceMetadata
-)
 
 
 class AgreementLevel(str, Enum):
