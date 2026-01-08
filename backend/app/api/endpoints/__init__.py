@@ -21,6 +21,7 @@ from . import debug
 from . import location
 from . import famous_charts
 from . import system_health
+from . import traditional
 
 __all__ = [
     "health",
@@ -41,4 +42,5 @@ __all__ = [
     "location",
     "famous_charts",
     "system_health",
+    "traditional",
 ]

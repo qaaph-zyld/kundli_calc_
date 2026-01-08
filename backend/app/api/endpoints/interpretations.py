@@ -197,6 +197,104 @@ async def demo_sun_in_tenth():
     }
 
 
+@router.get("/yogas/available", tags=["Interpretations", "Yogas"])
+async def get_available_yogas():
+    """
+    Get list of available yoga interpretations.
+    
+    Returns:
+        Dictionary of yoga categories with available yogas
+    """
+    available = engine.get_available_yogas()
+    
+    total_yogas = sum(len(yogas) for yogas in available.values())
+    
+    return {
+        "status": "success",
+        "data": available,
+        "total_yogas": total_yogas,
+        "categories": list(available.keys()),
+        "note": "All yogas include BPHS chapter and verse references"
+    }
+
+
+@router.get("/yoga/{yoga_name}", tags=["Interpretations", "Yogas"])
+async def get_yoga_interpretation(yoga_name: str):
+    """
+    Get classical text interpretation for a specific yoga.
+    
+    Args:
+        yoga_name: Name of the yoga (e.g., Gaja_Kesari_Yoga, Dharma_Karma_Adhipati_Yoga)
+        
+    Returns:
+        Full yoga interpretation with:
+        - Formation conditions
+        - Classical description from BPHS
+        - Detailed effects by life area
+        - Strength factors and assessment
+        - Formation examples
+        - Cancellation factors
+        - Timing of effects
+        - Source citations with chapter and verses
+    
+    Example:
+    ```
+    GET /api/v1/interpret/yoga/Gaja_Kesari_Yoga
+    ```
+    """
+    try:
+        interpretation = engine.interpret_yoga(yoga_name=yoga_name)
+        
+        return {
+            "status": "success",
+            "yoga": interpretation.model_dump(mode='json'),
+            "sources": interpretation.sources.get_all_citations(),
+            "confidence_score": interpretation.metadata.confidence_score
+        }
+    except ValueError as e:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Yoga interpretation not found: {str(e)}"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error generating yoga interpretation: {str(e)}"
+        )
+
+
+@router.get("/yoga/demo/gaja-kesari", tags=["Interpretations", "Yogas", "Demo"])
+async def demo_gaja_kesari_yoga():
+    """
+    Demo endpoint showing Gaja Kesari Yoga interpretation.
+    
+    Demonstrates:
+    - Complete yoga formation conditions
+    - Classical BPHS description
+    - Detailed effects breakdown
+    - Strength assessment criteria
+    - Source attribution with verses
+    
+    **Gaja Kesari Yoga** is one of the most famous and auspicious yogas,
+    formed when Jupiter occupies a kendra from the Moon.
+    """
+    interpretation = engine.interpret_yoga("Gaja_Kesari_Yoga")
+    
+    return {
+        "demo_title": "Gaja Kesari Yoga - The Elephant-Lion Combination",
+        "significance": "One of the most famous yogas in Vedic astrology",
+        "interpretation": interpretation.model_dump(mode='json'),
+        "why_this_matters": [
+            "🎯 Complete Formation Criteria: Not just 'Jupiter and Moon' but specific kendra placement",
+            "📚 Classical Authority: Direct from BPHS Chapter 41, verses 37-38",
+            "💎 Strength Assessment: Know when yoga is strong vs weak",
+            "⚖️ Cancellation Factors: Understand what weakens the yoga",
+            "🔍 Transparency: Full verse citations for verification"
+        ],
+        "citations": interpretation.sources.get_all_citations()
+    }
+
+
 @router.get("/sources/info", tags=["Interpretations", "Metadata"])
 async def get_source_information():
     """

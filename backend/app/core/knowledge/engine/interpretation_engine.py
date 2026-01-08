@@ -160,6 +160,90 @@ class KnowledgeInterpretationEngine:
             metadata=metadata
         )
     
+    def interpret_yoga(
+        self,
+        yoga_name: str,
+        detected_in_chart: bool = True,
+        formation_details: Optional[Dict[str, Any]] = None
+    ):
+        """
+        Generate interpretation for a yoga with classical text sources.
+        
+        Args:
+            yoga_name: Name of the yoga
+            detected_in_chart: Whether yoga is actually present
+            formation_details: Optional details about how yoga formed
+            
+        Returns:
+            YogaInterpretation with full source attribution
+        """
+        from ..sources.bphs_yogas import get_yoga_interpretation
+        from ..schemas.interpretation_schema import YogaInterpretation
+        
+        yoga_data = get_yoga_interpretation(yoga_name)
+        
+        if not yoga_data:
+            raise ValueError(f"No BPHS interpretation found for yoga: {yoga_name}")
+        
+        # Build source citations
+        chapter = yoga_data.get('chapter', 40)
+        verses = yoga_data.get('verses', '')
+        
+        primary_citation = SourceCitation(
+            text=ClassicalText.BPHS,
+            chapter=chapter,
+            verses=verses,
+            translator="R. Santhanam",
+            edition="Rajan Publications, 1984"
+        )
+        
+        primary_source = SourcedContent(
+            content=yoga_data.get('classical_description', ''),
+            citation=primary_citation,
+            confidence=ConfidenceLevel.DIRECT_QUOTE,
+            notes=f"Direct interpretation from BPHS Chapter {chapter} on yogas"
+        )
+        
+        # Build InterpretationSource
+        sources = InterpretationSource(
+            primary_sources=[primary_source],
+            supporting_sources=[],
+            synthesis_note=f"Yoga interpretation from BPHS Ch. {chapter}, verses {verses}"
+        )
+        
+        # Build metadata
+        metadata = InterpretationMetadata(
+            interpretation_type="yoga",
+            confidence_score=0.95,
+            last_updated=datetime.now().isoformat(),
+            validator=f"BPHS Chapter {chapter}",
+            tags=[
+                yoga_name.lower().replace('_', '-'),
+                yoga_data.get('category', 'yoga').lower().replace(' ', '-'),
+                'bphs',
+                'classical_text'
+            ]
+        )
+        
+        return YogaInterpretation(
+            yoga_name=yoga_name,
+            category=yoga_data.get('category', 'Yoga'),
+            formation=yoga_data.get('formation', ''),
+            classical_description=yoga_data.get('classical_description', ''),
+            planets_involved=yoga_data.get('planets_involved'),
+            houses_involved=yoga_data.get('houses_involved'),
+            effects=yoga_data.get('effects', {}),
+            strength_factors=yoga_data.get('strength_factors'),
+            strength_assessment=yoga_data.get('strength_assessment'),
+            examples=yoga_data.get('examples'),
+            timing=yoga_data.get('timing'),
+            cancellation_factors=yoga_data.get('cancellation_factors'),
+            special_notes=yoga_data.get('special_notes'),
+            modern_interpretation=yoga_data.get('modern_interpretation'),
+            sources=sources,
+            metadata=metadata
+        )
+    
     def synthesize_chart_interpretation(
         self,
         chart_data: Dict[str, Any],
@@ -182,7 +266,7 @@ class KnowledgeInterpretationEngine:
         # - Aspects
         # - Dashas
         # Into coherent narrative
-        raise NotImplementedError("Full chart synthesis coming in Phase 2")
+        raise NotImplementedError("Full chart synthesis coming in Phase 3")
     
     def get_available_interpretations(self) -> Dict[str, List[int]]:
         """
@@ -195,3 +279,20 @@ class KnowledgeInterpretationEngine:
         for planet, houses in BPHS_PLANETS_IN_HOUSES.items():
             available[planet] = list(houses.keys())
         return available
+    
+    def get_available_yogas(self) -> Dict[str, List[str]]:
+        """
+        Get list of available yogas by category.
+        
+        Returns:
+            Dictionary of category -> list of yoga names
+        """
+        from ..sources.bphs_yogas import (
+            BPHS_RAJA_YOGAS, BPHS_DHANA_YOGAS, BPHS_PANCHA_MAHAPURUSHA_YOGAS
+        )
+        
+        return {
+            "Raja Yoga": list(BPHS_RAJA_YOGAS.keys()),
+            "Wealth Yoga": list(BPHS_DHANA_YOGAS.keys()),
+            "Mahapurusha Yoga": list(BPHS_PANCHA_MAHAPURUSHA_YOGAS.keys())
+        }

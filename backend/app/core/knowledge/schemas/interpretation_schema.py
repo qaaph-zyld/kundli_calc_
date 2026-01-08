@@ -97,32 +97,45 @@ class PlanetInHouseInterpretation(BaseModel):
 class YogaInterpretation(BaseModel):
     """Interpretation for a specific yoga"""
     yoga_name: str
-    yoga_type: str = Field(..., description="Category (Raja, Dhana, etc.)")
+    category: str = Field(..., description="Category (Raja Yoga, Wealth Yoga, Mahapurusha Yoga, etc.)")
     
     # Formation details
-    formation: str = Field(..., description="How the yoga forms")
-    planets_involved: List[str]
-    houses_involved: List[int]
+    formation: str = Field(..., description="How the yoga forms - conditions required")
+    classical_description: str = Field(..., description="Description from classical texts")
+    planets_involved: Optional[List[str]] = None
+    houses_involved: Optional[List[int]] = None
     
     # Effects
-    primary_effects: str = Field(..., description="Main effects per classical texts")
-    strength_based_effects: Dict[str, str] = Field(
-        default_factory=dict,
-        description="Effects by strength level"
+    effects: Dict[str, Any] = Field(..., description="Categorized effects (general, career, wealth, etc.)")
+    
+    # Strength assessment
+    strength_factors: Optional[List[str]] = Field(
+        None,
+        description="Factors that strengthen the yoga"
+    )
+    strength_assessment: Optional[Dict[str, str]] = Field(
+        None,
+        description="Effects by strength level (very_strong, strong, moderate, weak)"
     )
     
-    # Manifestation
-    manifestation_conditions: List[str] = Field(
-        default_factory=list,
-        description="Conditions for yoga to manifest fully"
+    # Formation examples
+    examples: Optional[List[str]] = Field(
+        None,
+        description="Example formations of this yoga"
     )
-    timing: str = Field(..., description="When effects are felt")
+    
+    # Timing
+    timing: Optional[str] = Field(None, description="When effects manifest")
     
     # Cancellation factors
-    cancellation_factors: List[str] = Field(
-        default_factory=list,
-        description="Factors that can cancel or weaken the yoga"
+    cancellation_factors: Optional[List[str]] = Field(
+        None,
+        description="Factors that cancel or weaken the yoga"
     )
+    
+    # Special notes
+    special_notes: Optional[List[str]] = None
+    modern_interpretation: Optional[str] = None
     
     # Source attribution
     sources: InterpretationSource

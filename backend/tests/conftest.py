@@ -55,6 +55,10 @@ def db() -> Session:
 @pytest.fixture(autouse=True)
 def mock_swisseph():
     """Mock swisseph module."""
+    if os.environ.get("MOCK_SWISSEPH", "1").lower() in {"0", "false", "no"}:
+        yield None
+        return
+
     class MockSwisseph:
         """Mock swisseph class."""
         def __init__(self):

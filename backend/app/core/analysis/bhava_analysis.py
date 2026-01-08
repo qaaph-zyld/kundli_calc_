@@ -17,7 +17,7 @@ Bhava Bala Components:
 6. Bhava Sandhi (cusp considerations)
 """
 
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Tuple
 from dataclasses import dataclass
 from enum import Enum
 

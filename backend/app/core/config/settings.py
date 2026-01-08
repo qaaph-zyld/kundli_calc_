@@ -73,7 +73,7 @@ class Settings(BaseSettings):
         description="Path to Swiss Ephemeris data files"
     )
 
-    model_config = SettingsConfigDict(env_file=env_file, case_sensitive=True)
+    model_config = SettingsConfigDict(env_file=env_file, case_sensitive=True, extra="ignore")
 
 
 # Create settings instance
