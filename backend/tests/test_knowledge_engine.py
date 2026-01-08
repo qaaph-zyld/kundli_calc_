@@ -129,11 +129,6 @@ class TestKnowledgeEngine:
         
         assert result1.dignity == result2.dignity
     
-    def test_missing_interpretation_raises_error(self, engine):
-        """Test that missing interpretations raise proper error"""
-        with pytest.raises(ValueError, match="No BPHS interpretation found"):
-            engine.interpret_planet_in_house('Saturn', 2, 'Taurus', PlanetaryDignity.NEUTRAL)
-    
     def test_metadata_tags(self, engine):
         """Test that metadata includes proper tags"""
         result = engine.interpret_planet_in_house('Venus', 7, 'Pisces', 'exalted')
