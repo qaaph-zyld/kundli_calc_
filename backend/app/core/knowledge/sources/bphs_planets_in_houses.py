@@ -1078,6 +1078,217 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
     },
     
     "Mercury": {
+        1: {
+            "verses": "24.38",
+            "translation": "Mercury in the ascendant: The native will be learned, will possess a beautiful speech, be truthful, be skilled in sexual science, and be long-lived.",
+            "detailed_effects": [
+                "Intelligent, analytical, and communicative personality",
+                "Quick wit and sharp mental faculties",
+                "Youthful appearance and adaptable nature",
+                "Strong communication and learning abilities",
+                "Business-minded and commercially oriented",
+                "Versatile with multiple skills and interests",
+                "Nervous or restless energy"
+            ],
+            "positive_effects": [
+                "Exceptional intelligence and learning ability",
+                "Excellent communication skills",
+                "Success in business, writing, teaching",
+                "Adaptable to changing circumstances",
+                "Youthful and charming demeanor"
+            ],
+            "challenging_effects": [
+                "Nervous anxiety or mental restlessness",
+                "Scattered focus and interests",
+                "Tendency to overthink",
+                "May lack depth in relationships"
+            ]
+        },
+        2: {
+            "verses": "24.39",
+            "translation": "Mercury in the 2nd: The native will earn wealth through his own intelligence, will enjoy food, be sweet in speech, and truthful.",
+            "detailed_effects": [
+                "Wealth through intellect and communication",
+                "Sweet, persuasive, and eloquent speech",
+                "Multiple income sources",
+                "Good education and learning",
+                "Financial intelligence",
+                "Family benefits from native's skills"
+            ],
+            "positive_effects": [
+                "Earnings through writing, teaching, business",
+                "Persuasive communication brings wealth",
+                "Intelligent financial management",
+                "Educational success"
+            ],
+            "challenging_effects": [
+                "Income may fluctuate",
+                "Overthinking financial decisions",
+                "May use clever speech manipulatively"
+            ]
+        },
+        3: {
+            "verses": "24.40",
+            "translation": "Mercury in 3rd: Native will always be happy, will have good brothers, be eloquent, and endowed with all kinds of wealth.",
+            "detailed_effects": [
+                "Excellent for communication and writing",
+                "Good relationships with siblings",
+                "Success through own efforts and skills",
+                "Short travels beneficial",
+                "Courage combined with intelligence",
+                "Technical or business skills"
+            ],
+            "positive_effects": [
+                "Outstanding communication abilities",
+                "Sibling support and cooperation",
+                "Success in media, writing, business",
+                "Quick learning and adaptability"
+            ],
+            "challenging_effects": [
+                "Restless mind",
+                "Too many interests",
+                "Nervous energy in communication"
+            ]
+        },
+        4: {
+            "verses": "24.41",
+            "translation": "Mercury in 4th: Native will be happy, educated, will have all kinds of wealth, conveyances, and be an expert in Shastras.",
+            "detailed_effects": [
+                "Educated and scholarly",
+                "Good property and vehicles",
+                "Mother is educated or intellectual",
+                "Success in education sector",
+                "Emotional intelligence",
+                "Home-based business favorable"
+            ],
+            "positive_effects": [
+                "Excellent education",
+                "Property and comforts",
+                "Intellectual family environment",
+                "Teaching from home beneficial"
+            ],
+            "challenging_effects": [
+                "Mental restlessness at home",
+                "Frequent residence changes",
+                "Overthinking domestic matters"
+            ]
+        },
+        5: {
+            "verses": "24.42",
+            "translation": "Mercury in 5th: Native will be versed in Mantras and Abhichara acts, will have learning, sons, and be extremely pleased.",
+            "detailed_effects": [
+                "Highly intelligent children",
+                "Success in speculation through analysis",
+                "Creative intelligence",
+                "Mantra and occult knowledge",
+                "Teaching and advisory roles",
+                "Romantic communication skills"
+            ],
+            "positive_effects": [
+                "Intelligent offspring",
+                "Success in speculation with analysis",
+                "Creative writing abilities",
+                "Educational expertise"
+            ],
+            "challenging_effects": [
+                "Overthinking in romance",
+                "Children may be nervous",
+                "Analytical approach to creativity"
+            ]
+        },
+        6: {
+            "verses": "24.43",
+            "translation": "Mercury in 6th: Native will always have gains, be famous, will destroy enemies, and be endowed with maternal happiness.",
+            "detailed_effects": [
+                "Victory over enemies through intelligence",
+                "Success in service and competition",
+                "Analytical problem-solving",
+                "Medical or legal profession favorable",
+                "Overcomes obstacles through wit",
+                "Maternal uncle supportive"
+            ],
+            "positive_effects": [
+                "Defeats enemies intellectually",
+                "Success in analytical professions",
+                "Problem-solving abilities",
+                "Service with intelligence"
+            ],
+            "challenging_effects": [
+                "Nervous health issues",
+                "Mental stress from conflicts",
+                "Overthinking problems"
+            ]
+        },
+        7: {
+            "verses": "24.44",
+            "translation": "Mercury in 7th: Native will have good speech, learning, sweet speech, will have wealth, and a spouse like a minister or a king.",
+            "detailed_effects": [
+                "Intelligent, communicative spouse",
+                "Business partnerships successful",
+                "Diplomatic in relationships",
+                "Spouse may be in business/education",
+                "Communication key to marriage",
+                "Public dealing skills"
+            ],
+            "positive_effects": [
+                "Intelligent spouse",
+                "Success in partnerships",
+                "Diplomatic relationships",
+                "Business acumen with partner"
+            ],
+            "challenging_effects": [
+                "Over-analytical in marriage",
+                "Communication issues if afflicted",
+                "Partnership disputes through words"
+            ]
+        },
+        8: {
+            "verses": "24.45",
+            "translation": "Mercury in 8th: Native will be famous, long-lived, will move in various countries, be a confidant of the king, and wealthy.",
+            "detailed_effects": [
+                "Research and investigation skills",
+                "Occult and mystical knowledge",
+                "Foreign connections",
+                "Hidden income sources",
+                "Longevity generally good",
+                "Interest in mysteries"
+            ],
+            "positive_effects": [
+                "Deep research abilities",
+                "Occult knowledge",
+                "Inheritance gains",
+                "Long life",
+                "Secret earnings"
+            ],
+            "challenging_effects": [
+                "Mental anxiety about hidden matters",
+                "Nervous health issues",
+                "Inheritance disputes"
+            ]
+        },
+        9: {
+            "verses": "24.46",
+            "translation": "Mercury in 9th: Native will be eloquent, truthful, scholarly in Vedas, endowed with sons, and all kinds of wealth.",
+            "detailed_effects": [
+                "Excellent for higher learning",
+                "Religious or philosophical communication",
+                "Father educated or intellectual",
+                "Foreign education beneficial",
+                "Teaching and publishing favorable",
+                "Dharmic intelligence"
+            ],
+            "positive_effects": [
+                "Scholarly achievements",
+                "Success in publishing, teaching",
+                "Higher education excellence",
+                "Good fortune through learning"
+            ],
+            "challenging_effects": [
+                "Over-analytical about beliefs",
+                "May change beliefs frequently",
+                "Nervous during travels"
+            ]
+        },
         10: {
             "verses": "24.38",
             "translation": "Mercury in the 10th house: The native will be learned in Shastras, will possess good speech and wealth, will be truthful, and will have happiness from wife and sons.",
@@ -1101,6 +1312,55 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Scattered professional focus",
                 "Nervous tension from multitasking",
                 "Tendency to overanalyze career decisions"
+            ]
+        },
+        11: {
+            "verses": "24.47",
+            "translation": "Mercury in 11th: Native will always have gains, be happy, truthful, intelligent, and endowed with many good qualities.",
+            "detailed_effects": [
+                "Multiple income sources",
+                "Intelligent social network",
+                "Success through communication",
+                "Elder siblings educated",
+                "Goals achieved through intelligence",
+                "Business networking excellent"
+            ],
+            "positive_effects": [
+                "High income through intellect",
+                "Excellent networking abilities",
+                "Diverse income streams",
+                "Intelligent friends",
+                "Goals fulfilled"
+            ],
+            "challenging_effects": [
+                "Scattered income focus",
+                "Nervous in groups",
+                "Too many projects"
+            ]
+        },
+        12: {
+            "verses": "24.48",
+            "translation": "Mercury in 12th: Native will be learned in Shastras, skilled in fine arts, be sweet and good in speech, and will incur expenditure on good deeds.",
+            "detailed_effects": [
+                "Expenses on education and learning",
+                "Foreign residence or work",
+                "Research and writing in isolation",
+                "Spiritual or philosophical learning",
+                "Hidden communication skills",
+                "Work behind scenes"
+            ],
+            "positive_effects": [
+                "Deep scholarly knowledge",
+                "Success in foreign lands",
+                "Research abilities",
+                "Spiritual intelligence",
+                "Writing in seclusion"
+            ],
+            "challenging_effects": [
+                "Financial losses through poor decisions",
+                "Nervous anxiety",
+                "Communication in isolation",
+                "Sleep disturbances"
             ]
         }
     },
@@ -1333,6 +1593,197 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Can be judgmental or preachy"
             ]
         },
+        2: {
+            "verses": "24.41",
+            "translation": "Jupiter in 2nd: Native will have a beautiful face, be sweet in speech, be learned, happy, wealthy, and good in everything.",
+            "detailed_effects": [
+                "Wealth through righteous means",
+                "Eloquent, wise speech",
+                "Strong family values",
+                "Good education and learning",
+                "Financial prosperity",
+                "Ethical approach to wealth"
+            ],
+            "positive_effects": [
+                "Excellent financial prosperity",
+                "Wise speech brings respect",
+                "Happy family life",
+                "Educational success",
+                "Ethical wealth accumulation"
+            ],
+            "challenging_effects": [
+                "May overindulge in food",
+                "Tendency to be overly generous",
+                "Weight gain possible"
+            ]
+        },
+        3: {
+            "verses": "24.42",
+            "translation": "Jupiter in 3rd: Native will be devoid of fraternal happiness, be bereft of servants, be indolent, and devoid of strength.",
+            "detailed_effects": [
+                "Sibling relationships complex",
+                "Success through own efforts",
+                "Writing and teaching abilities",
+                "Philosophical communication",
+                "Courage with wisdom",
+                "Self-made success"
+            ],
+            "positive_effects": [
+                "Wise communication",
+                "Teaching through writing",
+                "Philosophical courage",
+                "Self-reliant success"
+            ],
+            "challenging_effects": [
+                "Strained sibling relationships",
+                "May lack initiative",
+                "Difficulty with physical effort"
+            ]
+        },
+        4: {
+            "verses": "24.43",
+            "translation": "Jupiter in 4th: Native will be happy, learned in Shastras, will have relatives, lands, conveyances, and mother.",
+            "detailed_effects": [
+                "Excellent for mother and property",
+                "Educated family environment",
+                "Property and vehicles",
+                "Emotional contentment",
+                "Teaching from home",
+                "Strong foundation"
+            ],
+            "positive_effects": [
+                "Happy relationship with mother",
+                "Property and comforts",
+                "Educational environment",
+                "Inner peace and contentment",
+                "Strong family foundation"
+            ],
+            "challenging_effects": [
+                "May be overly attached to home",
+                "Tendency toward complacency",
+                "Weight gain from comfort"
+            ]
+        },
+        5: {
+            "verses": "24.44",
+            "translation": "Jupiter in 5th: Native will have good sons, be intelligent, a minister or equal to him, and be happy.",
+            "detailed_effects": [
+                "Excellent for children - blessed",
+                "High intelligence and wisdom",
+                "Advisory and ministerial roles",
+                "Success in speculation with ethics",
+                "Good fortune and grace",
+                "Spiritual knowledge"
+            ],
+            "positive_effects": [
+                "Blessed with good children",
+                "Exceptional intelligence",
+                "Advisory positions",
+                "Good fortune",
+                "Spiritual wisdom"
+            ],
+            "challenging_effects": [
+                "May be overly optimistic in speculation",
+                "Can be too idealistic with children"
+            ]
+        },
+        6: {
+            "verses": "24.45",
+            "translation": "Jupiter in 6th: Native will destroy enemies, be famous, an advisor to the king, and without diseases.",
+            "detailed_effects": [
+                "Victory over enemies through wisdom",
+                "Success in service professions",
+                "Legal and advisory work favorable",
+                "Good health despite house",
+                "Uncle support possible",
+                "Ethical approach to conflicts"
+            ],
+            "positive_effects": [
+                "Defeats enemies ethically",
+                "Success in law, counseling, medicine",
+                "Generally good health",
+                "Respected advisor",
+                "Service with wisdom"
+            ],
+            "challenging_effects": [
+                "Conflicts with service",
+                "Liver or weight issues",
+                "May be overly generous to opponents"
+            ]
+        },
+        7: {
+            "verses": "24.46",
+            "translation": "Jupiter in 7th: Native will have an excellent, virtuous wife, be learned, happy, will have sons, be religious, and wealthy.",
+            "detailed_effects": [
+                "Excellent for marriage",
+                "Virtuous, educated spouse",
+                "Success in partnerships",
+                "Good children",
+                "Wealth through partnerships",
+                "Diplomatic wisdom"
+            ],
+            "positive_effects": [
+                "Outstanding spouse - virtuous and wise",
+                "Happy marriage",
+                "Success in business partnerships",
+                "Good children and family",
+                "Wealth and prosperity"
+            ],
+            "challenging_effects": [
+                "May idealize partner",
+                "Spouse may be dominating",
+                "Weight gain after marriage"
+            ]
+        },
+        8: {
+            "verses": "24.47",
+            "translation": "Jupiter in 8th: Native will be long-lived, will destroy enemies, be learned in Shastras, and indulge in many sports.",
+            "detailed_effects": [
+                "Longevity and good health",
+                "Interest in occult and mysticism",
+                "Inheritance and legacy gains",
+                "Research abilities",
+                "Transformation through wisdom",
+                "Hidden knowledge"
+            ],
+            "positive_effects": [
+                "Long life",
+                "Occult wisdom",
+                "Inheritance benefits",
+                "Deep research abilities",
+                "Spiritual transformation"
+            ],
+            "challenging_effects": [
+                "Sudden changes in fortune",
+                "Inheritance disputes possible",
+                "Liver health issues"
+            ]
+        },
+        9: {
+            "verses": "24.48",
+            "translation": "Jupiter in 9th: Native will be attached to performing religious acts, be learned, fortunate, and be an advisor to the king.",
+            "detailed_effects": [
+                "Highly auspicious - best placement",
+                "Strong fortune and grace",
+                "Spiritual and religious inclination",
+                "Father wise and supportive",
+                "Higher education success",
+                "Dharmic life path"
+            ],
+            "positive_effects": [
+                "Exceptional fortune and blessings",
+                "Spiritual wisdom",
+                "Higher education excellence",
+                "Good father relationship",
+                "Advisory positions",
+                "Foreign travel beneficial"
+            ],
+            "challenging_effects": [
+                "May become overly religious",
+                "Can be dogmatic",
+                "Weight gain possible"
+            ]
+        },
         10: {
             "verses": "24.49",
             "translation": "Jupiter in the 10th house: The native will enjoy happiness from sons, will be religious, learned, famous, and will be an advisor to the king or government.",
@@ -1357,6 +1808,58 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Can form Hamsa Yoga if in own sign or exaltation",
                 "Strong contributor to Raja Yogas",
                 "Gaja Kesari Yoga if Moon is in kendra"
+            ]
+        },
+        11: {
+            "verses": "24.50",
+            "translation": "Jupiter in 11th: Native will always be happy, will have many gains, and many sons.",
+            "detailed_effects": [
+                "Excellent for gains and income",
+                "Multiple income sources",
+                "Fulfillment of desires",
+                "Good children",
+                "Wise social network",
+                "Goals achieved through ethics",
+                "Elder siblings supportive"
+            ],
+            "positive_effects": [
+                "High income through wisdom",
+                "Desires fulfilled ethically",
+                "Blessed with children",
+                "Wise friends and network",
+                "Long life and prosperity"
+            ],
+            "challenging_effects": [
+                "May be overly optimistic about gains",
+                "Tendency to overextend financially"
+            ]
+        },
+        12: {
+            "verses": "24.51",
+            "translation": "Jupiter in 12th: Native will be poor, will have physical troubles, be childless, stupid, and will serve others.",
+            "detailed_effects": [
+                "Expenses on spiritual and charitable causes",
+                "Foreign residence beneficial",
+                "Spiritual wisdom and moksha",
+                "Teaching or healing in isolation",
+                "Hidden blessings and grace",
+                "Liberation orientation",
+                "Work in ashrams, hospitals, universities abroad"
+            ],
+            "positive_effects": [
+                "Strong spiritual inclination",
+                "Success in foreign lands",
+                "Charitable and generous nature",
+                "Moksha orientation",
+                "Teaching spirituality",
+                "Divine grace despite losses"
+            ],
+            "challenging_effects": [
+                "Financial losses or high expenses",
+                "Difficulty with children",
+                "May lack material focus",
+                "Liver health issues",
+                "Isolation from family"
             ]
         }
     },
