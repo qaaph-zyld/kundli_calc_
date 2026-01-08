@@ -11,7 +11,7 @@ Provides planetary period (dasha) integrated interpretations combining:
 
 from typing import Optional, List
 from datetime import datetime
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Path
 from pydantic import BaseModel, Field
 
 from backend.app.core.knowledge.sources.jataka_parijata_dashas import get_dasha_interpretation
