@@ -6,7 +6,8 @@ All endpoint routers exported here
 from . import health
 from . import ashtakavarga
 from . import bhava
-from . import prediction
+from . import interpretations
+from . import comprehensive_interpretation
 from . import shadbala
 from . import kp_system
 from . import yogas
