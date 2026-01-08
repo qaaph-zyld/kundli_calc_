@@ -21,7 +21,7 @@ from .middleware.rate_limiter import setup_rate_limiting
 from .api.endpoints import (
     charts, health, ayanamsa, panchang, dasha, geo, divisional, debug, location, famous_charts,
     lal_kitab, varshphal, yogas, transits, kp_system, shadbala, ashtakavarga, bhava, prediction,
-    additional_dashas, horoscope, compatibility, system_health
+    additional_dashas, horoscope, compatibility, system_health, traditional, interpretations
 )
 from .core.errors.handlers import ErrorHandler
 from .db.mongodb import MongoDB
@@ -191,6 +191,18 @@ app.include_router(
     bhava.router,
     prefix="/api/v1/bhava",
     tags=["bhava"]
+)
+
+app.include_router(
+    traditional.router,
+    prefix="/api/v1/traditional",
+    tags=["traditional"]
+)
+
+app.include_router(
+    interpretations.router,
+    prefix="/api/v1/interpret",
+    tags=["interpretations"]
 )
 
 app.include_router(
