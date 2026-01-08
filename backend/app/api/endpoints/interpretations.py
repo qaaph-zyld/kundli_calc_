@@ -13,7 +13,8 @@ from typing import Optional, List, Dict, Any
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
 
-from app.core.knowledge.engine.interpretation_engine import KnowledgeInterpretationEngine
+from backend.app.core.knowledge.engine.interpretation_engine import KnowledgeInterpretationEngine
+from backend.app.core.knowledge.engine.multi_source_engine import MultiSourceEngine
 from app.core.knowledge.schemas.interpretation_schema import (
     PlanetaryDignity, LifeArea, PlanetInHouseInterpretation
 )
