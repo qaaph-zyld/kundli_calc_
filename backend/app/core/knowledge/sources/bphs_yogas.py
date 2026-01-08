@@ -2,13 +2,15 @@
 BPHS: Yogas (Planetary Combinations)
 =====================================
 Digitized yoga interpretations from Brihat Parashara Hora Shastra
-Chapters 40-43: Raja Yogas, Dhana Yogas, Arishta Yogas
+Chapters 40-46: Raja Yogas, Dhana Yogas, Arishta Yogas, Nabhasa Yogas
 
 Translation: R. Santhanam (1984)
 Source: Rajan Publications
 
 Yogas are specific planetary combinations that produce significant effects.
 Each entry includes formation conditions, effects, and verse references.
+
+Phase 5 Expansion: Added yogas from Chapters 44-46
 """
 from typing import Dict, Any, List
 
@@ -339,11 +341,16 @@ def get_yogas_by_category(category: str) -> Dict[str, Dict[str, Any]]:
     return {name: data for name, data in all_yogas.items() if data.get('category') == category}
 
 
-def get_all_yoga_names() -> List[str]:
-    """Get list of all available yoga names"""
-    all_yogas = {
-        **BPHS_RAJA_YOGAS,
-        **BPHS_DHANA_YOGAS,
-        **BPHS_PANCHA_MAHAPURUSHA_YOGAS
-    }
-    return list(all_yogas.keys())
+def get_all_yogas() -> Dict[str, Dict[str, Any]]:
+    """
+    Get all available yogas from all categories.
+    
+    Returns:
+        Combined dictionary of all yogas
+    """
+    all_yogas = {}
+    all_yogas.update(BPHS_RAJA_YOGAS)
+    all_yogas.update(BPHS_DHANA_YOGAS)
+    all_yogas.update(BPHS_PANCHA_MAHAPURUSHA_YOGAS)
+    all_yogas.update(BPHS_ADDITIONAL_YOGAS)  # Phase 5 expansion
+    return all_yogas
