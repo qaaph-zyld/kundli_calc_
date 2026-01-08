@@ -352,5 +352,4 @@ def get_all_yogas() -> Dict[str, Dict[str, Any]]:
     all_yogas.update(BPHS_RAJA_YOGAS)
     all_yogas.update(BPHS_DHANA_YOGAS)
     all_yogas.update(BPHS_PANCHA_MAHAPURUSHA_YOGAS)
-    all_yogas.update(BPHS_ADDITIONAL_YOGAS)  # Phase 5 expansion
     return all_yogas
