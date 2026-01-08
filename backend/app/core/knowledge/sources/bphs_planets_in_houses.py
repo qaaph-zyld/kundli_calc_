@@ -1439,6 +1439,102 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Use eloquence for teaching and uplifting others"
             ]
         },
+        3: {
+            "verses": "24.55",
+            "translation": "Venus in 3rd: Native will be miserly, devoid of happiness from wife, siblings and relatives, will serve others, and be of firm disposition.",
+            "detailed_effects": [
+                "Artistic communication abilities",
+                "Success through creative efforts",
+                "Strained sibling relationships",
+                "Travels for pleasure or arts",
+                "Self-made success in arts",
+                "Courage in creative expression"
+            ],
+            "positive_effects": [
+                "Creative communication",
+                "Artistic writing or media",
+                "Success through own efforts",
+                "Travels bring pleasure"
+            ],
+            "challenging_effects": [
+                "Sibling conflicts",
+                "Marital challenges",
+                "May be stingy",
+                "Relationship issues with relatives"
+            ]
+        },
+        4: {
+            "verses": "24.56",
+            "translation": "Venus in 4th: Native will be happy, will have good conveyances and garments, be dear to the king, endowed with all kinds of wealth, and be passionate.",
+            "detailed_effects": [
+                "Happy home life",
+                "Beautiful property and vehicles",
+                "Mother cultured or artistic",
+                "Comfortable domestic environment",
+                "Property through or for spouse",
+                "Inner contentment"
+            ],
+            "positive_effects": [
+                "Excellent domestic happiness",
+                "Luxurious home and vehicles",
+                "Property and comforts",
+                "Harmonious family",
+                "Emotional fulfillment"
+            ],
+            "challenging_effects": [
+                "May be overly attached to comforts",
+                "Expensive tastes in home decor",
+                "Sensual indulgence at home"
+            ]
+        },
+        5: {
+            "verses": "24.57",
+            "translation": "Venus in 5th: Native will have good sons, be happy, intelligent, will have comforts of beds and seats, and be famous.",
+            "detailed_effects": [
+                "Excellent for romance and creativity",
+                "Beautiful, artistic children",
+                "Success in creative fields",
+                "Good fortune and blessings",
+                "Romantic fulfillment",
+                "Speculative gains if strong"
+            ],
+            "positive_effects": [
+                "Blessed with good children",
+                "Creative and artistic talents",
+                "Romantic happiness",
+                "Good fortune",
+                "Fame through arts"
+            ],
+            "challenging_effects": [
+                "May overindulge in pleasures",
+                "Excessive romance",
+                "Speculation risks if weak"
+            ]
+        },
+        6: {
+            "verses": "24.58",
+            "translation": "Venus in 6th: Native will have many enemies, be devoid of happiness from wife, will resort to others' wives, be lean, and suffer from diseases.",
+            "detailed_effects": [
+                "Challenges in marriage",
+                "Success in service professions",
+                "Health issues related to Venus",
+                "Defeats enemies through charm",
+                "Maternal uncle conflicts",
+                "Relationship complications"
+            ],
+            "positive_effects": [
+                "Overcomes obstacles eventually",
+                "Service in beauty/arts/healing",
+                "Diplomatic conflict resolution"
+            ],
+            "challenging_effects": [
+                "Marital unhappiness",
+                "Reproductive health issues",
+                "Extramarital attractions",
+                "Enemies and conflicts",
+                "Diabetes or kidney issues"
+            ]
+        },
         7: {
             "verses": "24.59",
             "translation": "Venus in the 7th house: The native will be very beautiful, happy with his wife, be fond of sexual pleasures, will have vehicles and wealth, and will lose wealth on account of women.",
@@ -1485,6 +1581,55 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Contributes to relationship and wealth yogas"
             ]
         },
+        8: {
+            "verses": "24.60",
+            "translation": "Venus in 8th: Native will be devoid of bodily vigor, be troubled by enemies, be short-lived, and devoid of wealth.",
+            "detailed_effects": [
+                "Interest in occult and mysticism",
+                "Sudden gains or losses",
+                "Inheritance matters",
+                "Hidden relationships possible",
+                "Transformation through relationships",
+                "Research in beauty/arts"
+            ],
+            "positive_effects": [
+                "Occult knowledge",
+                "Inheritance possible",
+                "Deep transformative relationships",
+                "Mystical artistic expression"
+            ],
+            "challenging_effects": [
+                "Sudden relationship crises",
+                "Hidden affairs complications",
+                "Reproductive health issues",
+                "Financial instability",
+                "Longevity concerns"
+            ]
+        },
+        9: {
+            "verses": "24.61",
+            "translation": "Venus in 9th: Native will have a bad wife, be devoted to others' wives, be very intelligent, will possess wealth, and will do virtuous acts.",
+            "detailed_effects": [
+                "Fortune through arts and beauty",
+                "Foreign travel for pleasure",
+                "Cultured and refined beliefs",
+                "Father artistic or wealthy",
+                "Higher education in arts",
+                "Dharma through beauty"
+            ],
+            "positive_effects": [
+                "Fortunate in life",
+                "Success in foreign lands",
+                "Artistic wisdom",
+                "Higher education in arts",
+                "Wealth and prosperity"
+            ],
+            "challenging_effects": [
+                "Marital challenges possible",
+                "May seek relationships outside marriage",
+                "Religious indulgence"
+            ]
+        },
         10: {
             "verses": "24.62",
             "translation": "Venus in the 10th house: The native will be liked by all, will perform virtuous deeds, be devoted to his preceptor, be intelligent, and will achieve fame.",
@@ -1521,6 +1666,30 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "reputation": "Popular, admired for taste and refinement",
                 "authority": "Diplomatic approach; harmonious with superiors"
             }
+        },
+        11: {
+            "verses": "24.63",
+            "translation": "Venus in 11th: Native will always have financial gains, be learned, happy, and truthful.",
+            "detailed_effects": [
+                "Excellent for gains and income",
+                "Multiple income sources",
+                "Desires fulfilled",
+                "Artistic social network",
+                "Elder siblings supportive",
+                "Goals achieved"
+            ],
+            "positive_effects": [
+                "High income through Venus pursuits",
+                "Social popularity",
+                "Desires fulfilled",
+                "Artistic friends",
+                "Financial prosperity"
+            ],
+            "challenging_effects": [
+                "May spend gains on pleasures",
+                "Expensive social circle",
+                "Romantic complications in groups"
+            ]
         },
         12: {
             "verses": "24.64",
@@ -1912,6 +2081,123 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
             },
             "timing": "Difficulties in youth (up to age 36), improvement after Sade Sati completion. Saturn mahadasha brings karmic lessons."
         },
+        2: {
+            "verses": "24.67",
+            "translation": "Saturn in 2nd: Native will have a bad face, will speak untruth, be devoid of wealth, will be dependent on others, and will have multiple spouses.",
+            "detailed_effects": [
+                "Financial challenges and delays",
+                "Harsh or restricted speech",
+                "Family responsibilities heavy",
+                "Self-made wealth through effort",
+                "Dental or facial issues",
+                "Learns value of money through scarcity"
+            ],
+            "positive_effects": [
+                "Builds wealth through discipline",
+                "Learns financial responsibility",
+                "Self-reliant earning"
+            ],
+            "challenging_effects": [
+                "Financial struggles",
+                "Harsh speech",
+                "Family conflicts",
+                "Dental problems",
+                "Difficulty accumulating wealth"
+            ]
+        },
+        3: {
+            "verses": "24.68",
+            "translation": "Saturn in 3rd: Native will have strength and valor, be learned, happy, wealthy, charitable, and will have younger brothers.",
+            "detailed_effects": [
+                "Courage through discipline",
+                "Success through persistent efforts",
+                "Sibling relationships mature over time",
+                "Writing and communication skills develop",
+                "Self-made success",
+                "Slow but steady progress"
+            ],
+            "positive_effects": [
+                "Disciplined courage",
+                "Success through persistence",
+                "Mature communication",
+                "Self-reliance"
+            ],
+            "challenging_effects": [
+                "Sibling conflicts initially",
+                "Slow progress in efforts",
+                "Communication delays"
+            ]
+        },
+        4: {
+            "verses": "24.69",
+            "translation": "Saturn in 4th: Native will be devoid of happiness from mother and relatives, be distressed, will lose lands and conveyances, and will serve the wicked.",
+            "detailed_effects": [
+                "Challenges with mother or home",
+                "Property delays or losses",
+                "Emotional heaviness",
+                "Frequent residence changes",
+                "Service-oriented career",
+                "Inner peace requires work"
+            ],
+            "positive_effects": [
+                "Self-made property eventually",
+                "Emotional maturity",
+                "Service with dedication"
+            ],
+            "challenging_effects": [
+                "Mother relationship strained",
+                "Lack of emotional peace",
+                "Property struggles",
+                "Vehicle problems"
+            ]
+        },
+        5: {
+            "verses": "24.70",
+            "translation": "Saturn in 5th: Native will be evil-minded, devoid of happiness from sons, be poor, wandering, and distressed.",
+            "detailed_effects": [
+                "Challenges with children - delays",
+                "Serious approach to creativity",
+                "Speculation risky",
+                "Past life karmas",
+                "Romantic delays",
+                "Digestive issues"
+            ],
+            "positive_effects": [
+                "Disciplined intelligence",
+                "Mature children eventually",
+                "Wisdom through experience"
+            ],
+            "challenging_effects": [
+                "Difficulty with children",
+                "Romantic obstacles",
+                "Speculation losses",
+                "Creative blocks"
+            ]
+        },
+        6: {
+            "verses": "24.71",
+            "translation": "Saturn in 6th: Native will destroy enemies, be wealthy, famous, will have vehicles, and be glutton.",
+            "detailed_effects": [
+                "Excellent placement - overcomes obstacles",
+                "Victory over enemies through persistence",
+                "Success in service professions",
+                "Good health despite challenges",
+                "Wealth through hard work",
+                "Litigation success"
+            ],
+            "positive_effects": [
+                "Defeats enemies methodically",
+                "Service success",
+                "Wealth through effort",
+                "Overcomes diseases",
+                "Fame through work"
+            ],
+            "challenging_effects": [
+                "Chronic health issues possible",
+                "Work-related stress",
+                "Digestive problems"
+            ]
+        },
         7: {
             "verses": "24.72",
             "translation": "Saturn in the 7th house: The native will lose his wife, be poor, will suffer from tuberculosis or other disease, be distressed, and will wander aimlessly.",
@@ -1953,6 +2239,55 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "partnerships": "Structured, long-term business partnerships",
                 "relationships": "Serious, committed; learns through challenges"
             }
+        },
+        8: {
+            "verses": "24.73",
+            "translation": "Saturn in 8th: Native will be a thief, will have deformed limbs, will lose wealth, longevity, and wife, and be imprisoned.",
+            "detailed_effects": [
+                "Longevity generally good despite verse",
+                "Interest in occult and mysticism",
+                "Chronic health issues",
+                "Inheritance delays or denials",
+                "Transformation through suffering",
+                "Research abilities"
+            ],
+            "positive_effects": [
+                "Deep occult knowledge",
+                "Longevity if strong",
+                "Transformative wisdom",
+                "Research skills"
+            ],
+            "challenging_effects": [
+                "Chronic ailments",
+                "Sudden crises",
+                "Inheritance problems",
+                "Hidden obstacles",
+                "Sexual difficulties"
+            ]
+        },
+        9: {
+            "verses": "24.74",
+            "translation": "Saturn in 9th: Native will be devoid of fortune and religious merit, will be sinful, indulge in evil acts, and be bereft of father.",
+            "detailed_effects": [
+                "Challenges with father or teachers",
+                "Dharma through discipline",
+                "Foreign travel for work",
+                "Higher education delays",
+                "Self-made fortune",
+                "Karmic spiritual path"
+            ],
+            "positive_effects": [
+                "Disciplined spirituality",
+                "Success abroad eventually",
+                "Wisdom through hardship",
+                "Self-reliant fortune"
+            ],
+            "challenging_effects": [
+                "Father relationship distant",
+                "Religious doubts",
+                "Delayed fortune",
+                "Obstacles in higher learning"
+            ]
         },
         10: {
             "verses": "24.75",
@@ -1999,6 +2334,30 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Can form Sasa Yoga if Saturn in own sign or exaltation",
                 "Strong for Karma Yoga - duty-based success",
                 "Contributes to Dhana Yogas through 10th house strength"
+            ]
+        },
+        11: {
+            "verses": "24.76",
+            "translation": "Saturn in 11th: Native will have excellent gains, will be long-lived, will have good servants, be learned, wealthy, and famous.",
+            "detailed_effects": [
+                "Excellent for gains and income",
+                "Multiple income through persistence",
+                "Long life",
+                "Elder siblings supportive",
+                "Goals achieved through discipline",
+                "Slow but steady gains"
+            ],
+            "positive_effects": [
+                "High income through discipline",
+                "Long life and prosperity",
+                "Goals achieved",
+                "Fame through work",
+                "Steady gains"
+            ],
+            "challenging_effects": [
+                "Gains come slowly",
+                "Few friends",
+                "Serious social circles"
             ]
         },
         12: {
