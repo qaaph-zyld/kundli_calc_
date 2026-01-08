@@ -296,3 +296,97 @@ class KnowledgeInterpretationEngine:
             "Wealth Yoga": list(BPHS_DHANA_YOGAS.keys()),
             "Mahapurusha Yoga": list(BPHS_PANCHA_MAHAPURUSHA_YOGAS.keys())
         }
+    
+    def interpret_dasha(
+        self,
+        planet: str,
+        dasha_type: str = "Vimshottari",
+        chart_context: Optional[Dict[str, Any]] = None
+    ):
+        """
+        Generate interpretation for planetary dasha period.
+        
+        Args:
+            planet: Planet whose dasha is running
+            dasha_type: Type of dasha system (default: Vimshottari)
+            chart_context: Optional chart data for contextualized interpretation
+            
+        Returns:
+            DashaInterpretation with classical text sources
+        """
+        from ..sources.bphs_dasha_effects import get_mahadasha_interpretation
+        from ..schemas.interpretation_schema import DashaInterpretation, LifeArea
+        
+        dasha_data = get_mahadasha_interpretation(planet)
+        
+        if not dasha_data:
+            raise ValueError(f"No BPHS interpretation found for {planet} mahadasha")
+        
+        # Build source citations
+        chapter = dasha_data.get('chapter', 47)
+        verses = dasha_data.get('verses', '')
+        
+        primary_citation = SourceCitation(
+            text=ClassicalText.BPHS,
+            chapter=chapter,
+            verses=verses,
+            translator="R. Santhanam",
+            edition="Rajan Publications, 1984"
+        )
+        
+        primary_source = SourcedContent(
+            content=dasha_data.get('classical_description', ''),
+            citation=primary_citation,
+            confidence=ConfidenceLevel.DIRECT_QUOTE,
+            notes=f"Direct interpretation from BPHS Chapter {chapter} on Vimshottari Dasha effects"
+        )
+        
+        # Build InterpretationSource
+        sources = InterpretationSource(
+            primary_sources=[primary_source],
+            supporting_sources=[],
+            synthesis_note=f"Dasha interpretation from BPHS Ch. {chapter}, verses {verses}"
+        )
+        
+        # Build metadata
+        metadata = InterpretationMetadata(
+            interpretation_type="dasha",
+            confidence_score=0.95,
+            last_updated=datetime.now().isoformat(),
+            validator=f"BPHS Chapter {chapter}",
+            tags=[
+                planet.lower(),
+                'mahadasha',
+                dasha_type.lower(),
+                'bphs',
+                'classical_text'
+            ]
+        )
+        
+        # Extract life areas from effects
+        life_areas_activated = []
+        general_effects = dasha_data.get('general_effects', {})
+        
+        # Build general theme
+        general_theme = dasha_data.get('classical_description', '')
+        
+        # Extract positive and challenging indications
+        positive = general_effects.get('positive', [])
+        challenging = general_effects.get('challenging', [])
+        
+        # Build recommendations from remedies
+        recommendations = dasha_data.get('remedies', [])
+        
+        return DashaInterpretation(
+            planet=planet,
+            dasha_type=dasha_type,
+            level="Mahadasha",
+            general_theme=general_theme,
+            life_areas_activated=life_areas_activated,
+            positive_indications=positive,
+            challenging_indications=challenging,
+            effects_by_house_placement=str(dasha_data.get('effects_by_house', {})) if 'effects_by_house' in dasha_data else None,
+            recommendations=recommendations,
+            sources=sources,
+            metadata=metadata
+        )

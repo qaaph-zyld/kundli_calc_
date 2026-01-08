@@ -295,6 +295,79 @@ async def demo_gaja_kesari_yoga():
     }
 
 
+@router.get("/dasha/{planet}", tags=["Interpretations", "Dasha"])
+async def get_dasha_interpretation(planet: str):
+    """
+    Get classical text interpretation for a planetary mahadasha.
+    
+    Args:
+        planet: Planet name (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn, Rahu, Ketu)
+        
+    Returns:
+        Full mahadasha interpretation with:
+        - Duration and general theme
+        - Positive and challenging effects
+        - Career and life area impacts
+        - Health considerations
+        - Timing patterns within dasha
+        - Remedial measures
+        - Source citations from BPHS Ch 47-49
+    
+    Example:
+    ```
+    GET /api/v1/interpret/dasha/Jupiter
+    ```
+    """
+    try:
+        interpretation = engine.interpret_dasha(planet=planet)
+        
+        return {
+            "status": "success",
+            "dasha": interpretation.model_dump(mode='json'),
+            "sources": interpretation.sources.get_all_citations(),
+            "confidence_score": interpretation.metadata.confidence_score
+        }
+    except ValueError as e:
+        raise HTTPException(
+            status_code=404,
+            detail=f"Dasha interpretation not found: {str(e)}"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Error generating dasha interpretation: {str(e)}"
+        )
+
+
+@router.get("/dasha/demo/jupiter", tags=["Interpretations", "Dasha", "Demo"])
+async def demo_jupiter_dasha():
+    """
+    Demo endpoint showing Jupiter mahadasha interpretation.
+    
+    Jupiter mahadasha (16 years) is considered the most auspicious period,
+    bringing wisdom, prosperity, and spiritual growth.
+    
+    Demonstrates complete classical text-based dasha interpretation.
+    """
+    interpretation = engine.interpret_dasha("Jupiter")
+    
+    return {
+        "demo_title": "Jupiter Mahadasha - Period of Wisdom and Prosperity",
+        "duration": "16 years - Second longest period",
+        "significance": "Most auspicious mahadasha in Vedic astrology",
+        "interpretation": interpretation.model_dump(mode='json'),
+        "why_this_matters": [
+            "🎯 Complete Period Guidance: Know what to expect during 16-year Jupiter dasha",
+            "📚 Classical Authority: Direct from BPHS Chapters 47-48",
+            "⏰ Timing Patterns: Understand how effects evolve within the period",
+            "⚕️ Health Guidance: Specific health areas to watch",
+            "🔧 Remedial Measures: Classical remedies to enhance positive effects",
+            "🔍 Source Verification: Full verse citations for validation"
+        ],
+        "citations": interpretation.sources.get_all_citations()
+    }
+
+
 @router.get("/sources/info", tags=["Interpretations", "Metadata"])
 async def get_source_information():
     """
