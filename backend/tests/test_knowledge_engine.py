@@ -132,7 +132,7 @@ class TestKnowledgeEngine:
     def test_missing_interpretation_raises_error(self, engine):
         """Test that missing interpretations raise proper error"""
         with pytest.raises(ValueError, match="No BPHS interpretation found"):
-            engine.interpret_planet_in_house('Sun', 8, 'Cancer', PlanetaryDignity.DEBILITATED)
+            engine.interpret_planet_in_house('Mercury', 5, 'Sagittarius', PlanetaryDignity.NEUTRAL)
     
     def test_metadata_tags(self, engine):
         """Test that metadata includes proper tags"""

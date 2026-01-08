@@ -207,6 +207,168 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Support younger generation"
             ]
         },
+        3: {
+            "verses": "24.6",
+            "translation": "Sun in the 3rd house: The native will be valorous, strong, inimical to relatives, wealthy, will destroy enemies, and will be bereft of brothers.",
+            "detailed_effects": [
+                "Courageous and adventurous nature",
+                "Strong communication and self-expression",
+                "Success through own efforts and initiative",
+                "May have strained sibling relationships",
+                "Good at overcoming obstacles and competitors",
+                "Physical strength and vitality",
+                "Independent, self-made success"
+            ],
+            "positive_effects": [
+                "Exceptional courage and determination",
+                "Victory over enemies and obstacles",
+                "Strong willpower and initiative",
+                "Success in competitive fields",
+                "Good writing or communication abilities"
+            ],
+            "challenging_effects": [
+                "Conflicts with siblings",
+                "Aggressive communication style",
+                "May lack brotherly support",
+                "Tendency toward egoistic self-expression"
+            ],
+            "remedies": [
+                "Practice diplomatic communication",
+                "Make peace with siblings",
+                "Use courage for righteous causes"
+            ]
+        },
+        6: {
+            "verses": "24.9",
+            "translation": "Sun in the 6th house: The native will be very strong, will have weak vision, will be devoid of wealth, inimical disposition, and will destroy enemies.",
+            "detailed_effects": [
+                "Excellent for overcoming enemies and obstacles",
+                "Success in service, medicine, law enforcement",
+                "Strong digestive fire but health challenges",
+                "Ability to handle conflicts and litigation",
+                "May face financial ups and downs",
+                "Uncle (maternal) support possible",
+                "Victory over diseases and adversaries"
+            ],
+            "positive_effects": [
+                "Defeats enemies and competitors",
+                "Success in service professions",
+                "Ability to overcome health issues",
+                "Good for military, police, legal work",
+                "Strong constitution despite challenges"
+            ],
+            "challenging_effects": [
+                "Chronic health issues possible",
+                "Conflicts and legal battles",
+                "Financial struggles",
+                "Enemies and opposition",
+                "Eye problems"
+            ],
+            "remedies": [
+                "Serve the sick and needy",
+                "Maintain strong health discipline",
+                "Avoid unnecessary conflicts",
+                "Strengthen Sun through worship"
+            ]
+        },
+        7: {
+            "verses": "24.10",
+            "translation": "Sun in the 7th house: The native will be poor, insulted, suffers from dental and eye problems, will incur royal displeasure, will lose wife, and be devoid of happiness.",
+            "detailed_effects": [
+                "Challenges in marriage and partnerships",
+                "Strong personality that may dominate partner",
+                "Late marriage often beneficial",
+                "Business partnerships require care",
+                "Spouse may have leadership qualities",
+                "Public-facing work favorable",
+                "Need to balance ego in relationships"
+            ],
+            "positive_effects": [
+                "Leadership in partnerships",
+                "Success in public dealings",
+                "Strong spouse with character",
+                "Business acumen if Sun well-placed"
+            ],
+            "challenging_effects": [
+                "Marital conflicts due to ego",
+                "Dominance issues with partner",
+                "Separation or delays in marriage",
+                "Dental and eye health issues",
+                "Partnership disputes"
+            ],
+            "remedies": [
+                "Practice humility in marriage",
+                "Marry after age 28",
+                "Balance independence with partnership",
+                "Strengthen Venus for marital harmony"
+            ]
+        },
+        8: {
+            "verses": "24.11 (part)",
+            "translation": "Sun in the 8th house: The native will have limited eyesight, be devoid of wealth and happiness, will suffer humiliation and will be dependent on others.",
+            "detailed_effects": [
+                "Interest in occult, mysticism, transformation",
+                "Hidden sources of income possible",
+                "Longevity generally good despite challenges",
+                "Research and investigation skills",
+                "Inheritance matters important",
+                "Chronic health issues require attention",
+                "Spiritual transformation through crises"
+            ],
+            "positive_effects": [
+                "Deep insight into hidden matters",
+                "Success in research and occult",
+                "Inheritance and legacy gains possible",
+                "Longevity if Sun strong",
+                "Transformative spiritual experiences"
+            ],
+            "challenging_effects": [
+                "Financial instability",
+                "Health challenges, especially eyes",
+                "Sudden upheavals and crises",
+                "Issues with inheritance",
+                "Hidden enemies"
+            ],
+            "remedies": [
+                "Practice spiritual discipline",
+                "Handle father's legacy with care",
+                "Donate for eye hospitals",
+                "Strengthen Sun through mantras"
+            ]
+        },
+        12: {
+            "verses": "24.15",
+            "translation": "Sun in the 12th house: The native will have defective eyes, be devoid of wealth, will commit sinful acts, will have a diseased body, and be bereft of virtues.",
+            "detailed_effects": [
+                "Expenditure on spiritual and charitable causes",
+                "Foreign travel and residence possible",
+                "Sleep disturbances or eye problems",
+                "Success in foreign lands",
+                "Isolated work environments favorable",
+                "Spiritual seeking and moksha orientation",
+                "Hidden expenses and losses"
+            ],
+            "positive_effects": [
+                "Success in foreign countries",
+                "Spiritual inclination and liberation",
+                "Work in hospitals, ashrams, retreats",
+                "Charitable disposition",
+                "Moksha orientation"
+            ],
+            "challenging_effects": [
+                "Financial losses and high expenses",
+                "Eye problems and sleep issues",
+                "Separation from homeland",
+                "Father's loss or distance",
+                "Hidden enemies"
+            ],
+            "remedies": [
+                "Channel expenses toward spirituality",
+                "Serve in charitable institutions",
+                "Practice meditation and sleep discipline",
+                "Donate for spiritual causes"
+            ]
+        },
         10: {
             "verses": "24.11",
             "translation": "Sun in the 10th house: The native will be happy, will have abundant wealth, will perform religious sacrifices, and will have excellent conveyances, fame, and expertise in multiple sciences.",
@@ -415,10 +577,427 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Use popularity for social benefit",
                 "Balance career with family needs"
             ]
+        },
+        3: {
+            "verses": "24.17",
+            "translation": "Moon in the 3rd house: The native will have praiseworthy habits, be endowed with brothers, be valorous, happy, and will have weak arms.",
+            "detailed_effects": [
+                "Good relationship with siblings",
+                "Creative communication abilities",
+                "Love of travel and short journeys",
+                "Emotional courage and initiative",
+                "Artistic self-expression",
+                "Success through own efforts",
+                "Changeable interests"
+            ],
+            "positive_effects": [
+                "Supportive siblings",
+                "Good communication skills",
+                "Creative writing or arts",
+                "Adaptable and versatile",
+                "Emotional courage"
+            ],
+            "challenging_effects": [
+                "Restless mind",
+                "Inconsistent efforts",
+                "May lack physical strength",
+                "Emotional instability in projects"
+            ]
+        },
+        5: {
+            "verses": "24.19",
+            "translation": "Moon in the 5th house: The native will be scholarly, virtuous, will have good sons, be wise, and will be a king's minister or equal to him.",
+            "detailed_effects": [
+                "Excellent for creativity and intelligence",
+                "Good relationship with children",
+                "Emotional investment in learning",
+                "Success in speculation if Moon strong",
+                "Romantic and sensitive nature",
+                "Advisory roles suitable",
+                "Past life merit manifests"
+            ],
+            "positive_effects": [
+                "Intelligent and learned",
+                "Blessed with children",
+                "Creative and artistic",
+                "Success in education and advisory",
+                "Good fortune"
+            ],
+            "challenging_effects": [
+                "Emotional attachment to children",
+                "Speculation risky if Moon weak",
+                "Mood affects creativity"
+            ]
+        },
+        6: {
+            "verses": "24.19 (part)",
+            "translation": "Moon in the 6th house: The native will suffer stomach ailments, will be renowned, wealthy, will have many enemies, and be lazy.",
+            "detailed_effects": [
+                "Service-oriented career",
+                "Success in healing professions",
+                "Digestive issues common",
+                "Ability to overcome obstacles",
+                "Maternal relatives may cause issues",
+                "Fluctuating health",
+                "Emotional resilience"
+            ],
+            "positive_effects": [
+                "Success in nursing, counseling",
+                "Overcomes enemies eventually",
+                "Wealth through service",
+                "Emotional strength"
+            ],
+            "challenging_effects": [
+                "Stomach and digestive problems",
+                "Emotional stress from conflicts",
+                "Mother's health concerns",
+                "Enemies and litigation"
+            ]
+        },
+        8: {
+            "verses": "24.21",
+            "translation": "Moon in the 8th house: The native will be short-lived, suffer humiliation, be abandoned by his relatives, and undergo many diseases.",
+            "detailed_effects": [
+                "Interest in occult and mysticism",
+                "Emotional depth and transformation",
+                "Psychic sensitivity",
+                "Research abilities",
+                "Mother's longevity concerns",
+                "Hidden emotional issues",
+                "Inheritance matters"
+            ],
+            "positive_effects": [
+                "Deep intuition",
+                "Occult abilities",
+                "Psychological insight",
+                "Transformative experiences"
+            ],
+            "challenging_effects": [
+                "Emotional crises",
+                "Health fluctuations",
+                "Mother's health issues",
+                "Hidden anxieties",
+                "Sudden changes"
+            ]
+        },
+        9: {
+            "verses": "24.22",
+            "translation": "Moon in the 9th house: The native will be devoted to divine and paternal assignments, will be endowed with happiness, wealth, intelligence, and sons, and will be victorious.",
+            "detailed_effects": [
+                "Fortunate and blessed",
+                "Strong dharmic inclination",
+                "Mother supports spiritual growth",
+                "Success in higher learning",
+                "Foreign travel beneficial",
+                "Good relationship with teachers",
+                "Wisdom and intuition"
+            ],
+            "positive_effects": [
+                "Excellent fortune",
+                "Spiritual wisdom",
+                "Higher education success",
+                "Foreign gains",
+                "Blessed with children"
+            ],
+            "challenging_effects": [
+                "Emotional attachment to beliefs",
+                "May change beliefs frequently",
+                "Travel may be restless"
+            ]
+        },
+        11: {
+            "verses": "24.24",
+            "translation": "Moon in the 11th house: The native will be intelligent, endowed with wealth, long-lived, will have lasting children, and be victorious over enemies.",
+            "detailed_effects": [
+                "Excellent for gains and fulfillment",
+                "Strong social network",
+                "Popular in groups",
+                "Elder siblings supportive",
+                "Multiple income sources",
+                "Emotional fulfillment through friends",
+                "Goals achieved"
+            ],
+            "positive_effects": [
+                "High income",
+                "Popular and well-connected",
+                "Desires fulfilled",
+                "Long life",
+                "Good children"
+            ],
+            "challenging_effects": [
+                "Emotional dependency on groups",
+                "Income may fluctuate",
+                "Friends may be fickle"
+            ]
+        },
+        12: {
+            "verses": "24.25",
+            "translation": "Moon in the 12th house: The native will be bereft of good looks, will be stupid, will be inimical, will spend on evil deeds, be distressed, and irritable.",
+            "detailed_effects": [
+                "Spiritual seeking and moksha",
+                "Foreign residence likely",
+                "Work in isolation beneficial",
+                "Sleep issues or insomnia",
+                "Emotional seclusion",
+                "Expenses on family or mother",
+                "Hidden emotional life"
+            ],
+            "positive_effects": [
+                "Strong spiritual inclination",
+                "Success in foreign lands",
+                "Meditation abilities",
+                "Charitable nature",
+                "Liberation orientation"
+            ],
+            "challenging_effects": [
+                "Emotional loneliness",
+                "Sleep disorders",
+                "High expenses",
+                "Mother's health or distance",
+                "Hidden sorrows"
+            ]
         }
     },
     
     "Mars": {
+        1: {
+            "verses": "24.26",
+            "translation": "Mars in the ascendant: The native will suffer from diseases, will be cruel, haughty, will make unsteady or little wealth, will have diseased limbs, and will be devoid of happiness.",
+            "detailed_effects": [
+                "Dynamic, energetic personality",
+                "Strong physical vitality and courage",
+                "Independent and assertive nature",
+                "Quick to anger but also to forgive",
+                "Athletic or competitive inclinations",
+                "Tendency toward accidents or injuries",
+                "Leadership through action"
+            ],
+            "positive_effects": [
+                "Exceptional courage and determination",
+                "Strong physical body and stamina",
+                "Natural warrior and competitor",
+                "Technical and mechanical skills",
+                "Quick decision-making abilities"
+            ],
+            "challenging_effects": [
+                "Aggressive or impulsive behavior",
+                "Prone to accidents and injuries",
+                "Blood pressure issues",
+                "Conflict-prone temperament",
+                "Impatience and anger"
+            ],
+            "remedies": [
+                "Practice anger management",
+                "Channel energy through sports",
+                "Worship Mars deity (Mangal)",
+                "Recite Hanuman Chalisa"
+            ]
+        },
+        2: {
+            "verses": "24.27",
+            "translation": "Mars in the 2nd house: The native will be devoid of learning and wealth, will eat undesirable food, will be dependent on bad people, and will have a troubled face.",
+            "detailed_effects": [
+                "Harsh or aggressive speech",
+                "Financial ups and downs",
+                "Family conflicts possible",
+                "Strong appetite and metabolism",
+                "Self-made wealth through effort",
+                "Technical or engineering skills",
+                "Direct communication style"
+            ],
+            "positive_effects": [
+                "Ability to rebuild wealth",
+                "Strong determination in finances",
+                "Technical earning abilities"
+            ],
+            "challenging_effects": [
+                "Harsh speech causes problems",
+                "Financial instability",
+                "Family disputes",
+                "Dental or facial issues"
+            ]
+        },
+        3: {
+            "verses": "24.28",
+            "translation": "Mars in the 3rd house: The native will be devoid of brothers, be miserable, given to anger, and will have a diseased throat and ears.",
+            "detailed_effects": [
+                "Excellent for courage and initiative",
+                "Success through own efforts",
+                "Strained sibling relationships",
+                "Strong communication drive",
+                "Athletic or competitive pursuits",
+                "Technical writing abilities",
+                "Victory over obstacles"
+            ],
+            "positive_effects": [
+                "Exceptional courage",
+                "Strong initiative and drive",
+                "Success in competitive fields",
+                "Technical skills",
+                "Defeats enemies"
+            ],
+            "challenging_effects": [
+                "Conflicts with siblings",
+                "Aggressive communication",
+                "Accidents during travel",
+                "Ear or throat problems"
+            ]
+        },
+        4: {
+            "verses": "24.29",
+            "translation": "Mars in the 4th house: The native will be devoid of relatives, conveyances, happiness, and lands, will live in others' houses, and will serve the king.",
+            "detailed_effects": [
+                "Challenges with mother or home life",
+                "Frequent residence changes",
+                "Property through own efforts",
+                "Technical or engineering career",
+                "Emotional restlessness",
+                "Vehicle accidents to guard against",
+                "Service in military or government"
+            ],
+            "positive_effects": [
+                "Success through service",
+                "Self-made property",
+                "Technical expertise"
+            ],
+            "challenging_effects": [
+                "Mother relationship strained",
+                "Lack of peace at home",
+                "Property disputes",
+                "Vehicle accidents risk"
+            ]
+        },
+        5: {
+            "verses": "24.30",
+            "translation": "Mars in the 5th house: The native will be devoid of happiness from sons, will be without wealth and learning, and will be cruel.",
+            "detailed_effects": [
+                "Challenges with children",
+                "Competitive in speculation",
+                "Strong romantic drive",
+                "Technical or sports abilities",
+                "Risk-taking nature",
+                "Abdominal health issues",
+                "Quick intelligence"
+            ],
+            "positive_effects": [
+                "Success in speculation if strong",
+                "Athletic abilities",
+                "Quick decision-making",
+                "Technical creativity"
+            ],
+            "challenging_effects": [
+                "Difficulties with children",
+                "Impulsive speculation losses",
+                "Romantic conflicts",
+                "Abdominal issues"
+            ]
+        },
+        6: {
+            "verses": "24.31",
+            "translation": "Mars in the 6th house: The native will attain happiness, wealth, will conquer enemies, will be famous, and will not have brothers.",
+            "detailed_effects": [
+                "Excellent placement - overcomes obstacles",
+                "Success in service and competition",
+                "Victory over enemies and diseases",
+                "Military, police, medical fields favorable",
+                "Strong immune system",
+                "Sibling issues possible",
+                "Litigation success"
+            ],
+            "positive_effects": [
+                "Defeats all enemies",
+                "Success in service",
+                "Strong health overall",
+                "Wealth through effort",
+                "Competitive success"
+            ],
+            "challenging_effects": [
+                "Conflicts are common",
+                "Blood-related issues",
+                "Strained with siblings"
+            ]
+        },
+        7: {
+            "verses": "24.32",
+            "translation": "Mars in the 7th house: The native will be deprived of his wife, will suffer from diseases, be mean, be a sexual pervert, and will face downfall.",
+            "detailed_effects": [
+                "Challenges in marriage - Manglik dosha",
+                "Assertive or aggressive spouse",
+                "Business partnership conflicts",
+                "Strong sexual drive",
+                "Late marriage beneficial",
+                "Spouse may be technical or athletic",
+                "Marital counseling helpful"
+            ],
+            "positive_effects": [
+                "Dynamic business partnerships",
+                "Energetic spouse",
+                "Success in competitive business"
+            ],
+            "challenging_effects": [
+                "Marital conflicts frequent",
+                "Separation risks",
+                "Partnership disputes",
+                "Sexual issues",
+                "Manglik considerations"
+            ],
+            "remedies": [
+                "Marry after 28 or match Manglik",
+                "Kuja dosha remedies",
+                "Practice patience in marriage"
+            ]
+        },
+        8: {
+            "verses": "24.33",
+            "translation": "Mars in the 8th house: The native will have few friends, be short-lived, will suffer humiliation, and will be troubled by enemies.",
+            "detailed_effects": [
+                "Interest in occult and mysteries",
+                "Research and investigation skills",
+                "Sudden events and transformations",
+                "Inheritance conflicts",
+                "Chronic health issues",
+                "Sexual intensity",
+                "Hidden sources of income"
+            ],
+            "positive_effects": [
+                "Deep research abilities",
+                "Occult knowledge",
+                "Inheritance possible",
+                "Transformative power"
+            ],
+            "challenging_effects": [
+                "Accidents and surgeries",
+                "Chronic health issues",
+                "Sudden crises",
+                "Inheritance disputes",
+                "Longevity concerns"
+            ]
+        },
+        9: {
+            "verses": "24.34",
+            "translation": "Mars in the 9th house: The native will be devoid of fortunes, father, religious dispositions, and be sinful and not trustworthy.",
+            "detailed_effects": [
+                "Conflicts with father or teachers",
+                "Independent beliefs",
+                "Foreign travel for work",
+                "Technical or engineering education",
+                "Challenges in higher learning",
+                "Dharma through action",
+                "Self-made fortune"
+            ],
+            "positive_effects": [
+                "Independent thinking",
+                "Success abroad",
+                "Technical expertise",
+                "Warrior dharma"
+            ],
+            "challenging_effects": [
+                "Father relationship strained",
+                "Conflicts with gurus",
+                "Religious disagreements",
+                "Accidents during travel"
+            ]
+        },
         10: {
             "verses": "24.35",
             "translation": "Mars in the 10th house: The native will be religious, famous, valorous, and will be endowed with jewels, gold, and wealth.",
@@ -443,6 +1022,57 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Aggressive or domineering professional style",
                 "Accidents or injuries related to career",
                 "Legal disputes over property or career matters"
+            ]
+        },
+        11: {
+            "verses": "24.36",
+            "translation": "Mars in the 11th house: The native will be endowed with wealth, happiness, longevity, will be courageous, and will have limited progeny.",
+            "detailed_effects": [
+                "Excellent for gains and income",
+                "Success in competitive fields",
+                "Strong social network",
+                "Technical income sources",
+                "Elder siblings supportive",
+                "Ambitious goals achieved",
+                "Athletic or competitive groups"
+            ],
+            "positive_effects": [
+                "High income through effort",
+                "Ambitious goals fulfilled",
+                "Competitive success",
+                "Strong network",
+                "Long life"
+            ],
+            "challenging_effects": [
+                "Few children",
+                "Conflicts in groups",
+                "Aggressive friendships"
+            ]
+        },
+        12: {
+            "verses": "24.37",
+            "translation": "Mars in the 12th house: The native will have diseased eyes, will be bereft of wealth and happiness, will live in foreign lands, suffer pains, and will face imprisonment.",
+            "detailed_effects": [
+                "High expenditure on various causes",
+                "Foreign residence or work",
+                "Hidden enemies",
+                "Isolated work environments",
+                "Sleep disturbances",
+                "Sexual expenses",
+                "Spiritual warrior path"
+            ],
+            "positive_effects": [
+                "Success in foreign lands",
+                "Spiritual discipline",
+                "Research in isolation",
+                "Moksha through action"
+            ],
+            "challenging_effects": [
+                "Financial losses",
+                "Eye problems",
+                "Hidden enemies",
+                "Accidents or confinement",
+                "Sleep issues"
             ]
         }
     },
