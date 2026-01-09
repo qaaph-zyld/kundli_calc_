@@ -310,6 +310,17 @@ class MultiSourceEngine:
                 )
         
         if 'Phaladeepika' in interpretations:
+            phaladeepika_data = PHALADEEPIKA_PLANETS_IN_HOUSES.get(planet, {}).get(house)
+            if phaladeepika_data:
+                sources.append("Phaladeepika")
+        
+        hora_sara_data = HORA_SARA_PLANETS_IN_HOUSES.get(planet, {}).get(house)
+        if hora_sara_data:
+            sources.append("Hora Sara")
+        
+        return sources
+        
+        if 'Phaladeepika' in interpretations:
             phaladeepika_trans = interpretations['Phaladeepika'].get('translation', '')
             if phaladeepika_trans:
                 synthesis_parts.append(
