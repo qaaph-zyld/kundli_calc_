@@ -1218,51 +1218,284 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
     "Venus": {
         1: {
             "chapter": 15,
-            "verses": "15.3",
-            "translation": "Venus in the first house bestows beauty, attractive eyes, happiness, poetic nature, enjoyment of pleasures, and good fortune.",
+            "verses": "15.1",
+            "translation": "Venus in 1st bestows beauty, attractive eyes, happiness, poetic nature, enjoyment of pleasures, and good fortune.",
             "detailed_effects": [
                 "Physical beauty and charm",
-                "Artistic and poetic abilities",
+                "Attractive eyes",
+                "Happiness and contentment",
+                "Poetic and artistic nature",
                 "Enjoyment of life's pleasures",
-                "Attractive personality",
-                "Material comforts"
+                "Good fortune"
             ],
             "positive_effects": [
-                "Physical beauty",
+                "Beauty",
+                "Charm",
+                "Happiness",
                 "Artistic talents",
-                "Charm and grace",
+                "Fortune"
+            ],
+            "challenging_effects": [],
+            "timing": "Romance and arts throughout life",
+            "tags": ["beauty", "arts", "happiness", "fortune"],
+            "confidence": "high"
+        },
+        2: {
+            "chapter": 15,
+            "verses": "15.2",
+            "translation": "Venus in 2nd gives wealth, sweet speech, beautiful face, good food, and family happiness.",
+            "detailed_effects": [
+                "Substantial wealth",
+                "Sweet and melodious speech",
+                "Beautiful facial features",
+                "Enjoyment of good food",
+                "Family happiness"
+            ],
+            "positive_effects": [
+                "Wealth",
+                "Sweet speech",
+                "Beauty",
+                "Good food",
+                "Family harmony"
+            ],
+            "challenging_effects": [],
+            "timing": "Wealth gains during Venus dasha",
+            "tags": ["wealth", "speech", "family", "beauty"],
+            "confidence": "high"
+        },
+        3: {
+            "chapter": 15,
+            "verses": "15.3",
+            "translation": "Venus in 3rd gives courage, happiness from siblings, wealth, artistic talents, and success.",
+            "detailed_effects": [
+                "Courage and initiative",
+                "Good sibling relationships",
+                "Wealth accumulation",
+                "Artistic and creative talents",
+                "Success in endeavors"
+            ],
+            "positive_effects": [
+                "Courage",
+                "Sibling harmony",
+                "Wealth",
+                "Arts",
+                "Success"
+            ],
+            "challenging_effects": [],
+            "timing": "Artistic success during Venus dasha",
+            "tags": ["courage", "siblings", "wealth", "arts"],
+            "confidence": "high"
+        },
+        4: {
+            "chapter": 15,
+            "verses": "15.4",
+            "translation": "Venus in 4th gives happiness, mother's blessings, property, vehicles, comforts, and education.",
+            "detailed_effects": [
+                "Domestic happiness",
+                "Mother's blessings",
+                "Property and land",
+                "Vehicles and conveyances",
                 "Material comforts",
-                "Pleasant personality"
+                "Good education"
             ],
-            "challenging_effects": [
-                "May be overly indulgent",
-                "Attachment to pleasures"
+            "positive_effects": [
+                "Happiness",
+                "Mother's grace",
+                "Property",
+                "Vehicles",
+                "Comforts",
+                "Education"
             ],
-            "timing": "Romance and artistic pursuits during Venus dasha"
+            "challenging_effects": [],
+            "timing": "Property acquisition during Venus dasha",
+            "tags": ["mother", "property", "happiness", "vehicles"],
+            "confidence": "high"
+        },
+        5: {
+            "chapter": 15,
+            "verses": "15.5",
+            "translation": "Venus in 5th gives good children, intelligence, wealth, happiness, and success in speculation.",
+            "detailed_effects": [
+                "Good and beautiful children",
+                "High intelligence",
+                "Wealth accumulation",
+                "Overall happiness",
+                "Success in speculation"
+            ],
+            "positive_effects": [
+                "Good progeny",
+                "Intelligence",
+                "Wealth",
+                "Happiness",
+                "Speculation success"
+            ],
+            "challenging_effects": [],
+            "timing": "Children during Venus dasha",
+            "tags": ["children", "intelligence", "wealth", "happiness"],
+            "confidence": "high"
+        },
+        6: {
+            "chapter": 15,
+            "verses": "15.6",
+            "translation": "Venus in 6th gives victory over enemies, wealth, good health, and happiness.",
+            "detailed_effects": [
+                "Victory over adversaries",
+                "Wealth accumulation",
+                "Good health",
+                "Overall happiness",
+                "Success in service"
+            ],
+            "positive_effects": [
+                "Victory over enemies",
+                "Wealth",
+                "Health",
+                "Happiness"
+            ],
+            "challenging_effects": [],
+            "timing": "Success throughout life",
+            "tags": ["health", "enemies", "wealth", "happiness"],
+            "confidence": "high"
         },
         7: {
             "chapter": 15,
-            "verses": "15.9",
-            "translation": "Venus in the 7th house gives a beautiful and virtuous spouse, happiness in marriage, and gains through partnerships.",
+            "verses": "15.7",
+            "translation": "Venus in 7th gives beautiful and virtuous spouse, happiness in marriage, and gains through partnerships.",
             "detailed_effects": [
-                "Beautiful and compatible spouse",
+                "Beautiful and virtuous spouse",
                 "Harmonious marital life",
                 "Success through partnerships",
                 "Diplomatic abilities",
                 "Material gains from marriage"
             ],
             "positive_effects": [
-                "Excellent marriage",
                 "Beautiful spouse",
+                "Marital happiness",
                 "Partnership success",
-                "Diplomatic skills",
-                "Marital happiness"
+                "Diplomacy",
+                "Wealth from marriage"
+            ],
+            "challenging_effects": [],
+            "timing": "Marriage during Venus dasha",
+            "tags": ["marriage", "wealth", "partnerships", "happiness"],
+            "confidence": "high"
+        },
+        8: {
+            "chapter": 15,
+            "verses": "15.8",
+            "translation": "Venus in 8th gives long life, wealth from inheritance, occult knowledge, and mystical interests.",
+            "detailed_effects": [
+                "Long lifespan",
+                "Wealth through inheritance",
+                "Occult and mystical knowledge",
+                "Interest in mysteries",
+                "Research abilities"
+            ],
+            "positive_effects": [
+                "Longevity",
+                "Inheritance",
+                "Occult knowledge",
+                "Mystical interests"
+            ],
+            "challenging_effects": [],
+            "timing": "Inheritance during Venus dasha",
+            "tags": ["longevity", "wealth", "occult", "inheritance"],
+            "confidence": "high"
+        },
+        9: {
+            "chapter": 15,
+            "verses": "15.9",
+            "translation": "Venus in 9th gives wealth, virtue, devotion, father's blessings, fortune, and happiness.",
+            "detailed_effects": [
+                "Wealth and prosperity",
+                "Virtuous character",
+                "Religious devotion",
+                "Father's blessings",
+                "Good fortune",
+                "Overall happiness"
+            ],
+            "positive_effects": [
+                "Wealth",
+                "Virtue",
+                "Devotion",
+                "Father's grace",
+                "Fortune",
+                "Happiness"
+            ],
+            "challenging_effects": [],
+            "timing": "Fortune throughout life",
+            "tags": ["dharma", "father", "wealth", "happiness"],
+            "confidence": "high"
+        },
+        10: {
+            "chapter": 15,
+            "verses": "15.10",
+            "translation": "Venus in 10th gives fame, success in career, wealth, happiness, and virtuous deeds.",
+            "detailed_effects": [
+                "Fame and recognition",
+                "Career success",
+                "Wealth accumulation",
+                "Overall happiness",
+                "Virtuous actions"
+            ],
+            "positive_effects": [
+                "Fame",
+                "Career success",
+                "Wealth",
+                "Happiness",
+                "Virtue"
+            ],
+            "challenging_effects": [],
+            "timing": "Career peaks during Venus dasha",
+            "tags": ["career", "fame", "wealth", "happiness"],
+            "confidence": "high"
+        },
+        11: {
+            "chapter": 15,
+            "verses": "15.11",
+            "translation": "Venus in 11th gives wealth, happiness, gains from multiple sources, and fulfillment of desires.",
+            "detailed_effects": [
+                "Substantial wealth and gains",
+                "Overall happiness",
+                "Multiple income streams",
+                "Desire fulfillment",
+                "Social success"
+            ],
+            "positive_effects": [
+                "Wealth and gains",
+                "Happiness",
+                "Multiple incomes",
+                "Desires fulfilled",
+                "Social connections"
+            ],
+            "challenging_effects": [],
+            "timing": "Gains throughout life",
+            "tags": ["wealth", "gains", "happiness", "desires"],
+            "confidence": "high"
+        },
+        12: {
+            "chapter": 15,
+            "verses": "15.12",
+            "translation": "Venus in 12th gives expenses on luxuries, life abroad, spiritual inclinations, but also losses.",
+            "detailed_effects": [
+                "Expenditure on luxuries",
+                "Life in foreign lands",
+                "Spiritual inclinations",
+                "Financial losses",
+                "Comfort-seeking nature"
+            ],
+            "positive_effects": [
+                "Spiritual growth",
+                "Foreign opportunities",
+                "Luxury enjoyment"
             ],
             "challenging_effects": [
-                "High expectations from partner",
-                "May be overly dependent on relationships"
+                "Heavy expenses",
+                "Financial losses",
+                "Foreign residence"
             ],
-            "timing": "Marriage during Venus dasha, partnership gains throughout"
+            "timing": "Expenses throughout, spiritual growth during Venus dasha",
+            "tags": ["losses", "foreign", "spirituality", "luxury"],
+            "confidence": "high"
         }
     },
     

@@ -319,6 +319,105 @@ HORA_SARA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
             "confidence": "high",
             "notes": "Sun in 12th (Dusthana/losses) gives multiple afflictions"
         }
+    },
+    
+    "Moon": {
+        1: {
+            "chapter": 8,
+            "verses": "8.1",
+            "translation": "Moon in 1st makes one fickle-minded, handsome, with beautiful eyes, fond of water, kind-hearted, and soft-spoken.",
+            "detailed_effects": [
+                "Fickle and changeable mind",
+                "Handsome appearance",
+                "Beautiful eyes",
+                "Love for water and liquids",
+                "Kind and compassionate",
+                "Soft and gentle speech"
+            ],
+            "positive_effects": [
+                "Beauty",
+                "Kind nature",
+                "Soft speech",
+                "Compassion"
+            ],
+            "challenging_effects": [
+                "Mental fickleness",
+                "Changeable moods"
+            ],
+            "timing": "Emotional patterns throughout life",
+            "tags": ["personality", "appearance", "emotions", "temperament"],
+            "confidence": "high"
+        },
+        4: {
+            "chapter": 8,
+            "verses": "8.4",
+            "translation": "Moon in 4th gives happiness, mother's blessings, property, vehicles, comforts, and good friends.",
+            "detailed_effects": [
+                "Domestic happiness",
+                "Mother's blessings and grace",
+                "Property and land ownership",
+                "Vehicles and conveyances",
+                "Material comforts",
+                "Good friendships"
+            ],
+            "positive_effects": [
+                "Happiness",
+                "Mother's grace",
+                "Property",
+                "Vehicles",
+                "Comforts",
+                "Friends"
+            ],
+            "challenging_effects": [],
+            "timing": "Property during Moon dasha, happiness throughout",
+            "tags": ["mother", "property", "happiness", "vehicles"],
+            "confidence": "high"
+        },
+        7: {
+            "chapter": 8,
+            "verses": "8.7",
+            "translation": "Moon in 7th gives beautiful spouse, passionate nature, wealth, and happiness in marriage.",
+            "detailed_effects": [
+                "Beautiful and attractive spouse",
+                "Passionate and romantic nature",
+                "Wealth through marriage",
+                "Marital happiness",
+                "Emotional fulfillment"
+            ],
+            "positive_effects": [
+                "Beautiful spouse",
+                "Marital bliss",
+                "Wealth",
+                "Passion"
+            ],
+            "challenging_effects": [],
+            "timing": "Marriage during Moon dasha",
+            "tags": ["marriage", "wealth", "happiness", "passion"],
+            "confidence": "high"
+        },
+        10: {
+            "chapter": 8,
+            "verses": "8.10",
+            "translation": "Moon in 10th gives success, intelligence, fame, virtue, and respect.",
+            "detailed_effects": [
+                "Professional success",
+                "High intelligence",
+                "Fame and recognition",
+                "Virtuous character",
+                "Social respect"
+            ],
+            "positive_effects": [
+                "Career success",
+                "Intelligence",
+                "Fame",
+                "Virtue",
+                "Respect"
+            ],
+            "challenging_effects": [],
+            "timing": "Career success during Moon dasha",
+            "tags": ["career", "fame", "intelligence", "virtue"],
+            "confidence": "high"
+        }
     }
 }
 
