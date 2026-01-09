@@ -889,8 +889,8 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
     "Mercury": {
         1: {
             "chapter": 13,
-            "verses": "13.3",
-            "translation": "Mercury in the first house makes one skilled in arts, eloquent in speech, intelligent, long-lived, and with beautiful eyes.",
+            "verses": "13.1",
+            "translation": "Mercury in 1st makes one skilled in arts, eloquent in speech, intelligent, long-lived, with beautiful eyes.",
             "detailed_effects": [
                 "Exceptional communication skills",
                 "Artistic and creative abilities",
@@ -899,40 +899,269 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Longevity and good health"
             ],
             "positive_effects": [
-                "Eloquence and communication",
-                "Intelligence and wit",
+                "Eloquence",
+                "Intelligence",
                 "Artistic talents",
                 "Longevity",
-                "Physical attractiveness"
+                "Beautiful eyes"
             ],
-            "challenging_effects": [
-                "May overthink situations",
-                "Nervous energy"
-            ],
-            "timing": "Intellectual pursuits flourish during Mercury dasha"
+            "challenging_effects": [],
+            "timing": "Intellectual pursuits throughout life",
+            "tags": ["intelligence", "communication", "arts", "longevity"],
+            "confidence": "high"
         },
-        11: {
+        2: {
             "chapter": 13,
-            "verses": "13.13",
-            "translation": "Mercury in the 11th house bestows learning, wealth, happiness, many sources of income, and fulfillment of desires.",
+            "verses": "13.2",
+            "translation": "Mercury in 2nd gives wealth, sweet speech, good education, happiness from family.",
             "detailed_effects": [
-                "Multiple income streams",
-                "Educational achievements",
-                "Network of influential friends",
-                "Fulfillment of ambitions",
+                "Wealth accumulation",
+                "Sweet and pleasant speech",
+                "Good education",
+                "Family happiness",
                 "Financial prosperity"
             ],
             "positive_effects": [
+                "Wealth",
+                "Sweet speech",
+                "Education",
+                "Family harmony"
+            ],
+            "challenging_effects": [],
+            "timing": "Wealth gains during Mercury dasha",
+            "tags": ["wealth", "speech", "education", "family"],
+            "confidence": "high"
+        },
+        3: {
+            "chapter": 13,
+            "verses": "13.3",
+            "translation": "Mercury in 3rd gives courage, wealth, happiness from siblings, intelligence, and success.",
+            "detailed_effects": [
+                "Courage and initiative",
+                "Wealth through communication",
+                "Good sibling relationships",
+                "High intelligence",
+                "Success in endeavors"
+            ],
+            "positive_effects": [
+                "Courage",
+                "Wealth",
+                "Sibling harmony",
+                "Intelligence",
+                "Success"
+            ],
+            "challenging_effects": [],
+            "timing": "Communication skills peak during Mercury dasha",
+            "tags": ["courage", "siblings", "wealth", "intelligence"],
+            "confidence": "high"
+        },
+        4: {
+            "chapter": 13,
+            "verses": "13.4",
+            "translation": "Mercury in 4th gives happiness, education, mother's blessings, property, vehicles, and comforts.",
+            "detailed_effects": [
+                "Domestic happiness",
+                "Good education",
+                "Mother's blessings",
+                "Property ownership",
+                "Vehicles and comforts"
+            ],
+            "positive_effects": [
+                "Happiness",
+                "Education",
+                "Mother's grace",
+                "Property",
+                "Vehicles"
+            ],
+            "challenging_effects": [],
+            "timing": "Property acquisition during Mercury dasha",
+            "tags": ["mother", "property", "education", "happiness"],
+            "confidence": "high"
+        },
+        5: {
+            "chapter": 13,
+            "verses": "13.5",
+            "translation": "Mercury in 5th gives intelligence, good children, wealth, happiness, and success in speculation.",
+            "detailed_effects": [
+                "Exceptional intelligence",
+                "Good and intelligent children",
                 "Wealth accumulation",
-                "Educational success",
-                "Desire fulfillment",
-                "Multiple income sources",
-                "Social connections"
+                "Overall happiness",
+                "Success in speculation/investments"
+            ],
+            "positive_effects": [
+                "Intelligence",
+                "Good progeny",
+                "Wealth",
+                "Happiness",
+                "Speculation success"
+            ],
+            "challenging_effects": [],
+            "timing": "Children and investments during Mercury dasha",
+            "tags": ["children", "intelligence", "wealth", "speculation"],
+            "confidence": "high"
+        },
+        6: {
+            "chapter": 13,
+            "verses": "13.6",
+            "translation": "Mercury in 6th gives victory over enemies, wealth, good health, intelligence, and leadership.",
+            "detailed_effects": [
+                "Victory over adversaries",
+                "Wealth accumulation",
+                "Good health",
+                "High intelligence",
+                "Leadership abilities"
+            ],
+            "positive_effects": [
+                "Victory over enemies",
+                "Wealth",
+                "Health",
+                "Intelligence",
+                "Leadership"
+            ],
+            "challenging_effects": [],
+            "timing": "Success throughout life",
+            "tags": ["health", "enemies", "wealth", "intelligence"],
+            "confidence": "high"
+        },
+        7: {
+            "chapter": 13,
+            "verses": "13.7",
+            "translation": "Mercury in 7th gives beautiful spouse, happiness in marriage, wealth, intelligence, and diplomatic skills.",
+            "detailed_effects": [
+                "Beautiful and intelligent spouse",
+                "Marital happiness",
+                "Wealth through partnerships",
+                "High intelligence",
+                "Diplomatic and negotiation skills"
+            ],
+            "positive_effects": [
+                "Beautiful spouse",
+                "Marital bliss",
+                "Wealth",
+                "Intelligence",
+                "Diplomacy"
+            ],
+            "challenging_effects": [],
+            "timing": "Marriage during Mercury dasha",
+            "tags": ["marriage", "wealth", "intelligence", "diplomacy"],
+            "confidence": "high"
+        },
+        8: {
+            "chapter": 13,
+            "verses": "13.8",
+            "translation": "Mercury in 8th gives long life, fame, wealth from inheritance, occult knowledge.",
+            "detailed_effects": [
+                "Long lifespan",
+                "Fame and recognition",
+                "Wealth through inheritance",
+                "Occult and mystical knowledge",
+                "Research abilities"
+            ],
+            "positive_effects": [
+                "Longevity",
+                "Fame",
+                "Inheritance",
+                "Occult knowledge"
+            ],
+            "challenging_effects": [],
+            "timing": "Occult interests during Mercury dasha",
+            "tags": ["longevity", "wealth", "occult", "fame"],
+            "confidence": "high"
+        },
+        9: {
+            "chapter": 13,
+            "verses": "13.9",
+            "translation": "Mercury in 9th gives wealth, virtue, devotion to deities, father's blessings, and fortune.",
+            "detailed_effects": [
+                "Wealth and prosperity",
+                "Virtuous character",
+                "Religious devotion",
+                "Father's blessings",
+                "Good fortune"
+            ],
+            "positive_effects": [
+                "Wealth",
+                "Virtue",
+                "Devotion",
+                "Father's grace",
+                "Fortune"
+            ],
+            "challenging_effects": [],
+            "timing": "Fortune throughout life",
+            "tags": ["dharma", "father", "wealth", "spirituality"],
+            "confidence": "high"
+        },
+        10: {
+            "chapter": 13,
+            "verses": "13.10",
+            "translation": "Mercury in 10th gives intelligence, fame, success in career, wealth, and virtuous deeds.",
+            "detailed_effects": [
+                "Exceptional intelligence",
+                "Fame and recognition",
+                "Career success",
+                "Wealth accumulation",
+                "Virtuous actions"
+            ],
+            "positive_effects": [
+                "Intelligence",
+                "Fame",
+                "Career success",
+                "Wealth",
+                "Virtue"
+            ],
+            "challenging_effects": [],
+            "timing": "Career peaks during Mercury dasha",
+            "tags": ["career", "fame", "intelligence", "wealth"],
+            "confidence": "high"
+        },
+        11: {
+            "chapter": 13,
+            "verses": "13.11",
+            "translation": "Mercury in 11th bestows learning, wealth, happiness, many sources of income, and fulfillment of desires.",
+            "detailed_effects": [
+                "Educational achievements",
+                "Substantial wealth",
+                "Overall happiness",
+                "Multiple income streams",
+                "Desire fulfillment"
+            ],
+            "positive_effects": [
+                "Education",
+                "Wealth",
+                "Happiness",
+                "Multiple incomes",
+                "Desires fulfilled"
+            ],
+            "challenging_effects": [],
+            "timing": "Gains throughout life, peak during Mercury dasha",
+            "tags": ["wealth", "gains", "education", "happiness"],
+            "confidence": "high"
+        },
+        12: {
+            "chapter": 13,
+            "verses": "13.12",
+            "translation": "Mercury in 12th gives expenses, losses, life abroad, but also learning and spiritual knowledge.",
+            "detailed_effects": [
+                "Heavy expenditures",
+                "Financial losses",
+                "Life in foreign lands",
+                "Learning and education",
+                "Spiritual knowledge"
+            ],
+            "positive_effects": [
+                "Learning",
+                "Spiritual knowledge",
+                "Foreign opportunities"
             ],
             "challenging_effects": [
-                "May scatter energies across too many ventures"
+                "Expenses",
+                "Losses",
+                "Foreign residence"
             ],
-            "timing": "Financial gains during Mercury dasha"
+            "timing": "Expenses throughout, spiritual growth during Mercury dasha",
+            "tags": ["losses", "foreign", "education", "spirituality"],
+            "confidence": "high"
         }
     },
     
