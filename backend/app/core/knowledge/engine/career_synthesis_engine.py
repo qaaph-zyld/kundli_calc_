@@ -61,10 +61,10 @@ class CareerTimingWindow:
 @dataclass
 class CareerSynthesis:
     """Complete career life-area analysis"""
-    domain: str = "career"
     overall_assessment: str
     strength_score: float  # 0-100 aggregate
     strength_level: CareerStrength
+    domain: str = "career"
     
     key_factors: List[CareerFactor]
     synthesis: str  # Complete narrative
