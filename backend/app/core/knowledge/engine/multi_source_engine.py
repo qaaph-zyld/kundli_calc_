@@ -309,11 +309,18 @@ class MultiSourceEngine:
                     f"\n\nSaravali adds: '{saravali_trans[:150]}...'"
                 )
         
+        if 'Phaladeepika' in interpretations:
+            phaladeepika_trans = interpretations['Phaladeepika'].get('translation', '')
+            if phaladeepika_trans:
+                synthesis_parts.append(
+                    f"\n\nPhaladeepika mentions: '{phaladeepika_trans[:150]}...'"
+                )
+        
         # Address contradictions if any
         if contradictions:
             synthesis_parts.append(
                 f"\n\nNote: Sources show some variation in interpretation. "
-                f"BPHS emphasizes certain aspects while Saravali provides complementary perspectives. "
+                f"BPHS, Saravali and Phaladeepika provide complementary perspectives. "
                 f"Individual chart context determines which interpretation manifests most strongly."
             )
         
