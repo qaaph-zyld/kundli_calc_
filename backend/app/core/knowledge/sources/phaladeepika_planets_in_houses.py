@@ -602,52 +602,287 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
     "Mars": {
         1: {
             "chapter": 12,
-            "verses": "12.3",
-            "translation": "Mars in the first house makes one cruel, adventurous, daring in acts, with scars on the body, short-tempered, and engaged in violent activities.",
+            "verses": "12.1",
+            "translation": "Mars in 1st house makes one cruel, adventurous, eater of forbidden food, quarrelsome, has a scarred body, and unkind to mother.",
             "detailed_effects": [
-                "Courageous and fearless nature",
-                "Tendency toward aggression",
-                "Physical marks or scars",
-                "Quick temper and impulsive actions",
-                "Athletic or martial interests"
+                "Cruel or harsh temperament",
+                "Adventurous and risk-taking nature",
+                "Dietary indiscretions",
+                "Quarrelsome and aggressive",
+                "Physical scars or marks on body",
+                "Strained relationship with mother"
             ],
             "positive_effects": [
                 "Courage and bravery",
-                "Physical strength",
-                "Leadership in action",
-                "Protection abilities"
+                "Adventurous spirit",
+                "Physical strength"
             ],
             "challenging_effects": [
-                "Aggressive tendencies",
-                "Anger management issues",
-                "Prone to accidents or injuries",
-                "Conflicts with others"
+                "Cruel tendencies",
+                "Quarrelsome nature",
+                "Physical scars",
+                "Conflict with mother"
             ],
-            "timing": "Martial activities peak during Mars dasha"
+            "timing": "Aggressive tendencies throughout life, peak during Mars dasha",
+            "tags": ["personality", "aggression", "health", "mother"],
+            "confidence": "high"
+        },
+        2: {
+            "chapter": 12,
+            "verses": "12.2",
+            "translation": "Mars in 2nd causes eye disease, loss of wealth, harsh speech, living on others' food, family conflicts.",
+            "detailed_effects": [
+                "Eye problems or defects",
+                "Financial losses",
+                "Harsh or abusive speech",
+                "Dependent on others for sustenance",
+                "Family disputes and conflicts"
+            ],
+            "positive_effects": [],
+            "challenging_effects": [
+                "Eye health issues",
+                "Wealth losses",
+                "Harsh speech",
+                "Food dependency",
+                "Family conflicts"
+            ],
+            "timing": "Financial and speech issues throughout life",
+            "tags": ["wealth", "speech", "health", "family"],
+            "confidence": "high"
+        },
+        3: {
+            "chapter": 12,
+            "verses": "12.3",
+            "translation": "Mars in 3rd gives courage, wealth, happiness from brothers, leadership, and victory over enemies.",
+            "detailed_effects": [
+                "Exceptional courage and bravery",
+                "Wealth accumulation",
+                "Good relationship with siblings",
+                "Leadership qualities",
+                "Victory over adversaries"
+            ],
+            "positive_effects": [
+                "Courage",
+                "Wealth",
+                "Sibling harmony",
+                "Leadership",
+                "Victory over enemies"
+            ],
+            "challenging_effects": [],
+            "timing": "Courage and leadership throughout life",
+            "tags": ["courage", "siblings", "wealth", "leadership"],
+            "confidence": "high"
+        },
+        4: {
+            "chapter": 12,
+            "verses": "12.4",
+            "translation": "Mars in 4th destroys happiness, mother, lands, vehicles, relatives, and comforts.",
+            "detailed_effects": [
+                "Loss of domestic happiness",
+                "Harm to mother or early separation",
+                "Property losses",
+                "Loss of vehicles",
+                "Few relatives or strained relations"
+            ],
+            "positive_effects": [],
+            "challenging_effects": [
+                "Domestic unhappiness",
+                "Mother's suffering",
+                "Property losses",
+                "Vehicle losses",
+                "Relative conflicts"
+            ],
+            "timing": "Mother-related effects in youth, property issues throughout",
+            "tags": ["mother", "property", "happiness", "vehicles"],
+            "confidence": "high"
+        },
+        5: {
+            "chapter": 12,
+            "verses": "12.5",
+            "translation": "Mars in 5th makes one devoid of happiness, wealth, and children; intelligent but wrathful.",
+            "detailed_effects": [
+                "Unhappiness and discontent",
+                "Financial struggles",
+                "Difficulty with children or childlessness",
+                "High intelligence",
+                "Quick temper and anger"
+            ],
+            "positive_effects": [
+                "High intelligence"
+            ],
+            "challenging_effects": [
+                "Unhappiness",
+                "Poverty",
+                "Children issues",
+                "Anger problems"
+            ],
+            "timing": "Children-related effects during procreative years",
+            "tags": ["children", "intelligence", "wealth", "temperament"],
+            "confidence": "high"
+        },
+        6: {
+            "chapter": 12,
+            "verses": "12.6",
+            "translation": "Mars in 6th gives wealth, victory over enemies, happiness, strong physique, and leadership.",
+            "detailed_effects": [
+                "Substantial wealth",
+                "Victory over adversaries",
+                "Overall happiness",
+                "Strong and healthy body",
+                "Leadership and authority"
+            ],
+            "positive_effects": [
+                "Wealth",
+                "Victory over enemies",
+                "Happiness",
+                "Physical strength",
+                "Leadership"
+            ],
+            "challenging_effects": [],
+            "timing": "Strength and victory throughout life",
+            "tags": ["health", "enemies", "wealth", "leadership"],
+            "confidence": "high",
+            "notes": "Mars in 6th (Upachaya) is very strong and favorable"
+        },
+        7: {
+            "chapter": 12,
+            "verses": "12.7",
+            "translation": "Mars in 7th causes loss of spouse, wealth problems, diseases, and living in foreign lands.",
+            "detailed_effects": [
+                "Marital difficulties or loss of spouse",
+                "Financial problems",
+                "Health issues and diseases",
+                "Life away from homeland",
+                "Conflicts in partnerships"
+            ],
+            "positive_effects": [],
+            "challenging_effects": [
+                "Marital problems",
+                "Wealth issues",
+                "Health problems",
+                "Foreign residence",
+                "Partnership conflicts"
+            ],
+            "timing": "Marital effects after marriage, health issues throughout",
+            "tags": ["marriage", "wealth", "health", "foreign"],
+            "confidence": "high",
+            "notes": "Mars in 7th (Kuja Dosha) harms marriage and partnerships"
+        },
+        8: {
+            "chapter": 12,
+            "verses": "12.8",
+            "translation": "Mars in 8th gives eye defects, loss of wealth, friendless, dependent on others, short life.",
+            "detailed_effects": [
+                "Eye problems",
+                "Poverty and financial struggles",
+                "Lack of friends",
+                "Dependent on others",
+                "Reduced longevity"
+            ],
+            "positive_effects": [],
+            "challenging_effects": [
+                "Eye defects",
+                "Financial losses",
+                "Social isolation",
+                "Dependency",
+                "Short lifespan"
+            ],
+            "timing": "Challenges throughout life, longevity concerns",
+            "tags": ["longevity", "wealth", "health", "eyes"],
+            "confidence": "high"
+        },
+        9: {
+            "chapter": 12,
+            "verses": "12.9",
+            "translation": "Mars in 9th destroys father, dharma, fortune, and makes one sinful and irreligious.",
+            "detailed_effects": [
+                "Harm to father or conflict",
+                "Lack of fortune and luck",
+                "Irreligious tendencies",
+                "Sinful actions",
+                "Obstacles in dharma"
+            ],
+            "positive_effects": [],
+            "challenging_effects": [
+                "Father's suffering",
+                "Loss of fortune",
+                "Irreligious nature",
+                "Sinful tendencies",
+                "Dharma obstacles"
+            ],
+            "timing": "Father-related effects in youth, dharma issues throughout",
+            "tags": ["dharma", "father", "fortune", "spirituality"],
+            "confidence": "high"
         },
         10: {
             "chapter": 12,
-            "verses": "12.12",
-            "translation": "Mars in the 10th house makes the native virtuous, successful in undertakings, protector of relatives, and achiever of desired objectives.",
+            "verses": "12.10",
+            "translation": "Mars in 10th gives wealth, happiness, leadership, fame, courage, and virtuous deeds.",
             "detailed_effects": [
-                "Success in professional endeavors",
-                "Protective of family and community",
-                "Achievement-oriented personality",
-                "Leadership in work environment",
-                "Righteous and ethical conduct"
+                "Wealth and prosperity",
+                "Career success and leadership",
+                "Fame and recognition",
+                "Exceptional courage",
+                "Virtuous actions"
             ],
             "positive_effects": [
+                "Wealth",
                 "Career success",
-                "Protective nature",
-                "Achievement of goals",
-                "Virtuous character",
-                "Leadership abilities"
+                "Fame",
+                "Courage",
+                "Virtue"
             ],
+            "challenging_effects": [],
+            "timing": "Career peaks during Mars dasha",
+            "tags": ["career", "fame", "wealth", "leadership"],
+            "confidence": "high",
+            "notes": "Mars in 10th (Kendra/Kona) is very strong for career"
+        },
+        11: {
+            "chapter": 12,
+            "verses": "12.11",
+            "translation": "Mars in 11th gives wealth, long life, happiness, gains from multiple sources, and courage.",
+            "detailed_effects": [
+                "Substantial wealth and gains",
+                "Long life",
+                "Overall happiness",
+                "Multiple income streams",
+                "Courageous nature"
+            ],
+            "positive_effects": [
+                "Wealth and gains",
+                "Longevity",
+                "Happiness",
+                "Multiple incomes",
+                "Courage"
+            ],
+            "challenging_effects": [],
+            "timing": "Gains throughout life, peak during Mars dasha",
+            "tags": ["wealth", "gains", "longevity", "courage"],
+            "confidence": "high"
+        },
+        12: {
+            "chapter": 12,
+            "verses": "12.12",
+            "translation": "Mars in 12th causes eye defects, loss of wealth through enemies, living abroad, and physical suffering.",
+            "detailed_effects": [
+                "Eye problems",
+                "Financial losses through adversaries",
+                "Life in foreign lands",
+                "Physical suffering and diseases",
+                "Expenses and losses"
+            ],
+            "positive_effects": [],
             "challenging_effects": [
-                "May face professional conflicts",
-                "Competitive work environment"
+                "Eye defects",
+                "Wealth losses",
+                "Foreign residence",
+                "Physical suffering",
+                "Heavy expenses"
             ],
-            "timing": "Career achievements during Mars dasha"
+            "timing": "Losses and expenses throughout life",
+            "tags": ["losses", "foreign", "health", "eyes"],
+            "confidence": "high"
         }
     },
     
