@@ -34,7 +34,7 @@ class TestWholeSignHouses:
         latitude = 28.6139  # New Delhi
         longitude = 77.2090
         
-        houses = calculator.calculate_houses(date, latitude, longitude, house_system='W')
+        houses = calculator.calculate_houses(date, latitude, longitude, house_system='WHOLE_SIGN')
         
         # Verify house cusps are multiples of 30 (sign boundaries)
         for i, cusp in enumerate(houses.get('cusps', [])[:12], 1):
