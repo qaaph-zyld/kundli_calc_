@@ -4,6 +4,11 @@ import sys
 from unittest.mock import Mock
 from datetime import datetime, timezone
 from typing import Generator, Dict, Any
+from pathlib import Path
+
+# Add backend directory to Python path
+backend_dir = Path(__file__).parent.parent
+sys.path.insert(0, str(backend_dir))
 
 # Set test environment before importing any modules
 os.environ["ENV"] = "test"

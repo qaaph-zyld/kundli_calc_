@@ -16,7 +16,7 @@ from typing import List, Optional, Dict, Any
 from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
 
-from backend.app.core.knowledge.engine.contextual_synthesis_engine import (
+from app.core.knowledge.engine.contextual_synthesis_engine import (
     ContextualSynthesisEngine,
     ContextualInterpretation
 )

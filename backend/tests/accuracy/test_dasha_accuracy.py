@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 from datetime import datetime, timedelta
 
-from app.core.calculations.dasha_system import VimshottariDashaCalculator
+from app.core.calculations.dasha_system import VimshottariDasha
 
 
 REFERENCE_DIR = Path(__file__).parent / "reference_charts"

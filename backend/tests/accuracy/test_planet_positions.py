@@ -12,7 +12,6 @@ from pathlib import Path
 from datetime import datetime
 import swisseph as swe
 
-from app.core.calculations.engine_core import VedicChartEngine
 from app.core.calculations.ayanamsa import EnhancedAyanamsaManager
 
 

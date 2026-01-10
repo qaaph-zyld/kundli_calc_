@@ -16,11 +16,11 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional
 import uuid
 
-from backend.app.core.knowledge.engine.career_synthesis_engine import CareerSynthesisEngine
-from backend.app.core.knowledge.engine.relationship_synthesis_engine import RelationshipSynthesisEngine
-from backend.app.core.knowledge.engine.wealth_synthesis_engine import WealthSynthesisEngine
-from backend.app.core.timing.yoga_activation_engine import YogaActivationEngine
-from backend.app.core.timing.transit_engine import TransitIntelligenceEngine
+from app.core.knowledge.engine.career_synthesis_engine import CareerSynthesisEngine
+from app.core.knowledge.engine.relationship_synthesis_engine import RelationshipSynthesisEngine
+from app.core.knowledge.engine.wealth_synthesis_engine import WealthSynthesisEngine
+from app.core.timing.yoga_activation_engine import YogaActivationEngine
+from app.core.timing.transit_engine import TransitIntelligenceEngine
 
 
 @dataclass

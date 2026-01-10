@@ -38,12 +38,6 @@ class UserInDB(UserBase):
     last_login: Optional[datetime]
     saved_kundlis: List[str] = []  # List of kundli IDs
 
-users = Table(
-    'users',
-    metadata,
-    extend_existing=True,
-)
-
 class UserResponse(UserBase):
     id: str
     created_at: datetime

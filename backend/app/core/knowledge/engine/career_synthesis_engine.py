@@ -18,11 +18,11 @@ from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 from enum import Enum
 
-from backend.app.core.knowledge.engine.contextual_synthesis_engine import (
+from app.core.knowledge.engine.contextual_synthesis_engine import (
     ContextualSynthesisEngine,
     StrengthLevel
 )
-from backend.app.core.knowledge.sources.bphs_yogas import get_all_yogas
+from app.core.knowledge.sources.bphs_yogas import get_all_yogas
 
 
 class CareerStrength(Enum):

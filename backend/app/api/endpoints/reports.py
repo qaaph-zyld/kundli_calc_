@@ -9,7 +9,7 @@ from typing import Optional, List, Dict, Any
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
-from backend.app.core.reports.report_generator import ComprehensiveReportGenerator
+from app.core.reports.report_generator import ComprehensiveReportGenerator
 
 router = APIRouter()
 

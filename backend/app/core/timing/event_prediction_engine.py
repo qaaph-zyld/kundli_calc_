@@ -15,9 +15,9 @@ from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 
-from backend.app.core.knowledge.engine.career_synthesis_engine import CareerSynthesisEngine
-from backend.app.core.knowledge.engine.relationship_synthesis_engine import RelationshipSynthesisEngine
-from backend.app.core.knowledge.engine.wealth_synthesis_engine import WealthSynthesisEngine
+from app.core.knowledge.engine.career_synthesis_engine import CareerSynthesisEngine
+from app.core.knowledge.engine.relationship_synthesis_engine import RelationshipSynthesisEngine
+from app.core.knowledge.engine.wealth_synthesis_engine import WealthSynthesisEngine
 
 
 @dataclass

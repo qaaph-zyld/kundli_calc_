@@ -9,9 +9,9 @@ from typing import Optional, List, Dict
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
-from backend.app.core.knowledge.engine.career_synthesis_engine import CareerSynthesisEngine
-from backend.app.core.knowledge.engine.relationship_synthesis_engine import RelationshipSynthesisEngine
-from backend.app.core.knowledge.engine.wealth_synthesis_engine import WealthSynthesisEngine
+from app.core.knowledge.engine.career_synthesis_engine import CareerSynthesisEngine
+from app.core.knowledge.engine.relationship_synthesis_engine import RelationshipSynthesisEngine
+from app.core.knowledge.engine.wealth_synthesis_engine import WealthSynthesisEngine
 
 router = APIRouter()
 

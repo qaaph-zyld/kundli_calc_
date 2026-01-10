@@ -19,7 +19,7 @@ import json
 from typing import Dict, Any, Optional
 import time
 
-from backend.app.core.metadata.calculation_metadata import (
+from app.core.metadata.calculation_metadata import (
     CalculationMetadata,
     CalculationType
 )

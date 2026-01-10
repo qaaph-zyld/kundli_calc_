@@ -18,9 +18,9 @@ from typing import List, Dict, Any, Optional
 from enum import Enum
 from dataclasses import dataclass
 
-from backend.app.core.knowledge.engine.interpretation_engine import KnowledgeInterpretationEngine
-from backend.app.core.knowledge.engine.multi_source_engine import MultiSourceEngine
-from backend.app.core.knowledge.sources.bphs_yogas import get_all_yogas
+from app.core.knowledge.engine.interpretation_engine import KnowledgeInterpretationEngine
+from app.core.knowledge.engine.multi_source_engine import MultiSourceEngine
+from app.core.knowledge.sources.bphs_yogas import get_all_yogas
 
 
 class ContextualFactor(Enum):

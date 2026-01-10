@@ -17,11 +17,11 @@ from typing import List, Dict, Any, Optional, Tuple
 from enum import Enum
 from dataclasses import dataclass
 
-from backend.app.core.knowledge.sources.bphs_planets_in_houses import (
+from app.core.knowledge.sources.bphs_planets_in_houses import (
     get_planet_in_house_interpretation,
     BPHS_PLANETS_IN_HOUSES
 )
-from backend.app.core.knowledge.sources.saravali_planets_in_houses import (
+from app.core.knowledge.sources.saravali_planets_in_houses import (
     get_saravali_interpretation,
     SARAVALI_PLANETS_IN_HOUSES,
     SARAVALI_METADATA

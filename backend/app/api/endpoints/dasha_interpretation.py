@@ -14,8 +14,8 @@ from datetime import datetime
 from fastapi import APIRouter, HTTPException, Query, Path
 from pydantic import BaseModel, Field
 
-from backend.app.core.knowledge.sources.jataka_parijata_dashas import get_dasha_interpretation
-from backend.app.core.knowledge.engine.contextual_synthesis_engine import ContextualSynthesisEngine
+from app.core.knowledge.sources.jataka_parijata_dashas import get_dasha_interpretation
+from app.core.knowledge.engine.contextual_synthesis_engine import ContextualSynthesisEngine
 
 router = APIRouter()
 

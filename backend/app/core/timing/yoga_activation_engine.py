@@ -16,7 +16,7 @@ from typing import List, Dict, Any, Optional
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 
-from backend.app.core.knowledge.sources.bphs_yogas import get_all_yogas
+from app.core.knowledge.sources.bphs_yogas import get_all_yogas
 
 
 # Vimshottari Dasha durations (in years)
