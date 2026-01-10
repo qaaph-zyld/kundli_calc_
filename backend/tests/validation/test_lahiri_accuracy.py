@@ -11,7 +11,8 @@ Tolerance: <0.001° (3.6 arcseconds)
 
 import pytest
 from datetime import datetime
-from backend.app.core.calculations.ayanamsa import get_ayanamsa
+import swisseph as swe
+from app.core.calculations.ayanamsa import EnhancedAyanamsaManager
 
 
 class TestLahiriAccuracy:
@@ -23,7 +24,8 @@ class TestLahiriAccuracy:
         # Lahiri ayanamsa ≈ 23.85° on 2000-01-01
         
         date = datetime(2000, 1, 1, 12, 0, 0)
-        ayanamsa = get_ayanamsa(date, ayanamsa_type="LAHIRI")
+        manager = EnhancedAyanamsaManager()
+        ayanamsa = manager.calculate_precise_ayanamsa(date, system='LAHIRI')
         
         # Expected value (from Swiss Ephemeris)
         expected = 23.85  # Approximate
@@ -38,7 +40,8 @@ class TestLahiriAccuracy:
         # Lahiri ayanamsa ≈ 24.19° on 2026-01-09
         
         date = datetime(2026, 1, 9, 12, 0, 0)
-        ayanamsa = get_ayanamsa(date, ayanamsa_type="LAHIRI")
+        manager = EnhancedAyanamsaManager()
+        ayanamsa = manager.calculate_precise_ayanamsa(date, system='LAHIRI')
         
         expected = 24.19  # Approximate
         
@@ -48,7 +51,8 @@ class TestLahiriAccuracy:
     def test_lahiri_1950(self):
         """Test Lahiri ayanamsa for 1950"""
         date = datetime(1950, 1, 1, 12, 0, 0)
-        ayanamsa = get_ayanamsa(date, ayanamsa_type="LAHIRI")
+        manager = EnhancedAyanamsaManager()
+        ayanamsa = manager.calculate_precise_ayanamsa(date, system='LAHIRI')
         
         # Expected ≈ 23.15°
         expected = 23.15
@@ -60,8 +64,9 @@ class TestLahiriAccuracy:
         date1 = datetime(2000, 1, 1)
         date2 = datetime(2026, 1, 1)
         
-        ayanamsa1 = get_ayanamsa(date1, ayanamsa_type="LAHIRI")
-        ayanamsa2 = get_ayanamsa(date2, ayanamsa_type="LAHIRI")
+        manager = EnhancedAyanamsaManager()
+        ayanamsa1 = manager.calculate_precise_ayanamsa(date1, system='LAHIRI')
+        ayanamsa2 = manager.calculate_precise_ayanamsa(date2, system='LAHIRI')
         
         # Ayanamsa should increase (precession)
         assert ayanamsa2 > ayanamsa1, \

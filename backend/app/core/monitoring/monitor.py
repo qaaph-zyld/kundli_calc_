@@ -7,8 +7,33 @@ from datetime import datetime, timedelta
 import time
 import psutil
 import logging
+from enum import Enum
 from pydantic import BaseModel, Field
 from app.core.cache import cache
+
+class AlertLevel(str, Enum):
+    """Alert severity levels"""
+    INFO = "info"
+    WARNING = "warning"
+    ERROR = "error"
+    CRITICAL = "critical"
+
+class MetricCategory(str, Enum):
+    """Metric categories"""
+    PERFORMANCE = "performance"
+    CALCULATION = "calculation"
+    API = "api"
+    DATABASE = "database"
+    CACHE = "cache"
+    SYSTEM = "system"
+
+class Alert(BaseModel):
+    """Alert model"""
+    level: AlertLevel
+    message: str
+    source: str
+    timestamp: datetime = Field(default_factory=datetime.utcnow)
+    metadata: Dict[str, Any] = Field(default_factory=dict)
 
 class MetricType(str):
     """Metric types"""

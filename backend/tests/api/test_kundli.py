@@ -308,30 +308,37 @@ async def test_kundli_security():
     )
     return await test_framework.run_case(case)
 
-# Test suite
-test_suite = TestSuite(
-    name="Kundli API Test Suite",
-    description="Comprehensive tests for Kundli calculation API",
-    cases=[
-        test_calculate_kundli_valid(),
-        test_calculate_kundli_invalid(),
-        test_kundli_pattern_flow(),
-        test_kundli_e2e_flow(),
-        test_kundli_performance(),
-        test_kundli_security()
-    ],
-    metadata={
-        "version": "1.0.0",
-        "owner": "QA Team",
-        "priority": "Critical"
-    }
-)
+# Test suite - Commented out, pytest discovers tests automatically
+# test_suite = TestSuite(
+#     name="Kundli API Test Suite",
+#     description="Comprehensive tests for Kundli calculation API",
+#     cases=[
+#         test_calculate_kundli_valid(),
+#         test_calculate_kundli_invalid(),
+#         test_kundli_pattern_flow(),
+#         test_kundli_e2e_flow(),
+#         test_kundli_performance(),
+#         test_kundli_security()
+#     ],
+#     metadata={
+#         "version": "1.0.0",
+#         "author": "Kundli Dev Team",
+#         "created": datetime.utcnow()
+#     }
+# )
 
 # Run tests
 if __name__ == "__main__":
     import asyncio
-    results = asyncio.run(test_framework.run_suite(test_suite))
-    
+    # results = asyncio.run(test_framework.run_suite(test_suite))
+    # 
+    # # Print results
+    # for result in results:
+    #     print(f"\nTest: {result.case.name}")
+    #     print(f"Status: {result.status}")
+    #     print(f"Duration: {result.duration:.3f}s")
+    #     if result.error:
+    #         print(f"Error: {result.error}")
     # Print results
     for result in results:
         print(f"\nTest: {result.case.name}")

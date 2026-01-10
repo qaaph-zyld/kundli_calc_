@@ -8,14 +8,18 @@ from app.models.base import BaseModel
 class User(BaseModel):
     """User model."""
 
-    __tablename__ = "users"
-    __table_args__ = {'extend_existing': True}
-
-    email = Column(String(255), unique=True, nullable=False, index=True)
-    hashed_password = Column(String(255), nullable=False)
-    full_name = Column(String(255))
-    last_login = Column(DateTime(timezone=True))
-    is_active = Column(Boolean, default=True)
+    metadata = MetaData()
+    __table__ = Table(
+        'users',
+        metadata,
+        extend_existing=True,
+        Column('email', String(255), unique=True, nullable=False, index=True),
+        Column('hashed_password', String(255), nullable=False),
+        Column('full_name', String(255)),
+        Column('last_login', DateTime(timezone=True)),
+        Column('is_active', Boolean, default=True),
+        Column('is_superuser', Boolean, default=False)
+    )
     is_superuser = Column(Boolean, default=False)
 
     # Relationships

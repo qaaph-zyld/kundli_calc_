@@ -5,7 +5,7 @@ Gate: GATE_4
 Version: 1.0.0
 """
 
-from typing import Dict, List, Optional, Any, Union, Type, TypeVar
+from typing import Dict, List, Optional, Any, Union, Type, TypeVar, Tuple
 from datetime import datetime
 from enum import Enum
 import json
@@ -15,8 +15,7 @@ from pydantic import (
     Field,
     validator,
     ValidationError,
-    create_model,
-    constr
+    create_model
 )
 from dataclasses import dataclass, field
 import jsonschema

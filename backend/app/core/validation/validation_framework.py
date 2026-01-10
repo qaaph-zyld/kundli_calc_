@@ -12,6 +12,12 @@ from pydantic import BaseModel, Field, validator
 import json
 from app.core.cache import redis_cache
 
+class ValidationType(str, Enum):
+    """Validation type enumeration"""
+    STRICT = "strict"
+    LENIENT = "lenient"
+    WARNING_ONLY = "warning_only"
+
 class ValidationLevel(str, Enum):
     """Validation levels"""
     STRICT = "STRICT"
@@ -52,6 +58,13 @@ class ValidationRule(BaseModel):
     severity: str = "ERROR"
     enabled: bool = True
     parameters: Dict[str, Any] = Field(default_factory=dict)
+
+def validate_input(data: Dict[str, Any], strict: bool = True) -> ValidationResult:
+    """Helper function for input validation"""
+    framework = ValidationFramework()
+    level = ValidationLevel.STRICT if strict else ValidationLevel.STANDARD
+    import asyncio
+    return asyncio.run(framework.validate(data, level, ValidationScope.INPUT))
 
 class ValidationFramework:
     """Enhanced validation framework for Kundli calculations"""
