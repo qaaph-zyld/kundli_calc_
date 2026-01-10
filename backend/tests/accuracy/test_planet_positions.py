@@ -12,7 +12,7 @@ from pathlib import Path
 from datetime import datetime
 import swisseph as swe
 
-from app.core.calculations.chart_calculator import ChartCalculator
+from app.core.calculations.engine_core import VedicChartEngine
 from app.core.calculations.ayanamsa import EnhancedAyanamsaManager
 
 
@@ -53,11 +53,12 @@ def test_planet_positions_match_jhora(chart_name):
     jd = swe.julday(dt.year, dt.month, dt.day, 
                     dt.hour + dt.minute/60.0 + dt.second/3600.0)
     
-    calculator = ChartCalculator()
-    chart_data = calculator.calculate_chart(
-        jd=jd,
-        latitude=birth_data['latitude'],
-        longitude=birth_data['longitude']
+    engine = VedicChartEngine()
+    chart_data = engine.calculate(
+        jd,
+        birth_data['latitude'],
+        birth_data['longitude'],
+        ayanamsa_id=1
     )
     our_planets = chart_data['planets']
     
@@ -110,11 +111,12 @@ def test_tropical_to_sidereal_conversion():
     """
     jd = swe.julday(2000, 1, 1, 0.0)
     
-    calculator = ChartCalculator()
-    chart_data = calculator.calculate_chart(
-        jd=jd,
-        latitude=28.6139,
-        longitude=77.2090
+    engine = VedicChartEngine()
+    chart_data = engine.calculate(
+        jd,
+        28.6139,
+        77.2090,
+        ayanamsa_id=1
     )
     planets = chart_data['planets']
     
@@ -148,14 +150,15 @@ def test_rahu_ketu_opposition():
         (2026, 1, 10, 0.0)
     ]
     
-    calculator = ChartCalculator()
+    engine = VedicChartEngine()
     
     for year, month, day, hour in test_dates:
         jd = swe.julday(year, month, day, hour)
-        chart_data = calculator.calculate_chart(
-            jd=jd,
-            latitude=28.6139,
-            longitude=77.2090
+        chart_data = engine.calculate(
+            jd,
+            28.6139,
+            77.2090,
+            ayanamsa_id=1
         )
         planets = chart_data['planets']
         
@@ -185,16 +188,17 @@ def test_retrograde_detection():
     if not test_cases:
         pytest.skip("Retrograde test cases need to be populated with verified dates")
     
-    calculator = ChartCalculator()
+    engine = VedicChartEngine()
     
     for case in test_cases:
         year, month, day, hour = case["date"]
         jd = swe.julday(year, month, day, hour)
         
-        chart_data = calculator.calculate_chart(
-            jd=jd,
-            latitude=28.6139,
-            longitude=77.2090
+        chart_data = engine.calculate(
+            jd,
+            28.6139,
+            77.2090,
+            ayanamsa_id=1
         )
         planets = chart_data['planets']
         planet_data = planets[case["planet"]]

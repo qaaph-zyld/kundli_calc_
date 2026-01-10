@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 from datetime import datetime, timedelta
 
-from app.core.calculations.vimshottari_dasha import VimshottariDasha
+from app.core.calculations.dasha_system import VimshottariDashaCalculator
 
 
 REFERENCE_DIR = Path(__file__).parent / "reference_charts"
@@ -47,7 +47,7 @@ def test_dasha_birth_balance(chart_name):
     birth_data = reference["birth_data"]
     dt = datetime.fromisoformat(birth_data["datetime"])
     
-    dasha_calc = VimshottariDasha()
+    dasha_calc = VimshottariDashaCalculator()
     our_balance = dasha_calc.calculate_birth_balance(
         dt,
         birth_data["latitude"],
@@ -88,7 +88,7 @@ def test_mahadasha_periods(chart_name):
     birth_data = reference["birth_data"]
     dt = datetime.fromisoformat(birth_data["datetime"])
     
-    dasha_calc = VimshottariDasha()
+    dasha_calc = VimshottariDashaCalculator()
     our_dashas = dasha_calc.calculate_all_mahadashas(
         dt,
         birth_data["latitude"],
@@ -138,7 +138,7 @@ def test_dasha_sequence_order():
     dt = datetime(1990, 5, 15, 10, 30, 0)
     lat, lon = 28.6139, 77.2090
     
-    dasha_calc = VimshottariDasha()
+    dasha_calc = VimshottariDashaCalculator()
     dashas = dasha_calc.calculate_all_mahadashas(dt, lat, lon)
     
     our_sequence = [d["planet"] for d in dashas]
@@ -178,7 +178,7 @@ def test_dasha_durations():
     dt = datetime(2000, 1, 1, 0, 0, 0)
     lat, lon = 28.6139, 77.2090
     
-    dasha_calc = VimshottariDasha()
+    dasha_calc = VimshottariDashaCalculator()
     dashas = dasha_calc.calculate_all_mahadashas(dt, lat, lon)
     
     tolerance_days = 1
