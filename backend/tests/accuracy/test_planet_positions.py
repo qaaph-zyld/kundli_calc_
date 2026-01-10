@@ -12,7 +12,7 @@ from pathlib import Path
 from datetime import datetime
 import swisseph as swe
 
-from app.core.calculations.planets import PlanetCalculator
+from app.core.calculations.chart_calculator import ChartCalculator
 from app.core.calculations.ayanamsa import EnhancedAyanamsaManager
 
 
@@ -53,8 +53,13 @@ def test_planet_positions_match_jhora(chart_name):
     jd = swe.julday(dt.year, dt.month, dt.day, 
                     dt.hour + dt.minute/60.0 + dt.second/3600.0)
     
-    calculator = PlanetCalculator()
-    our_planets = calculator.calculate_all_planets(jd)
+    calculator = ChartCalculator()
+    chart_data = calculator.calculate_chart(
+        jd=jd,
+        latitude=birth_data['latitude'],
+        longitude=birth_data['longitude']
+    )
+    our_planets = chart_data['planets']
     
     ayanamsa_mgr = EnhancedAyanamsaManager()
     ayanamsa = ayanamsa_mgr.get_ayanamsa(jd, ayanamsa_id=1)
@@ -105,8 +110,13 @@ def test_tropical_to_sidereal_conversion():
     """
     jd = swe.julday(2000, 1, 1, 0.0)
     
-    calculator = PlanetCalculator()
-    planets = calculator.calculate_all_planets(jd)
+    calculator = ChartCalculator()
+    chart_data = calculator.calculate_chart(
+        jd=jd,
+        latitude=28.6139,
+        longitude=77.2090
+    )
+    planets = chart_data['planets']
     
     ayanamsa_mgr = EnhancedAyanamsaManager()
     ayanamsa = ayanamsa_mgr.get_ayanamsa(jd, ayanamsa_id=1)
@@ -138,11 +148,16 @@ def test_rahu_ketu_opposition():
         (2026, 1, 10, 0.0)
     ]
     
-    calculator = PlanetCalculator()
+    calculator = ChartCalculator()
     
     for year, month, day, hour in test_dates:
         jd = swe.julday(year, month, day, hour)
-        planets = calculator.calculate_all_planets(jd)
+        chart_data = calculator.calculate_chart(
+            jd=jd,
+            latitude=28.6139,
+            longitude=77.2090
+        )
+        planets = chart_data['planets']
         
         rahu_long = planets["Rahu"]["longitude"]
         ketu_long = planets["Ketu"]["longitude"]
@@ -170,13 +185,18 @@ def test_retrograde_detection():
     if not test_cases:
         pytest.skip("Retrograde test cases need to be populated with verified dates")
     
-    calculator = PlanetCalculator()
+    calculator = ChartCalculator()
     
     for case in test_cases:
         year, month, day, hour = case["date"]
         jd = swe.julday(year, month, day, hour)
         
-        planets = calculator.calculate_all_planets(jd)
+        chart_data = calculator.calculate_chart(
+            jd=jd,
+            latitude=28.6139,
+            longitude=77.2090
+        )
+        planets = chart_data['planets']
         planet_data = planets[case["planet"]]
         
         is_retrograde = planet_data.get("is_retrograde", False)
