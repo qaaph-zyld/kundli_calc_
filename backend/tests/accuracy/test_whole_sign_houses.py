@@ -51,7 +51,7 @@ class TestWholeSignHouses:
         latitude = 28.6139
         longitude = 77.2090
         
-        result = calculator.calculate_houses(date, latitude, longitude, house_system='W')
+        result = calculator.calculate_houses(date, latitude, longitude, house_system='WHOLE_SIGN')
         
         ascendant = result['ascendant']
         first_house_cusp = result['cusps'][0]
@@ -71,7 +71,7 @@ class TestWholeSignHouses:
         latitude = 28.6139
         longitude = 77.2090
         
-        result = calculator.calculate_houses(date, latitude, longitude, house_system='W')
+        result = calculator.calculate_houses(date, latitude, longitude, house_system='WHOLE_SIGN')
         cusps = result['cusps'][:12]
         
         # Each house should be exactly 30° after the previous
@@ -91,7 +91,7 @@ class TestWholeSignHouses:
         latitude = 28.6139
         longitude = 77.2090
         
-        result = calculator.calculate_houses(date, latitude, longitude, house_system='W')
+        result = calculator.calculate_houses(date, latitude, longitude, house_system='WHOLE_SIGN')
         cusps = result['cusps'][:12]
         
         # 12 houses should span 360° total
@@ -117,8 +117,8 @@ class TestWholeSignHouses:
         latitude = 28.6139
         longitude = 77.2090
         
-        result1 = calculator.calculate_houses(date1, latitude, longitude, house_system='W')
-        result2 = calculator.calculate_houses(date2, latitude, longitude, house_system='W')
+        result1 = calculator.calculate_houses(date1, latitude, longitude, house_system='WHOLE_SIGN')
+        result2 = calculator.calculate_houses(date2, latitude, longitude, house_system='WHOLE_SIGN')
         
         # Whole Sign houses should be identical if ascendant is in same sign
         # (This test may fail if ascendant changes sign during the day - that's expected)
