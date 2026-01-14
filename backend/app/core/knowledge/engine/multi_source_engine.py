@@ -26,6 +26,14 @@ from app.core.knowledge.sources.saravali_planets_in_houses import (
     SARAVALI_PLANETS_IN_HOUSES,
     SARAVALI_METADATA
 )
+from app.core.knowledge.sources.phaladeepika_planets_in_houses import (
+    get_phaladeepika_interpretation,
+    PHALADEEPIKA_PLANETS_IN_HOUSES
+)
+from app.core.knowledge.sources.hora_sara_planets_in_houses import (
+    get_hora_sara_interpretation,
+    HORA_SARA_PLANETS_IN_HOUSES
+)
 
 
 class AgreementLevel(str, Enum):
@@ -45,8 +53,7 @@ class SourceComparison:
     sources_available: List[str]
     agreement_level: AgreementLevel
     common_themes: List[str]
-    unique_to_bphs: List[str]
-    unique_to_saravali: List[str]
+    unique_insights: Dict[str, List[str]]  # Changed from separate fields per source
     contradictions: List[Dict[str, str]]
     synthesis: str
     confidence_score: float
@@ -64,15 +71,27 @@ class MultiSourceEngine:
     """
     
     def __init__(self):
-        """Initialize the multi-source engine"""
+        """Initialize the multi-source engine with all available sources"""
         self.sources = {
             'BPHS': {
                 'data': BPHS_PLANETS_IN_HOUSES,
-                'get_func': get_planet_in_house_interpretation
+                'get_func': get_planet_in_house_interpretation,
+                'metadata': {'translator': 'R. Santhanam', 'edition': '1984', 'chapter': 24}
             },
             'Saravali': {
                 'data': SARAVALI_PLANETS_IN_HOUSES,
-                'get_func': get_saravali_interpretation
+                'get_func': get_saravali_interpretation,
+                'metadata': SARAVALI_METADATA
+            },
+            'Phaladeepika': {
+                'data': PHALADEEPIKA_PLANETS_IN_HOUSES,
+                'get_func': get_phaladeepika_interpretation,
+                'metadata': {'translator': 'V. Subrahmanya Sastri', 'edition': '1963'}
+            },
+            'Hora Sara': {
+                'data': HORA_SARA_PLANETS_IN_HOUSES,
+                'get_func': get_hora_sara_interpretation,
+                'metadata': {'translator': 'R. Santhanam', 'edition': '1996'}
             }
         }
     
@@ -89,11 +108,10 @@ class MultiSourceEngine:
         """
         available = []
         
-        if planet in BPHS_PLANETS_IN_HOUSES and house in BPHS_PLANETS_IN_HOUSES[planet]:
-            available.append('BPHS')
-        
-        if planet in SARAVALI_PLANETS_IN_HOUSES and house in SARAVALI_PLANETS_IN_HOUSES[planet]:
-            available.append('Saravali')
+        for source_name, source_info in self.sources.items():
+            source_data = source_info['data']
+            if planet in source_data and house in source_data[planet]:
+                available.append(source_name)
         
         return available
     
@@ -116,17 +134,15 @@ class MultiSourceEngine:
         if not sources_available:
             raise ValueError(f"No sources available for {planet} in house {house}")
         
-        # Get interpretations from available sources
+        # Get interpretations from all available sources dynamically
         interpretations = {}
         
-        if 'BPHS' in sources_available:
-            interpretations['BPHS'] = get_planet_in_house_interpretation(planet, house)
+        for source_name in sources_available:
+            get_func = self.sources[source_name]['get_func']
+            interpretations[source_name] = get_func(planet, house)
         
-        if 'Saravali' in sources_available:
-            interpretations['Saravali'] = get_saravali_interpretation(planet, house)
-        
-        # Analyze agreements and contradictions
-        common_themes, unique_bphs, unique_saravali, contradictions = self._analyze_interpretations(
+        # Analyze agreements and contradictions across all sources
+        common_themes, unique_insights, contradictions = self._analyze_interpretations(
             interpretations
         )
         
@@ -151,8 +167,7 @@ class MultiSourceEngine:
             sources_available=sources_available,
             agreement_level=agreement_level,
             common_themes=common_themes,
-            unique_to_bphs=unique_bphs,
-            unique_to_saravali=unique_saravali,
+            unique_insights=unique_insights,
             contradictions=contradictions,
             synthesis=synthesis,
             confidence_score=confidence
@@ -161,75 +176,88 @@ class MultiSourceEngine:
     def _analyze_interpretations(
         self, 
         interpretations: Dict[str, Dict[str, Any]]
-    ) -> Tuple[List[str], List[str], List[str], List[Dict[str, str]]]:
+    ) -> Tuple[List[str], Dict[str, List[str]], List[Dict[str, str]]]:
         """
-        Analyze interpretations to find common themes and contradictions.
+        Analyze interpretations to find common themes and contradictions across N sources.
         
         Returns:
-            Tuple of (common_themes, unique_to_bphs, unique_to_saravali, contradictions)
+            Tuple of (common_themes, unique_insights_by_source, contradictions)
         """
         common_themes = []
-        unique_bphs = []
-        unique_saravali = []
+        unique_insights = {source: [] for source in interpretations.keys()}
         contradictions = []
         
         # If only one source, return its effects as unique
         if len(interpretations) == 1:
             source_name = list(interpretations.keys())[0]
             effects = interpretations[source_name].get('detailed_effects', [])
-            if source_name == 'BPHS':
-                unique_bphs = effects
-            else:
-                unique_saravali = effects
-            return common_themes, unique_bphs, unique_saravali, contradictions
+            unique_insights[source_name] = effects[:5]
+            return common_themes, unique_insights, contradictions
         
-        # Compare BPHS and Saravali
-        bphs_data = interpretations.get('BPHS', {})
-        saravali_data = interpretations.get('Saravali', {})
+        # Collect all effects from all sources
+        all_effects_by_source = {}
+        for source_name, data in interpretations.items():
+            positive = set(data.get('positive_effects', []))
+            challenging = set(data.get('challenging_effects', []))
+            all_effects_by_source[source_name] = positive | challenging
         
-        bphs_positive = set(bphs_data.get('positive_effects', []))
-        saravali_positive = set(saravali_data.get('positive_effects', []))
+        # Find common keywords across ALL sources
+        if len(all_effects_by_source) >= 2:
+            # Start with first source's effects
+            source_names = list(all_effects_by_source.keys())
+            common_keywords = self._find_common_keywords_multi(
+                [all_effects_by_source[s] for s in source_names]
+            )
+            common_themes = [f"All sources emphasize: {theme}" for theme in common_keywords[:5]]
         
-        bphs_challenging = set(bphs_data.get('challenging_effects', []))
-        saravali_challenging = set(saravali_data.get('challenging_effects', []))
+        # Identify unique effects per source (effects not found in other sources)
+        for source_name, effects in all_effects_by_source.items():
+            other_effects = set()
+            for other_source, other_source_effects in all_effects_by_source.items():
+                if other_source != source_name:
+                    other_effects |= other_source_effects
+            
+            # Effects unique to this source
+            unique = list(effects - other_effects)[:3]
+            if unique:
+                unique_insights[source_name] = unique
         
-        # Find common positive themes (semantic matching would be better, but using keywords for now)
-        common_keywords = self._find_common_keywords(
-            bphs_positive | bphs_challenging,
-            saravali_positive | saravali_challenging
-        )
-        common_themes = [f"Both sources emphasize: {theme}" for theme in common_keywords[:5]]
+        # Look for contradictions across all sources
+        source_names = list(interpretations.keys())
+        for i, source1 in enumerate(source_names):
+            for source2 in source_names[i+1:]:
+                positive1 = set(interpretations[source1].get('positive_effects', []))
+                challenging2 = set(interpretations[source2].get('challenging_effects', []))
+                
+                for effect1 in positive1:
+                    for effect2 in challenging2:
+                        if self._are_contradictory(effect1, effect2):
+                            contradictions.append({
+                                source1: effect1,
+                                source2: effect2
+                            })
         
-        # Identify unique effects
-        unique_bphs = list(bphs_positive - saravali_positive)[:3]
-        unique_saravali = list(saravali_positive - bphs_positive)[:3]
-        
-        # Look for contradictions (positive in one, challenging in another)
-        for bphs_effect in bphs_positive:
-            for saravali_effect in saravali_challenging:
-                if self._are_contradictory(bphs_effect, saravali_effect):
-                    contradictions.append({
-                        'BPHS': bphs_effect,
-                        'Saravali': saravali_effect
-                    })
-        
-        return common_themes, unique_bphs, unique_saravali, contradictions
+        return common_themes, unique_insights, contradictions
     
-    def _find_common_keywords(self, set1: set, set2: set) -> List[str]:
-        """Find common keywords between two sets of effects"""
+    def _find_common_keywords_multi(self, effect_sets: List[set]) -> List[str]:
+        """Find common keywords across multiple sets of effects"""
         keywords = []
         
         # Simple keyword extraction (could be enhanced with NLP)
         important_words = {
             'wealth', 'health', 'career', 'marriage', 'children', 'education',
             'happiness', 'success', 'fame', 'property', 'vehicles', 'wisdom',
-            'leadership', 'courage', 'intelligence', 'spiritual', 'fortune'
+            'leadership', 'courage', 'intelligence', 'spiritual', 'fortune',
+            'longevity', 'enemies', 'father', 'mother', 'siblings'
         }
         
         for word in important_words:
-            found_in_1 = any(word in str(item).lower() for item in set1)
-            found_in_2 = any(word in str(item).lower() for item in set2)
-            if found_in_1 and found_in_2:
+            # Check if word appears in ALL effect sets
+            found_in_all = all(
+                any(word in str(item).lower() for item in effect_set)
+                for effect_set in effect_sets
+            )
+            if found_in_all:
                 keywords.append(word)
         
         return keywords
@@ -282,56 +310,47 @@ class MultiSourceEngine:
     ) -> str:
         """Synthesize a unified interpretation from multiple sources"""
         synthesis_parts = []
+        num_sources = len(interpretations)
         
         # Start with planet and house
         synthesis_parts.append(
-            f"For {planet} in the {house}th house, classical texts provide the following synthesis:"
+            f"For {planet} in the {house}th house, {num_sources} classical text(s) provide the following synthesis:"
         )
         
         # Add common themes
         if common_themes:
             synthesis_parts.append(
-                f"\n\nBoth BPHS and Saravali agree on key themes including {', '.join(common_themes[:3])}."
+                f"\n\nAll sources agree on key themes: {', '.join(common_themes[:5])}."
             )
         
-        # Add source-specific insights
-        if 'BPHS' in interpretations:
-            bphs_trans = interpretations['BPHS'].get('translation', '')
-            if bphs_trans:
-                synthesis_parts.append(
-                    f"\n\nBPHS (Ch. 24) states: '{bphs_trans[:150]}...'"
-                )
-        
-        if 'Saravali' in interpretations:
-            saravali_trans = interpretations['Saravali'].get('translation', '')
-            if saravali_trans:
-                synthesis_parts.append(
-                    f"\n\nSaravali adds: '{saravali_trans[:150]}...'"
-                )
-        
-        if 'Phaladeepika' in interpretations:
-            phaladeepika_data = PHALADEEPIKA_PLANETS_IN_HOUSES.get(planet, {}).get(house)
-            if phaladeepika_data:
-                sources.append("Phaladeepika")
-        
-        hora_sara_data = HORA_SARA_PLANETS_IN_HOUSES.get(planet, {}).get(house)
-        if hora_sara_data:
-            sources.append("Hora Sara")
-        
-        return sources
-        
-        if 'Phaladeepika' in interpretations:
-            phaladeepika_trans = interpretations['Phaladeepika'].get('translation', '')
-            if phaladeepika_trans:
-                synthesis_parts.append(
-                    f"\n\nPhaladeepika mentions: '{phaladeepika_trans[:150]}...'"
-                )
+        # Add each source's translation in order of authority
+        source_order = ['BPHS', 'Saravali', 'Phaladeepika', 'Hora Sara']
+        for source_name in source_order:
+            if source_name in interpretations:
+                trans = interpretations[source_name].get('translation', '')
+                if trans:
+                    chapter_info = ""
+                    if source_name == 'BPHS':
+                        chapter_info = "Ch. 24"
+                    elif source_name == 'Saravali':
+                        verses = interpretations[source_name].get('verses', '')
+                        chapter_info = verses.split(',')[0] if verses else ""
+                    elif source_name == 'Phaladeepika':
+                        chapter = interpretations[source_name].get('chapter', '')
+                        chapter_info = f"Ch. {chapter}" if chapter else ""
+                    elif source_name == 'Hora Sara':
+                        chapter = interpretations[source_name].get('chapter', '')
+                        chapter_info = f"Ch. {chapter}" if chapter else ""
+                    
+                    synthesis_parts.append(
+                        f"\n\n{source_name} ({chapter_info}): '{trans[:120]}{'...' if len(trans) > 120 else ''}"
+                    )
         
         # Address contradictions if any
         if contradictions:
             synthesis_parts.append(
-                f"\n\nNote: Sources show some variation in interpretation. "
-                f"BPHS, Saravali and Phaladeepika provide complementary perspectives. "
+                f"\n\nNote: Sources show some variation in interpretation ({len(contradictions)} point(s) of divergence). "
+                f"Classical texts provide complementary perspectives. "
                 f"Individual chart context determines which interpretation manifests most strongly."
             )
         
@@ -392,12 +411,10 @@ class MultiSourceEngine:
             'interpretations': {}
         }
         
-        # Get individual source interpretations
-        if 'BPHS' in sources_available:
-            result['interpretations']['BPHS'] = get_planet_in_house_interpretation(planet, house)
-        
-        if 'Saravali' in sources_available:
-            result['interpretations']['Saravali'] = get_saravali_interpretation(planet, house)
+        # Get individual source interpretations dynamically
+        for source_name in sources_available:
+            get_func = self.sources[source_name]['get_func']
+            result['interpretations'][source_name] = get_func(planet, house)
         
         # Add comparison if requested and multiple sources available
         if include_comparison and len(sources_available) > 1:
@@ -405,8 +422,7 @@ class MultiSourceEngine:
             result['comparison'] = {
                 'agreement_level': comparison.agreement_level.value,
                 'common_themes': comparison.common_themes,
-                'unique_to_bphs': comparison.unique_to_bphs,
-                'unique_to_saravali': comparison.unique_to_saravali,
+                'unique_insights': comparison.unique_insights,
                 'contradictions': comparison.contradictions,
                 'synthesis': comparison.synthesis,
                 'confidence_score': comparison.confidence_score

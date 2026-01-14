@@ -1190,6 +1190,194 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
             ],
             "timing": "Spiritual growth and wisdom during Jupiter dasha"
         },
+        2: {
+            "chapter": 14,
+            "verses": "14.4",
+            "translation": "Jupiter in the 2nd house makes one wealthy, learned, eloquent in speech, handsome-faced, and blessed with good food and family.",
+            "detailed_effects": [
+                "Substantial wealth accumulation",
+                "Eloquent and wise speech",
+                "Beautiful facial features",
+                "Good education and learning",
+                "Happy family life",
+                "Enjoyment of good food"
+            ],
+            "positive_effects": [
+                "Wealth and prosperity",
+                "Eloquent speech",
+                "Beautiful face",
+                "Learning and wisdom",
+                "Family happiness"
+            ],
+            "challenging_effects": [
+                "May overindulge in food",
+                "Can be overly optimistic about finances"
+            ],
+            "timing": "Wealth increases during Jupiter dasha",
+            "tags": ["wealth", "speech", "family", "learning"],
+            "confidence": "high"
+        },
+        3: {
+            "chapter": 14,
+            "verses": "14.5",
+            "translation": "Jupiter in the 3rd makes one courageous, wealthy, intelligent, but with limited happiness from siblings.",
+            "detailed_effects": [
+                "Courage and initiative",
+                "Wealth through self-effort",
+                "Intelligence and wisdom",
+                "Limited sibling harmony",
+                "Success in communications",
+                "Teaching abilities"
+            ],
+            "positive_effects": [
+                "Courage and bravery",
+                "Wealth through effort",
+                "Intelligence",
+                "Communication skills",
+                "Teaching talents"
+            ],
+            "challenging_effects": [
+                "Limited happiness from siblings",
+                "Sibling conflicts possible"
+            ],
+            "timing": "Courage and wealth develop during Jupiter dasha",
+            "tags": ["courage", "siblings", "wealth", "intelligence"],
+            "confidence": "high"
+        },
+        4: {
+            "chapter": 14,
+            "verses": "14.6",
+            "translation": "Jupiter in the 4th bestows happiness, property, vehicles, learning, and blessings from mother.",
+            "detailed_effects": [
+                "Domestic happiness and peace",
+                "Property and land ownership",
+                "Vehicles and conveyances",
+                "Good education",
+                "Mother's blessings",
+                "Comfortable home life"
+            ],
+            "positive_effects": [
+                "Domestic happiness",
+                "Property and vehicles",
+                "Good education",
+                "Mother's grace",
+                "Comfortable living"
+            ],
+            "challenging_effects": [
+                "May be too attached to comforts"
+            ],
+            "timing": "Property gains during Jupiter dasha",
+            "tags": ["property", "mother", "education", "happiness"],
+            "confidence": "high"
+        },
+        5: {
+            "chapter": 14,
+            "verses": "14.7",
+            "translation": "Jupiter in the 5th gives good children, intelligence, wisdom, success in speculation, and spiritual knowledge.",
+            "detailed_effects": [
+                "Blessed with intelligent children",
+                "Wisdom and good judgment",
+                "Success in speculation",
+                "Spiritual knowledge",
+                "Creative intelligence",
+                "Good fortune"
+            ],
+            "positive_effects": [
+                "Good children",
+                "Intelligence and wisdom",
+                "Speculative gains",
+                "Spiritual knowledge",
+                "Fortune"
+            ],
+            "challenging_effects": [
+                "May be overly optimistic in speculation"
+            ],
+            "timing": "Children during Jupiter dasha, spiritual growth",
+            "tags": ["children", "intelligence", "speculation", "spirituality"],
+            "confidence": "high"
+        },
+        6: {
+            "chapter": 14,
+            "verses": "14.8",
+            "translation": "Jupiter in the 6th destroys enemies, brings fame, but gives limited happiness from children and some financial challenges.",
+            "detailed_effects": [
+                "Victory over enemies",
+                "Fame and recognition",
+                "Success in service professions",
+                "Limited happiness from children",
+                "Some financial difficulties",
+                "Health generally good"
+            ],
+            "positive_effects": [
+                "Defeats enemies",
+                "Fame",
+                "Success in service",
+                "Good health",
+                "Victory in disputes"
+            ],
+            "challenging_effects": [
+                "Limited happiness from children",
+                "Financial challenges",
+                "Work-related stress"
+            ],
+            "timing": "Victory over enemies during Jupiter dasha",
+            "tags": ["enemies", "fame", "service", "health"],
+            "confidence": "high"
+        },
+        7: {
+            "chapter": 14,
+            "verses": "14.9",
+            "translation": "Jupiter in the 7th bestows a beautiful and virtuous spouse, happiness in marriage, wealth, and success in partnerships.",
+            "detailed_effects": [
+                "Beautiful and virtuous spouse",
+                "Marital happiness",
+                "Wealth through partnerships",
+                "Success in business partnerships",
+                "Diplomatic abilities",
+                "Good fortune"
+            ],
+            "positive_effects": [
+                "Excellent marriage",
+                "Beautiful spouse",
+                "Partnership success",
+                "Wealth",
+                "Diplomatic skills"
+            ],
+            "challenging_effects": [
+                "May have high expectations from spouse"
+            ],
+            "timing": "Marriage during Jupiter dasha, partnership success",
+            "tags": ["marriage", "partnerships", "wealth", "spouse"],
+            "confidence": "high"
+        },
+        8: {
+            "chapter": 14,
+            "verses": "14.10",
+            "translation": "Jupiter in the 8th gives longevity, interest in occult, some financial challenges, but spiritual wisdom and transformative experiences.",
+            "detailed_effects": [
+                "Long life",
+                "Interest in occult sciences",
+                "Financial ups and downs",
+                "Spiritual wisdom",
+                "Transformative experiences",
+                "Research abilities"
+            ],
+            "positive_effects": [
+                "Longevity",
+                "Spiritual wisdom",
+                "Occult knowledge",
+                "Transformative growth",
+                "Research skills"
+            ],
+            "challenging_effects": [
+                "Financial instability",
+                "Sudden changes",
+                "Inheritance issues"
+            ],
+            "timing": "Spiritual transformation during Jupiter dasha",
+            "tags": ["longevity", "occult", "transformation", "spirituality"],
+            "confidence": "high"
+        },
         9: {
             "chapter": 14,
             "verses": "14.11",
@@ -1212,6 +1400,87 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "May be overly idealistic"
             ],
             "timing": "Fortune manifests during Jupiter dasha, pilgrimage during this period"
+        },
+        10: {
+            "chapter": 14,
+            "verses": "14.12",
+            "translation": "Jupiter in the 10th gives authority, career success, fame, virtuous conduct, and respect in society.",
+            "detailed_effects": [
+                "Outstanding career success",
+                "Authority and leadership",
+                "Fame and recognition",
+                "Virtuous professional conduct",
+                "Respect from society",
+                "Government favor"
+            ],
+            "positive_effects": [
+                "Career excellence",
+                "Authority",
+                "Fame",
+                "Virtuous conduct",
+                "Social respect"
+            ],
+            "challenging_effects": [
+                "High expectations from career",
+                "Pressure to maintain status"
+            ],
+            "timing": "Career peaks during Jupiter dasha",
+            "tags": ["career", "authority", "fame", "virtue"],
+            "confidence": "high"
+        },
+        11: {
+            "chapter": 14,
+            "verses": "14.13",
+            "translation": "Jupiter in the 11th bestows wealth, many children, longevity, fulfillment of desires, and social success.",
+            "detailed_effects": [
+                "Substantial wealth and gains",
+                "Many children",
+                "Long and healthy life",
+                "Fulfillment of desires",
+                "Social success",
+                "Multiple income sources"
+            ],
+            "positive_effects": [
+                "Wealth and prosperity",
+                "Many children",
+                "Longevity",
+                "Achievement of goals",
+                "Social success"
+            ],
+            "challenging_effects": [
+                "May be overly optimistic about gains"
+            ],
+            "timing": "Gains increase during Jupiter dasha",
+            "tags": ["wealth", "gains", "children", "longevity"],
+            "confidence": "high"
+        },
+        12: {
+            "chapter": 14,
+            "verses": "14.14",
+            "translation": "Jupiter in the 12th gives spiritual inclination, expenses on good causes, success in foreign lands, but limited wealth and some losses.",
+            "detailed_effects": [
+                "Spiritual inclinations",
+                "Charitable nature",
+                "Success in foreign lands",
+                "Expenses on good causes",
+                "Limited wealth",
+                "Interest in meditation"
+            ],
+            "positive_effects": [
+                "Spiritual growth",
+                "Charitable nature",
+                "Foreign success",
+                "Wisdom",
+                "Moksha orientation"
+            ],
+            "challenging_effects": [
+                "Financial losses",
+                "Expenses exceed income",
+                "Limited material wealth"
+            ],
+            "timing": "Spiritual growth during Jupiter dasha, foreign travel",
+            "tags": ["spirituality", "expenses", "foreign", "charity"],
+            "confidence": "high"
         }
     },
     
@@ -1525,6 +1794,231 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
             ],
             "timing": "Challenges in youth, improvement during and after Saturn dasha"
         },
+        2: {
+            "chapter": 16,
+            "verses": "16.4",
+            "translation": "Saturn in the 2nd house makes one poor, ugly-faced, devoid of learning, with harsh speech, and eating bad food.",
+            "detailed_effects": [
+                "Financial challenges",
+                "Unattractive facial features",
+                "Limited formal education",
+                "Harsh or slow speech",
+                "Poor dietary habits",
+                "Family difficulties"
+            ],
+            "positive_effects": [
+                "Discipline in finances",
+                "Frugality and careful resource management",
+                "Wisdom in speech when mature"
+            ],
+            "challenging_effects": [
+                "Financial difficulties",
+                "Ugly face",
+                "Lack of education",
+                "Harsh speech",
+                "Poor food quality"
+            ],
+            "timing": "Financial struggles early, improvement after age 36",
+            "tags": ["wealth", "speech", "family", "education"],
+            "confidence": "high"
+        },
+        3: {
+            "chapter": 16,
+            "verses": "16.5",
+            "translation": "Saturn in the 3rd gives courage, wealth through effort, intelligence, but limited happiness from siblings.",
+            "detailed_effects": [
+                "Courage and perseverance",
+                "Wealth through hard work",
+                "Intelligence and discipline",
+                "Limited sibling harmony",
+                "Success through self-effort",
+                "Long-term initiatives"
+            ],
+            "positive_effects": [
+                "Courage and perseverance",
+                "Wealth through effort",
+                "Intelligence",
+                "Disciplined approach",
+                "Self-made success"
+            ],
+            "challenging_effects": [
+                "Limited happiness from siblings",
+                "Sibling loss or conflicts",
+                "Slow progress"
+            ],
+            "timing": "Wealth develops slowly through persistent effort",
+            "tags": ["courage", "siblings", "wealth", "effort"],
+            "confidence": "high"
+        },
+        4: {
+            "chapter": 16,
+            "verses": "16.6",
+            "translation": "Saturn in the 4th causes lack of domestic happiness, loss of mother, property difficulties, and few vehicles.",
+            "detailed_effects": [
+                "Domestic challenges",
+                "Mother's early loss or separation",
+                "Property difficulties",
+                "Few or old vehicles",
+                "Emotional distance from family",
+                "Heart health concerns"
+            ],
+            "positive_effects": [
+                "Independence and self-reliance",
+                "Discipline in domestic matters",
+                "Property gains after age 36"
+            ],
+            "challenging_effects": [
+                "Lack of domestic happiness",
+                "Mother's loss",
+                "Property problems",
+                "Few vehicles",
+                "Emotional coldness"
+            ],
+            "timing": "Domestic challenges throughout life, property gains delayed",
+            "tags": ["mother", "property", "happiness", "vehicles"],
+            "confidence": "high"
+        },
+        5: {
+            "chapter": 16,
+            "verses": "16.7",
+            "translation": "Saturn in the 5th gives difficulties with children, financial challenges, pessimistic thinking, and digestive problems.",
+            "detailed_effects": [
+                "Childlessness or delayed children",
+                "Financial difficulties",
+                "Pessimistic mindset",
+                "Digestive health issues",
+                "Creative blocks",
+                "Speculative losses"
+            ],
+            "positive_effects": [
+                "Discipline in creative pursuits",
+                "Philosophical wisdom",
+                "Adopted children may bring happiness"
+            ],
+            "challenging_effects": [
+                "Lack of children",
+                "Financial problems",
+                "Negative thinking",
+                "Stomach diseases",
+                "Unhappiness"
+            ],
+            "timing": "Children delayed or absent, financial struggles",
+            "tags": ["children", "wealth", "health", "creativity"],
+            "confidence": "high"
+        },
+        6: {
+            "chapter": 16,
+            "verses": "16.8",
+            "translation": "Saturn in the 6th destroys enemies, brings fame, good health, and success through service and discipline.",
+            "detailed_effects": [
+                "Victory over enemies",
+                "Fame and recognition",
+                "Strong health",
+                "Success in service professions",
+                "Disciplined work approach",
+                "Longevity"
+            ],
+            "positive_effects": [
+                "Defeats enemies",
+                "Fame",
+                "Good health",
+                "Success in service",
+                "Discipline"
+            ],
+            "challenging_effects": [
+                "Chronic health issues if afflicted",
+                "Slow victory",
+                "Work stress"
+            ],
+            "timing": "Victory over enemies during Saturn dasha",
+            "tags": ["enemies", "fame", "health", "service"],
+            "confidence": "high"
+        },
+        7: {
+            "chapter": 16,
+            "verses": "16.9",
+            "translation": "Saturn in the 7th causes marital difficulties, loss of spouse, health problems, and partnership challenges.",
+            "detailed_effects": [
+                "Marital challenges",
+                "Loss of spouse or separation",
+                "Late marriage",
+                "Health issues",
+                "Partnership difficulties",
+                "Chronic diseases"
+            ],
+            "positive_effects": [
+                "Discipline in partnerships",
+                "Long-lasting relationships when formed",
+                "Success with mature partners"
+            ],
+            "challenging_effects": [
+                "Loss of wife",
+                "Marital discord",
+                "Chronic diseases",
+                "Partnership conflicts",
+                "Unhappiness"
+            ],
+            "timing": "Marriage challenges, late marriage common",
+            "tags": ["marriage", "partnerships", "health", "spouse"],
+            "confidence": "high"
+        },
+        8: {
+            "chapter": 16,
+            "verses": "16.10",
+            "translation": "Saturn in the 8th gives reduced longevity, chronic diseases, financial difficulties, and physical defects.",
+            "detailed_effects": [
+                "Chronic health concerns",
+                "Reduced longevity if afflicted",
+                "Financial instability",
+                "Physical defects",
+                "Interest in occult",
+                "Inheritance issues"
+            ],
+            "positive_effects": [
+                "Deep research abilities",
+                "Occult knowledge",
+                "Transformative wisdom",
+                "Discipline in crises"
+            ],
+            "challenging_effects": [
+                "Short lifespan",
+                "Chronic diseases",
+                "Financial problems",
+                "Physical defects",
+                "Sudden losses"
+            ],
+            "timing": "Health challenges throughout life",
+            "tags": ["longevity", "health", "wealth", "occult"],
+            "confidence": "high"
+        },
+        9: {
+            "chapter": 16,
+            "verses": "16.11",
+            "translation": "Saturn in the 9th causes difficulties with father, lack of spiritual inclination, financial struggles, and marital problems.",
+            "detailed_effects": [
+                "Strained relationship with father",
+                "Lack of religious inclination",
+                "Financial difficulties",
+                "Marital challenges",
+                "Difficulties with children",
+                "Foreign travel problems"
+            ],
+            "positive_effects": [
+                "Independent philosophy",
+                "Discipline in spiritual pursuits when mature",
+                "Wisdom through hardship"
+            ],
+            "challenging_effects": [
+                "Father's loss or separation",
+                "Financial problems",
+                "Marital difficulties",
+                "Lack of spirituality",
+                "Unhappiness"
+            ],
+            "timing": "Father-related issues, spiritual awakening delayed",
+            "tags": ["father", "spirituality", "wealth", "marriage"],
+            "confidence": "high"
+        },
         10: {
             "chapter": 16,
             "verses": "16.12",
@@ -1549,6 +2043,63 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Delays in recognition"
             ],
             "timing": "Authority peaks during Saturn dasha, recognition in later life"
+        },
+        11: {
+            "chapter": 16,
+            "verses": "16.13",
+            "translation": "Saturn in the 11th bestows wealth through effort, longevity, few children, and fulfillment of desires through discipline.",
+            "detailed_effects": [
+                "Wealth through hard work",
+                "Long and healthy life",
+                "Few but responsible children",
+                "Gains through discipline",
+                "Social success",
+                "Multiple income sources"
+            ],
+            "positive_effects": [
+                "Wealth and gains",
+                "Longevity",
+                "Achievement of goals",
+                "Social success",
+                "Disciplined approach"
+            ],
+            "challenging_effects": [
+                "Limited children",
+                "Slow gains",
+                "Serious friendships"
+            ],
+            "timing": "Gains increase with age, prosperity after 36",
+            "tags": ["wealth", "gains", "longevity", "children"],
+            "confidence": "high"
+        },
+        12: {
+            "chapter": 16,
+            "verses": "16.14",
+            "translation": "Saturn in the 12th causes financial losses, limited education, unhappiness, and service to others.",
+            "detailed_effects": [
+                "Financial losses and expenses",
+                "Limited formal education",
+                "Unhappiness and sorrow",
+                "Service to others",
+                "Spiritual inclinations develop",
+                "Interest in isolation"
+            ],
+            "positive_effects": [
+                "Spiritual growth",
+                "Service to humanity",
+                "Success in foreign lands",
+                "Discipline in spiritual practices"
+            ],
+            "challenging_effects": [
+                "Financial difficulties",
+                "Lack of education",
+                "Unhappiness",
+                "Serving others",
+                "Expenses and losses"
+            ],
+            "timing": "Expenses throughout life, spiritual growth in later years",
+            "tags": ["expenses", "spirituality", "foreign", "service"],
+            "confidence": "high"
         }
     }
 }

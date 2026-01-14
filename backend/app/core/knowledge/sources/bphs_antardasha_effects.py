@@ -205,4 +205,4 @@ BPHS_ANTARDASHA_EFFECTS: Dict[str, Dict[str, Dict[str, Any]]] = {
             "notes": "Combines Jupiter's wisdom with Saturn's discipline"
         }
     }
-}\n\n\ndef get_hora_sara_interpretation(planet: str, house: int) -> Dict[str, Any]:", "AllowMultiple": false}]
+}
