@@ -11,7 +11,7 @@ from passlib.context import CryptContext
 from pydantic import BaseModel
 from app.core.config.settings import settings
 from app.core.cache import RedisCache
-from app.core.models.user import User
+from app.models.database_models import User
 
 class SecurityScope(BaseModel):
     """Security scope model"""

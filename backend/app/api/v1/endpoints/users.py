@@ -17,7 +17,7 @@ from app.crud.user import (
     get_users,
     update_user,
 )
-from app.models.users import User
+from app.models.database_models import User
 from app.schemas.user import User as UserSchema
 from app.schemas.user import UserCreate, UserUpdate
 
