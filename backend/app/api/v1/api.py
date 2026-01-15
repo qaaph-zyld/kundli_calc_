@@ -11,6 +11,7 @@ from app.api.v1.endpoints.kundli import router as kundli_router
 from app.api.v1.endpoints.login import login
 from app.api.v1.endpoints.users import users
 from app.api.v1.endpoints.birth_charts import birth_charts
+from app.api.v1.knowledge import router as knowledge_router
 
 api_router = APIRouter()
 
@@ -19,6 +20,9 @@ api_router.include_router(router_health, tags=["health"])
 
 # Include kundli router
 api_router.include_router(kundli_router, prefix="/kundli", tags=["kundli"])
+
+# Include knowledge router (multi-source classical text comparison)
+api_router.include_router(knowledge_router, prefix="/knowledge", tags=["knowledge"])
 
 # Include login router
 api_router.include_router(login.router, tags=["login"])

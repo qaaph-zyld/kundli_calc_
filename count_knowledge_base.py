@@ -9,7 +9,10 @@ from app.core.knowledge.sources.bphs_planets_in_houses import BPHS_PLANETS_IN_HO
 from app.core.knowledge.sources.saravali_planets_in_houses import SARAVALI_PLANETS_IN_HOUSES
 from app.core.knowledge.sources.phaladeepika_planets_in_houses import PHALADEEPIKA_PLANETS_IN_HOUSES
 from app.core.knowledge.sources.hora_sara_planets_in_houses import HORA_SARA_PLANETS_IN_HOUSES
-from app.core.knowledge.sources.bphs_yogas import BPHS_RAJA_YOGAS, BPHS_DHANA_YOGAS, BPHS_PANCHA_MAHAPURUSHA_YOGAS
+from app.core.knowledge.sources.bphs_yogas import (
+    BPHS_RAJA_YOGAS, BPHS_DHANA_YOGAS, BPHS_PANCHA_MAHAPURUSHA_YOGAS,
+    BPHS_ARISHTA_YOGAS, BPHS_NABHASA_YOGAS
+)
 from app.core.knowledge.sources.bphs_dasha_effects import BPHS_MAHADASHA_EFFECTS
 from app.core.knowledge.sources.bphs_antardasha_effects import BPHS_ANTARDASHA_EFFECTS
 from app.core.knowledge.sources.jataka_parijata_dashas import JATAKA_PARIJATA_DASHAS
@@ -56,11 +59,15 @@ print("-" * 80)
 raja_count = len(BPHS_RAJA_YOGAS)
 dhana_count = len(BPHS_DHANA_YOGAS)
 mahapurusha_count = len(BPHS_PANCHA_MAHAPURUSHA_YOGAS)
-yogas_total = raja_count + dhana_count + mahapurusha_count
+arishta_count = len(BPHS_ARISHTA_YOGAS)
+nabhasa_count = len(BPHS_NABHASA_YOGAS)
+yogas_total = raja_count + dhana_count + mahapurusha_count + arishta_count + nabhasa_count
 
 print(f"BPHS Raja Yogas: {raja_count}")
 print(f"BPHS Dhana Yogas: {dhana_count}")
 print(f"BPHS Pancha Mahapurusha Yogas: {mahapurusha_count}")
+print(f"BPHS Arishta Yogas: {arishta_count}")
+print(f"BPHS Nabhasa Yogas: {nabhasa_count}")
 print(f"\n>>> YOGAS TOTAL: {yogas_total}")
 
 # Dashas
