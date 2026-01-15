@@ -208,6 +208,437 @@ BPHS_DHANA_YOGAS: Dict[str, Dict[str, Any]] = {
     }
 }
 
+BPHS_ARISHTA_YOGAS: Dict[str, Dict[str, Any]] = {
+    "Daridra_Yoga": {
+        "chapter": 44,
+        "verses": "44.3-5",
+        "category": "Arishta Yoga",
+        "formation": "Lord of 11th house in 6th, 8th, or 12th house (dusthana)",
+        "classical_description": "Daridra means poverty. When the lord of gains (11th) occupies a dusthana, it creates obstacles to wealth accumulation and financial difficulties.",
+        "effects": {
+            "general": "Financial difficulties, poverty, obstacles to wealth accumulation",
+            "wealth": "Chronic financial struggles, inability to save money, losses of gains",
+            "career": "Obstacles in achieving financial goals, income instability",
+            "timing": "Most pronounced during dasha of 11th lord"
+        },
+        "strength_factors": [
+            "11th lord in 8th house - most severe (sudden losses)",
+            "11th lord in 12th house - severe (constant expenses)",
+            "11th lord in 6th house - moderate (debts and conflicts)",
+            "Affliction by malefics increases severity"
+        ],
+        "cancellation_factors": [
+            "11th lord in own sign or exaltation despite dusthana placement",
+            "Strong aspect from Jupiter or benefics",
+            "Formation of Raja Yoga or Dhana Yoga simultaneously",
+            "11th lord in Vargottama (same sign in D1 and D9)"
+        ],
+        "remedies": [
+            "Strengthen 11th lord through gemstone if appropriate",
+            "Worship deity associated with 11th lord planet",
+            "Charity and service to reduce karmic debt",
+            "Avoid speculation and risky investments"
+        ]
+    },
+    
+    "Duryoga": {
+        "chapter": 44,
+        "verses": "44.6-8",
+        "category": "Arishta Yoga",
+        "formation": "Lord of 10th house in 6th, 8th, or 12th house",
+        "classical_description": "Duryoga means bad combination. When the lord of career (10th) occupies a dusthana, it creates professional difficulties and obstacles to success.",
+        "effects": {
+            "general": "Career obstacles, professional setbacks, loss of reputation",
+            "career": "Difficulties in profession, job instability, conflicts with authority",
+            "reputation": "Damage to public image, loss of status",
+            "health": "Work-related stress and health issues",
+            "timing": "Career challenges during 10th lord dasha"
+        },
+        "strength_factors": [
+            "10th lord in 8th house - severe (sudden career losses)",
+            "10th lord in 12th house - severe (foreign employment, losses)",
+            "10th lord in 6th house - moderate (service positions, conflicts)"
+        ],
+        "cancellation_factors": [
+            "10th lord in own sign or exaltation",
+            "Raja Yoga formation simultaneously",
+            "Strong benefic aspects",
+            "10th lord conjunct or aspected by 9th lord"
+        ]
+    },
+    
+    "Kemadruma_Yoga": {
+        "chapter": 44,
+        "verses": "44.15-17",
+        "category": "Arishta Yoga",
+        "formation": "Moon without planets in houses 2nd and 12th from it (Moon isolated)",
+        "classical_description": "Kemadruma means 'without support'. When Moon has no planets on either side, the native lacks emotional and material support.",
+        "effects": {
+            "general": "Poverty, lack of support, emotional isolation, mental distress",
+            "emotional": "Loneliness, lack of emotional support, mental anxiety",
+            "wealth": "Financial difficulties, lack of resources",
+            "relationships": "Difficulty forming lasting bonds, isolation",
+            "health": "Mental health challenges, depression tendencies"
+        },
+        "strength_factors": [
+            "Moon weak by sign or afflicted - most severe",
+            "Moon in dusthana (6,8,12) - very severe",
+            "No benefic aspects to Moon - severe"
+        ],
+        "cancellation_factors": [
+            "Planets in kendras (1,4,7,10) from Moon",
+            "Moon in kendra from ascendant",
+            "Moon in own sign (Cancer) or exaltation (Taurus)",
+            "Jupiter aspecting Moon",
+            "Moon conjunct benefic planet"
+        ],
+        "notes": "One of the most important Arishta yogas. Cancellation is common, so check carefully."
+    },
+    
+    "Shakata_Yoga": {
+        "chapter": 44,
+        "verses": "44.18-20",
+        "category": "Arishta Yoga",
+        "formation": "Jupiter in 6th, 8th, or 12th house from Moon",
+        "classical_description": "Shakata means 'cart'. Like a cart that goes up and down, this yoga creates fluctuating fortunes and instability.",
+        "effects": {
+            "general": "Fluctuating fortunes, ups and downs in life, instability",
+            "wealth": "Financial instability, gains followed by losses",
+            "career": "Career fluctuations, periods of success and failure",
+            "emotional": "Emotional ups and downs, lack of stability",
+            "timing": "Fluctuations throughout life, especially in Jupiter and Moon dashas"
+        },
+        "strength_factors": [
+            "Jupiter in 8th from Moon - most severe",
+            "Jupiter weak by sign - severe",
+            "Moon also weak - very severe"
+        ],
+        "cancellation_factors": [
+            "Jupiter in own sign or exaltation",
+            "Jupiter in kendra from ascendant",
+            "Strong benefic aspects to Jupiter or Moon",
+            "Formation of Gaja Kesari Yoga (Jupiter in kendra from Moon)"
+        ]
+    },
+    
+    "Graha_Yuddha_Dosha": {
+        "chapter": 44,
+        "verses": "44.25-27",
+        "category": "Arishta Yoga",
+        "formation": "Planetary war - two planets within 1 degree in same sign (excluding Sun, Moon, Rahu, Ketu)",
+        "classical_description": "When planets are in close combat (Graha Yuddha), the defeated planet loses strength and creates difficulties in its significations.",
+        "effects": {
+            "general": "Conflict in planetary significations, weakened results of defeated planet",
+            "specific": "Depends on which planet is defeated - that planet's significations suffer",
+            "timing": "Effects manifest during dashas of defeated planet"
+        },
+        "strength_factors": [
+            "Defeated planet's significations severely weakened",
+            "Victor planet's significations strengthened",
+            "Degree difference <0.5° - most severe combat"
+        ],
+        "cancellation_factors": [
+            "Defeated planet in own sign or exaltation",
+            "Strong benefic aspects to defeated planet",
+            "Defeated planet forms other strong yogas"
+        ],
+        "notes": "Determine victor by brightness/size: Mars>Mercury>Jupiter>Venus>Saturn"
+    },
+    
+    "Vipareeta_Raja_Yoga": {
+        "chapter": 44,
+        "verses": "44.30-32",
+        "category": "Special Yoga",
+        "formation": "Lords of dusthanas (6,8,12) in dusthanas, or in mutual exchange",
+        "classical_description": "Vipareeta means 'reversed'. Paradoxically, when dusthana lords occupy dusthanas, they create Raja Yoga-like effects through overcoming adversities.",
+        "effects": {
+            "general": "Success through adversity, gains from enemies' losses, unexpected fortune",
+            "career": "Rise after setbacks, success in crisis management",
+            "wealth": "Gains from unexpected sources, inheritance, enemies' losses",
+            "reputation": "Fame through overcoming obstacles",
+            "timing": "Benefits manifest during dusthana lords' dashas"
+        },
+        "types": [
+            "Harsha Yoga: 6th lord in 6th, 8th, or 12th",
+            "Sarala Yoga: 8th lord in 8th, 6th, or 12th",
+            "Vimala Yoga: 12th lord in 12th, 6th, or 8th"
+        ],
+        "strength_factors": [
+            "Dusthana lord in own sign - stronger",
+            "Multiple Vipareeta yogas - very strong",
+            "No affliction to dusthana lords - pure results"
+        ],
+        "notes": "Unique yoga that turns adversity into advantage. Highly valued in predictive astrology."
+    },
+    
+    "Kala_Sarpa_Yoga": {
+        "chapter": 45,
+        "verses": "45.10-12",
+        "category": "Arishta Yoga",
+        "formation": "All seven planets (Sun through Saturn) hemmed between Rahu and Ketu",
+        "classical_description": "Kala Sarpa means 'serpent of time'. When all planets are trapped between the lunar nodes, it creates intense karmic patterns and obstacles.",
+        "effects": {
+            "general": "Intense life experiences, karmic challenges, obstacles and delays",
+            "psychological": "Mental restlessness, anxiety, obsessive tendencies",
+            "career": "Obstacles to success, sudden rises and falls",
+            "relationships": "Challenges in relationships, separations",
+            "spiritual": "Strong spiritual inclinations, interest in occult",
+            "timing": "Effects vary by Rahu-Ketu axis and which houses they occupy"
+        },
+        "strength_factors": [
+            "Partial Kala Sarpa (one planet outside) - milder",
+            "Complete Kala Sarpa - severe",
+            "Rahu-Ketu in dusthanas - more challenging",
+            "Rahu-Ketu in kendras/trikonas - more manageable"
+        ],
+        "cancellation_factors": [
+            "Even one planet outside Rahu-Ketu axis",
+            "Strong benefic yogas present",
+            "Exalted planets within the axis",
+            "Jupiter or Venus strong and well-placed"
+        ],
+        "remedies": [
+            "Rahu-Ketu remedies (Naga Dosha remedies)",
+            "Worship of Lord Shiva or Subramanya",
+            "Sarpa Dosha puja at specific temples",
+            "Strengthen benefic planets in chart"
+        ],
+        "notes": "Controversial yoga - some astrologers consider it overemphasized. Effects depend heavily on overall chart strength."
+    },
+    
+    "Graha_Malika_Yoga": {
+        "chapter": 45,
+        "verses": "45.15-17",
+        "category": "Special Yoga",
+        "formation": "Planets occupying consecutive houses forming a chain/garland pattern",
+        "classical_description": "Graha Malika means 'planetary garland'. When planets occupy consecutive houses, they create a chain of connected energies.",
+        "effects": {
+            "general": "Balanced life experiences, systematic progress, connected life areas",
+            "personality": "Well-rounded character, multiple talents",
+            "career": "Success through systematic approach, gradual growth",
+            "timing": "Effects depend on which houses are occupied and starting point"
+        },
+        "types": [
+            "Starting from 1st house - strong personality focus",
+            "Starting from 10th house - strong career focus",
+            "Longer chains (7+ houses) - more powerful"
+        ],
+        "strength_factors": [
+            "More consecutive houses - stronger",
+            "Planets in own signs or exaltation - very strong",
+            "No breaks in the chain - pure results"
+        ]
+    },
+    
+    "Dur_Yoga": {
+        "chapter": 44,
+        "verses": "44.35-37",
+        "category": "Arishta Yoga",
+        "formation": "Lord of 2nd or 12th house in dusthana, or malefics in 2nd/12th",
+        "classical_description": "Creates difficulties in wealth accumulation, family life, and causes excessive expenses.",
+        "effects": {
+            "general": "Financial difficulties, family problems, excessive expenses",
+            "wealth": "Loss of wealth, inability to save, chronic debt",
+            "family": "Family conflicts, separation from family",
+            "speech": "Harsh speech causing problems",
+            "eyes": "Eye problems if 2nd lord severely afflicted"
+        },
+        "cancellation_factors": [
+            "2nd/12th lords in own signs",
+            "Strong benefic aspects",
+            "Formation of Dhana Yoga"
+        ]
+    },
+    
+    "Matru_Dosha": {
+        "chapter": 44,
+        "verses": "44.40-42",
+        "category": "Arishta Yoga",
+        "formation": "Moon or 4th lord severely afflicted, or malefics in 4th house",
+        "classical_description": "Creates difficulties related to mother, domestic happiness, and emotional well-being.",
+        "effects": {
+            "general": "Mother's health issues, lack of domestic happiness, emotional challenges",
+            "mother": "Mother's early death, separation, or health problems",
+            "domestic": "Lack of peace at home, property issues",
+            "emotional": "Emotional instability, mental distress",
+            "education": "Obstacles in education"
+        },
+        "cancellation_factors": [
+            "Moon or 4th lord in exaltation",
+            "Strong benefic in 4th house",
+            "Jupiter aspecting 4th house or Moon"
+        ]
+    },
+    
+    "Pitru_Dosha": {
+        "chapter": 44,
+        "verses": "44.43-45",
+        "category": "Arishta Yoga",
+        "formation": "Sun or 9th lord severely afflicted, or malefics in 9th house",
+        "classical_description": "Creates difficulties related to father, dharma, and fortune.",
+        "effects": {
+            "general": "Father's health issues, lack of fortune, obstacles to dharma",
+            "father": "Father's early death, separation, or conflicts",
+            "fortune": "Lack of luck and blessings, obstacles to success",
+            "dharma": "Difficulties in religious/spiritual pursuits",
+            "education": "Obstacles in higher education"
+        },
+        "cancellation_factors": [
+            "Sun or 9th lord in exaltation",
+            "Strong benefic in 9th house",
+            "Jupiter aspecting 9th house or Sun"
+        ]
+    },
+    
+    "Putra_Dosha": {
+        "chapter": 44,
+        "verses": "44.46-48",
+        "category": "Arishta Yoga",
+        "formation": "Jupiter or 5th lord severely afflicted, or malefics in 5th house",
+        "classical_description": "Creates difficulties related to children, intelligence, and creative pursuits.",
+        "effects": {
+            "general": "Difficulties with children, creative blocks, speculative losses",
+            "children": "Childlessness, delayed children, or children's health issues",
+            "intelligence": "Mental stress, poor judgment in speculation",
+            "creativity": "Creative frustrations, blocks",
+            "romance": "Romantic disappointments"
+        },
+        "cancellation_factors": [
+            "Jupiter or 5th lord in exaltation",
+            "Strong benefic in 5th house",
+            "Jupiter aspecting 5th house",
+            "5th lord in kendra or trikona"
+        ]
+    },
+    
+    "Kalatra_Dosha": {
+        "chapter": 44,
+        "verses": "44.50-52",
+        "category": "Arishta Yoga",
+        "formation": "Venus or 7th lord severely afflicted, or malefics in 7th house",
+        "classical_description": "Creates difficulties in marriage, partnerships, and relationships.",
+        "effects": {
+            "general": "Marital difficulties, partnership problems, relationship challenges",
+            "marriage": "Late marriage, marital discord, separation, or spouse's health issues",
+            "partnerships": "Business partnership conflicts, losses",
+            "health": "Reproductive health issues"
+        },
+        "cancellation_factors": [
+            "Venus or 7th lord in exaltation",
+            "Strong benefic in 7th house",
+            "Jupiter aspecting 7th house or Venus",
+            "7th lord in kendra or trikona"
+        ]
+    },
+    
+    "Balarishta_Yoga": {
+        "chapter": 45,
+        "verses": "45.3-5",
+        "category": "Arishta Yoga",
+        "formation": "Moon and ascendant lord both in dusthanas (6,8,12) with malefic aspects",
+        "classical_description": "Balarishta means 'infant mortality'. Indicates health challenges in childhood.",
+        "effects": {
+            "general": "Health challenges in childhood, early life difficulties",
+            "health": "Childhood diseases, weak constitution in youth",
+            "longevity": "Reduced longevity if severe and uncancelled",
+            "timing": "Most critical in first 12 years of life"
+        },
+        "strength_factors": [
+            "Both Moon and ascendant lord in 8th - most severe",
+            "Malefic aspects from Mars, Saturn, Rahu - severe",
+            "No benefic aspects - very dangerous"
+        ],
+        "cancellation_factors": [
+            "Strong benefic in ascendant or with Moon",
+            "Jupiter aspecting ascendant or Moon",
+            "Ascendant lord or Moon in exaltation",
+            "Strong benefic yogas present",
+            "Survival past age 12 indicates cancellation"
+        ],
+        "notes": "Important to check for cancellations. Modern medicine reduces severity."
+    },
+    
+    "Angarak_Yoga": {
+        "chapter": 45,
+        "verses": "45.20-22",
+        "category": "Arishta Yoga",
+        "formation": "Mars conjunct Rahu (especially in ascendant, 5th, 7th, 8th, or 12th)",
+        "classical_description": "Angarak means 'burning coal'. The fiery combination of Mars and Rahu creates intense, explosive energy.",
+        "effects": {
+            "general": "Aggressive tendencies, accidents, sudden events, intense experiences",
+            "personality": "Aggressive, impulsive, risk-taking nature",
+            "health": "Prone to accidents, injuries, surgeries, blood-related issues",
+            "relationships": "Conflicts in relationships, aggressive behavior",
+            "career": "Success in Mars-Rahu fields (military, surgery, technology) but with challenges"
+        },
+        "strength_factors": [
+            "In ascendant - affects personality severely",
+            "In 7th - marital challenges",
+            "In 8th - accidents and sudden events",
+            "In 12th - expenses, losses, foreign issues"
+        ],
+        "cancellation_factors": [
+            "Mars in own sign or exaltation",
+            "Strong Jupiter aspect",
+            "Conjunction in 3rd, 6th, or 11th (upachaya) - less severe"
+        ]
+    },
+    
+    "Guru_Chandal_Yoga": {
+        "chapter": 45,
+        "verses": "45.25-27",
+        "category": "Arishta Yoga",
+        "formation": "Jupiter conjunct Rahu (especially in ascendant, 5th, 9th, or 10th)",
+        "classical_description": "Chandal means 'outcaste'. Jupiter's purity is tainted by Rahu's shadowy influence, affecting wisdom and judgment.",
+        "effects": {
+            "general": "Unconventional beliefs, challenges to traditional values, wisdom through unorthodox paths",
+            "wisdom": "Unconventional thinking, may reject traditional teachings",
+            "children": "Difficulties with children or unconventional children",
+            "dharma": "Challenges to religious beliefs, spiritual confusion",
+            "reputation": "May face criticism for unconventional views"
+        },
+        "strength_factors": [
+            "In 5th house - children and intelligence affected",
+            "In 9th house - dharma and fortune affected",
+            "In 10th house - career and reputation affected"
+        ],
+        "cancellation_factors": [
+            "Jupiter in own sign (Sagittarius/Pisces)",
+            "Jupiter in exaltation (Cancer)",
+            "Strong benefic aspects to Jupiter",
+            "Jupiter in kendra from Moon (forms Gaja Kesari despite Rahu)"
+        ],
+        "notes": "Modern interpretation: Can indicate genius through unconventional thinking. Not always negative."
+    }
+}
+
+BPHS_NABHASA_YOGAS: Dict[str, Dict[str, Any]] = {
+    "Rajju_Yoga": {"chapter": 46, "verses": "46.5-6", "category": "Nabhasa Yoga - Ashraya", "formation": "All planets in movable signs (Aries, Cancer, Libra, Capricorn)", "classical_description": "Rajju means 'rope'. Creates a wandering, traveling nature with frequent changes.", "effects": {"general": "Frequent travels, changes of residence, wandering nature", "personality": "Restless, adaptable, loves travel and change", "career": "Success in travel-related fields, frequent job changes", "wealth": "Gains through travel and foreign connections"}, "strength_factors": ["More planets in movable signs - stronger", "Planets in own signs - better results"]},
+    "Musala_Yoga": {"chapter": 46, "verses": "46.7-8", "category": "Nabhasa Yoga - Ashraya", "formation": "All planets in fixed signs (Taurus, Leo, Scorpio, Aquarius)", "classical_description": "Musala means 'pestle'. Creates stability, determination, and fixed nature.", "effects": {"general": "Stable life, determination, fixed opinions, wealth accumulation", "personality": "Stubborn, determined, resistant to change", "career": "Long-term career stability, success through persistence", "wealth": "Steady wealth accumulation, property ownership"}, "strength_factors": ["All planets in fixed signs - very strong", "Planets in own signs - excellent results"]},
+    "Nala_Yoga": {"chapter": 46, "verses": "46.9-10", "category": "Nabhasa Yoga - Ashraya", "formation": "All planets in dual signs (Gemini, Virgo, Sagittarius, Pisces)", "classical_description": "Creates versatility, adaptability, and multiple interests.", "effects": {"general": "Versatile nature, multiple talents, adaptability", "personality": "Flexible, multi-talented, intellectual", "career": "Success in multiple fields, diverse interests", "wealth": "Multiple income sources"}, "strength_factors": ["Planets in own signs - stronger", "Mercury and Jupiter strong - excellent"]},
+    "Gada_Yoga": {"chapter": 46, "verses": "46.15-16", "category": "Nabhasa Yoga - Dala", "formation": "All planets in 1st and 7th houses only", "classical_description": "Gada means 'mace'. Creates strong personality and partnership focus.", "effects": {"general": "Strong personality, focus on self and relationships", "personality": "Powerful presence, relationship-oriented", "marriage": "Marriage and partnerships central to life", "career": "Success through partnerships"}, "strength_factors": ["Benefics in 1st, malefics in 7th - balanced", "Strong ascendant lord - powerful"]},
+    "Shakata_Yoga_Nabhasa": {"chapter": 46, "verses": "46.17-18", "category": "Nabhasa Yoga - Dala", "formation": "All planets in 4th and 10th houses only", "classical_description": "Creates focus on domestic life and career.", "effects": {"general": "Balance between home and career, property and profession", "career": "Strong career focus", "domestic": "Emphasis on home and property", "wealth": "Gains through property and career"}, "strength_factors": ["Benefics in 4th, malefics in 10th - good", "4th and 10th lords strong - excellent"]},
+    "Yupa_Yoga": {"chapter": 46, "verses": "46.20-21", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 1st, 2nd, 3rd, and 4th houses", "classical_description": "Yupa means 'sacrificial post'. Creates focus on self-development and early life houses.", "effects": {"general": "Focus on self, family, courage, and home", "personality": "Self-focused, family-oriented", "wealth": "Wealth through family and self-effort", "courage": "Courageous and self-reliant"}, "strength_factors": ["Benefics in these houses - very good", "Ascendant lord strong - powerful"]},
+    "Ishu_Yoga": {"chapter": 46, "verses": "46.22-23", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 4th, 5th, 6th, and 7th houses", "classical_description": "Ishu means 'arrow'. Creates focus on middle life areas.", "effects": {"general": "Focus on home, children, service, and partnerships", "domestic": "Strong domestic focus", "children": "Emphasis on children and creativity", "partnerships": "Partnership-oriented life"}, "strength_factors": ["Benefics in 4th, 5th, 7th - excellent", "5th and 7th lords strong - good"]},
+    "Shakti_Yoga": {"chapter": 46, "verses": "46.24-25", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 7th, 8th, 9th, and 10th houses", "classical_description": "Shakti means 'power'. Creates focus on partnerships, transformation, dharma, and career.", "effects": {"general": "Power through partnerships and career, transformative life", "career": "Strong career focus and success", "partnerships": "Important partnerships", "spiritual": "Transformative spiritual experiences"}, "strength_factors": ["Benefics in 9th, 10th - excellent career and fortune", "9th and 10th lords strong - powerful"]},
+    "Danda_Yoga": {"chapter": 46, "verses": "46.26-27", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 10th, 11th, 12th, and 1st houses", "classical_description": "Danda means 'staff'. Creates focus on career, gains, expenses, and self.", "effects": {"general": "Career and gains focus, expenses and self-development", "career": "Strong career emphasis", "gains": "Focus on income and achievements", "expenses": "Significant expenses but for good causes"}, "strength_factors": ["Benefics in 1st, 10th, 11th - very good", "10th and 11th lords strong - wealth and career"]},
+    "Nau_Yoga": {"chapter": 46, "verses": "46.28-29", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 1st, 2nd, 3rd, 4th, 5th, 6th, and 7th houses (first seven houses)", "classical_description": "Nau means 'boat'. Creates emphasis on personal development and relationships.", "effects": {"general": "Focus on self-development and relationships", "personality": "Strong personality development", "relationships": "Relationship-oriented", "wealth": "Wealth through self and partnerships"}, "strength_factors": ["Benefics well-distributed - good", "Ascendant and 7th lords strong - excellent"]},
+    "Kuta_Yoga": {"chapter": 46, "verses": "46.30-31", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 4th, 5th, 6th, 7th, 8th, 9th, and 10th houses", "classical_description": "Creates focus on middle and later life areas.", "effects": {"general": "Focus on home, children, service, partnerships, transformation, dharma, career", "career": "Career and dharma emphasis", "family": "Family and children focus", "transformation": "Transformative experiences"}, "strength_factors": ["Benefics in 4th, 5th, 9th, 10th - excellent", "Multiple lords strong - powerful"]},
+    "Chhatra_Yoga": {"chapter": 46, "verses": "46.32-33", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 7th, 8th, 9th, 10th, 11th, 12th, and 1st houses", "classical_description": "Chhatra means 'umbrella/protection'. Creates protective influence and authority.", "effects": {"general": "Protection, authority, success in later life", "career": "Authority and leadership", "protection": "Divine protection and grace", "wealth": "Gains and prosperity"}, "strength_factors": ["Benefics in 1st, 9th, 10th, 11th - very powerful", "Multiple Raja Yogas - excellent"]},
+    "Chapa_Yoga": {"chapter": 46, "verses": "46.34-35", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 1st, 2nd, 3rd, 7th, 8th, and 9th houses", "classical_description": "Chapa means 'bow'. Creates warrior-like qualities and strategic thinking.", "effects": {"general": "Strategic thinking, warrior qualities, success through effort", "personality": "Strategic, courageous", "career": "Success in competitive fields", "dharma": "Righteous warrior path"}, "strength_factors": ["Mars and Sun strong - warrior qualities", "9th lord strong - dharmic success"]},
+    "Samudra_Yoga": {"chapter": 46, "verses": "46.36-37", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 2nd, 3rd, 4th, 8th, 9th, and 10th houses", "classical_description": "Samudra means 'ocean'. Creates depth, wisdom, and vast resources.", "effects": {"general": "Wealth, wisdom, depth of character", "wealth": "Vast resources like ocean", "wisdom": "Deep knowledge and understanding", "career": "Success and authority"}, "strength_factors": ["Benefics in 2nd, 9th, 10th - wealth and fortune", "Jupiter strong - wisdom"]},
+    "Vallaki_Yoga": {"chapter": 46, "verses": "46.38-39", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 3rd, 4th, 5th, 9th, 10th, and 11th houses", "classical_description": "Creates success, happiness, and prosperity.", "effects": {"general": "Success, happiness, prosperity, good fortune", "career": "Career success and gains", "children": "Good children", "fortune": "Excellent fortune and blessings"}, "strength_factors": ["Benefics in 5th, 9th, 10th, 11th - very auspicious", "Multiple Dhana Yogas - wealthy"]},
+    "Damaru_Yoga": {"chapter": 46, "verses": "46.40-41", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 1st, 2nd, 7th, and 8th houses", "classical_description": "Damaru means 'drum'. Creates rhythmic ups and downs.", "effects": {"general": "Fluctuating fortunes, ups and downs", "personality": "Strong but unstable", "relationships": "Important partnerships", "transformation": "Transformative experiences"}, "strength_factors": ["Benefics in 1st and 7th - better", "Malefics in 8th - challenges"]},
+    "Pasha_Yoga": {"chapter": 46, "verses": "46.42-43", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 4th, 5th, 10th, and 11th houses", "classical_description": "Pasha means 'noose/bondage'. Creates attachment to material success.", "effects": {"general": "Material success, attachment to wealth and career", "career": "Strong career focus", "wealth": "Wealth and gains", "children": "Good children"}, "strength_factors": ["Benefics in all four houses - very wealthy", "10th and 11th lords strong - career and gains"]},
+    "Kedara_Yoga": {"chapter": 46, "verses": "46.44-45", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 2nd, 3rd, 8th, and 9th houses", "classical_description": "Kedara means 'field'. Creates agricultural success and land ownership.", "effects": {"general": "Success in agriculture, land ownership, wealth", "wealth": "Wealth through land and agriculture", "courage": "Courageous nature", "transformation": "Transformative experiences"}, "strength_factors": ["Benefics in 2nd and 9th - wealth and fortune", "Mars strong - land and property"]},
+    "Shula_Yoga": {"chapter": 46, "verses": "46.46-47", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 3rd, 4th, 5th, and 6th houses", "classical_description": "Shula means 'spear'. Creates sharp intellect and competitive nature.", "effects": {"general": "Sharp intellect, competitive success, service orientation", "intelligence": "Sharp mind and analytical abilities", "courage": "Courageous and competitive", "service": "Success in service professions"}, "strength_factors": ["Benefics in 4th and 5th - good", "Malefics in 6th - victory over enemies"]},
+    "Yuga_Yoga": {"chapter": 46, "verses": "46.48-49", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 7th, 8th, 9th, and 10th houses", "classical_description": "Creates focus on partnerships, transformation, dharma, and career.", "effects": {"general": "Success through partnerships and career, spiritual transformation", "career": "Strong career success", "partnerships": "Important partnerships", "dharma": "Spiritual and philosophical inclinations"}, "strength_factors": ["Benefics in 7th, 9th, 10th - excellent", "9th and 10th lords strong - fortune and career"]},
+    "Gola_Yoga": {"chapter": 46, "verses": "46.50-51", "category": "Nabhasa Yoga - Akriti", "formation": "All planets in 5th, 6th, 11th, and 12th houses", "classical_description": "Gola means 'sphere/globe'. Creates balanced material and spiritual pursuits.", "effects": {"general": "Balance between material gains and spiritual expenses", "children": "Good children", "gains": "Financial gains", "spirituality": "Spiritual inclinations and expenses"}, "strength_factors": ["Benefics in 5th and 11th - children and gains", "Jupiter strong - wisdom"]},
+    "Sringhataka_Yoga": {"chapter": 46, "verses": "46.52-53", "category": "Nabhasa Yoga - Sankhya", "formation": "All planets in four kendras (1st, 4th, 7th, 10th houses)", "classical_description": "Creates exceptional strength, authority, and success. Highly auspicious.", "effects": {"general": "Outstanding success, authority, happiness, prosperity", "personality": "Strong and authoritative", "career": "Exceptional career success", "wealth": "Prosperity and material comforts", "reputation": "Fame and recognition"}, "strength_factors": ["All kendras occupied - very powerful", "Benefics in kendras - excellent", "Kendra lords strong - outstanding"], "notes": "One of the most auspicious Nabhasa yogas"},
+    "Hala_Yoga": {"chapter": 46, "verses": "46.54-55", "category": "Nabhasa Yoga - Sankhya", "formation": "All planets in four panaparas (2nd, 5th, 8th, 11th houses)", "classical_description": "Hala means 'plough'. Creates wealth through agriculture and steady effort.", "effects": {"general": "Wealth through agriculture, steady gains, moderate success", "wealth": "Wealth accumulation through effort", "agriculture": "Success in farming and land", "gains": "Steady income and gains"}, "strength_factors": ["Benefics in 2nd, 5th, 11th - wealth and children", "Venus and Jupiter strong - prosperity"]},
+    "Vajra_Yoga": {"chapter": 46, "verses": "46.56-57", "category": "Nabhasa Yoga - Sankhya", "formation": "All benefics in kendras and all malefics in apoklimas (3,6,9,12), or vice versa", "classical_description": "Vajra means 'thunderbolt/diamond'. Creates exceptional strength and resilience.", "effects": {"general": "Exceptional strength, resilience, success through effort", "personality": "Strong and resilient character", "career": "Success through perseverance", "wealth": "Prosperity through effort"}, "strength_factors": ["Benefics in kendras - very strong", "Malefics in upachaya (3,6) - good", "Clear separation - powerful"], "notes": "Highly auspicious for strength and success"}
+}
+
 BPHS_PANCHA_MAHAPURUSHA_YOGAS: Dict[str, Dict[str, Any]] = {
     "Ruchaka_Yoga": {
         "chapter": 40,
@@ -316,7 +747,8 @@ def get_yoga_interpretation(yoga_name: str) -> Dict[str, Any]:
     all_yogas = {
         **BPHS_RAJA_YOGAS,
         **BPHS_DHANA_YOGAS,
-        **BPHS_PANCHA_MAHAPURUSHA_YOGAS
+        **BPHS_PANCHA_MAHAPURUSHA_YOGAS,
+        **BPHS_ARISHTA_YOGAS
     }
     
     return all_yogas.get(yoga_name, None)
@@ -327,7 +759,7 @@ def get_yogas_by_category(category: str) -> Dict[str, Dict[str, Any]]:
     Get all yogas of a specific category.
     
     Args:
-        category: Category name (Raja Yoga, Wealth Yoga, Mahapurusha Yoga, etc.)
+        category: Category name (Raja Yoga, Dhana Yoga, Mahapurusha Yoga, Arishta Yoga, etc.)
         
     Returns:
         Dictionary of yogas in that category
@@ -335,7 +767,9 @@ def get_yogas_by_category(category: str) -> Dict[str, Dict[str, Any]]:
     all_yogas = {
         **BPHS_RAJA_YOGAS,
         **BPHS_DHANA_YOGAS,
-        **BPHS_PANCHA_MAHAPURUSHA_YOGAS
+        **BPHS_PANCHA_MAHAPURUSHA_YOGAS,
+        **BPHS_ARISHTA_YOGAS,
+        **BPHS_NABHASA_YOGAS
     }
     
     return {name: data for name, data in all_yogas.items() if data.get('category') == category}
@@ -352,4 +786,6 @@ def get_all_yogas() -> Dict[str, Dict[str, Any]]:
     all_yogas.update(BPHS_RAJA_YOGAS)
     all_yogas.update(BPHS_DHANA_YOGAS)
     all_yogas.update(BPHS_PANCHA_MAHAPURUSHA_YOGAS)
+    all_yogas.update(BPHS_ARISHTA_YOGAS)
+    all_yogas.update(BPHS_NABHASA_YOGAS)
     return all_yogas
