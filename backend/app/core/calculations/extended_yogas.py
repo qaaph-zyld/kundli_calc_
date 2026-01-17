@@ -1047,7 +1047,24 @@ class ExtendedYogaCalculator:
 
     def _check_lakshmi_yoga(self):
         """
-        Lakshmi Yoga - Multiple conditions for wealth
+        Lakshmi Yoga (Goddess of Wealth Yoga)
+        
+        Classical References:
+        - BPHS Chapter 41, Verse 36
+        - Saravali Chapter 40, Verse 16
+        
+        Definition: When the 9th lord (house of fortune) is strong and
+        positioned in a Kendra (1, 4, 7, 10) or Trikona (1, 5, 9).
+        
+        Classical Effects:
+        "The native will be wealthy, beautiful, famous, virtuous,
+        blessed by Goddess Lakshmi, and enjoy all comforts."
+        
+        Conditions:
+        - 9th lord in Kendra or Trikona from Lagna
+        - 9th lord in own sign, exaltation, or friend's sign (strong)
+        
+        Note: Named after Goddess Lakshmi, deity of wealth and prosperity.
         """
         lord_9 = self.house_lords[9]
         h9_lord_house = self._get_planet_house(lord_9)
@@ -1070,7 +1087,26 @@ class ExtendedYogaCalculator:
 
     def _check_saraswati_yoga(self):
         """
-        Saraswati Yoga - Jupiter, Venus, Mercury in kendra/trine
+        Saraswati Yoga (Goddess of Learning Yoga)
+        
+        Classical References:
+        - BPHS Chapter 41, Verse 58
+        - Saravali Chapter 40, Verse 28
+        
+        Definition: When Jupiter, Venus, and Mercury are positioned in
+        Kendra (1, 4, 7, 10) or Trikona (1, 5, 9) houses from Lagna.
+        
+        Classical Effects (BPHS):
+        "The native will be a poet, skilled in all Shastras, famous,
+        proficient in fine arts, music, and creative expression."
+        
+        Strength Variations:
+        - All three planets: Maximum strength (great scholar/artist)
+        - Two planets: Good strength (learned person)
+        - One planet: Weak (not true Saraswati Yoga)
+        
+        Note: Named after Goddess Saraswati, deity of learning and arts.
+        Very auspicious for education and creative pursuits.
         """
         planets_check = ["Jupiter", "Venus", "Mercury"]
         in_good_houses = []
@@ -1110,7 +1146,28 @@ class ExtendedYogaCalculator:
 
     def _check_parivartana_yoga(self):
         """
-        Parivartana (Exchange) Yoga - Two planets in each other's signs
+        Parivartana Yoga (Exchange/Mutual Reception Yoga)
+        
+        Classical References:
+        - BPHS Chapter 41, Verses 59-61
+        - Saravali Chapter 40, Verses 29-31
+        
+        Definition: When two planets occupy each other's signs, creating
+        a mutual exchange (Planet A in sign ruled by B, Planet B in sign
+        ruled by A).
+        
+        Three Types (by house involvement):
+        1. Maha Parivartana: Between lords of Kendra/Trikona (most auspicious)
+        2. Khala Parivartana: Between lords of Dusthana houses 6/8/12 (inauspicious)
+        3. Dainya Parivartana: Mixed (one good lord, one dusthana lord)
+        
+        Classical Effects:
+        - Maha: "Wealth, fame, power, long life, virtuous nature"
+        - Khala: "Troubles, obstacles, diseases, enemies"
+        - Dainya: "Mixed results depending on involved houses"
+        
+        Note: This yoga creates a strong karmic connection between the
+        involved houses and their significations.
         """
         for i in range(12):
             for j in range(i + 1, 12):
