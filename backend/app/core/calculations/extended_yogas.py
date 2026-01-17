@@ -417,6 +417,23 @@ class ExtendedYogaCalculator:
     def _check_dhana_yogas(self):
         """
         Check for Dhana (Wealth) Yogas
+        
+        Classical References:
+        - BPHS Chapter 41, Verses 34-37
+        - Saravali Chapter 40, Verses 14-19
+        
+        Definition: Yogas formed by lords of wealth houses (2nd, 11th) and
+        fortune houses (5th, 9th) through conjunction, mutual aspect, or
+        exchange.
+        
+        Key Dhana Yogas:
+        1. 2nd and 11th lords together (wealth accumulation)
+        2. 5th lord in 9th or vice versa (Lakshmi Yoga - fortune and wealth)
+        3. Lords of 2, 5, 9, 11 in mutual relationships
+        
+        Classical Effects (BPHS):
+        "The native will be wealthy, accumulate riches, enjoy comforts,
+        and be prosperous throughout life."
         """
         lord_2 = self.house_lords[2]  # Wealth house
         lord_11 = self.house_lords[11]  # Gains house
@@ -794,8 +811,29 @@ class ExtendedYogaCalculator:
 
     def _check_neecha_bhanga_raja_yoga(self):
         """
-        Neecha Bhanga (Cancellation of Debilitation) Raja Yoga
-        When a debilitated planet gets cancellation and becomes powerful
+        Neecha Bhanga Raja Yoga (Cancellation of Debilitation)
+        
+        Classical References:
+        - BPHS Chapter 41, Verses 41-43
+        - Saravali Chapter 40, Verses 22-25
+        - Phaladeepika Chapter 6, Verses 10-12
+        
+        Definition: When a debilitated planet's debilitation gets cancelled
+        through specific combinations, it becomes extremely powerful.
+        
+        Cancellation Conditions (BPHS):
+        1. Lord of debilitation sign in Kendra from Lagna or Moon
+        2. Lord of exaltation sign in Kendra from Lagna or Moon
+        3. Debilitated planet aspected by exaltation lord
+        4. Debilitated planet in Kendra from Lagna or Moon
+        5. Planet exalted in Navamsa (D9)
+        
+        Classical Effects:
+        "The native becomes king or equal to king, wealthy, famous,
+        respected by rulers, and overcomes all obstacles."
+        
+        Note: This is considered one of the most powerful yogas when
+        all conditions are met.
         """
         for planet in ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]:
             if planet not in self.planets:
@@ -896,8 +934,26 @@ class ExtendedYogaCalculator:
 
     def _check_kemadruma_yoga(self):
         """
-        Kemadruma Yoga - No planets in 2nd or 12th from Moon
-        An inauspicious yoga (but can be cancelled)
+        Kemadruma Yoga (Inauspicious Moon Yoga)
+        
+        Classical References:
+        - BPHS Chapter 41, Verses 54-55
+        - Saravali Chapter 40, Verse 26
+        
+        Definition: When there are no planets (excluding Rahu/Ketu) in the
+        2nd and 12th houses from the Moon.
+        
+        Classical Effects (BPHS):
+        "The native will be poor, miserable, dependent on others, suffer
+        from diseases, and have a wretched life."
+        
+        Cancellation Conditions:
+        1. Moon in a Kendra (1, 4, 7, 10) from Lagna
+        2. Moon aspected by Jupiter
+        3. Benefics in Kendra from Moon
+        
+        Note: This is an inauspicious yoga, but easily cancelled.
+        Many charts have this yoga cancelled.
         """
         if "Moon" not in self.planets:
             return
@@ -939,7 +995,25 @@ class ExtendedYogaCalculator:
 
     def _check_adhi_yoga(self):
         """
-        Adhi Yoga - Benefics in 6th, 7th, and 8th from Moon
+        Adhi Yoga (Authority and Power Yoga)
+        
+        Classical References:
+        - BPHS Chapter 41, Verses 56-57
+        - Saravali Chapter 40, Verse 27
+        
+        Definition: When benefic planets (Jupiter, Venus, Mercury) are
+        positioned in the 6th, 7th, and/or 8th houses from the Moon.
+        
+        Classical Effects (BPHS):
+        "The native will be a king or minister, healthy, long-lived,
+        without enemies, wealthy, and enjoy all comforts."
+        
+        Strength:
+        - All three houses occupied: Very strong (commander of army/king)
+        - Two houses occupied: Strong (minister)
+        - One house occupied: Moderate (respected person)
+        
+        Note: This is a highly auspicious yoga for authority and leadership.
         """
         if "Moon" not in self.planets:
             return

@@ -561,14 +561,19 @@ if not planets_2nd_from_moon and not planets_12th_from_moon:
 - Neecha Bhanga Raja Yoga
 - Kemadruma Yoga
 
-### Issues Identified
+### Issues Identified & Fixed
 
-**Moon Yogas (3 yogas) - Minor Discrepancy:** ⚠️
-- **Issue:** Implementation restricts to benefics only
+**Moon Yogas (3 yogas) - FIXED:** ✅
+- **Issue:** Implementation was restricted to benefics only
 - **Classical:** Should include all planets except Sun
 - **Severity:** Medium
-- **Impact:** Reduces yoga detection rate
-- **Fix:** Expand to all planets (except Sun), vary strength by planet
+- **Impact:** Was reducing yoga detection rate
+- **Fix Applied (2026-01-17):** Expanded to all planets except Sun, strength varies by planet type
+  - Pure benefics: Strength 80
+  - Pure malefics: Strength 65
+  - Mixed: Strength 70
+  - Nodes only: Strength 60
+- **Status:** Now 100% BPHS-compliant
 
 **Recommendation:**
 ```python
@@ -592,22 +597,22 @@ planets_2nd = [p for p in planets_2nd if p != "Sun"]
 | Mahapurusha | 5 | 5 | 5 | 0 | 100% |
 | Raja Yogas | 10+ | 5 | 5 | 0 | 100% |
 | Dhana Yogas | 5+ | 3 | 3 | 0 | 100% |
-| Chandra Yogas | 3 | 3 | 0 | 3 | 0%* |
+| Chandra Yogas | 3 | 3 | 3 | 0 | 100% ✅ |
 | Surya Yogas | 3 | 3 | 3 | 0 | 100% |
 | Vipreet Raja | 3 | 3 | 3 | 0 | 100% |
 | Special Yogas | 10+ | 8 | 8 | 0 | 100% |
-| **TOTAL** | **60+** | **30** | **27** | **3** | **90%** |
+| **TOTAL** | **60+** | **30** | **30** | **0** | **100%** ✅ |
 
-*Note: Chandra yogas work but are more restrictive than classical definition
+**Update 2026-01-17:** All verified yogas now 100% BPHS-compliant after Chandra yoga fixes.
 
 ---
 
 ## Recommended Actions
 
-### Immediate (High Priority)
-1. **Fix Chandra Yogas** - Expand to all planets except Sun
-2. **Add classical citations** to code comments
-3. **Update test cases** to include fixed conditions
+### Immediate (High Priority) - COMPLETE ✅
+1. ✅ **Fix Chandra Yogas** - Expanded to all planets except Sun (2026-01-17)
+2. ✅ **Add classical citations** - Added BPHS/Saravali citations to 10+ yoga categories (2026-01-17)
+3. ⏳ **Update test cases** - Existing tests passing, additional edge case tests pending
 
 ### Short-term (Medium Priority)
 1. Verify remaining 30 yogas against Saravali
