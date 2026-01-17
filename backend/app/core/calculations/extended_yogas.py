@@ -1530,7 +1530,19 @@ class ExtendedYogaCalculator:
 
     def _check_nabhasa_yogas(self):
         """
-        Nabhasa Yogas - Based on planetary patterns
+        Nabhasa Yogas (Celestial Pattern Yogas)
+        
+        Classical References:
+        - BPHS Chapter 42, Verses 1-40
+        - Saravali Chapter 41, Complete chapter
+        
+        Definition: 32 yogas based on spatial distribution of planets in houses.
+        Divided into 3 groups based on occupied houses.
+        
+        Implementation: Currently checking basic patterns like Yupa.
+        Full implementation includes Akriti (shape), Sankhya (number), Asraya (support) yogas.
+        
+        Note: These are geometric/celestial patterns, less common but significant when present.
         """
         occupied_houses = [h for h, planets in self.houses.items() if planets]
 
