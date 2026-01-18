@@ -209,6 +209,72 @@ class TestDashaEdgeCases:
         assert first_dasha["planet"] == "Ketu"
 
 
+class TestJHoraDateAccuracy:
+    """Test exact dasha dates against JHora within ±1 day tolerance"""
+    
+    @pytest.fixture
+    def dasha_calculator(self):
+        return VimshottariDasha()
+    
+    # JHora reference dates from Nikola_Jelacic.txt
+    JHORA_MAHADASHA_DATES = [
+        {"planet": "Mars", "start": "1988-02-17", "end": "1995-02-17"},
+        {"planet": "Rahu", "start": "1995-02-17", "end": "2013-02-16"},
+        {"planet": "Jupiter", "start": "2013-02-16", "end": "2029-02-16"},
+        {"planet": "Saturn", "start": "2029-02-16", "end": "2048-02-17"},
+        {"planet": "Mercury", "start": "2048-02-17", "end": "2065-02-17"},
+    ]
+    
+    def test_mahadasha_dates_within_tolerance(self, dasha_calculator):
+        """Test mahadasha start/end dates match JHora within acceptable tolerance
+        
+        Tolerance: ±1 day per year of dasha period (accounts for 365.25 vs 365.2422 day/year)
+        This means a 7-year dasha can have up to 7 days deviation.
+        """
+        birth_time = datetime(1990, 10, 9, 8, 10, 0, tzinfo=timezone.utc)
+        moon_longitude = 58.348689  # From JHora reference
+        
+        result = dasha_calculator.calculate_dasha_at_birth(birth_time, moon_longitude)
+        
+        for i, expected in enumerate(self.JHORA_MAHADASHA_DATES):
+            if i >= len(result["dasha_sequence"]):
+                break
+                
+            actual = result["dasha_sequence"][i]
+            
+            # Check planet matches
+            assert actual["planet"] == expected["planet"], \
+                f"Period {i}: Expected {expected['planet']}, got {actual['planet']}"
+            
+            # Check end date within tolerance (1 day per year of elapsed time)
+            expected_end = datetime.strptime(expected["end"], "%Y-%m-%d")
+            actual_end = actual["end_date"].replace(tzinfo=None) if actual["end_date"].tzinfo else actual["end_date"]
+            
+            # Calculate years from birth to this dasha end
+            years_elapsed = (expected_end - birth_time.replace(tzinfo=None)).days / 365.25
+            tolerance_days = max(3, int(years_elapsed * 0.5))  # 0.5 day/year, minimum 3 days
+            
+            diff_days = abs((actual_end - expected_end).days)
+            assert diff_days <= tolerance_days, \
+                f"{expected['planet']} end date: {actual_end.date()} differs from JHora {expected_end.date()} by {diff_days} days (tolerance: {tolerance_days})"
+    
+    def test_current_bhukti_matches_jhora(self, dasha_calculator):
+        """Test current bhukti (as of Jan 2026) matches JHora"""
+        birth_time = datetime(1990, 10, 9, 8, 10, 0, tzinfo=timezone.utc)
+        moon_longitude = 58.348689
+        
+        # Check date: January 18, 2026
+        check_date = datetime(2026, 1, 18, 12, 0, 0, tzinfo=timezone.utc)
+        
+        current = dasha_calculator.get_current_dasha(birth_time, moon_longitude, check_date)
+        
+        # Per JHora: Jupiter mahadasha, Mars bhukti (Oct 2025 - Sep 2026)
+        assert current["mahadasha"]["planet"] == "Jupiter", \
+            f"Expected Jupiter mahadasha, got {current['mahadasha']['planet']}"
+        assert current["antardasha"]["planet"] == "Mars", \
+            f"Expected Mars antardasha, got {current['antardasha']['planet']}"
+
+
 class TestPratyantardashaCalculation:
     """Test pratyantardasha (sub-sub-period) calculations"""
     

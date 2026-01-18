@@ -140,5 +140,24 @@
     "karana": "Vanija",
     "weekday": "Tuesday"
   },
+  "vimshottari_dasha": {
+    "birth_dasha": "Mars",
+    "birth_bhukti": "Mars",
+    "moon_nakshatra": "Mrigasira",
+    "moon_nakshatra_lord": "Mars",
+    "mahadasha_sequence": [
+      {"planet": "Mars", "start": "1988-02-17", "end": "1995-02-17"},
+      {"planet": "Rahu", "start": "1995-02-17", "end": "2013-02-16"},
+      {"planet": "Jupiter", "start": "2013-02-16", "end": "2029-02-16"},
+      {"planet": "Saturn", "start": "2029-02-16", "end": "2048-02-17"},
+      {"planet": "Mercury", "start": "2048-02-17", "end": "2065-02-17"}
+    ],
+    "current_dasha": {
+      "mahadasha": "Jupiter",
+      "bhukti": "Mars",
+      "bhukti_start": "2025-10-21",
+      "bhukti_end": "2026-09-27"
+    }
+  },
   "notes": "Real user chart - gold standard reference for accuracy validation"
 }
