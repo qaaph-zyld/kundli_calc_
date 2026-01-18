@@ -1,15 +1,17 @@
 from datetime import datetime
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
 import swisseph as swe
 from app.models.kundli import (
-    KundliRequest,
-    KundliChart,
-    Planet,
-    House,
-    ChartType,
     AyanamsaType,
+    ChartType,
+    House,
     HouseSystem,
+    KundliChart,
+    KundliRequest,
+    Planet,
 )
+
 
 class KundliCalculator:
     PLANETS = {
@@ -27,23 +29,53 @@ class KundliCalculator:
     }
 
     SIGNS = [
-        "Aries", "Taurus", "Gemini", "Cancer",
-        "Leo", "Virgo", "Libra", "Scorpio",
-        "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+        "Aries",
+        "Taurus",
+        "Gemini",
+        "Cancer",
+        "Leo",
+        "Virgo",
+        "Libra",
+        "Scorpio",
+        "Sagittarius",
+        "Capricorn",
+        "Aquarius",
+        "Pisces",
     ]
 
     NAKSHATRAS = [
-        "Ashwini", "Bharani", "Krittika", "Rohini",
-        "Mrigashira", "Ardra", "Punarvasu", "Pushya",
-        "Ashlesha", "Magha", "Purva Phalguni", "Uttara Phalguni",
-        "Hasta", "Chitra", "Swati", "Vishakha",
-        "Anuradha", "Jyeshtha", "Mula", "Purva Ashadha",
-        "Uttara Ashadha", "Shravana", "Dhanishta", "Shatabhisha",
-        "Purva Bhadrapada", "Uttara Bhadrapada", "Revati"
+        "Ashwini",
+        "Bharani",
+        "Krittika",
+        "Rohini",
+        "Mrigashira",
+        "Ardra",
+        "Punarvasu",
+        "Pushya",
+        "Ashlesha",
+        "Magha",
+        "Purva Phalguni",
+        "Uttara Phalguni",
+        "Hasta",
+        "Chitra",
+        "Swati",
+        "Vishakha",
+        "Anuradha",
+        "Jyeshtha",
+        "Mula",
+        "Purva Ashadha",
+        "Uttara Ashadha",
+        "Shravana",
+        "Dhanishta",
+        "Shatabhisha",
+        "Purva Bhadrapada",
+        "Uttara Bhadrapada",
+        "Revati",
     ]
 
     def __init__(self):
         import os
+
         ephe_path = os.getenv("EPHE_PATH")
         if ephe_path:
             swe.set_ephe_path(ephe_path)
@@ -58,26 +90,17 @@ class KundliCalculator:
         swe.set_sid_mode(ayanamsa_map[ayanamsa])
 
     def _get_julian_day(self, date: datetime) -> float:
-        return swe.julday(
-            date.year,
-            date.month,
-            date.day,
-            date.hour + date.minute / 60.0 + date.second / 3600.0
-        )
+        return swe.julday(date.year, date.month, date.day, date.hour + date.minute / 60.0 + date.second / 3600.0)
 
-    def _calculate_houses(
-        self, jd: float, lat: float, lon: float, house_system: HouseSystem
-    ) -> List[House]:
+    def _calculate_houses(self, jd: float, lat: float, lon: float, house_system: HouseSystem) -> List[House]:
         system_map = {
-            HouseSystem.PLACIDUS: b'P',
-            HouseSystem.KOCH: b'K',
-            HouseSystem.EQUAL: b'E',
-            HouseSystem.WHOLE_SIGN: b'W',
+            HouseSystem.PLACIDUS: b"P",
+            HouseSystem.KOCH: b"K",
+            HouseSystem.EQUAL: b"E",
+            HouseSystem.WHOLE_SIGN: b"W",
         }
 
-        cusps, ascmc = swe.houses(
-            jd, lat, lon, system_map[house_system]
-        )
+        cusps, ascmc = swe.houses(jd, lat, lon, system_map[house_system])
 
         houses = []
         for i in range(12):
@@ -129,9 +152,7 @@ class KundliCalculator:
 
         return planets
 
-    def calculate_chart(
-        self, request: KundliRequest, chart_type: ChartType
-    ) -> KundliChart:
+    def calculate_chart(self, request: KundliRequest, chart_type: ChartType) -> KundliChart:
         # Set ayanamsa
         self._set_ayanamsa(request.ayanamsa)
 
@@ -139,9 +160,7 @@ class KundliCalculator:
         jd = self._get_julian_day(request.date)
 
         # Calculate houses
-        houses = self._calculate_houses(
-            jd, request.latitude, request.longitude, request.house_system
-        )
+        houses = self._calculate_houses(jd, request.latitude, request.longitude, request.house_system)
 
         # Calculate planets
         planets = self._calculate_planets(jd)
@@ -161,9 +180,7 @@ class KundliCalculator:
             planets=planets,
         )
 
-    def _apply_divisional_chart(
-        self, planets: List[Planet], chart_type: ChartType
-    ) -> List[Planet]:
+    def _apply_divisional_chart(self, planets: List[Planet], chart_type: ChartType) -> List[Planet]:
         # Implement divisional chart calculations
         # This is a simplified version
         division_factor = {
@@ -198,7 +215,4 @@ class KundliCalculator:
         return modified_planets
 
     def calculate_all_charts(self, request: KundliRequest) -> List[KundliChart]:
-        return [
-            self.calculate_chart(request, chart_type)
-            for chart_type in request.chart_types
-        ]
+        return [self.calculate_chart(request, chart_type) for chart_type in request.chart_types]

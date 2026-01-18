@@ -12,7 +12,7 @@ written by Kalyana Varma. It provides detailed, practical interpretations
 that complement and sometimes contrast with BPHS.
 """
 
-from typing import Dict, Any
+from typing import Any, Dict
 
 # Metadata about the source text
 SARAVALI_METADATA = {
@@ -26,13 +26,12 @@ SARAVALI_METADATA = {
     "language": "Sanskrit (translated to English)",
     "tradition": "Vedic/Hindu astrology (Jyotish)",
     "authority_level": "Primary classical text",
-    "notes": "One of the earliest comprehensive astrological texts; practical focus"
+    "notes": "One of the earliest comprehensive astrological texts; practical focus",
 }
 
 # Saravali Planets in Houses Interpretations
 # Format: {planet: {house: {interpretation_data}}}
 SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
-    
     "Sun": {
         1: {
             "verses": "Ch. 27, v. 1-2",
@@ -44,23 +43,23 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Health issues with eyes or head",
                 "Athletic or lean body structure",
                 "Impetuous and quick to act",
-                "Father's influence strong on personality"
+                "Father's influence strong on personality",
             ],
             "positive_effects": [
                 "Natural leadership and authority",
                 "Strong willpower and determination",
                 "Success through self-effort",
                 "Respected by others",
-                "Courageous and bold"
+                "Courageous and bold",
             ],
             "challenging_effects": [
                 "May have ego issues",
                 "Impulsive decision-making",
                 "Eye or head health concerns",
                 "Can be domineering",
-                "Scanty hair (baldness tendency)"
+                "Scanty hair (baldness tendency)",
             ],
-            "timing": "Sun dashas bring prominence to self and career"
+            "timing": "Sun dashas bring prominence to self and career",
         },
         2: {
             "verses": "Ch. 27, v. 2",
@@ -72,22 +71,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Self-esteem issues related to finances",
                 "May need to rebuild family fortune",
                 "Strong opinions on values and money",
-                "Facial features may be stern"
+                "Facial features may be stern",
             ],
             "positive_effects": [
                 "Strong voice and authoritative speech when well-placed",
                 "Determination to create own wealth",
                 "Value-driven approach to resources",
-                "Can be powerful speaker if Sun is strong"
+                "Can be powerful speaker if Sun is strong",
             ],
             "challenging_effects": [
                 "Financial instability",
                 "Harsh speech causing conflicts",
                 "Family disputes over money",
                 "Difficulty in formal education",
-                "Eye or facial issues"
+                "Eye or facial issues",
             ],
-            "timing": "Financial challenges in early life; improvement after Sun dasha"
+            "timing": "Financial challenges in early life; improvement after Sun dasha",
         },
         3: {
             "verses": "Ch. 27, v. 3",
@@ -99,22 +98,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Generous and charitable nature",
                 "Skilled in multiple areas",
                 "Self-made success through effort",
-                "Initiative and entrepreneurial spirit"
+                "Initiative and entrepreneurial spirit",
             ],
             "positive_effects": [
                 "Outstanding courage and valor",
                 "Physical strength and energy",
                 "Generosity and liberality",
                 "Skillful and versatile",
-                "Success through self-effort"
+                "Success through self-effort",
             ],
             "challenging_effects": [
                 "Loss of or separation from siblings",
                 "Conflicts with brothers/sisters",
                 "Overly aggressive approach",
-                "Ego in communications"
+                "Ego in communications",
             ],
-            "timing": "Courage develops early; sibling issues in youth; success through initiative"
+            "timing": "Courage develops early; sibling issues in youth; success through initiative",
         },
         4: {
             "verses": "Ch. 27, v. 4",
@@ -126,21 +125,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "May work in government service",
                 "Emotional distance from family",
                 "Frequent changes of residence",
-                "Heart-related health concerns"
+                "Heart-related health concerns",
             ],
             "positive_effects": [
                 "Government service opportunities",
                 "Authority in domestic matters if Sun strong",
-                "Self-reliance and independence"
+                "Self-reliance and independence",
             ],
             "challenging_effects": [
                 "Lack of domestic happiness",
                 "Mother's health or separation",
                 "Loss of property or vehicles",
                 "Few close friends",
-                "Emotional instability"
+                "Emotional instability",
             ],
-            "timing": "Domestic challenges throughout life; property gains delayed"
+            "timing": "Domestic challenges throughout life; property gains delayed",
         },
         5: {
             "verses": "Ch. 27, v. 5",
@@ -152,21 +151,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Digestive health issues",
                 "Creative blocks or frustrations",
                 "Ego affecting romantic relationships",
-                "Intelligence but harsh expression"
+                "Intelligence but harsh expression",
             ],
             "positive_effects": [
                 "Strong intellect and analytical ability",
                 "Leadership in creative fields if well-placed",
-                "Authority in educational settings"
+                "Authority in educational settings",
             ],
             "challenging_effects": [
                 "Difficulties with children",
                 "Financial losses through speculation",
                 "Stomach and digestive problems",
                 "Harsh or critical nature",
-                "Romantic disappointments"
+                "Romantic disappointments",
             ],
-            "timing": "Children delayed or challenging; health issues in middle age"
+            "timing": "Children delayed or challenging; health issues in middle age",
         },
         6: {
             "verses": "Ch. 27, v. 6",
@@ -178,22 +177,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Victory in legal matters and disputes",
                 "Leadership in service or health sectors",
                 "Conflicts with subordinates or employees",
-                "Generally good health"
+                "Generally good health",
             ],
             "positive_effects": [
                 "Outstanding ability to defeat enemies",
                 "Strong health and vitality",
                 "Success in competition",
                 "Fame and recognition",
-                "Leadership positions"
+                "Leadership positions",
             ],
             "challenging_effects": [
                 "Conflicts with employees or servants",
                 "Enmity from relatives",
                 "Ego in service relationships",
-                "Legal disputes"
+                "Legal disputes",
             ],
-            "timing": "Victory over enemies in Sun dasha; health remains strong"
+            "timing": "Victory over enemies in Sun dasha; health remains strong",
         },
         7: {
             "verses": "Ch. 27, v. 7",
@@ -205,21 +204,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Business partnership difficulties",
                 "Public humiliation or criticism",
                 "Financial losses through partnerships",
-                "Late marriage or multiple marriages"
+                "Late marriage or multiple marriages",
             ],
             "positive_effects": [
                 "Strong personality attracts partners",
                 "Leadership in partnerships if Sun well-placed",
-                "Public recognition despite challenges"
+                "Public recognition despite challenges",
             ],
             "challenging_effects": [
                 "Marital discord and conflicts",
                 "Spouse's health problems",
                 "Loss of wealth through partnerships",
                 "Defeat in legal disputes",
-                "Public humiliation"
+                "Public humiliation",
             ],
-            "timing": "Marriage challenges throughout life; partnerships require careful management"
+            "timing": "Marriage challenges throughout life; partnerships require careful management",
         },
         8: {
             "verses": "Ch. 27, v. 8",
@@ -231,22 +230,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Interest in occult and mysticism",
                 "Sudden ups and downs in life",
                 "Inheritance issues or delays",
-                "Transformative life experiences"
+                "Transformative life experiences",
             ],
             "positive_effects": [
                 "Deep insight into mysteries",
                 "Transformative spiritual growth",
                 "Research and investigation abilities",
-                "Gains through inheritance if well-placed"
+                "Gains through inheritance if well-placed",
             ],
             "challenging_effects": [
                 "Serious eye problems",
                 "Chronic health issues",
                 "Financial difficulties",
                 "Reduced longevity",
-                "Sudden losses and crises"
+                "Sudden losses and crises",
             ],
-            "timing": "Health challenges throughout life; spiritual transformation in later years"
+            "timing": "Health challenges throughout life; spiritual transformation in later years",
         },
         9: {
             "verses": "Ch. 27, v. 9",
@@ -258,21 +257,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Marital challenges",
                 "Financial struggles",
                 "Lack of interest in religion or spirituality",
-                "Foreign travel may bring difficulties"
+                "Foreign travel may bring difficulties",
             ],
             "positive_effects": [
                 "Independent thinking and philosophy",
                 "Authority in teaching if well-placed",
-                "Leadership in foreign lands"
+                "Leadership in foreign lands",
             ],
             "challenging_effects": [
                 "Father's health issues or separation",
                 "Loss of wealth",
                 "Difficulties with children",
                 "Marital problems",
-                "Lack of spiritual inclination"
+                "Lack of spiritual inclination",
             ],
-            "timing": "Father-related issues in youth; spiritual awakening delayed or absent"
+            "timing": "Father-related issues in youth; spiritual awakening delayed or absent",
         },
         10: {
             "verses": "Ch. 27, v. 10",
@@ -284,21 +283,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Father may be influential",
                 "Success through independent business",
                 "Leadership in chosen field",
-                "Public recognition and fame"
+                "Public recognition and fame",
             ],
             "positive_effects": [
                 "Outstanding career achievements",
                 "Natural authority in profession",
                 "Government favor and positions",
                 "Strong reputation and fame",
-                "Leadership roles"
+                "Leadership roles",
             ],
             "challenging_effects": [
                 "May face challenges from superiors",
                 "Work-related stress",
-                "Pressure to maintain status"
+                "Pressure to maintain status",
             ],
-            "timing": "Career peaks during Sun mahadasha and dashas of 10th lord"
+            "timing": "Career peaks during Sun mahadasha and dashas of 10th lord",
         },
         11: {
             "verses": "Ch. 27, v. 11",
@@ -310,21 +309,17 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Fulfillment of desires and ambitions",
                 "Success in social networks",
                 "Vehicles and material comforts",
-                "Few children but successful"
+                "Few children but successful",
             ],
             "positive_effects": [
                 "Outstanding financial gains",
                 "Longevity and good health",
                 "Wealth from multiple sources",
                 "Vehicles and luxuries",
-                "Achievement of goals"
+                "Achievement of goals",
             ],
-            "challenging_effects": [
-                "Limited number of children",
-                "Ego in friendships",
-                "May dominate social groups"
-            ],
-            "timing": "Gains increase with age; peak prosperity in Sun dasha"
+            "challenging_effects": ["Limited number of children", "Ego in friendships", "May dominate social groups"],
+            "timing": "Gains increase with age; peak prosperity in Sun dasha",
         },
         12: {
             "verses": "Ch. 27, v. 12",
@@ -336,25 +331,24 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Service to others or foreign lands",
                 "Spiritual inclinations develop",
                 "Expenditure exceeds income",
-                "Interest in isolation or meditation"
+                "Interest in isolation or meditation",
             ],
             "positive_effects": [
                 "Spiritual growth and moksha",
                 "Service to humanity",
                 "Success in foreign lands",
-                "Charitable nature"
+                "Charitable nature",
             ],
             "challenging_effects": [
                 "Serious eye problems",
                 "Financial difficulties",
                 "Loss of children or childlessness",
                 "Serving others rather than leading",
-                "Expenses and losses"
+                "Expenses and losses",
             ],
-            "timing": "Expenses throughout life; spiritual growth in later years"
-        }
+            "timing": "Expenses throughout life; spiritual growth in later years",
+        },
     },
-    
     "Moon": {
         1: {
             "verses": "Ch. 28, v. 1",
@@ -366,23 +360,23 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Love for beauty, water, and nature",
                 "Good education and learning",
                 "Kapha (phlegm) constitution",
-                "Nurturing and caring personality"
+                "Nurturing and caring personality",
             ],
             "positive_effects": [
                 "Beautiful and attractive physique",
                 "Emotional intelligence",
                 "Love for arts and beauty",
                 "Good learning abilities",
-                "Nurturing nature"
+                "Nurturing nature",
             ],
             "challenging_effects": [
                 "Fickle-minded and changeable",
                 "Emotional instability",
                 "Phlegm-related health issues",
                 "Overly sensitive",
-                "Mood swings"
+                "Mood swings",
             ],
-            "timing": "Emotional nature evident from birth; Moon dasha brings changes"
+            "timing": "Emotional nature evident from birth; Moon dasha brings changes",
         },
         2: {
             "verses": "Ch. 28, v. 2",
@@ -394,21 +388,17 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Good education and knowledge",
                 "Happy family life",
                 "Many friends and social connections",
-                "Gains through liquids or nurturing professions"
+                "Gains through liquids or nurturing professions",
             ],
             "positive_effects": [
                 "Outstanding wealth and prosperity",
                 "Beautiful face and eyes",
                 "Sweet speech and communication",
                 "Educational achievements",
-                "Happy family relationships"
+                "Happy family relationships",
             ],
-            "challenging_effects": [
-                "Emotional attachment to money",
-                "Fluctuating finances",
-                "May overindulge in food"
-            ],
-            "timing": "Wealth increases in Moon dasha; family happiness throughout life"
+            "challenging_effects": ["Emotional attachment to money", "Fluctuating finances", "May overindulge in food"],
+            "timing": "Wealth increases in Moon dasha; family happiness throughout life",
         },
         3: {
             "verses": "Ch. 28, v. 3",
@@ -420,21 +410,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success through self-effort",
                 "Good communication abilities",
                 "Wealth through initiative",
-                "Artistic and creative talents"
+                "Artistic and creative talents",
             ],
             "positive_effects": [
                 "Strong courage and initiative",
                 "Good sibling relationships",
                 "Wealth and prosperity",
                 "Strong physical constitution",
-                "Creative abilities"
+                "Creative abilities",
             ],
             "challenging_effects": [
                 "Tendency to gain weight",
                 "Emotional approach to courage",
-                "May be overly attached to siblings"
+                "May be overly attached to siblings",
             ],
-            "timing": "Courage develops early; wealth through self-effort in Moon dasha"
+            "timing": "Courage develops early; wealth through self-effort in Moon dasha",
         },
         4: {
             "verses": "Ch. 28, v. 4",
@@ -446,21 +436,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Happy domestic life",
                 "Comfortable home environment",
                 "Good education and learning",
-                "Support from relatives"
+                "Support from relatives",
             ],
             "positive_effects": [
                 "Emotional contentment and peace",
                 "Happy relationship with mother",
                 "Property and material comforts",
                 "Good education",
-                "Strong family ties"
+                "Strong family ties",
             ],
             "challenging_effects": [
                 "Emotional attachment to home",
                 "May be too dependent on family",
-                "Frequent residence changes if weak"
+                "Frequent residence changes if weak",
             ],
-            "timing": "Peak emotional happiness during Moon dasha; property gains likely"
+            "timing": "Peak emotional happiness during Moon dasha; property gains likely",
         },
         5: {
             "verses": "Ch. 28, v. 5",
@@ -472,21 +462,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Fame and recognition",
                 "Emotional intelligence",
                 "Success in creative pursuits",
-                "Romantic and loving nature"
+                "Romantic and loving nature",
             ],
             "positive_effects": [
                 "Blessed with good children",
                 "Intelligence and wisdom",
                 "Fame and reputation",
                 "Creative talents",
-                "Emotional happiness"
+                "Emotional happiness",
             ],
             "challenging_effects": [
                 "Emotional attachment to children",
                 "Fluctuating creative output",
-                "Romantic mood swings"
+                "Romantic mood swings",
             ],
-            "timing": "Children in Moon dasha; creative success; educational achievements"
+            "timing": "Children in Moon dasha; creative success; educational achievements",
         },
         6: {
             "verses": "Ch. 28, v. 6",
@@ -498,21 +488,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Digestive and stomach problems",
                 "Service-oriented work",
                 "Emotional stress from conflicts",
-                "Lack of peace of mind"
+                "Lack of peace of mind",
             ],
             "positive_effects": [
                 "Ability to serve and help others",
                 "Emotional resilience when developed",
-                "Success in healing professions"
+                "Success in healing professions",
             ],
             "challenging_effects": [
                 "Phlegm and water-related diseases",
                 "Short temper and irritability",
                 "Many enemies and conflicts",
                 "Lack of happiness",
-                "Mental stress"
+                "Mental stress",
             ],
-            "timing": "Health challenges throughout life; enemies in Moon dasha"
+            "timing": "Health challenges throughout life; enemies in Moon dasha",
         },
         7: {
             "verses": "Ch. 28, v. 7",
@@ -524,21 +514,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Pleasant and amiable personality",
                 "Success in business partnerships",
                 "Wealth through partnerships",
-                "Good education"
+                "Good education",
             ],
             "positive_effects": [
                 "Outstanding marital happiness",
                 "Beautiful and compatible spouse",
                 "Wealth and prosperity",
                 "Pleasant personality",
-                "Success in partnerships"
+                "Success in partnerships",
             ],
             "challenging_effects": [
                 "Emotional dependency on partner",
                 "Fluctuating relationship dynamics",
-                "May be too accommodating"
+                "May be too accommodating",
             ],
-            "timing": "Marriage in Moon dasha; partnership success; emotional fulfillment"
+            "timing": "Marriage in Moon dasha; partnership success; emotional fulfillment",
         },
         8: {
             "verses": "Ch. 28, v. 8",
@@ -550,22 +540,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial instability",
                 "Transformative life experiences",
                 "Inheritance issues",
-                "Reduced vitality"
+                "Reduced vitality",
             ],
             "positive_effects": [
                 "Deep emotional insight",
                 "Psychic and intuitive abilities",
                 "Transformative spiritual growth",
-                "Research abilities"
+                "Research abilities",
             ],
             "challenging_effects": [
                 "Chronic diseases",
                 "Short lifespan",
                 "Financial difficulties",
                 "Physical defects or weakness",
-                "Emotional crises"
+                "Emotional crises",
             ],
-            "timing": "Health challenges throughout life; crises in Moon dasha"
+            "timing": "Health challenges throughout life; crises in Moon dasha",
         },
         9: {
             "verses": "Ch. 28, v. 9",
@@ -577,21 +567,17 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth and prosperity",
                 "Intelligent and wise",
                 "Blessed with children",
-                "Attractive to opposite sex"
+                "Attractive to opposite sex",
             ],
             "positive_effects": [
                 "Outstanding fortune and blessings",
                 "Spiritual devotion",
                 "Wealth and happiness",
                 "Intelligence and wisdom",
-                "Good children"
+                "Good children",
             ],
-            "challenging_effects": [
-                "Emotional attachment to beliefs",
-                "May be overly idealistic",
-                "Fluctuating faith"
-            ],
-            "timing": "Fortune increases in Moon dasha; spiritual growth; foreign travel"
+            "challenging_effects": ["Emotional attachment to beliefs", "May be overly idealistic", "Fluctuating faith"],
+            "timing": "Fortune increases in Moon dasha; spiritual growth; foreign travel",
         },
         10: {
             "verses": "Ch. 28, v. 10",
@@ -603,21 +589,17 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Emotional intelligence in career",
                 "Fluctuating career trajectory",
                 "Mother influential in career",
-                "Public recognition"
+                "Public recognition",
             ],
             "positive_effects": [
                 "Public popularity and fame",
                 "Success in people-oriented careers",
                 "Wealth through career",
                 "Vehicles and comforts",
-                "Virtuous professional conduct"
+                "Virtuous professional conduct",
             ],
-            "challenging_effects": [
-                "Career changes and fluctuations",
-                "Emotional stress from work",
-                "Public scrutiny"
-            ],
-            "timing": "Career success in Moon dasha; public recognition peaks"
+            "challenging_effects": ["Career changes and fluctuations", "Emotional stress from work", "Public scrutiny"],
+            "timing": "Career success in Moon dasha; public recognition peaks",
         },
         11: {
             "verses": "Ch. 28, v. 11",
@@ -629,21 +611,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Long and healthy life",
                 "Success in social networks",
                 "Fulfillment of desires",
-                "Servants and helpers"
+                "Servants and helpers",
             ],
             "positive_effects": [
                 "Outstanding financial gains",
                 "Many children",
                 "Longevity",
                 "Social success",
-                "Achievement of goals"
+                "Achievement of goals",
             ],
             "challenging_effects": [
                 "Emotional attachment to gains",
                 "Fluctuating income",
-                "May have too many obligations"
+                "May have too many obligations",
             ],
-            "timing": "Gains increase with age; peak prosperity in Moon dasha"
+            "timing": "Gains increase with age; peak prosperity in Moon dasha",
         },
         12: {
             "verses": "Ch. 28, v. 12",
@@ -655,25 +637,24 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Lazy or indolent nature",
                 "Spiritual inclinations develop",
                 "Interest in foreign lands",
-                "Expenditure exceeds income"
+                "Expenditure exceeds income",
             ],
             "positive_effects": [
                 "Spiritual growth and moksha",
                 "Intuitive and psychic abilities",
                 "Success in foreign lands",
-                "Charitable nature"
+                "Charitable nature",
             ],
             "challenging_effects": [
                 "Eye diseases",
                 "Financial difficulties",
                 "Lack of education",
                 "Indolence and laziness",
-                "Expenses and losses"
+                "Expenses and losses",
             ],
-            "timing": "Expenses throughout life; spiritual awakening in later years"
-        }
+            "timing": "Expenses throughout life; spiritual awakening in later years",
+        },
     },
-    
     "Mars": {
         1: {
             "verses": "Ch. 29, v. 1",
@@ -685,23 +666,23 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Prone to injuries and accidents",
                 "Bilious (Pitta) constitution",
                 "Quick temper and impulsive",
-                "Strong physical vitality"
+                "Strong physical vitality",
             ],
             "positive_effects": [
                 "Outstanding courage and bravery",
                 "Strong physical energy",
                 "Leadership abilities",
                 "Athletic prowess",
-                "Competitive spirit"
+                "Competitive spirit",
             ],
             "challenging_effects": [
                 "Cruel or harsh nature",
                 "Impulsive and rash decisions",
                 "Prone to injuries",
                 "Short temper",
-                "Reduced longevity if afflicted"
+                "Reduced longevity if afflicted",
             ],
-            "timing": "Mars dasha brings energy, courage, but also conflicts and injuries"
+            "timing": "Mars dasha brings energy, courage, but also conflicts and injuries",
         },
         2: {
             "verses": "Ch. 29, v. 2",
@@ -713,21 +694,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Relationship indiscretions",
                 "Lack of formal education",
                 "Family disputes over money",
-                "Poor dietary habits"
+                "Poor dietary habits",
             ],
             "positive_effects": [
                 "Strong voice and assertive speech",
                 "Ability to fight for resources",
-                "Self-made wealth if Mars strong"
+                "Self-made wealth if Mars strong",
             ],
             "challenging_effects": [
                 "Financial difficulties",
                 "Harsh speech causing conflicts",
                 "Facial injuries or ugliness",
                 "Immoral relationships",
-                "Lack of education and happiness"
+                "Lack of education and happiness",
             ],
-            "timing": "Financial struggles in early life; speech-related conflicts"
+            "timing": "Financial struggles in early life; speech-related conflicts",
         },
         3: {
             "verses": "Ch. 29, v. 3",
@@ -739,22 +720,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Entrepreneurial spirit",
                 "Wealth through self-effort",
                 "Competitive nature",
-                "Initiative and drive"
+                "Initiative and drive",
             ],
             "positive_effects": [
                 "Outstanding courage and bravery",
                 "Wealth through initiative",
                 "Strong communication skills",
                 "Success in competitive fields",
-                "Self-made achievements"
+                "Self-made achievements",
             ],
             "challenging_effects": [
                 "Loss of siblings",
                 "Conflicts with brothers/sisters",
                 "Gossip or tale-bearing",
-                "Aggressive communication"
+                "Aggressive communication",
             ],
-            "timing": "Courage evident early; wealth through self-effort in Mars dasha"
+            "timing": "Courage evident early; wealth through self-effort in Mars dasha",
         },
         4: {
             "verses": "Ch. 29, v. 4",
@@ -766,21 +747,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Betrayal in friendships",
                 "Emotional turbulence at home",
                 "Heart-related health concerns",
-                "Frequent residence changes"
+                "Frequent residence changes",
             ],
             "positive_effects": [
                 "Independence and self-reliance",
                 "Ability to rebuild after losses",
-                "Strong will in domestic matters"
+                "Strong will in domestic matters",
             ],
             "challenging_effects": [
                 "Lack of domestic happiness",
                 "Mother's health issues",
                 "Property losses",
                 "Betrayal of friends",
-                "Loss of patrimony"
+                "Loss of patrimony",
             ],
-            "timing": "Domestic challenges throughout life; property issues in Mars dasha"
+            "timing": "Domestic challenges throughout life; property issues in Mars dasha",
         },
         5: {
             "verses": "Ch. 29, v. 5",
@@ -792,21 +773,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Marital discord",
                 "Creative frustrations",
                 "Aggressive romantic approach",
-                "Digestive health issues"
+                "Digestive health issues",
             ],
             "positive_effects": [
                 "Strong intellect and analytical ability",
                 "Competitive in creative fields",
-                "Athletic children if Mars well-placed"
+                "Athletic children if Mars well-placed",
             ],
             "challenging_effects": [
                 "Difficulties with children",
                 "Loss through speculation",
                 "Fickle-minded nature",
                 "Marital problems",
-                "Lack of happiness and wealth"
+                "Lack of happiness and wealth",
             ],
-            "timing": "Children delayed or challenging; speculative losses in Mars dasha"
+            "timing": "Children delayed or challenging; speculative losses in Mars dasha",
         },
         6: {
             "verses": "Ch. 29, v. 6",
@@ -818,23 +799,23 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Prone to injuries and wounds",
                 "Success in military or police work",
                 "Health issues from accidents",
-                "Powerful but manageable enemies"
+                "Powerful but manageable enemies",
             ],
             "positive_effects": [
                 "Outstanding ability to defeat enemies",
                 "Success in competitive fields",
                 "Victory in legal matters",
                 "Strong physical constitution",
-                "Leadership in service sectors"
+                "Leadership in service sectors",
             ],
             "challenging_effects": [
                 "Excessive sexual desires",
                 "Powerful enemies",
                 "Diseases and wounds",
                 "Accidents and injuries",
-                "Conflicts with subordinates"
+                "Conflicts with subordinates",
             ],
-            "timing": "Victory over enemies in Mars dasha; injuries and health issues"
+            "timing": "Victory over enemies in Mars dasha; injuries and health issues",
         },
         7: {
             "verses": "Ch. 29, v. 7",
@@ -846,21 +827,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Extramarital affairs",
                 "Business partnership disputes",
                 "Aggressive approach to relationships",
-                "Late marriage or multiple marriages"
+                "Late marriage or multiple marriages",
             ],
             "positive_effects": [
                 "Passionate and energetic partner if Mars strong",
                 "Success in competitive partnerships",
-                "Strong will in relationships"
+                "Strong will in relationships",
             ],
             "challenging_effects": [
                 "Loss of wife or marital discord",
                 "Health problems",
                 "Immoral relationships",
                 "Lack of happiness",
-                "Partnership conflicts"
+                "Partnership conflicts",
             ],
-            "timing": "Marriage challenges throughout life; partnerships require careful management"
+            "timing": "Marriage challenges throughout life; partnerships require careful management",
         },
         8: {
             "verses": "Ch. 29, v. 8",
@@ -872,22 +853,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Interest in occult and mysteries",
                 "Sudden accidents and crises",
                 "Inheritance disputes",
-                "Reduced longevity if afflicted"
+                "Reduced longevity if afflicted",
             ],
             "positive_effects": [
                 "Deep research abilities",
                 "Transformative spiritual growth",
                 "Courage in crises",
-                "Gains through inheritance if well-placed"
+                "Gains through inheritance if well-placed",
             ],
             "challenging_effects": [
                 "Eye deformities or injuries",
                 "Financial difficulties",
                 "Lack of happiness and intelligence",
                 "Short lifespan",
-                "Sudden losses and accidents"
+                "Sudden losses and accidents",
             ],
-            "timing": "Health challenges and crises throughout life; accidents in Mars dasha"
+            "timing": "Health challenges and crises throughout life; accidents in Mars dasha",
         },
         9: {
             "verses": "Ch. 29, v. 9",
@@ -899,21 +880,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Aggressive or violent tendencies",
                 "Lack of religious inclination",
                 "Conflicts in foreign lands",
-                "Unethical behavior"
+                "Unethical behavior",
             ],
             "positive_effects": [
                 "Independent philosophy",
                 "Courage in foreign lands",
-                "Athletic or military pursuits abroad"
+                "Athletic or military pursuits abroad",
             ],
             "challenging_effects": [
                 "Lack of skills",
                 "Adverse spouse",
                 "Violent tendencies",
                 "Lack of virtue and dharma",
-                "Father-related issues"
+                "Father-related issues",
             ],
-            "timing": "Father-related conflicts; lack of spiritual inclination; foreign travel issues"
+            "timing": "Father-related conflicts; lack of spiritual inclination; foreign travel issues",
         },
         10: {
             "verses": "Ch. 29, v. 10",
@@ -925,22 +906,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success through courage and action",
                 "Aggressive professional approach",
                 "Property through career",
-                "Technical or mechanical aptitude"
+                "Technical or mechanical aptitude",
             ],
             "positive_effects": [
                 "Outstanding career in Mars-related fields",
                 "Leadership and authority",
                 "Wealth through profession",
                 "Desires fulfilled",
-                "Courageous and bold in career"
+                "Courageous and bold in career",
             ],
             "challenging_effects": [
                 "Conflicts with authority",
                 "Aggressive professional style",
                 "Accidents or injuries at work",
-                "Legal issues possible"
+                "Legal issues possible",
             ],
-            "timing": "Career peaks in Mars dasha; property gains through profession"
+            "timing": "Career peaks in Mars dasha; property gains through profession",
         },
         11: {
             "verses": "Ch. 29, v. 11",
@@ -952,21 +933,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Long and healthy life",
                 "Success in social networks",
                 "Fulfillment of desires through effort",
-                "Servants and helpers"
+                "Servants and helpers",
             ],
             "positive_effects": [
                 "Outstanding financial gains",
                 "Longevity and good health",
                 "Wealth from multiple sources",
                 "Achievement of goals",
-                "Social success"
+                "Social success",
             ],
             "challenging_effects": [
                 "Limited number of children",
                 "Aggressive in friendships",
-                "Conflicts in social groups"
+                "Conflicts in social groups",
             ],
-            "timing": "Gains increase with age; peak prosperity in Mars dasha"
+            "timing": "Gains increase with age; peak prosperity in Mars dasha",
         },
         12: {
             "verses": "Ch. 29, v. 12",
@@ -978,25 +959,24 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Physical defects or injuries",
                 "Expenditure exceeds income",
                 "Interest in foreign lands",
-                "Spiritual warrior path"
+                "Spiritual warrior path",
             ],
             "positive_effects": [
                 "Spiritual growth through challenges",
                 "Service to humanity",
                 "Success in foreign lands",
-                "Courage in isolation"
+                "Courage in isolation",
             ],
             "challenging_effects": [
                 "Eye diseases",
                 "Financial difficulties",
                 "Loss of position",
                 "Physical defects",
-                "Expenses and losses"
+                "Expenses and losses",
             ],
-            "timing": "Expenses and losses throughout life; spiritual growth in later years"
-        }
+            "timing": "Expenses and losses throughout life; spiritual growth in later years",
+        },
     },
-    
     "Mercury": {
         1: {
             "verses": "Ch. 30, v. 1-2",
@@ -1008,22 +988,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Business-minded personality",
                 "Versatile and adaptable",
                 "Sweet and persuasive speech",
-                "Self-made success"
+                "Self-made success",
             ],
             "positive_effects": [
                 "Exceptional intelligence",
                 "Excellent communication skills",
                 "Success in business and commerce",
                 "Quick wit and humor",
-                "Educational achievements"
+                "Educational achievements",
             ],
             "challenging_effects": [
                 "Nervous energy and restlessness",
                 "Scattered interests",
                 "May overthink situations",
-                "Difficulty with emotional depth"
+                "Difficulty with emotional depth",
             ],
-            "timing": "Mercury dasha brings learning, business success, travel"
+            "timing": "Mercury dasha brings learning, business success, travel",
         },
         2: {
             "verses": "Ch. 30, v. 2",
@@ -1035,21 +1015,17 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Good education and learning",
                 "Happy family life",
                 "Enjoyment of good food",
-                "Multiple income sources"
+                "Multiple income sources",
             ],
             "positive_effects": [
                 "Outstanding wealth through intelligence",
                 "Sweet and effective communication",
                 "Business success",
                 "Educational achievements",
-                "Happy family relationships"
+                "Happy family relationships",
             ],
-            "challenging_effects": [
-                "May be too talkative",
-                "Scattered financial focus",
-                "Nervous speech patterns"
-            ],
-            "timing": "Wealth increases in Mercury dasha; business success; good food"
+            "challenging_effects": ["May be too talkative", "Scattered financial focus", "Nervous speech patterns"],
+            "timing": "Wealth increases in Mercury dasha; business success; good food",
         },
         3: {
             "verses": "Ch. 30, v. 3",
@@ -1061,21 +1037,17 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Cheerful and optimistic disposition",
                 "Success through self-effort",
                 "Versatile talents",
-                "May lack close emotional bonds"
+                "May lack close emotional bonds",
             ],
             "positive_effects": [
                 "Outstanding communication skills",
                 "Good sibling relationships",
                 "Skillful and versatile",
                 "Cheerful nature",
-                "Success through effort"
+                "Success through effort",
             ],
-            "challenging_effects": [
-                "Constant hard work required",
-                "Lack of close relationships",
-                "Restless nature"
-            ],
-            "timing": "Hard work throughout life; success through communication in Mercury dasha"
+            "challenging_effects": ["Constant hard work required", "Lack of close relationships", "Restless nature"],
+            "timing": "Hard work throughout life; success through communication in Mercury dasha",
         },
         4: {
             "verses": "Ch. 30, v. 4",
@@ -1087,21 +1059,17 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Intelligence and learning",
                 "Happy home environment",
                 "Success in education",
-                "Comfortable living"
+                "Comfortable living",
             ],
             "positive_effects": [
                 "Outstanding domestic happiness",
                 "Property and vehicles",
                 "Intelligence and education",
                 "Good family relationships",
-                "Comfortable life"
+                "Comfortable life",
             ],
-            "challenging_effects": [
-                "May overthink domestic matters",
-                "Restless at home",
-                "Frequent residence changes"
-            ],
-            "timing": "Domestic happiness in Mercury dasha; property gains; educational success"
+            "challenging_effects": ["May overthink domestic matters", "Restless at home", "Frequent residence changes"],
+            "timing": "Domestic happiness in Mercury dasha; property gains; educational success",
         },
         5: {
             "verses": "Ch. 30, v. 5",
@@ -1113,21 +1081,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Creative and intellectual pursuits",
                 "Success in speculation if careful",
                 "Teaching abilities",
-                "Happiness and contentment"
+                "Happiness and contentment",
             ],
             "positive_effects": [
                 "Blessed with intelligent children",
                 "Outstanding education",
                 "Creative and intellectual success",
                 "Skillful in chosen field",
-                "Happiness and joy"
+                "Happiness and joy",
             ],
             "challenging_effects": [
                 "May overthink creative matters",
                 "Scattered interests",
-                "Nervous energy in romance"
+                "Nervous energy in romance",
             ],
-            "timing": "Children in Mercury dasha; educational success; creative achievements"
+            "timing": "Children in Mercury dasha; educational success; creative achievements",
         },
         6: {
             "verses": "Ch. 30, v. 6",
@@ -1139,22 +1107,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Service-oriented work",
                 "Health issues from stress",
                 "Victory over enemies through intelligence",
-                "Analytical abilities"
+                "Analytical abilities",
             ],
             "positive_effects": [
                 "Ability to defeat enemies through wit",
                 "Analytical problem-solving",
                 "Success in service professions",
-                "Critical thinking skills"
+                "Critical thinking skills",
             ],
             "challenging_effects": [
                 "Many enemies and conflicts",
                 "Financial difficulties",
                 "Harsh speech causing problems",
                 "Serving others rather than leading",
-                "Nervous health issues"
+                "Nervous health issues",
             ],
-            "timing": "Enemies throughout life; financial challenges; service work"
+            "timing": "Enemies throughout life; financial challenges; service work",
         },
         7: {
             "verses": "Ch. 30, v. 7",
@@ -1166,21 +1134,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Good education and learning",
                 "Wealth through partnerships",
                 "Happy marital life",
-                "Diplomatic abilities"
+                "Diplomatic abilities",
             ],
             "positive_effects": [
                 "Outstanding marital happiness",
                 "Intelligent and beautiful spouse",
                 "Wealth and prosperity",
                 "Success in partnerships",
-                "Educational achievements"
+                "Educational achievements",
             ],
             "challenging_effects": [
                 "May overthink relationships",
                 "Communication issues in marriage",
-                "Restless in partnerships"
+                "Restless in partnerships",
             ],
-            "timing": "Marriage in Mercury dasha; partnership success; wealth through spouse"
+            "timing": "Marriage in Mercury dasha; partnership success; wealth through spouse",
         },
         8: {
             "verses": "Ch. 30, v. 8",
@@ -1192,21 +1160,17 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Fame and recognition",
                 "Wealth through inheritance or research",
                 "Deep intellectual pursuits",
-                "Transformative learning"
+                "Transformative learning",
             ],
             "positive_effects": [
                 "Outstanding research abilities",
                 "Fame and recognition",
                 "Long life",
                 "Wealth and prosperity",
-                "Deep knowledge"
+                "Deep knowledge",
             ],
-            "challenging_effects": [
-                "Obsessive thinking",
-                "Nervous health issues",
-                "Secretive nature"
-            ],
-            "timing": "Long life; fame in Mercury dasha; wealth through research"
+            "challenging_effects": ["Obsessive thinking", "Nervous health issues", "Secretive nature"],
+            "timing": "Long life; fame in Mercury dasha; wealth through research",
         },
         9: {
             "verses": "Ch. 30, v. 9",
@@ -1218,21 +1182,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Good marriage and children",
                 "Fame and recognition",
                 "Skillful in multiple areas",
-                "Religious and philosophical knowledge"
+                "Religious and philosophical knowledge",
             ],
             "positive_effects": [
                 "Outstanding fortune and blessings",
                 "Wealth and prosperity",
                 "Excellent education",
                 "Happy marriage and children",
-                "Fame and recognition"
+                "Fame and recognition",
             ],
             "challenging_effects": [
                 "May be overly intellectual",
                 "Scattered philosophical interests",
-                "Restless in spiritual pursuits"
+                "Restless in spiritual pursuits",
             ],
-            "timing": "Fortune increases in Mercury dasha; educational success; foreign travel"
+            "timing": "Fortune increases in Mercury dasha; educational success; foreign travel",
         },
         10: {
             "verses": "Ch. 30, v. 10",
@@ -1244,21 +1208,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Versatile professional skills",
                 "Multiple income sources",
                 "Fame through intelligence",
-                "Happy family life"
+                "Happy family life",
             ],
             "positive_effects": [
                 "Outstanding in intellectual professions",
                 "Fame and recognition",
                 "Happy marriage and children",
                 "Skillful in chosen field",
-                "Wealth through intellect"
+                "Wealth through intellect",
             ],
             "challenging_effects": [
                 "Scattered career focus",
                 "Nervous tension from multiple projects",
-                "May change careers frequently"
+                "May change careers frequently",
             ],
-            "timing": "Career success in Mercury dasha; recognition for intellectual work"
+            "timing": "Career success in Mercury dasha; recognition for intellectual work",
         },
         11: {
             "verses": "Ch. 30, v. 11",
@@ -1270,21 +1234,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Long and healthy life",
                 "Success in social networks",
                 "Fulfillment of desires",
-                "Servants and helpers"
+                "Servants and helpers",
             ],
             "positive_effects": [
                 "Outstanding financial gains",
                 "Longevity",
                 "Wealth from multiple sources",
                 "Achievement of goals",
-                "Social success"
+                "Social success",
             ],
             "challenging_effects": [
                 "Limited number of children",
                 "Scattered focus on gains",
-                "Restless in friendships"
+                "Restless in friendships",
             ],
-            "timing": "Gains increase with age; peak prosperity in Mercury dasha"
+            "timing": "Gains increase with age; peak prosperity in Mercury dasha",
         },
         12: {
             "verses": "Ch. 30, v. 12",
@@ -1296,24 +1260,19 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Happiness and contentment",
                 "Interest in meditation and isolation",
                 "Charitable nature",
-                "Expenses on education"
+                "Expenses on education",
             ],
             "positive_effects": [
                 "Outstanding spiritual learning",
                 "Good marriage",
                 "Happiness and joy",
                 "Success in foreign lands",
-                "Skillful in chosen field"
+                "Skillful in chosen field",
             ],
-            "challenging_effects": [
-                "Expenses and losses",
-                "Overthinking in isolation",
-                "Nervous energy"
-            ],
-            "timing": "Spiritual growth in Mercury dasha; foreign success; expenses on learning"
-        }
+            "challenging_effects": ["Expenses and losses", "Overthinking in isolation", "Nervous energy"],
+            "timing": "Spiritual growth in Mercury dasha; foreign success; expenses on learning",
+        },
     },
-    
     "Jupiter": {
         1: {
             "verses": "Ch. 31, v. 1-2",
@@ -1325,21 +1284,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Natural teacher and counselor",
                 "Ethical and righteous character",
                 "Blessed family life",
-                "Divine grace and protection"
+                "Divine grace and protection",
             ],
             "positive_effects": [
                 "Fortunate and blessed life",
                 "Wisdom and good judgment",
                 "Happy marriage and children",
                 "Respect from society",
-                "Wealth and prosperity"
+                "Wealth and prosperity",
             ],
             "challenging_effects": [
                 "May be overly optimistic",
                 "Tendency to overindulge",
-                "Can be preachy or self-righteous"
+                "Can be preachy or self-righteous",
             ],
-            "timing": "Jupiter dasha brings fortune, marriage, children, spiritual growth"
+            "timing": "Jupiter dasha brings fortune, marriage, children, spiritual growth",
         },
         2: {
             "verses": "Ch. 31, v. 2",
@@ -1351,21 +1310,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Good fortune and blessings",
                 "Happy family life",
                 "Enjoyment of good food",
-                "Educational achievements"
+                "Educational achievements",
             ],
             "positive_effects": [
                 "Outstanding wealth and prosperity",
                 "Beautiful face and appearance",
                 "Eloquent speech",
                 "Good fortune",
-                "Happy family relationships"
+                "Happy family relationships",
             ],
             "challenging_effects": [
                 "May be overly optimistic about finances",
                 "Tendency to overindulge in food",
-                "Can be preachy in speech"
+                "Can be preachy in speech",
             ],
-            "timing": "Wealth increases in Jupiter dasha; family happiness; good food"
+            "timing": "Wealth increases in Jupiter dasha; family happiness; good food",
         },
         3: {
             "verses": "Ch. 31, v. 3",
@@ -1377,21 +1336,17 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Courage and initiative",
                 "Teaching and advisory abilities",
                 "Success through self-effort",
-                "Communication skills"
+                "Communication skills",
             ],
             "positive_effects": [
                 "Outstanding intelligence",
                 "Wisdom and good judgment",
                 "Courage and initiative",
                 "Teaching abilities",
-                "Success through effort"
+                "Success through effort",
             ],
-            "challenging_effects": [
-                "Lack of happiness from siblings",
-                "Limited wealth",
-                "Sibling conflicts"
-            ],
-            "timing": "Intelligence develops early; limited wealth; sibling issues"
+            "challenging_effects": ["Lack of happiness from siblings", "Limited wealth", "Sibling conflicts"],
+            "timing": "Intelligence develops early; limited wealth; sibling issues",
         },
         4: {
             "verses": "Ch. 31, v. 4",
@@ -1403,21 +1358,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Intelligence and wisdom",
                 "Happy home environment",
                 "Authority and leadership",
-                "Comfortable living"
+                "Comfortable living",
             ],
             "positive_effects": [
                 "Outstanding domestic happiness",
                 "Property and vehicles",
                 "Intelligence and wisdom",
                 "Good family relationships",
-                "Authority and status"
+                "Authority and status",
             ],
             "challenging_effects": [
                 "May be overly attached to home",
                 "Can be too comfortable",
-                "Expectations from family"
+                "Expectations from family",
             ],
-            "timing": "Domestic happiness in Jupiter dasha; property gains; authority"
+            "timing": "Domestic happiness in Jupiter dasha; property gains; authority",
         },
         5: {
             "verses": "Ch. 31, v. 5",
@@ -1429,20 +1384,17 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Creative wisdom",
                 "Teaching and advisory abilities",
                 "Good fortune overall",
-                "Spiritual knowledge"
+                "Spiritual knowledge",
             ],
             "positive_effects": [
                 "Blessed with good children",
                 "Intelligence and wisdom",
                 "Success in education",
                 "Fame and recognition",
-                "Good fortune"
+                "Good fortune",
             ],
-            "challenging_effects": [
-                "May be overly optimistic in speculation",
-                "High expectations from children"
-            ],
-            "timing": "Children born in Jupiter dasha; educational success; spiritual progress"
+            "challenging_effects": ["May be overly optimistic in speculation", "High expectations from children"],
+            "timing": "Children born in Jupiter dasha; educational success; spiritual progress",
         },
         6: {
             "verses": "Ch. 31, v. 6",
@@ -1454,21 +1406,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Limited happiness from children",
                 "Financial challenges",
                 "Success in service professions",
-                "Wisdom in overcoming obstacles"
+                "Wisdom in overcoming obstacles",
             ],
             "positive_effects": [
                 "Outstanding ability to defeat enemies",
                 "Fame and recognition",
                 "Victory in legal matters",
                 "Success in service sectors",
-                "Wisdom and good judgment"
+                "Wisdom and good judgment",
             ],
             "challenging_effects": [
                 "Limited happiness from children",
                 "Financial difficulties",
-                "Health issues from overwork"
+                "Health issues from overwork",
             ],
-            "timing": "Victory over enemies in Jupiter dasha; fame; financial challenges"
+            "timing": "Victory over enemies in Jupiter dasha; fame; financial challenges",
         },
         7: {
             "verses": "Ch. 31, v. 7",
@@ -1480,21 +1432,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth through partnerships",
                 "Happy marital life",
                 "Success in business partnerships",
-                "Diplomatic abilities"
+                "Diplomatic abilities",
             ],
             "positive_effects": [
                 "Outstanding marital happiness",
                 "Beautiful and wise spouse",
                 "Wealth and prosperity",
                 "Success in partnerships",
-                "Intelligence and wisdom"
+                "Intelligence and wisdom",
             ],
             "challenging_effects": [
                 "May be overly optimistic about partnerships",
                 "Expectations from spouse",
-                "Can be preachy in relationships"
+                "Can be preachy in relationships",
             ],
-            "timing": "Marriage in Jupiter dasha; partnership success; wealth through spouse"
+            "timing": "Marriage in Jupiter dasha; partnership success; wealth through spouse",
         },
         8: {
             "verses": "Ch. 31, v. 8",
@@ -1506,22 +1458,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial difficulties",
                 "Interest in occult and spirituality",
                 "Transformative experiences",
-                "Inheritance issues"
+                "Inheritance issues",
             ],
             "positive_effects": [
                 "Deep spiritual insight",
                 "Interest in occult knowledge",
                 "Transformative wisdom",
-                "Research abilities"
+                "Research abilities",
             ],
             "challenging_effects": [
                 "Lack of happiness",
                 "Reduced longevity",
                 "Indolence and laziness",
                 "Financial difficulties",
-                "Sudden losses"
+                "Sudden losses",
             ],
-            "timing": "Challenges throughout life; spiritual growth in later years"
+            "timing": "Challenges throughout life; spiritual growth in later years",
         },
         9: {
             "verses": "Ch. 31, v. 9",
@@ -1533,21 +1485,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth and prosperity",
                 "Intelligence and wisdom",
                 "Blessed with children",
-                "Success in higher education"
+                "Success in higher education",
             ],
             "positive_effects": [
                 "Outstanding fortune and blessings",
                 "Spiritual devotion",
                 "Wealth and happiness",
                 "Intelligence and wisdom",
-                "Good children"
+                "Good children",
             ],
             "challenging_effects": [
                 "May be overly idealistic",
                 "Can be preachy about beliefs",
-                "High expectations from father"
+                "High expectations from father",
             ],
-            "timing": "Fortune increases in Jupiter dasha; spiritual growth; foreign travel"
+            "timing": "Fortune increases in Jupiter dasha; spiritual growth; foreign travel",
         },
         10: {
             "verses": "Ch. 31, v. 10",
@@ -1559,21 +1511,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Strong physique and health",
                 "Happiness and contentment",
                 "Courage and valor",
-                "Fame and reputation"
+                "Fame and reputation",
             ],
             "positive_effects": [
                 "Outstanding career achievements",
                 "Authority and status",
                 "Government positions",
                 "Fame and recognition",
-                "Strong health"
+                "Strong health",
             ],
             "challenging_effects": [
                 "High expectations from career",
                 "Pressure to maintain status",
-                "May be overly ambitious"
+                "May be overly ambitious",
             ],
-            "timing": "Career peaks in Jupiter dasha; authority and recognition"
+            "timing": "Career peaks in Jupiter dasha; authority and recognition",
         },
         11: {
             "verses": "Ch. 31, v. 11",
@@ -1585,21 +1537,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Long and healthy life",
                 "Success in social networks",
                 "Fulfillment of desires",
-                "Servants and helpers"
+                "Servants and helpers",
             ],
             "positive_effects": [
                 "Outstanding financial gains",
                 "Many children",
                 "Longevity",
                 "Social success",
-                "Achievement of goals"
+                "Achievement of goals",
             ],
             "challenging_effects": [
                 "May be overly optimistic about gains",
                 "High expectations from friends",
-                "Can be too generous"
+                "Can be too generous",
             ],
-            "timing": "Gains increase with age; peak prosperity in Jupiter dasha"
+            "timing": "Gains increase with age; peak prosperity in Jupiter dasha",
         },
         12: {
             "verses": "Ch. 31, v. 12",
@@ -1611,25 +1563,24 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Service to others or foreign lands",
                 "Spiritual inclinations develop",
                 "Charitable nature",
-                "Interest in isolation or meditation"
+                "Interest in isolation or meditation",
             ],
             "positive_effects": [
                 "Spiritual growth and moksha",
                 "Service to humanity",
                 "Success in foreign lands",
-                "Charitable and generous nature"
+                "Charitable and generous nature",
             ],
             "challenging_effects": [
                 "Financial difficulties",
                 "Lack of education",
                 "Limited happiness",
                 "Serving others rather than leading",
-                "Expenses and losses"
+                "Expenses and losses",
             ],
-            "timing": "Expenses throughout life; spiritual growth in later years"
-        }
+            "timing": "Expenses throughout life; spiritual growth in later years",
+        },
     },
-    
     "Venus": {
         1: {
             "verses": "Ch. 32, v. 1",
@@ -1641,21 +1592,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Happy and content disposition",
                 "Long life and good health",
                 "Attractive eyes and features",
-                "Gentle and timid nature"
+                "Gentle and timid nature",
             ],
             "positive_effects": [
                 "Outstanding beauty and charm",
                 "Artistic talents",
                 "Happy and content life",
                 "Longevity",
-                "Attractive appearance"
+                "Attractive appearance",
             ],
             "challenging_effects": [
                 "Timid or shy nature",
                 "May be too pleasure-seeking",
-                "Can be vain about appearance"
+                "Can be vain about appearance",
             ],
-            "timing": "Venus dasha brings beauty, marriage, artistic success, happiness"
+            "timing": "Venus dasha brings beauty, marriage, artistic success, happiness",
         },
         2: {
             "verses": "Ch. 32, v. 2",
@@ -1667,21 +1618,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Poetic and artistic abilities",
                 "Happy family life",
                 "Enjoyment of luxuries",
-                "Multiple income sources"
+                "Multiple income sources",
             ],
             "positive_effects": [
                 "Outstanding wealth and prosperity",
                 "Beautiful face and speech",
                 "Poetic and artistic talents",
                 "Happy family relationships",
-                "Enjoyment of luxuries"
+                "Enjoyment of luxuries",
             ],
             "challenging_effects": [
                 "May be too focused on material pleasures",
                 "Expenses on luxuries",
-                "Can be too sweet in speech"
+                "Can be too sweet in speech",
             ],
-            "timing": "Wealth increases in Venus dasha; family happiness; artistic success"
+            "timing": "Wealth increases in Venus dasha; family happiness; artistic success",
         },
         3: {
             "verses": "Ch. 32, v. 3",
@@ -1693,21 +1644,17 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Artistic and creative skills",
                 "Success through self-effort",
                 "Communication abilities",
-                "Courage in artistic pursuits"
+                "Courage in artistic pursuits",
             ],
             "positive_effects": [
                 "Beautiful spouse",
                 "Artistic and creative skills",
                 "Success through effort",
                 "Communication talents",
-                "Financial prudence"
+                "Financial prudence",
             ],
-            "challenging_effects": [
-                "Lack of happiness from siblings",
-                "Miserly nature",
-                "Sibling conflicts"
-            ],
-            "timing": "Artistic success in Venus dasha; beautiful spouse; sibling issues"
+            "challenging_effects": ["Lack of happiness from siblings", "Miserly nature", "Sibling conflicts"],
+            "timing": "Artistic success in Venus dasha; beautiful spouse; sibling issues",
         },
         4: {
             "verses": "Ch. 32, v. 4",
@@ -1719,21 +1666,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Beautiful clothes and ornaments",
                 "Happy home environment",
                 "Property and comforts",
-                "Artistic home decoration"
+                "Artistic home decoration",
             ],
             "positive_effects": [
                 "Outstanding domestic happiness",
                 "Vehicles and luxuries",
                 "Good relationship with mother",
                 "Beautiful home and possessions",
-                "Comfortable living"
+                "Comfortable living",
             ],
             "challenging_effects": [
                 "May be too attached to comforts",
                 "Expenses on luxuries",
-                "Can be too comfortable"
+                "Can be too comfortable",
             ],
-            "timing": "Domestic happiness in Venus dasha; vehicles and luxuries; mother's blessings"
+            "timing": "Domestic happiness in Venus dasha; vehicles and luxuries; mother's blessings",
         },
         5: {
             "verses": "Ch. 32, v. 5",
@@ -1745,21 +1692,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Romantic and loving nature",
                 "Success in creative pursuits",
                 "Happiness and pleasure",
-                "Artistic talents"
+                "Artistic talents",
             ],
             "positive_effects": [
                 "Blessed with good children",
                 "Intelligence and creativity",
                 "Happiness and pleasure",
                 "Artistic success",
-                "Romantic fulfillment"
+                "Romantic fulfillment",
             ],
             "challenging_effects": [
                 "May be too pleasure-seeking",
                 "Overindulgence in romance",
-                "Expenses on entertainment"
+                "Expenses on entertainment",
             ],
-            "timing": "Children in Venus dasha; creative success; romantic happiness"
+            "timing": "Children in Venus dasha; creative success; romantic happiness",
         },
         6: {
             "verses": "Ch. 32, v. 6",
@@ -1771,21 +1718,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Victory in disputes",
                 "Success in service professions",
                 "Happiness and contentment",
-                "Diplomatic abilities"
+                "Diplomatic abilities",
             ],
             "positive_effects": [
                 "Outstanding ability to defeat enemies",
                 "Fame and recognition",
                 "Beautiful spouse",
                 "Happiness and success",
-                "Diplomatic skills"
+                "Diplomatic skills",
             ],
             "challenging_effects": [
                 "May face health issues from indulgence",
                 "Expenses on pleasures",
-                "Can be too accommodating"
+                "Can be too accommodating",
             ],
-            "timing": "Victory over enemies in Venus dasha; fame; marital happiness"
+            "timing": "Victory over enemies in Venus dasha; fame; marital happiness",
         },
         7: {
             "verses": "Ch. 32, v. 7",
@@ -1797,21 +1744,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success in partnerships",
                 "Diplomatic and charming",
                 "Wealth through spouse or partnerships",
-                "Artistic abilities"
+                "Artistic abilities",
             ],
             "positive_effects": [
                 "Outstanding marital happiness",
                 "Beautiful and virtuous spouse",
                 "Excellent sexual compatibility",
                 "Success in business partnerships",
-                "Fame and recognition"
+                "Fame and recognition",
             ],
             "challenging_effects": [
                 "May be overly focused on relationships",
                 "Expenses on spouse or luxuries",
-                "Jealousy issues if weak"
+                "Jealousy issues if weak",
             ],
-            "timing": "Marriage in Venus dasha; peak relationship happiness"
+            "timing": "Marriage in Venus dasha; peak relationship happiness",
         },
         8: {
             "verses": "Ch. 32, v. 8",
@@ -1823,23 +1770,23 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Interest in occult and mysteries",
                 "Transformative relationships",
                 "Inheritance issues",
-                "Deep emotional experiences"
+                "Deep emotional experiences",
             ],
             "positive_effects": [
                 "Outstanding longevity",
                 "Deep emotional insight",
                 "Interest in occult knowledge",
                 "Transformative experiences",
-                "Research abilities"
+                "Research abilities",
             ],
             "challenging_effects": [
                 "Limited wealth",
                 "Lack of happiness from spouse",
                 "Marital discord",
                 "Financial challenges",
-                "Sudden losses"
+                "Sudden losses",
             ],
-            "timing": "Long life; marital challenges; financial difficulties"
+            "timing": "Long life; marital challenges; financial difficulties",
         },
         9: {
             "verses": "Ch. 32, v. 9",
@@ -1851,21 +1798,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth and prosperity",
                 "Blessed with children",
                 "Artistic and creative talents",
-                "Success in higher education"
+                "Success in higher education",
             ],
             "positive_effects": [
                 "Outstanding fortune and blessings",
                 "Spiritual devotion",
                 "Wealth and happiness",
                 "Good children",
-                "Artistic success"
+                "Artistic success",
             ],
             "challenging_effects": [
                 "May be too idealistic in beliefs",
                 "Expenses on religious activities",
-                "Can be too devoted to pleasures"
+                "Can be too devoted to pleasures",
             ],
-            "timing": "Fortune increases in Venus dasha; spiritual growth; foreign travel"
+            "timing": "Fortune increases in Venus dasha; spiritual growth; foreign travel",
         },
         10: {
             "verses": "Ch. 32, v. 10",
@@ -1877,21 +1824,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Fame and recognition",
                 "Happiness and contentment",
                 "Diplomatic abilities",
-                "Wealth through career"
+                "Wealth through career",
             ],
             "positive_effects": [
                 "Outstanding career achievements",
                 "Authority and status",
                 "Fame and recognition",
                 "Success in arts and diplomacy",
-                "Happiness and prosperity"
+                "Happiness and prosperity",
             ],
             "challenging_effects": [
                 "May be too focused on career pleasures",
                 "Expenses on status symbols",
-                "Can be too diplomatic"
+                "Can be too diplomatic",
             ],
-            "timing": "Career peaks in Venus dasha; fame and recognition; artistic success"
+            "timing": "Career peaks in Venus dasha; fame and recognition; artistic success",
         },
         11: {
             "verses": "Ch. 32, v. 11",
@@ -1903,21 +1850,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Long and healthy life",
                 "Success in social networks",
                 "Fulfillment of desires",
-                "Servants and helpers"
+                "Servants and helpers",
             ],
             "positive_effects": [
                 "Outstanding financial gains",
                 "Many children",
                 "Longevity",
                 "Social success",
-                "Achievement of goals"
+                "Achievement of goals",
             ],
             "challenging_effects": [
                 "May be too focused on gains",
                 "Expenses on social activities",
-                "Can be too pleasure-seeking"
+                "Can be too pleasure-seeking",
             ],
-            "timing": "Gains increase with age; peak prosperity in Venus dasha"
+            "timing": "Gains increase with age; peak prosperity in Venus dasha",
         },
         12: {
             "verses": "Ch. 32, v. 12",
@@ -1929,24 +1876,19 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Happiness and contentment",
                 "Interest in meditation and isolation",
                 "Charitable nature",
-                "Expenses on luxuries"
+                "Expenses on luxuries",
             ],
             "positive_effects": [
                 "Outstanding spiritual learning",
                 "Good marriage",
                 "Happiness and joy",
                 "Success in foreign lands",
-                "Artistic and skillful"
+                "Artistic and skillful",
             ],
-            "challenging_effects": [
-                "Expenses and losses",
-                "Expenses on pleasures",
-                "May be too isolated"
-            ],
-            "timing": "Spiritual growth in Venus dasha; foreign success; expenses on luxuries"
-        }
+            "challenging_effects": ["Expenses and losses", "Expenses on pleasures", "May be too isolated"],
+            "timing": "Spiritual growth in Venus dasha; foreign success; expenses on luxuries",
+        },
     },
-    
     "Saturn": {
         1: {
             "verses": "Ch. 33, v. 1",
@@ -1958,22 +1900,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial difficulties",
                 "Chronic health issues",
                 "Serious and melancholic disposition",
-                "Delays and obstacles in life"
+                "Delays and obstacles in life",
             ],
             "positive_effects": [
                 "Discipline and perseverance",
                 "Philosophical and introspective nature",
                 "Wisdom through hardship",
-                "Long-term endurance"
+                "Long-term endurance",
             ],
             "challenging_effects": [
                 "Laziness and lethargy",
                 "Physical deformities or lameness",
                 "Financial difficulties",
                 "Chronic diseases",
-                "Melancholic nature"
+                "Melancholic nature",
             ],
-            "timing": "Saturn dasha brings delays, hardships, but also discipline and wisdom"
+            "timing": "Saturn dasha brings delays, hardships, but also discipline and wisdom",
         },
         2: {
             "verses": "Ch. 33, v. 2",
@@ -1985,21 +1927,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Poor dietary habits",
                 "Harsh or slow speech",
                 "Family difficulties",
-                "Delayed wealth accumulation"
+                "Delayed wealth accumulation",
             ],
             "positive_effects": [
                 "Discipline in finances if Saturn strong",
                 "Frugal and careful with resources",
-                "Wisdom in speech when mature"
+                "Wisdom in speech when mature",
             ],
             "challenging_effects": [
                 "Ugly or unattractive face",
                 "Financial difficulties",
                 "Bad or difficult spouse",
                 "Poor food and nutrition",
-                "Family conflicts"
+                "Family conflicts",
             ],
-            "timing": "Financial struggles in early life; improvement after age 36"
+            "timing": "Financial struggles in early life; improvement after age 36",
         },
         3: {
             "verses": "Ch. 33, v. 3",
@@ -2011,22 +1953,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth through hard work",
                 "Success through self-effort",
                 "Disciplined communication",
-                "Long-term initiatives"
+                "Long-term initiatives",
             ],
             "positive_effects": [
                 "Outstanding courage and perseverance",
                 "Intelligence and wisdom",
                 "Wealth through effort",
                 "Disciplined approach",
-                "Success through hard work"
+                "Success through hard work",
             ],
             "challenging_effects": [
                 "Limited happiness from siblings",
                 "Sibling conflicts or loss",
                 "Slow progress",
-                "Delays in initiatives"
+                "Delays in initiatives",
             ],
-            "timing": "Courage develops slowly; wealth through persistent effort in Saturn dasha"
+            "timing": "Courage develops slowly; wealth through persistent effort in Saturn dasha",
         },
         4: {
             "verses": "Ch. 33, v. 4",
@@ -2038,21 +1980,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Few vehicles or old vehicles",
                 "Emotional distance from family",
                 "Heart-related health concerns",
-                "Frequent residence changes"
+                "Frequent residence changes",
             ],
             "positive_effects": [
                 "Independence and self-reliance",
                 "Discipline in domestic matters",
-                "Property gains after age 36"
+                "Property gains after age 36",
             ],
             "challenging_effects": [
                 "Lack of domestic happiness",
                 "Mother's early death or separation",
                 "Loss of property",
                 "Few or no vehicles",
-                "Emotional coldness"
+                "Emotional coldness",
             ],
-            "timing": "Domestic challenges throughout life; property gains delayed"
+            "timing": "Domestic challenges throughout life; property gains delayed",
         },
         5: {
             "verses": "Ch. 33, v. 5",
@@ -2064,21 +2006,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Digestive health issues",
                 "Pessimistic or negative thinking",
                 "Creative blocks",
-                "Speculative losses"
+                "Speculative losses",
             ],
             "positive_effects": [
                 "Discipline in creative pursuits",
                 "Wisdom and philosophical thinking",
-                "Adopted children may bring happiness"
+                "Adopted children may bring happiness",
             ],
             "challenging_effects": [
                 "Lack of children or childlessness",
                 "Financial difficulties",
                 "Evil or negative mindset",
                 "Stomach and digestive problems",
-                "Lack of happiness"
+                "Lack of happiness",
             ],
-            "timing": "Children delayed or absent; financial struggles; health issues"
+            "timing": "Children delayed or absent; financial struggles; health issues",
         },
         6: {
             "verses": "Ch. 33, v. 6",
@@ -2090,21 +2032,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Fame and recognition",
                 "Success in service professions",
                 "Happiness and contentment",
-                "Disciplined approach to work"
+                "Disciplined approach to work",
             ],
             "positive_effects": [
                 "Outstanding ability to defeat enemies",
                 "Strong health and vitality",
                 "Fame and recognition",
                 "Success in competition",
-                "Happiness and prosperity"
+                "Happiness and prosperity",
             ],
             "challenging_effects": [
                 "Chronic health issues if afflicted",
                 "Slow victory over enemies",
-                "Work-related stress"
+                "Work-related stress",
             ],
-            "timing": "Victory over enemies in Saturn dasha; fame and recognition"
+            "timing": "Victory over enemies in Saturn dasha; fame and recognition",
         },
         7: {
             "verses": "Ch. 33, v. 7",
@@ -2116,21 +2058,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Late marriage or multiple marriages",
                 "Business partnership difficulties",
                 "Chronic health problems",
-                "Lack of happiness"
+                "Lack of happiness",
             ],
             "positive_effects": [
                 "Discipline in partnerships if Saturn strong",
                 "Long-lasting relationships when formed",
-                "Success with older or mature partners"
+                "Success with older or mature partners",
             ],
             "challenging_effects": [
                 "Loss of wife or marital discord",
                 "Chronic diseases",
                 "Sinful or unethical behavior",
                 "Lack of happiness",
-                "Partnership conflicts"
+                "Partnership conflicts",
             ],
-            "timing": "Marriage challenges throughout life; late marriage common"
+            "timing": "Marriage challenges throughout life; late marriage common",
         },
         8: {
             "verses": "Ch. 33, v. 8",
@@ -2142,22 +2084,22 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Interest in occult and mysteries",
                 "Physical defects or weakness",
                 "Inheritance issues",
-                "Sudden losses and crises"
+                "Sudden losses and crises",
             ],
             "positive_effects": [
                 "Deep research abilities",
                 "Interest in occult knowledge",
                 "Transformative wisdom",
-                "Discipline in crises"
+                "Discipline in crises",
             ],
             "challenging_effects": [
                 "Short lifespan",
                 "Chronic diseases",
                 "Financial difficulties",
                 "Physical defects",
-                "Sudden losses"
+                "Sudden losses",
             ],
-            "timing": "Health challenges throughout life; crises and transformations"
+            "timing": "Health challenges throughout life; crises and transformations",
         },
         9: {
             "verses": "Ch. 33, v. 9",
@@ -2169,21 +2111,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Marital challenges",
                 "Financial struggles",
                 "Lack of religious inclination",
-                "Foreign travel difficulties"
+                "Foreign travel difficulties",
             ],
             "positive_effects": [
                 "Independent philosophy",
                 "Discipline in spiritual pursuits when mature",
-                "Wisdom through hardship"
+                "Wisdom through hardship",
             ],
             "challenging_effects": [
                 "Father's health issues or separation",
                 "Loss of wealth",
                 "Difficulties with children",
                 "Marital problems",
-                "Lack of spiritual inclination"
+                "Lack of spiritual inclination",
             ],
-            "timing": "Father-related issues; spiritual awakening delayed or absent"
+            "timing": "Father-related issues; spiritual awakening delayed or absent",
         },
         10: {
             "verses": "Ch. 33, v. 10",
@@ -2195,21 +2137,21 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Authority through responsibility",
                 "Long-term professional stability",
                 "Government or structured work favorable",
-                "Respected for integrity"
+                "Respected for integrity",
             ],
             "positive_effects": [
                 "Outstanding career achievements",
                 "Wealth through profession",
                 "Royal or government favor",
                 "Religious and virtuous conduct",
-                "Long-lasting success"
+                "Long-lasting success",
             ],
             "challenging_effects": [
                 "Success comes slowly",
                 "Heavy work responsibilities",
-                "May face initial career obstacles"
+                "May face initial career obstacles",
             ],
-            "timing": "Career peaks after age 36; sustained success in Saturn dasha"
+            "timing": "Career peaks after age 36; sustained success in Saturn dasha",
         },
         11: {
             "verses": "Ch. 33, v. 11",
@@ -2221,21 +2163,17 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Long and healthy life",
                 "Success in social networks",
                 "Fulfillment of desires through effort",
-                "Servants and helpers"
+                "Servants and helpers",
             ],
             "positive_effects": [
                 "Outstanding financial gains",
                 "Longevity and good health",
                 "Wealth from persistent effort",
                 "Achievement of goals",
-                "Social success"
+                "Social success",
             ],
-            "challenging_effects": [
-                "Limited number of children",
-                "Slow gains and delays",
-                "Serious friendships"
-            ],
-            "timing": "Gains increase with age; peak prosperity after age 36 in Saturn dasha"
+            "challenging_effects": ["Limited number of children", "Slow gains and delays", "Serious friendships"],
+            "timing": "Gains increase with age; peak prosperity after age 36 in Saturn dasha",
         },
         12: {
             "verses": "Ch. 33, v. 12",
@@ -2247,35 +2185,35 @@ SARAVALI_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Service to others or foreign lands",
                 "Spiritual inclinations develop",
                 "Interest in isolation or meditation",
-                "Expenditure exceeds income"
+                "Expenditure exceeds income",
             ],
             "positive_effects": [
                 "Spiritual growth and moksha",
                 "Service to humanity",
                 "Success in foreign lands",
-                "Discipline in spiritual practices"
+                "Discipline in spiritual practices",
             ],
             "challenging_effects": [
                 "Financial difficulties",
                 "Lack of education",
                 "Limited happiness",
                 "Serving others rather than leading",
-                "Expenses and losses"
+                "Expenses and losses",
             ],
-            "timing": "Expenses throughout life; spiritual growth in later years"
-        }
-    }
+            "timing": "Expenses throughout life; spiritual growth in later years",
+        },
+    },
 }
 
 
 def get_saravali_interpretation(planet: str, house: int) -> Dict[str, Any]:
     """
     Retrieve Saravali interpretation for a planet in a specific house.
-    
+
     Args:
         planet: Planet name (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn)
         house: House number (1-12)
-        
+
     Returns:
         Dictionary containing interpretation data with keys:
         - verses: Chapter and verse reference
@@ -2284,36 +2222,33 @@ def get_saravali_interpretation(planet: str, house: int) -> Dict[str, Any]:
         - positive_effects: List of beneficial results
         - challenging_effects: List of difficulties
         - timing: Optional timing patterns
-        
+
     Raises:
         KeyError: If planet or house not found in data
     """
     if planet not in SARAVALI_PLANETS_IN_HOUSES:
         raise KeyError(f"Planet '{planet}' not found in Saravali data")
-    
+
     if house not in SARAVALI_PLANETS_IN_HOUSES[planet]:
         raise KeyError(f"House {house} not found for planet '{planet}' in Saravali data")
-    
+
     return SARAVALI_PLANETS_IN_HOUSES[planet][house]
 
 
 def get_available_saravali_combinations() -> Dict[str, list]:
     """
     Get list of available planet-house combinations in Saravali data.
-    
+
     Returns:
         Dictionary mapping planet names to lists of available houses
     """
-    return {
-        planet: sorted(houses.keys())
-        for planet, houses in SARAVALI_PLANETS_IN_HOUSES.items()
-    }
+    return {planet: sorted(houses.keys()) for planet, houses in SARAVALI_PLANETS_IN_HOUSES.items()}
 
 
 def get_saravali_coverage_stats() -> Dict[str, Any]:
     """
     Get coverage statistics for Saravali interpretations.
-    
+
     Returns:
         Dictionary with coverage metrics:
         - total_combinations: Total planet-house pairs available
@@ -2323,18 +2258,15 @@ def get_saravali_coverage_stats() -> Dict[str, Any]:
     """
     by_planet = {}
     total = 0
-    
+
     for planet, houses in SARAVALI_PLANETS_IN_HOUSES.items():
         count = len(houses)
-        by_planet[planet] = {
-            "houses_covered": count,
-            "completion_rate": (count / 12) * 100
-        }
+        by_planet[planet] = {"houses_covered": count, "completion_rate": (count / 12) * 100}
         total += count
-    
+
     return {
         "total_combinations": total,
         "planets_covered": len(SARAVALI_PLANETS_IN_HOUSES),
         "by_planet": by_planet,
-        "overall_completion_rate": (total / 84) * 100
+        "overall_completion_rate": (total / 84) * 100,
     }

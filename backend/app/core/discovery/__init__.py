@@ -5,34 +5,31 @@ Gate: GATE_14
 Version: 1.0.0
 """
 
+from .config import create_service_instance, get_discovery_config
 from .framework import (
-    RegistryType,
-    ServiceStatus,
-    ServiceEndpoint,
-    ServiceMetadata,
-    ServiceInstance,
-    DiscoveryConfig,
-    ServiceRegistry,
     ConsulRegistry,
+    DiscoveryConfig,
     EtcdRegistry,
-    ServiceDiscovery
-)
-from .config import (
-    get_discovery_config,
-    create_service_instance
+    RegistryType,
+    ServiceDiscovery,
+    ServiceEndpoint,
+    ServiceInstance,
+    ServiceMetadata,
+    ServiceRegistry,
+    ServiceStatus,
 )
 
 __all__ = [
-    'RegistryType',
-    'ServiceStatus',
-    'ServiceEndpoint',
-    'ServiceMetadata',
-    'ServiceInstance',
-    'DiscoveryConfig',
-    'ServiceRegistry',
-    'ConsulRegistry',
-    'EtcdRegistry',
-    'ServiceDiscovery',
-    'get_discovery_config',
-    'create_service_instance'
+    "RegistryType",
+    "ServiceStatus",
+    "ServiceEndpoint",
+    "ServiceMetadata",
+    "ServiceInstance",
+    "DiscoveryConfig",
+    "ServiceRegistry",
+    "ConsulRegistry",
+    "EtcdRegistry",
+    "ServiceDiscovery",
+    "get_discovery_config",
+    "create_service_instance",
 ]

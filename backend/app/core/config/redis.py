@@ -1,7 +1,10 @@
 """Redis client configuration."""
-import redis
-from typing import List, Optional
+
 import logging
+from typing import List, Optional
+
+import redis
+
 from .settings import settings
 
 logger = logging.getLogger(__name__)
@@ -31,7 +34,7 @@ class RedisClient:
                     username=settings.REDIS_USERNAME,
                     ssl=settings.REDIS_SSL,
                     socket_timeout=settings.REDIS_TIMEOUT,
-                    decode_responses=True
+                    decode_responses=True,
                 )
                 self._initialized = True
             except Exception as e:
@@ -41,13 +44,13 @@ class RedisClient:
 
     def is_connected(self) -> bool:
         """Check if Redis is connected.
-        
+
         Returns:
             True if connected, False otherwise
         """
         if not self._initialized or not self._client:
             return False
-            
+
         try:
             self._client.ping()
             return True
@@ -57,16 +60,16 @@ class RedisClient:
 
     def get(self, key: str) -> Optional[str]:
         """Get value from Redis.
-        
+
         Args:
             key: Key to retrieve
-            
+
         Returns:
             Value if found, None otherwise
         """
         if not self.is_connected():
             return None
-            
+
         try:
             return self._client.get(key)
         except Exception as e:
@@ -75,18 +78,18 @@ class RedisClient:
 
     def set(self, key: str, value: str, expire: Optional[int] = None) -> bool:
         """Set value in Redis.
-        
+
         Args:
             key: Key to set
             value: Value to store
             expire: Optional expiration in seconds
-            
+
         Returns:
             True if successful, False otherwise
         """
         if not self.is_connected():
             return False
-            
+
         try:
             return bool(self._client.set(key, value, ex=expire))
         except Exception as e:
@@ -95,16 +98,16 @@ class RedisClient:
 
     def delete(self, key: str) -> bool:
         """Delete key from Redis.
-        
+
         Args:
             key: Key to delete
-            
+
         Returns:
             True if deleted, False otherwise
         """
         if not self.is_connected():
             return False
-            
+
         try:
             return bool(self._client.delete(key))
         except Exception as e:
@@ -113,16 +116,16 @@ class RedisClient:
 
     def exists(self, key: str) -> bool:
         """Check if key exists in Redis.
-        
+
         Args:
             key: Key to check
-            
+
         Returns:
             True if exists, False otherwise
         """
         if not self.is_connected():
             return False
-            
+
         try:
             return bool(self._client.exists(key))
         except Exception as e:
@@ -131,16 +134,16 @@ class RedisClient:
 
     def get_keys(self, pattern: str) -> List[str]:
         """Get keys matching pattern.
-        
+
         Args:
             pattern: Pattern to match (e.g. "prefix:*")
-            
+
         Returns:
             List of matching keys
         """
         if not self.is_connected():
             return []
-            
+
         try:
             keys = self._client.scan_iter(match=pattern)
             return [key if isinstance(key, str) else key.decode() for key in keys]
@@ -150,16 +153,16 @@ class RedisClient:
 
     def get_ttl(self, key: str) -> int:
         """Get TTL for a key.
-        
+
         Args:
             key: Key to check TTL for
-            
+
         Returns:
             TTL in seconds, -2 if key doesn't exist, -1 if key exists but has no TTL
         """
         if not self.is_connected():
             return -2
-            
+
         try:
             return self._client.ttl(key)
         except Exception as e:
@@ -168,13 +171,13 @@ class RedisClient:
 
     def clear_all(self) -> bool:
         """Clear all keys in Redis.
-        
+
         Returns:
             True if successful, False otherwise
         """
         if not self.is_connected():
             return False
-            
+
         try:
             self._client.flushdb()
             return True

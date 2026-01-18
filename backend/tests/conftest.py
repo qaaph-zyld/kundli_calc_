@@ -2,6 +2,7 @@
 import os
 import sys
 from unittest.mock import Mock
+from unittest.mock import patch
 from datetime import datetime, timezone
 from typing import Generator, Dict, Any
 from pathlib import Path
@@ -75,6 +76,9 @@ def mock_swisseph():
             self.JUPITER = 5
             self.VENUS = 3
             self.SATURN = 6
+            self.URANUS = 7
+            self.NEPTUNE = 8
+            self.PLUTO = 9
             self.TRUE_NODE = 11
             self.MEAN_NODE = 10
             self.MEAN_APOG = 12
@@ -89,12 +93,18 @@ def mock_swisseph():
             self.FLG_SWIEPH = 2
             self.FLG_SPEED = 256
             self.FLG_TOPOCTR = 32768
+            self.FLG_TOPOCENTRIC = self.FLG_TOPOCTR
+            self.FLG_SIDEREAL = 64
+            self.FLG_MOSEPH = 4
             
             # Sidereal modes
             self.SIDM_LAHIRI = 1
             self.SIDM_RAMAN = 3
             self.SIDM_USHASHASHI = 4
             self.SIDM_KRISHNAMURTI = 5
+            self.SIDM_FAGAN_BRADLEY = 0
+            self.SIDM_YUKTESHWAR = 6
+            self.SIDM_JN_BHASIN = 7
             
             # House systems
             self.HOUSES_PLACIDUS = b'P'
@@ -119,6 +129,39 @@ def mock_swisseph():
             self.HOUSES_PISA = b'I'
             self.HOUSES_GAUQUELIN = b'L'
             self.HOUSES_KRUSINSKI = b'Y'
+
+        def set_ephe_path(self, path):
+            return self.swe_set_ephe_path(path)
+
+        def set_sid_mode(self, mode, t0=0, ayan_t0=0):
+            return self.swe_set_sid_mode(mode, t0=t0, ayan_t0=ayan_t0)
+
+        def set_topo(self, lon, lat, alt):
+            return None
+
+        def calc_ut(self, julday, planet, flags=0):
+            return self.swe_calc_ut(julday, planet, flags)
+
+        def calc(self, julday, planet, flags=0):
+            return self.swe_calc(julday, planet, flags)
+
+        def julday(self, year, month, day, hour):
+            return self.swe_julday(year, month, day, hour)
+
+        def revjul(self, julday, gregflag=1):
+            return self.swe_revjul(julday, gregflag=gregflag)
+
+        def houses(self, julday, lat, lon, hsys):
+            return self.swe_houses_ex(julday, lat, lon, hsys)
+
+        def get_ayanamsa_ut(self, jd):
+            return 0.0
+
+        def get_planet_name(self, planet):
+            return ""
+
+        def close(self):
+            return self.swe_close()
         
         def swe_set_ephe_path(self, path):
             """Mock set ephemeris path."""
@@ -134,7 +177,12 @@ def mock_swisseph():
         
         def swe_houses_ex(self, julday, lat, lon, hsys):
             """Mock calculate houses."""
-            return [[0] * 36, [0] * 10, [0] * 6]
+            cusps = [0.0] * 13
+            ascmc = [0.0] * 10
+            return (cusps, ascmc)
+
+        def houses_ex(self, julday, lat, lon, hsys):
+            return self.swe_houses_ex(julday, lat, lon, hsys)
         
         def swe_julday(self, year, month, day, hour):
             """Mock calculate Julian day."""
@@ -182,6 +230,44 @@ def test_client() -> Generator[TestClient, None, None]:
     """Get test client."""
     with TestClient(app) as client:
         yield client
+
+
+@pytest.fixture
+def client(test_client: TestClient) -> TestClient:
+    return test_client
+
+
+@pytest.fixture
+def mocker():
+    patchers = []
+
+    class _PatchProxy:
+        def __call__(self, target, *args, **kwargs):
+            p = patch(target, *args, **kwargs)
+            patchers.append(p)
+            return p.start()
+
+        def object(self, target, attribute, *args, **kwargs):
+            p = patch.object(target, attribute, *args, **kwargs)
+            patchers.append(p)
+            return p.start()
+
+        def dict(self, in_dict, *args, **kwargs):
+            p = patch.dict(in_dict, *args, **kwargs)
+            patchers.append(p)
+            return p.start()
+
+    class _Mocker:
+        patch = _PatchProxy()
+
+    try:
+        yield _Mocker()
+    finally:
+        for p in reversed(patchers):
+            try:
+                p.stop()
+            except Exception:
+                pass
 
 @pytest.fixture
 def test_auth_headers() -> Dict[str, str]:

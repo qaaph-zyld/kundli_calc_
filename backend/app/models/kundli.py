@@ -1,7 +1,9 @@
 from datetime import datetime
-from typing import List, Optional
-from pydantic import BaseModel, Field, field_validator
 from enum import Enum
+from typing import List, Optional
+
+from pydantic import BaseModel, Field, field_validator
+
 
 class AyanamsaType(str, Enum):
     LAHIRI = "lahiri"
@@ -9,16 +11,19 @@ class AyanamsaType(str, Enum):
     KP = "krishnamurti"
     TROPICAL = "tropical"
 
+
 class HouseSystem(str, Enum):
     PLACIDUS = "placidus"
     KOCH = "koch"
     EQUAL = "equal"
     WHOLE_SIGN = "whole_sign"
 
+
 class ChartType(str, Enum):
     RASI = "rasi"
     NAVAMSA = "navamsa"
     DASHAMSA = "dashamsa"
+
 
 class Planet(BaseModel):
     name: str
@@ -31,16 +36,19 @@ class Planet(BaseModel):
     nakshatra_pada: int
     is_retrograde: bool
 
+
 class House(BaseModel):
     number: int
     sign: str
     degree: float
     planets: List[str] = []
 
+
 class KundliChart(BaseModel):
     type: ChartType
     houses: List[House]
     planets: List[Planet]
+
 
 class KundliRequest(BaseModel):
     date: datetime
@@ -48,22 +56,24 @@ class KundliRequest(BaseModel):
     longitude: float = Field(..., ge=-180, le=180)
     timezone: str
     ayanamsa: AyanamsaType = AyanamsaType.LAHIRI
-    house_system: HouseSystem = HouseSystem.PLACIDUS
+    house_system: HouseSystem = HouseSystem.WHOLE_SIGN
     chart_types: List[ChartType] = [ChartType.RASI]
     language: Optional[str] = "en"
 
-    @field_validator('date')
+    @field_validator("date")
     @classmethod
     def validate_date(cls, v):
         if v > datetime.now():
             raise ValueError("Birth date cannot be in the future")
         return v
 
+
 class KundliResponse(BaseModel):
     request: KundliRequest
     charts: List[KundliChart]
     created_at: datetime = Field(default_factory=datetime.utcnow)
     id: str
+
 
 class Prediction(BaseModel):
     category: str
@@ -73,15 +83,18 @@ class Prediction(BaseModel):
     planets_involved: List[str]
     houses_involved: List[int]
 
+
 class KundliPredictions(BaseModel):
     kundli_id: str
     predictions: List[Prediction]
     generated_at: datetime = Field(default_factory=datetime.utcnow)
 
+
 class TransitRequest(BaseModel):
     birth_kundli_id: str
     transit_date: datetime
     chart_types: List[ChartType] = [ChartType.RASI]
+
 
 class TransitResponse(BaseModel):
     birth_kundli: KundliResponse
@@ -89,10 +102,12 @@ class TransitResponse(BaseModel):
     aspects: List[dict]  # Define detailed aspect structure
     predictions: List[Prediction]
 
+
 class MatchingRequest(BaseModel):
     kundli1_id: str
     kundli2_id: str
     match_factors: Optional[List[str]] = None
+
 
 class MatchingResponse(BaseModel):
     kundli1: KundliResponse

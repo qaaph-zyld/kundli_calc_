@@ -10,8 +10,7 @@ Antardasha = Sub-period within mahadasha
 Example: Sun mahadasha → Moon antardasha (specific 6-month period)
 """
 
-from typing import Dict, Any
-
+from typing import Any, Dict
 
 BPHS_ANTARDASHA_EFFECTS: Dict[str, Dict[str, Dict[str, Any]]] = {
     "Sun": {
@@ -24,21 +23,21 @@ BPHS_ANTARDASHA_EFFECTS: Dict[str, Dict[str, Dict[str, Any]]] = {
                 "health": "Strong vitality but watch for fever, bile issues, eye strain",
                 "relationships": "Commanding presence may strain relationships",
                 "wealth": "Gains through authority positions",
-                "timing": "Peak manifestation of Sun's natal promise"
+                "timing": "Peak manifestation of Sun's natal promise",
             },
             "positive_manifestations": [
                 "Authority and power peak",
                 "Government recognition",
                 "Leadership opportunities",
-                "Confidence and self-esteem high"
+                "Confidence and self-esteem high",
             ],
             "challenging_manifestations": [
                 "Ego conflicts",
                 "Health issues from heat/bile",
-                "Strained relationships due to dominance"
+                "Strained relationships due to dominance",
             ],
             "duration_months": 3.6,
-            "confidence": "high"
+            "confidence": "high",
         },
         "Moon": {
             "chapter": 47,
@@ -49,21 +48,21 @@ BPHS_ANTARDASHA_EFFECTS: Dict[str, Dict[str, Dict[str, Any]]] = {
                 "health": "Emotional health important, digestive balance needed",
                 "relationships": "Mother's influence positive, emotional connections",
                 "wealth": "Gains from public, women, or mother's side",
-                "timing": "Balances Sun's authority with emotional intelligence"
+                "timing": "Balances Sun's authority with emotional intelligence",
             },
             "positive_manifestations": [
                 "Public popularity",
                 "Mother's blessings",
                 "Emotional balance in leadership",
-                "Gains from public"
+                "Gains from public",
             ],
             "challenging_manifestations": [
                 "Mental fluctuations",
                 "Emotional stress from authority",
-                "Digestive issues"
+                "Digestive issues",
             ],
             "duration_months": 6.0,
-            "confidence": "high"
+            "confidence": "high",
         },
         "Mars": {
             "chapter": 47,
@@ -74,22 +73,22 @@ BPHS_ANTARDASHA_EFFECTS: Dict[str, Dict[str, Dict[str, Any]]] = {
                 "health": "High energy but prone to accidents, fever, injuries",
                 "relationships": "Conflicts with siblings, aggressive communication",
                 "wealth": "Property and land gains, competitive earnings",
-                "timing": "Action-oriented period with both gains and conflicts"
+                "timing": "Action-oriented period with both gains and conflicts",
             },
             "positive_manifestations": [
                 "Courage and valor peak",
                 "Victory over enemies",
                 "Property acquisition",
-                "Competitive success"
+                "Competitive success",
             ],
             "challenging_manifestations": [
                 "Accidents and injuries",
                 "Conflicts and disputes",
                 "Aggressive behavior",
-                "Blood-related health issues"
+                "Blood-related health issues",
             ],
             "duration_months": 4.2,
-            "confidence": "high"
+            "confidence": "high",
         },
         "Jupiter": {
             "chapter": 47,
@@ -100,22 +99,19 @@ BPHS_ANTARDASHA_EFFECTS: Dict[str, Dict[str, Dict[str, Any]]] = {
                 "health": "Generally good, watch for liver if excessive",
                 "relationships": "Children's welfare, guru's grace, elder's blessings",
                 "wealth": "Wealth through righteous means, property, gold",
-                "timing": "Highly auspicious period combining authority with wisdom"
+                "timing": "Highly auspicious period combining authority with wisdom",
             },
             "positive_manifestations": [
                 "Wisdom and knowledge expansion",
                 "Children's happiness",
                 "Fortune and blessings",
                 "Spiritual growth",
-                "Ethical success"
+                "Ethical success",
             ],
-            "challenging_manifestations": [
-                "Over-optimism",
-                "Weight gain if excessive"
-            ],
+            "challenging_manifestations": ["Over-optimism", "Weight gain if excessive"],
             "duration_months": 9.6,
             "confidence": "high",
-            "notes": "One of the most auspicious antardasha combinations"
+            "notes": "One of the most auspicious antardasha combinations",
         },
         "Venus": {
             "chapter": 47,
@@ -126,25 +122,24 @@ BPHS_ANTARDASHA_EFFECTS: Dict[str, Dict[str, Dict[str, Any]]] = {
                 "health": "Generally good, watch for reproductive system",
                 "relationships": "Romance flourishes, marriage possible, artistic partnerships",
                 "wealth": "Gains from arts, beauty industry, luxury items, vehicles",
-                "timing": "Balances authority with pleasure and aesthetics"
+                "timing": "Balances authority with pleasure and aesthetics",
             },
             "positive_manifestations": [
                 "Artistic success",
                 "Romance and love",
                 "Luxury and comforts",
                 "Vehicle acquisition",
-                "Aesthetic refinement"
+                "Aesthetic refinement",
             ],
             "challenging_manifestations": [
                 "Ego-desire conflicts",
                 "Over-indulgence in pleasures",
-                "Authority vs relationship balance"
+                "Authority vs relationship balance",
             ],
             "duration_months": 12.0,
-            "confidence": "high"
-        }
+            "confidence": "high",
+        },
     },
-    
     "Jupiter": {
         "Jupiter": {
             "chapter": 48,
@@ -155,7 +150,7 @@ BPHS_ANTARDASHA_EFFECTS: Dict[str, Dict[str, Dict[str, Any]]] = {
                 "health": "Generally excellent, watch for weight gain, liver, diabetes",
                 "relationships": "Marriage if unmarried, children born, guru's grace",
                 "wealth": "Wealth expansion, property, gold, ethical earnings peak",
-                "timing": "Most auspicious period of Jupiter mahadasha"
+                "timing": "Most auspicious period of Jupiter mahadasha",
             },
             "positive_manifestations": [
                 "Wisdom and knowledge peak",
@@ -163,17 +158,17 @@ BPHS_ANTARDASHA_EFFECTS: Dict[str, Dict[str, Dict[str, Any]]] = {
                 "Children born or children's success",
                 "Spiritual awakening",
                 "Fortune and blessings abundant",
-                "Marriage if unmarried"
+                "Marriage if unmarried",
             ],
             "challenging_manifestations": [
                 "Over-optimism leading to poor decisions",
                 "Weight gain and obesity",
                 "Liver issues if excessive",
-                "Complacency"
+                "Complacency",
             ],
             "duration_months": 25.6,
             "confidence": "high",
-            "notes": "Peak period for Jupiter's blessings - marriage, children, wealth"
+            "notes": "Peak period for Jupiter's blessings - marriage, children, wealth",
         },
         "Saturn": {
             "chapter": 48,
@@ -184,25 +179,25 @@ BPHS_ANTARDASHA_EFFECTS: Dict[str, Dict[str, Dict[str, Any]]] = {
                 "health": "Generally stable, watch for joint pain, chronic issues",
                 "relationships": "Serious commitments, responsibility to elders, delays in marriage",
                 "wealth": "Slow but steady accumulation, property through persistence",
-                "timing": "Tests patience but rewards discipline"
+                "timing": "Tests patience but rewards discipline",
             },
             "positive_manifestations": [
                 "Disciplined wisdom",
                 "Long-term success",
                 "Property through effort",
                 "Organizational skills",
-                "Karmic rewards"
+                "Karmic rewards",
             ],
             "challenging_manifestations": [
                 "Delays and obstacles",
                 "Heavy responsibilities",
                 "Pessimism",
                 "Chronic health issues",
-                "Separation from loved ones"
+                "Separation from loved ones",
             ],
             "duration_months": 30.4,
             "confidence": "high",
-            "notes": "Combines Jupiter's wisdom with Saturn's discipline"
-        }
-    }
+            "notes": "Combines Jupiter's wisdom with Saturn's discipline",
+        },
+    },
 }

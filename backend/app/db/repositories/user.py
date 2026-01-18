@@ -1,8 +1,10 @@
 from datetime import datetime
 from typing import List, Optional
-from bson import ObjectId
+
 from app.db.mongodb import MongoDB
-from app.models.user import UserInDB, UserCreate, UserUpdate
+from app.models.user import UserCreate, UserInDB, UserUpdate
+from bson import ObjectId
+
 
 class UserRepository:
     collection = MongoDB.db.users
@@ -44,10 +46,7 @@ class UserRepository:
         update_dict = update_data.dict(exclude_unset=True)
         update_dict["updated_at"] = datetime.utcnow()
 
-        result = await cls.collection.update_one(
-            {"_id": ObjectId(user_id)},
-            {"$set": update_dict}
-        )
+        result = await cls.collection.update_one({"_id": ObjectId(user_id)}, {"$set": update_dict})
 
         if result.modified_count:
             return await cls.get_user_by_id(user_id)
@@ -59,9 +58,7 @@ class UserRepository:
         return result.deleted_count > 0
 
     @classmethod
-    async def list_users(
-        cls, skip: int = 0, limit: int = 10, role: Optional[str] = None
-    ) -> List[UserInDB]:
+    async def list_users(cls, skip: int = 0, limit: int = 10, role: Optional[str] = None) -> List[UserInDB]:
         query = {"role": role} if role else {}
         cursor = cls.collection.find(query)
         cursor.skip(skip).limit(limit).sort("created_at", -1)
@@ -80,7 +77,7 @@ class UserRepository:
                     "last_login": datetime.utcnow(),
                     "updated_at": datetime.utcnow(),
                 }
-            }
+            },
         )
 
     @classmethod
@@ -90,7 +87,7 @@ class UserRepository:
             {
                 "$addToSet": {"saved_kundlis": kundli_id},
                 "$set": {"updated_at": datetime.utcnow()},
-            }
+            },
         )
         return result.modified_count > 0
 
@@ -101,6 +98,6 @@ class UserRepository:
             {
                 "$pull": {"saved_kundlis": kundli_id},
                 "$set": {"updated_at": datetime.utcnow()},
-            }
+            },
         )
         return result.modified_count > 0

@@ -1,11 +1,13 @@
-from typing import List, Dict, Any, Tuple
+from typing import Any, Dict, List, Tuple
+
 from app.models.kundli import (
-    KundliChart,
-    Planet,
     House,
-    MatchingResponse,
+    KundliChart,
     KundliResponse,
+    MatchingResponse,
+    Planet,
 )
+
 
 class KundliMatcher:
     GUNAS = {
@@ -30,9 +32,7 @@ class KundliMatcher:
     def __init__(self):
         self.total_points = 36  # Traditional Ashtakoot system
 
-    def _calculate_varna_kuta(
-        self, moon1: Planet, moon2: Planet
-    ) -> Tuple[float, str]:
+    def _calculate_varna_kuta(self, moon1: Planet, moon2: Planet) -> Tuple[float, str]:
         # Simplified varna calculation
         varna_map = {
             "Aries": "Kshatriya",
@@ -53,9 +53,7 @@ class KundliMatcher:
 
         return 0.5, "Average varna compatibility"
 
-    def _calculate_vashya_kuta(
-        self, moon1: Planet, moon2: Planet
-    ) -> Tuple[float, str]:
+    def _calculate_vashya_kuta(self, moon1: Planet, moon2: Planet) -> Tuple[float, str]:
         # Simplified vashya calculation
         vashya_groups = {
             "Chatushpad": ["Aries", "Taurus", "Leo", "Sagittarius"],
@@ -70,16 +68,14 @@ class KundliMatcher:
 
         return 0.5, "Different vashya groups"
 
-    def _calculate_tara_kuta(
-        self, moon1: Planet, moon2: Planet
-    ) -> Tuple[float, str]:
+    def _calculate_tara_kuta(self, moon1: Planet, moon2: Planet) -> Tuple[float, str]:
         # Calculate birth star (nakshatra) compatibility
         nakshatra1_num = self.NAKSHATRAS.index(moon1.nakshatra)
         nakshatra2_num = self.NAKSHATRAS.index(moon2.nakshatra)
 
         # Calculate tara (birth star compatibility)
         tara = (nakshatra2_num - nakshatra1_num) % 9
-        
+
         tara_scores = {
             1: (1.0, "Excellent - Janma Tara"),
             2: (0.5, "Poor - Sampat Tara"),
@@ -94,9 +90,7 @@ class KundliMatcher:
 
         return tara_scores.get(tara, (0.5, "Unknown Tara"))
 
-    def calculate_compatibility(
-        self, kundli1: KundliResponse, kundli2: KundliResponse
-    ) -> MatchingResponse:
+    def calculate_compatibility(self, kundli1: KundliResponse, kundli2: KundliResponse) -> MatchingResponse:
         # Get Moon positions from both charts
         moon1 = next(p for p in kundli1.charts[0].planets if p.name == "Moon")
         moon2 = next(p for p in kundli2.charts[0].planets if p.name == "Moon")
@@ -143,9 +137,7 @@ class KundliMatcher:
         ]
 
         # Generate recommendations based on scores
-        recommendations = self._generate_recommendations(
-            factor_scores, normalized_score
-        )
+        recommendations = self._generate_recommendations(factor_scores, normalized_score)
 
         return MatchingResponse(
             kundli1=kundli1,
@@ -156,29 +148,19 @@ class KundliMatcher:
             recommendations=recommendations,
         )
 
-    def _generate_recommendations(
-        self, factor_scores: Dict[str, float], total_score: float
-    ) -> List[str]:
+    def _generate_recommendations(self, factor_scores: Dict[str, float], total_score: float) -> List[str]:
         recommendations = []
 
         if total_score >= 25:
-            recommendations.append(
-                "This is a highly compatible match with strong spiritual and practical harmony."
-            )
+            recommendations.append("This is a highly compatible match with strong spiritual and practical harmony.")
         elif total_score >= 18:
-            recommendations.append(
-                "This match shows good compatibility but may need work in some areas."
-            )
+            recommendations.append("This match shows good compatibility but may need work in some areas.")
         else:
-            recommendations.append(
-                "This match shows some challenges. Careful consideration is advised."
-            )
+            recommendations.append("This match shows some challenges. Careful consideration is advised.")
 
         # Add specific recommendations based on factor scores
         for factor, score in factor_scores.items():
             if score < (self.GUNAS[factor] * 0.6):
-                recommendations.append(
-                    f"Consider working on {factor} compatibility through appropriate remedies."
-                )
+                recommendations.append(f"Consider working on {factor} compatibility through appropriate remedies.")
 
         return recommendations

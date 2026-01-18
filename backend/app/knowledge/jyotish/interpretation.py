@@ -8,8 +8,8 @@ This follows the traditional Parashara system taught by masters.
 "First understand the WHOLE, then analyze the PARTS"
 """
 
-from typing import Dict, List, Optional
 from dataclasses import dataclass
+from typing import Dict, List, Optional
 
 # =============================================================================
 # THE 10-STEP CHART READING METHODOLOGY
@@ -403,17 +403,21 @@ DISEASE INDICATORS:
 # PRACTICAL INTERPRETATION EXAMPLES
 # =============================================================================
 
+
 def get_interpretation_guide() -> str:
     """Return the complete interpretation methodology"""
     return INTERPRETATION_STEPS
+
 
 def get_career_guide() -> str:
     """Return career analysis guide"""
     return CAREER_ANALYSIS
 
+
 def get_marriage_guide() -> str:
     """Return marriage analysis guide"""
     return MARRIAGE_ANALYSIS
+
 
 def get_health_guide() -> str:
     """Return health analysis guide"""

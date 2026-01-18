@@ -10,7 +10,8 @@ Source: Rajan Publications
 Note: This is a structured representation of public domain classical knowledge.
 Each entry includes verse references for verification.
 """
-from typing import Dict, Any
+
+from typing import Any, Dict
 
 # BPHS Chapter 24: Planets in Bhavas (Houses)
 # Verses 1-78 cover all planet-house combinations
@@ -29,35 +30,35 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Courageous nature but can be impulsive or hasty",
                 "Leadership qualities manifest naturally",
                 "May have less hair on head or experience hair thinning",
-                "Independent, self-reliant temperament"
+                "Independent, self-reliant temperament",
             ],
             "positive_effects": [
                 "Natural leadership and commanding presence",
                 "Strong vitality and life force",
                 "Recognition and respect from others",
                 "Self-confidence and willpower",
-                "Interest in government, authority, or spirituality"
+                "Interest in government, authority, or spirituality",
             ],
             "challenging_effects": [
                 "Tendency toward arrogance or ego issues",
                 "Can be domineering or overly authoritative",
                 "Health issues related to heat (fevers, inflammation)",
                 "Possible eye problems",
-                "May face obstacles from father or authority figures"
+                "May face obstacles from father or authority figures",
             ],
             "remedies": [
                 "Worship the Sun deity (Surya) at sunrise",
                 "Recite Aditya Hridayam stotra",
                 "Practice humility and respect toward elders",
                 "Donate wheat, jaggery, or copper on Sundays",
-                "Wear ruby (if recommended by qualified astrologer)"
+                "Wear ruby (if recommended by qualified astrologer)",
             ],
             "life_areas": {
                 "personality": "Strong, authoritative, and independent character",
                 "health": "Generally strong vitality but watch for eye issues and bilious disorders",
                 "career": "Natural inclination toward leadership, government service, administration",
-                "relationships": "May dominate in relationships; need to balance ego"
-            }
+                "relationships": "May dominate in relationships; need to balance ego",
+            },
         },
         2: {
             "verses": "24.5",
@@ -69,28 +70,28 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Strong opinions that may conflict with family values",
                 "Education may face obstacles initially",
                 "Self-esteem tied to material possessions",
-                "May need to create own wealth rather than inherit"
+                "May need to create own wealth rather than inherit",
             ],
             "positive_effects": [
                 "Strong voice and commanding speech when positively placed",
                 "Can be powerful public speaker if Sun is strong",
                 "Determination to rebuild family fortune",
-                "Value-driven approach to wealth"
+                "Value-driven approach to wealth",
             ],
             "challenging_effects": [
                 "Harsh speech may damage relationships",
                 "Financial ups and downs",
                 "Conflicts with family members",
                 "Difficulty in formal education",
-                "Eye or face-related issues"
+                "Eye or face-related issues",
             ],
             "remedies": [
                 "Practice mindful speech",
                 "Donate food and resources to the needy",
                 "Worship ancestors (Pitru tarpan)",
                 "Maintain harmonious family relationships",
-                "Recite Gayatri Mantra daily"
-            ]
+                "Recite Gayatri Mantra daily",
+            ],
         },
         4: {
             "verses": "24.7",
@@ -101,24 +102,24 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Frequent changes of residence",
                 "Inner peace requires conscious cultivation",
                 "May distance from homeland",
-                "Emotional security sought through achievements"
+                "Emotional security sought through achievements",
             ],
             "positive_effects": [
                 "Strong will to create own foundation",
                 "Success in real estate if Sun well-placed",
-                "Leadership in family matters over time"
+                "Leadership in family matters over time",
             ],
             "challenging_effects": [
                 "Maternal relationship strained",
                 "Lack of emotional peace at home",
                 "Property disputes or losses",
-                "Difficulty settling in one place"
+                "Difficulty settling in one place",
             ],
             "remedies": [
                 "Honor mother despite difficulties",
                 "Practice grounding meditation",
-                "Perform Vastu remedies for home peace"
-            ]
+                "Perform Vastu remedies for home peace",
+            ],
         },
         5: {
             "verses": "24.8",
@@ -129,25 +130,25 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Challenges regarding children - delays or difficulties",
                 "Excellent for speculation and investments when strong",
                 "Past life merit manifests as wisdom",
-                "Romantic relationships intense but may face obstacles"
+                "Romantic relationships intense but may face obstacles",
             ],
             "positive_effects": [
                 "Exceptional intelligence and creativity",
                 "Success in speculation, stock market, gambling",
                 "Strong spiritual knowledge",
-                "Recognition for intellectual achievements"
+                "Recognition for intellectual achievements",
             ],
             "challenging_effects": [
                 "Difficulties with children - delays or strained relationships",
                 "Heart or upper back health issues",
                 "Ego in romantic matters",
-                "Over-confidence in speculative ventures"
+                "Over-confidence in speculative ventures",
             ],
             "remedies": [
                 "Recite Aditya Hridayam for heart health",
                 "Be patient regarding children",
-                "Balance ego in creative expression"
-            ]
+                "Balance ego in creative expression",
+            ],
         },
         9: {
             "verses": "24.12",
@@ -158,25 +159,25 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Father relationship complex or distant",
                 "Fortune improves after father or through spouse",
                 "Natural teacher and guide in spiritual matters",
-                "Government or religious work beneficial"
+                "Government or religious work beneficial",
             ],
             "positive_effects": [
                 "Strong spiritual and philosophical inclination",
                 "Success in higher education and teaching",
                 "Foreign connections beneficial",
                 "Good fortune in later life",
-                "Respected for wisdom and righteousness"
+                "Respected for wisdom and righteousness",
             ],
             "challenging_effects": [
                 "Father relationship distant or challenging",
                 "Religious dogmatism possible",
-                "Conflicts with gurus or mentors"
+                "Conflicts with gurus or mentors",
             ],
             "remedies": [
                 "Study and teach sacred texts",
                 "Respect father despite difficulties",
-                "Practice humility in spiritual matters"
-            ]
+                "Practice humility in spiritual matters",
+            ],
         },
         11: {
             "verses": "24.14",
@@ -187,25 +188,25 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Elder siblings supportive",
                 "Fulfillment of desires and ambitions",
                 "Leadership in groups and organizations",
-                "Multiple income sources"
+                "Multiple income sources",
             ],
             "positive_effects": [
                 "High income and financial gains",
                 "Influential social network",
                 "Goals and ambitions achieved",
                 "Recognition from government or large organizations",
-                "Long life and prosperity"
+                "Long life and prosperity",
             ],
             "challenging_effects": [
                 "Few children or challenges with progeny",
                 "Some enemies among friends",
-                "May dominate in social groups"
+                "May dominate in social groups",
             ],
             "remedies": [
                 "Use gains for charitable purposes",
                 "Be humble in social circles",
-                "Support younger generation"
-            ]
+                "Support younger generation",
+            ],
         },
         3: {
             "verses": "24.6",
@@ -217,26 +218,26 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "May have strained sibling relationships",
                 "Good at overcoming obstacles and competitors",
                 "Physical strength and vitality",
-                "Independent, self-made success"
+                "Independent, self-made success",
             ],
             "positive_effects": [
                 "Exceptional courage and determination",
                 "Victory over enemies and obstacles",
                 "Strong willpower and initiative",
                 "Success in competitive fields",
-                "Good writing or communication abilities"
+                "Good writing or communication abilities",
             ],
             "challenging_effects": [
                 "Conflicts with siblings",
                 "Aggressive communication style",
                 "May lack brotherly support",
-                "Tendency toward egoistic self-expression"
+                "Tendency toward egoistic self-expression",
             ],
             "remedies": [
                 "Practice diplomatic communication",
                 "Make peace with siblings",
-                "Use courage for righteous causes"
-            ]
+                "Use courage for righteous causes",
+            ],
         },
         6: {
             "verses": "24.9",
@@ -248,28 +249,28 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Ability to handle conflicts and litigation",
                 "May face financial ups and downs",
                 "Uncle (maternal) support possible",
-                "Victory over diseases and adversaries"
+                "Victory over diseases and adversaries",
             ],
             "positive_effects": [
                 "Defeats enemies and competitors",
                 "Success in service professions",
                 "Ability to overcome health issues",
                 "Good for military, police, legal work",
-                "Strong constitution despite challenges"
+                "Strong constitution despite challenges",
             ],
             "challenging_effects": [
                 "Chronic health issues possible",
                 "Conflicts and legal battles",
                 "Financial struggles",
                 "Enemies and opposition",
-                "Eye problems"
+                "Eye problems",
             ],
             "remedies": [
                 "Serve the sick and needy",
                 "Maintain strong health discipline",
                 "Avoid unnecessary conflicts",
-                "Strengthen Sun through worship"
-            ]
+                "Strengthen Sun through worship",
+            ],
         },
         7: {
             "verses": "24.10",
@@ -281,27 +282,27 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Business partnerships require care",
                 "Spouse may have leadership qualities",
                 "Public-facing work favorable",
-                "Need to balance ego in relationships"
+                "Need to balance ego in relationships",
             ],
             "positive_effects": [
                 "Leadership in partnerships",
                 "Success in public dealings",
                 "Strong spouse with character",
-                "Business acumen if Sun well-placed"
+                "Business acumen if Sun well-placed",
             ],
             "challenging_effects": [
                 "Marital conflicts due to ego",
                 "Dominance issues with partner",
                 "Separation or delays in marriage",
                 "Dental and eye health issues",
-                "Partnership disputes"
+                "Partnership disputes",
             ],
             "remedies": [
                 "Practice humility in marriage",
                 "Marry after age 28",
                 "Balance independence with partnership",
-                "Strengthen Venus for marital harmony"
-            ]
+                "Strengthen Venus for marital harmony",
+            ],
         },
         8: {
             "verses": "24.11 (part)",
@@ -313,28 +314,28 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Research and investigation skills",
                 "Inheritance matters important",
                 "Chronic health issues require attention",
-                "Spiritual transformation through crises"
+                "Spiritual transformation through crises",
             ],
             "positive_effects": [
                 "Deep insight into hidden matters",
                 "Success in research and occult",
                 "Inheritance and legacy gains possible",
                 "Longevity if Sun strong",
-                "Transformative spiritual experiences"
+                "Transformative spiritual experiences",
             ],
             "challenging_effects": [
                 "Financial instability",
                 "Health challenges, especially eyes",
                 "Sudden upheavals and crises",
                 "Issues with inheritance",
-                "Hidden enemies"
+                "Hidden enemies",
             ],
             "remedies": [
                 "Practice spiritual discipline",
                 "Handle father's legacy with care",
                 "Donate for eye hospitals",
-                "Strengthen Sun through mantras"
-            ]
+                "Strengthen Sun through mantras",
+            ],
         },
         12: {
             "verses": "24.15",
@@ -346,28 +347,28 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success in foreign lands",
                 "Isolated work environments favorable",
                 "Spiritual seeking and moksha orientation",
-                "Hidden expenses and losses"
+                "Hidden expenses and losses",
             ],
             "positive_effects": [
                 "Success in foreign countries",
                 "Spiritual inclination and liberation",
                 "Work in hospitals, ashrams, retreats",
                 "Charitable disposition",
-                "Moksha orientation"
+                "Moksha orientation",
             ],
             "challenging_effects": [
                 "Financial losses and high expenses",
                 "Eye problems and sleep issues",
                 "Separation from homeland",
                 "Father's loss or distance",
-                "Hidden enemies"
+                "Hidden enemies",
             ],
             "remedies": [
                 "Channel expenses toward spirituality",
                 "Serve in charitable institutions",
                 "Practice meditation and sleep discipline",
-                "Donate for spiritual causes"
-            ]
+                "Donate for spiritual causes",
+            ],
         },
         10: {
             "verses": "24.11",
@@ -381,7 +382,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Strong sense of duty and responsibility",
                 "Reputation for integrity and competence",
                 "Success through own efforts and merit",
-                "May hold positions of power and influence"
+                "May hold positions of power and influence",
             ],
             "positive_effects": [
                 "Exceptional career success and professional recognition",
@@ -391,37 +392,36 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Fame within chosen field or profession",
                 "Ability to lead large organizations or initiatives",
                 "Government favor and support possible",
-                "Father may be prominent or helpful in career"
+                "Father may be prominent or helpful in career",
             ],
             "challenging_effects": [
                 "Work may consume personal life",
                 "Excessive focus on career at expense of family",
                 "Ego conflicts with superiors possible",
                 "Intense pressure and responsibility",
-                "Public scrutiny and criticism"
+                "Public scrutiny and criticism",
             ],
             "remedies": [
                 "Worship Sun deity (Surya) for continued success",
                 "Maintain humility despite achievements",
                 "Honor father and authority figures",
                 "Use position to serve others",
-                "Balance work with spiritual practices"
+                "Balance work with spiritual practices",
             ],
             "life_areas": {
                 "career": "Exceptional placement for career - leadership, authority, fame, government service",
                 "reputation": "Excellent public image and respect in society",
                 "father": "Strong relationship with father; father may be prominent",
-                "dharma": "Strong sense of duty and righteous action in profession"
+                "dharma": "Strong sense of duty and righteous action in profession",
             },
             "timing": "Most powerful during Sun mahadasha. Effects strengthen after age 30.",
             "notable_yogas": [
                 "Can form Ruchaka Yoga if in own sign (Leo)",
                 "Contributes to Raja Yogas if connected with lords of kendras/trikonas",
-                "Strengthens any Dharma-Karma Adhipati Yoga"
-            ]
-        }
+                "Strengthens any Dharma-Karma Adhipati Yoga",
+            ],
+        },
     },
-    
     "Moon": {
         1: {
             "verses": "24.14-15",
@@ -434,7 +434,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Nurturing, caring disposition toward others",
                 "Youthful appearance, often looking younger than age",
                 "Mind-dominated personality; thoughts influence health",
-                "May have Kapha constitution (cool, moist)"
+                "May have Kapha constitution (cool, moist)",
             ],
             "positive_effects": [
                 "Likeable personality with strong people skills",
@@ -442,22 +442,22 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Creative and imaginative mindset",
                 "Good relationship with mother",
                 "Ability to influence others through emotional appeal",
-                "Longevity and generally good health"
+                "Longevity and generally good health",
             ],
             "challenging_effects": [
                 "Emotional fluctuations and mood swings",
                 "Tendency toward mental stress or anxiety",
                 "May be overly sensitive to criticism",
                 "Dependency on others for emotional security",
-                "Possible challenges with children (as per classical text)"
+                "Possible challenges with children (as per classical text)",
             ],
             "remedies": [
                 "Practice emotional regulation through meditation",
                 "Worship Moon deity (Chandra)",
                 "Strengthen relationship with mother",
                 "Pearl (Moti) if recommended by expert",
-                "Fasting on Mondays"
-            ]
+                "Fasting on Mondays",
+            ],
         },
         2: {
             "verses": "24.16",
@@ -469,24 +469,24 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Love of food and comfort",
                 "Beautiful eyes and pleasant face",
                 "Income fluctuates with Moon phases",
-                "Emotional security through material stability"
+                "Emotional security through material stability",
             ],
             "positive_effects": [
                 "Excellent for wealth and family happiness",
                 "Natural talent for poetry, singing, counseling",
                 "Strong maternal family support",
-                "Gains through liquids, food, or public-facing work"
+                "Gains through liquids, food, or public-facing work",
             ],
             "challenging_effects": [
                 "Income may fluctuate",
                 "Emotional spending habits",
-                "Over-attachment to material security"
+                "Over-attachment to material security",
             ],
             "remedies": [
                 "Maintain stable savings despite fluctuations",
                 "Use eloquence for teaching and uplifting",
-                "Honor mother and maternal lineage"
-            ]
+                "Honor mother and maternal lineage",
+            ],
         },
         4: {
             "verses": "24.18",
@@ -498,25 +498,25 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Love of home and domestic life",
                 "Nurturing family environment",
                 "Success in real estate, hospitality, counseling",
-                "Inner peace and contentment"
+                "Inner peace and contentment",
             ],
             "positive_effects": [
                 "Exceptional emotional security and happiness",
                 "Blessed with property and conveyances",
                 "Loving relationship with mother",
                 "Success in nurturing professions",
-                "Strong family foundation"
+                "Strong family foundation",
             ],
             "challenging_effects": [
                 "Emotional dependency on home environment",
                 "Difficulty leaving homeland",
-                "May be overly attached to mother"
+                "May be overly attached to mother",
             ],
             "remedies": [
                 "Express gratitude for blessings",
                 "Share home comforts with others",
-                "Maintain emotional balance"
-            ]
+                "Maintain emotional balance",
+            ],
         },
         7: {
             "verses": "24.20",
@@ -528,25 +528,25 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success in public relations and hospitality",
                 "Strong desire for companionship",
                 "Business partnerships favorable",
-                "Romantic and sensitive in relationships"
+                "Romantic and sensitive in relationships",
             ],
             "positive_effects": [
                 "Happy marriage with emotional connection",
                 "Beautiful, caring spouse",
                 "Success in businesses dealing with public",
                 "Popularity and social grace",
-                "Wealth through partnerships"
+                "Wealth through partnerships",
             ],
             "challenging_effects": [
                 "Emotional dependency on partner",
                 "Mood affects relationship harmony",
-                "May idealize partner unrealistically"
+                "May idealize partner unrealistically",
             ],
             "remedies": [
                 "Maintain emotional stability in marriage",
                 "Practice independence alongside partnership",
-                "Use emotional intelligence for harmony"
-            ]
+                "Use emotional intelligence for harmony",
+            ],
         },
         10: {
             "verses": "24.23",
@@ -558,25 +558,25 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Mother's influence on career",
                 "Work involving liquids, food, hospitality, healthcare",
                 "Emotional satisfaction from career achievements",
-                "Fame through service to others"
+                "Fame through service to others",
             ],
             "positive_effects": [
                 "Excellent for public-facing careers",
                 "Natural ability to connect with masses",
                 "Success in hospitality, nursing, counseling, food",
                 "Recognition for caring and service",
-                "Mother supports career"
+                "Mother supports career",
             ],
             "challenging_effects": [
                 "Career may fluctuate with emotional state",
                 "Public scrutiny affects emotions",
-                "Work-life balance challenging"
+                "Work-life balance challenging",
             ],
             "remedies": [
                 "Maintain emotional stability in profession",
                 "Use popularity for social benefit",
-                "Balance career with family needs"
-            ]
+                "Balance career with family needs",
+            ],
         },
         3: {
             "verses": "24.17",
@@ -588,21 +588,21 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Emotional courage and initiative",
                 "Artistic self-expression",
                 "Success through own efforts",
-                "Changeable interests"
+                "Changeable interests",
             ],
             "positive_effects": [
                 "Supportive siblings",
                 "Good communication skills",
                 "Creative writing or arts",
                 "Adaptable and versatile",
-                "Emotional courage"
+                "Emotional courage",
             ],
             "challenging_effects": [
                 "Restless mind",
                 "Inconsistent efforts",
                 "May lack physical strength",
-                "Emotional instability in projects"
-            ]
+                "Emotional instability in projects",
+            ],
         },
         5: {
             "verses": "24.19",
@@ -614,20 +614,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success in speculation if Moon strong",
                 "Romantic and sensitive nature",
                 "Advisory roles suitable",
-                "Past life merit manifests"
+                "Past life merit manifests",
             ],
             "positive_effects": [
                 "Intelligent and learned",
                 "Blessed with children",
                 "Creative and artistic",
                 "Success in education and advisory",
-                "Good fortune"
+                "Good fortune",
             ],
             "challenging_effects": [
                 "Emotional attachment to children",
                 "Speculation risky if Moon weak",
-                "Mood affects creativity"
-            ]
+                "Mood affects creativity",
+            ],
         },
         6: {
             "verses": "24.19 (part)",
@@ -639,20 +639,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Ability to overcome obstacles",
                 "Maternal relatives may cause issues",
                 "Fluctuating health",
-                "Emotional resilience"
+                "Emotional resilience",
             ],
             "positive_effects": [
                 "Success in nursing, counseling",
                 "Overcomes enemies eventually",
                 "Wealth through service",
-                "Emotional strength"
+                "Emotional strength",
             ],
             "challenging_effects": [
                 "Stomach and digestive problems",
                 "Emotional stress from conflicts",
                 "Mother's health concerns",
-                "Enemies and litigation"
-            ]
+                "Enemies and litigation",
+            ],
         },
         8: {
             "verses": "24.21",
@@ -664,21 +664,21 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Research abilities",
                 "Mother's longevity concerns",
                 "Hidden emotional issues",
-                "Inheritance matters"
+                "Inheritance matters",
             ],
             "positive_effects": [
                 "Deep intuition",
                 "Occult abilities",
                 "Psychological insight",
-                "Transformative experiences"
+                "Transformative experiences",
             ],
             "challenging_effects": [
                 "Emotional crises",
                 "Health fluctuations",
                 "Mother's health issues",
                 "Hidden anxieties",
-                "Sudden changes"
-            ]
+                "Sudden changes",
+            ],
         },
         9: {
             "verses": "24.22",
@@ -690,20 +690,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success in higher learning",
                 "Foreign travel beneficial",
                 "Good relationship with teachers",
-                "Wisdom and intuition"
+                "Wisdom and intuition",
             ],
             "positive_effects": [
                 "Excellent fortune",
                 "Spiritual wisdom",
                 "Higher education success",
                 "Foreign gains",
-                "Blessed with children"
+                "Blessed with children",
             ],
             "challenging_effects": [
                 "Emotional attachment to beliefs",
                 "May change beliefs frequently",
-                "Travel may be restless"
-            ]
+                "Travel may be restless",
+            ],
         },
         11: {
             "verses": "24.24",
@@ -715,20 +715,16 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Elder siblings supportive",
                 "Multiple income sources",
                 "Emotional fulfillment through friends",
-                "Goals achieved"
+                "Goals achieved",
             ],
             "positive_effects": [
                 "High income",
                 "Popular and well-connected",
                 "Desires fulfilled",
                 "Long life",
-                "Good children"
+                "Good children",
             ],
-            "challenging_effects": [
-                "Emotional dependency on groups",
-                "Income may fluctuate",
-                "Friends may be fickle"
-            ]
+            "challenging_effects": ["Emotional dependency on groups", "Income may fluctuate", "Friends may be fickle"],
         },
         12: {
             "verses": "24.25",
@@ -740,25 +736,24 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Sleep issues or insomnia",
                 "Emotional seclusion",
                 "Expenses on family or mother",
-                "Hidden emotional life"
+                "Hidden emotional life",
             ],
             "positive_effects": [
                 "Strong spiritual inclination",
                 "Success in foreign lands",
                 "Meditation abilities",
                 "Charitable nature",
-                "Liberation orientation"
+                "Liberation orientation",
             ],
             "challenging_effects": [
                 "Emotional loneliness",
                 "Sleep disorders",
                 "High expenses",
                 "Mother's health or distance",
-                "Hidden sorrows"
-            ]
-        }
+                "Hidden sorrows",
+            ],
+        },
     },
-    
     "Mars": {
         1: {
             "verses": "24.26",
@@ -770,28 +765,28 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Quick to anger but also to forgive",
                 "Athletic or competitive inclinations",
                 "Tendency toward accidents or injuries",
-                "Leadership through action"
+                "Leadership through action",
             ],
             "positive_effects": [
                 "Exceptional courage and determination",
                 "Strong physical body and stamina",
                 "Natural warrior and competitor",
                 "Technical and mechanical skills",
-                "Quick decision-making abilities"
+                "Quick decision-making abilities",
             ],
             "challenging_effects": [
                 "Aggressive or impulsive behavior",
                 "Prone to accidents and injuries",
                 "Blood pressure issues",
                 "Conflict-prone temperament",
-                "Impatience and anger"
+                "Impatience and anger",
             ],
             "remedies": [
                 "Practice anger management",
                 "Channel energy through sports",
                 "Worship Mars deity (Mangal)",
-                "Recite Hanuman Chalisa"
-            ]
+                "Recite Hanuman Chalisa",
+            ],
         },
         2: {
             "verses": "24.27",
@@ -803,19 +798,19 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Strong appetite and metabolism",
                 "Self-made wealth through effort",
                 "Technical or engineering skills",
-                "Direct communication style"
+                "Direct communication style",
             ],
             "positive_effects": [
                 "Ability to rebuild wealth",
                 "Strong determination in finances",
-                "Technical earning abilities"
+                "Technical earning abilities",
             ],
             "challenging_effects": [
                 "Harsh speech causes problems",
                 "Financial instability",
                 "Family disputes",
-                "Dental or facial issues"
-            ]
+                "Dental or facial issues",
+            ],
         },
         3: {
             "verses": "24.28",
@@ -827,21 +822,21 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Strong communication drive",
                 "Athletic or competitive pursuits",
                 "Technical writing abilities",
-                "Victory over obstacles"
+                "Victory over obstacles",
             ],
             "positive_effects": [
                 "Exceptional courage",
                 "Strong initiative and drive",
                 "Success in competitive fields",
                 "Technical skills",
-                "Defeats enemies"
+                "Defeats enemies",
             ],
             "challenging_effects": [
                 "Conflicts with siblings",
                 "Aggressive communication",
                 "Accidents during travel",
-                "Ear or throat problems"
-            ]
+                "Ear or throat problems",
+            ],
         },
         4: {
             "verses": "24.29",
@@ -853,19 +848,15 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Technical or engineering career",
                 "Emotional restlessness",
                 "Vehicle accidents to guard against",
-                "Service in military or government"
+                "Service in military or government",
             ],
-            "positive_effects": [
-                "Success through service",
-                "Self-made property",
-                "Technical expertise"
-            ],
+            "positive_effects": ["Success through service", "Self-made property", "Technical expertise"],
             "challenging_effects": [
                 "Mother relationship strained",
                 "Lack of peace at home",
                 "Property disputes",
-                "Vehicle accidents risk"
-            ]
+                "Vehicle accidents risk",
+            ],
         },
         5: {
             "verses": "24.30",
@@ -877,20 +868,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Technical or sports abilities",
                 "Risk-taking nature",
                 "Abdominal health issues",
-                "Quick intelligence"
+                "Quick intelligence",
             ],
             "positive_effects": [
                 "Success in speculation if strong",
                 "Athletic abilities",
                 "Quick decision-making",
-                "Technical creativity"
+                "Technical creativity",
             ],
             "challenging_effects": [
                 "Difficulties with children",
                 "Impulsive speculation losses",
                 "Romantic conflicts",
-                "Abdominal issues"
-            ]
+                "Abdominal issues",
+            ],
         },
         6: {
             "verses": "24.31",
@@ -902,20 +893,16 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Military, police, medical fields favorable",
                 "Strong immune system",
                 "Sibling issues possible",
-                "Litigation success"
+                "Litigation success",
             ],
             "positive_effects": [
                 "Defeats all enemies",
                 "Success in service",
                 "Strong health overall",
                 "Wealth through effort",
-                "Competitive success"
+                "Competitive success",
             ],
-            "challenging_effects": [
-                "Conflicts are common",
-                "Blood-related issues",
-                "Strained with siblings"
-            ]
+            "challenging_effects": ["Conflicts are common", "Blood-related issues", "Strained with siblings"],
         },
         7: {
             "verses": "24.32",
@@ -927,25 +914,21 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Strong sexual drive",
                 "Late marriage beneficial",
                 "Spouse may be technical or athletic",
-                "Marital counseling helpful"
+                "Marital counseling helpful",
             ],
             "positive_effects": [
                 "Dynamic business partnerships",
                 "Energetic spouse",
-                "Success in competitive business"
+                "Success in competitive business",
             ],
             "challenging_effects": [
                 "Marital conflicts frequent",
                 "Separation risks",
                 "Partnership disputes",
                 "Sexual issues",
-                "Manglik considerations"
+                "Manglik considerations",
             ],
-            "remedies": [
-                "Marry after 28 or match Manglik",
-                "Kuja dosha remedies",
-                "Practice patience in marriage"
-            ]
+            "remedies": ["Marry after 28 or match Manglik", "Kuja dosha remedies", "Practice patience in marriage"],
         },
         8: {
             "verses": "24.33",
@@ -957,21 +940,21 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Inheritance conflicts",
                 "Chronic health issues",
                 "Sexual intensity",
-                "Hidden sources of income"
+                "Hidden sources of income",
             ],
             "positive_effects": [
                 "Deep research abilities",
                 "Occult knowledge",
                 "Inheritance possible",
-                "Transformative power"
+                "Transformative power",
             ],
             "challenging_effects": [
                 "Accidents and surgeries",
                 "Chronic health issues",
                 "Sudden crises",
                 "Inheritance disputes",
-                "Longevity concerns"
-            ]
+                "Longevity concerns",
+            ],
         },
         9: {
             "verses": "24.34",
@@ -983,20 +966,15 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Technical or engineering education",
                 "Challenges in higher learning",
                 "Dharma through action",
-                "Self-made fortune"
+                "Self-made fortune",
             ],
-            "positive_effects": [
-                "Independent thinking",
-                "Success abroad",
-                "Technical expertise",
-                "Warrior dharma"
-            ],
+            "positive_effects": ["Independent thinking", "Success abroad", "Technical expertise", "Warrior dharma"],
             "challenging_effects": [
                 "Father relationship strained",
                 "Conflicts with gurus",
                 "Religious disagreements",
-                "Accidents during travel"
-            ]
+                "Accidents during travel",
+            ],
         },
         10: {
             "verses": "24.35",
@@ -1008,21 +986,21 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Competitive nature drives professional success",
                 "Gains through property and real estate",
                 "Leadership through strength and decisiveness",
-                "May work in fields involving fire, metals, or machinery"
+                "May work in fields involving fire, metals, or machinery",
             ],
             "positive_effects": [
                 "High energy and drive for career success",
                 "Courage to take risks in profession",
                 "Success in competitive fields",
                 "Accumulation of property and wealth",
-                "Respected for bravery and direct action"
+                "Respected for bravery and direct action",
             ],
             "challenging_effects": [
                 "Conflicts with authority figures",
                 "Aggressive or domineering professional style",
                 "Accidents or injuries related to career",
-                "Legal disputes over property or career matters"
-            ]
+                "Legal disputes over property or career matters",
+            ],
         },
         11: {
             "verses": "24.36",
@@ -1034,20 +1012,16 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Technical income sources",
                 "Elder siblings supportive",
                 "Ambitious goals achieved",
-                "Athletic or competitive groups"
+                "Athletic or competitive groups",
             ],
             "positive_effects": [
                 "High income through effort",
                 "Ambitious goals fulfilled",
                 "Competitive success",
                 "Strong network",
-                "Long life"
+                "Long life",
             ],
-            "challenging_effects": [
-                "Few children",
-                "Conflicts in groups",
-                "Aggressive friendships"
-            ]
+            "challenging_effects": ["Few children", "Conflicts in groups", "Aggressive friendships"],
         },
         12: {
             "verses": "24.37",
@@ -1059,24 +1033,23 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Isolated work environments",
                 "Sleep disturbances",
                 "Sexual expenses",
-                "Spiritual warrior path"
+                "Spiritual warrior path",
             ],
             "positive_effects": [
                 "Success in foreign lands",
                 "Spiritual discipline",
                 "Research in isolation",
-                "Moksha through action"
+                "Moksha through action",
             ],
             "challenging_effects": [
                 "Financial losses",
                 "Eye problems",
                 "Hidden enemies",
                 "Accidents or confinement",
-                "Sleep issues"
-            ]
-        }
+                "Sleep issues",
+            ],
+        },
     },
-    
     "Mercury": {
         1: {
             "verses": "24.38",
@@ -1088,21 +1061,21 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Strong communication and learning abilities",
                 "Business-minded and commercially oriented",
                 "Versatile with multiple skills and interests",
-                "Nervous or restless energy"
+                "Nervous or restless energy",
             ],
             "positive_effects": [
                 "Exceptional intelligence and learning ability",
                 "Excellent communication skills",
                 "Success in business, writing, teaching",
                 "Adaptable to changing circumstances",
-                "Youthful and charming demeanor"
+                "Youthful and charming demeanor",
             ],
             "challenging_effects": [
                 "Nervous anxiety or mental restlessness",
                 "Scattered focus and interests",
                 "Tendency to overthink",
-                "May lack depth in relationships"
-            ]
+                "May lack depth in relationships",
+            ],
         },
         2: {
             "verses": "24.39",
@@ -1113,19 +1086,19 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Multiple income sources",
                 "Good education and learning",
                 "Financial intelligence",
-                "Family benefits from native's skills"
+                "Family benefits from native's skills",
             ],
             "positive_effects": [
                 "Earnings through writing, teaching, business",
                 "Persuasive communication brings wealth",
                 "Intelligent financial management",
-                "Educational success"
+                "Educational success",
             ],
             "challenging_effects": [
                 "Income may fluctuate",
                 "Overthinking financial decisions",
-                "May use clever speech manipulatively"
-            ]
+                "May use clever speech manipulatively",
+            ],
         },
         3: {
             "verses": "24.40",
@@ -1136,19 +1109,15 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success through own efforts and skills",
                 "Short travels beneficial",
                 "Courage combined with intelligence",
-                "Technical or business skills"
+                "Technical or business skills",
             ],
             "positive_effects": [
                 "Outstanding communication abilities",
                 "Sibling support and cooperation",
                 "Success in media, writing, business",
-                "Quick learning and adaptability"
+                "Quick learning and adaptability",
             ],
-            "challenging_effects": [
-                "Restless mind",
-                "Too many interests",
-                "Nervous energy in communication"
-            ]
+            "challenging_effects": ["Restless mind", "Too many interests", "Nervous energy in communication"],
         },
         4: {
             "verses": "24.41",
@@ -1159,19 +1128,19 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Mother is educated or intellectual",
                 "Success in education sector",
                 "Emotional intelligence",
-                "Home-based business favorable"
+                "Home-based business favorable",
             ],
             "positive_effects": [
                 "Excellent education",
                 "Property and comforts",
                 "Intellectual family environment",
-                "Teaching from home beneficial"
+                "Teaching from home beneficial",
             ],
             "challenging_effects": [
                 "Mental restlessness at home",
                 "Frequent residence changes",
-                "Overthinking domestic matters"
-            ]
+                "Overthinking domestic matters",
+            ],
         },
         5: {
             "verses": "24.42",
@@ -1182,19 +1151,19 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Creative intelligence",
                 "Mantra and occult knowledge",
                 "Teaching and advisory roles",
-                "Romantic communication skills"
+                "Romantic communication skills",
             ],
             "positive_effects": [
                 "Intelligent offspring",
                 "Success in speculation with analysis",
                 "Creative writing abilities",
-                "Educational expertise"
+                "Educational expertise",
             ],
             "challenging_effects": [
                 "Overthinking in romance",
                 "Children may be nervous",
-                "Analytical approach to creativity"
-            ]
+                "Analytical approach to creativity",
+            ],
         },
         6: {
             "verses": "24.43",
@@ -1205,19 +1174,15 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Analytical problem-solving",
                 "Medical or legal profession favorable",
                 "Overcomes obstacles through wit",
-                "Maternal uncle supportive"
+                "Maternal uncle supportive",
             ],
             "positive_effects": [
                 "Defeats enemies intellectually",
                 "Success in analytical professions",
                 "Problem-solving abilities",
-                "Service with intelligence"
+                "Service with intelligence",
             ],
-            "challenging_effects": [
-                "Nervous health issues",
-                "Mental stress from conflicts",
-                "Overthinking problems"
-            ]
+            "challenging_effects": ["Nervous health issues", "Mental stress from conflicts", "Overthinking problems"],
         },
         7: {
             "verses": "24.44",
@@ -1228,19 +1193,19 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Diplomatic in relationships",
                 "Spouse may be in business/education",
                 "Communication key to marriage",
-                "Public dealing skills"
+                "Public dealing skills",
             ],
             "positive_effects": [
                 "Intelligent spouse",
                 "Success in partnerships",
                 "Diplomatic relationships",
-                "Business acumen with partner"
+                "Business acumen with partner",
             ],
             "challenging_effects": [
                 "Over-analytical in marriage",
                 "Communication issues if afflicted",
-                "Partnership disputes through words"
-            ]
+                "Partnership disputes through words",
+            ],
         },
         8: {
             "verses": "24.45",
@@ -1251,20 +1216,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Foreign connections",
                 "Hidden income sources",
                 "Longevity generally good",
-                "Interest in mysteries"
+                "Interest in mysteries",
             ],
             "positive_effects": [
                 "Deep research abilities",
                 "Occult knowledge",
                 "Inheritance gains",
                 "Long life",
-                "Secret earnings"
+                "Secret earnings",
             ],
             "challenging_effects": [
                 "Mental anxiety about hidden matters",
                 "Nervous health issues",
-                "Inheritance disputes"
-            ]
+                "Inheritance disputes",
+            ],
         },
         9: {
             "verses": "24.46",
@@ -1275,19 +1240,19 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Father educated or intellectual",
                 "Foreign education beneficial",
                 "Teaching and publishing favorable",
-                "Dharmic intelligence"
+                "Dharmic intelligence",
             ],
             "positive_effects": [
                 "Scholarly achievements",
                 "Success in publishing, teaching",
                 "Higher education excellence",
-                "Good fortune through learning"
+                "Good fortune through learning",
             ],
             "challenging_effects": [
                 "Over-analytical about beliefs",
                 "May change beliefs frequently",
-                "Nervous during travels"
-            ]
+                "Nervous during travels",
+            ],
         },
         10: {
             "verses": "24.38",
@@ -1299,20 +1264,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Good networking and business acumen",
                 "Success through mental agility and adaptability",
                 "Teaching, writing, consulting are favorable",
-                "Reputation for intelligence and versatility"
+                "Reputation for intelligence and versatility",
             ],
             "positive_effects": [
                 "Excellent communication skills in profession",
                 "Success in business and commerce",
                 "Recognition for intellectual abilities",
                 "Multiple income sources possible",
-                "Good reputation for honesty and intelligence"
+                "Good reputation for honesty and intelligence",
             ],
             "challenging_effects": [
                 "Scattered professional focus",
                 "Nervous tension from multitasking",
-                "Tendency to overanalyze career decisions"
-            ]
+                "Tendency to overanalyze career decisions",
+            ],
         },
         11: {
             "verses": "24.47",
@@ -1323,20 +1288,16 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success through communication",
                 "Elder siblings educated",
                 "Goals achieved through intelligence",
-                "Business networking excellent"
+                "Business networking excellent",
             ],
             "positive_effects": [
                 "High income through intellect",
                 "Excellent networking abilities",
                 "Diverse income streams",
                 "Intelligent friends",
-                "Goals fulfilled"
+                "Goals fulfilled",
             ],
-            "challenging_effects": [
-                "Scattered income focus",
-                "Nervous in groups",
-                "Too many projects"
-            ]
+            "challenging_effects": ["Scattered income focus", "Nervous in groups", "Too many projects"],
         },
         12: {
             "verses": "24.48",
@@ -1347,24 +1308,23 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Research and writing in isolation",
                 "Spiritual or philosophical learning",
                 "Hidden communication skills",
-                "Work behind scenes"
+                "Work behind scenes",
             ],
             "positive_effects": [
                 "Deep scholarly knowledge",
                 "Success in foreign lands",
                 "Research abilities",
                 "Spiritual intelligence",
-                "Writing in seclusion"
+                "Writing in seclusion",
             ],
             "challenging_effects": [
                 "Financial losses through poor decisions",
                 "Nervous anxiety",
                 "Communication in isolation",
-                "Sleep disturbances"
-            ]
-        }
+                "Sleep disturbances",
+            ],
+        },
     },
-    
     "Venus": {
         1: {
             "verses": "24.53",
@@ -1378,7 +1338,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Good marriage prospects and happy relationships",
                 "Material comforts and luxuries come naturally",
                 "Artistic talents and creative expression",
-                "Generally fortunate and pleasant life"
+                "Generally fortunate and pleasant life",
             ],
             "positive_effects": [
                 "Exceptional charm and social grace",
@@ -1386,28 +1346,28 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Happy marriage and romantic fulfillment",
                 "Material prosperity and comfortable lifestyle",
                 "Popularity and admiration from others",
-                "Refined taste and aesthetic sensibilities"
+                "Refined taste and aesthetic sensibilities",
             ],
             "challenging_effects": [
                 "May be overly concerned with appearance",
                 "Tendency toward sensual indulgence",
                 "Can be vain or superficial",
                 "May prioritize pleasure over duty",
-                "Possible relationship complications due to attractiveness"
+                "Possible relationship complications due to attractiveness",
             ],
             "remedies": [
                 "Practice moderation in sensual pleasures",
                 "Use charm for benevolent purposes",
                 "Cultivate inner beauty alongside outer",
                 "Donate white items or sweets on Fridays",
-                "Worship Goddess Lakshmi"
+                "Worship Goddess Lakshmi",
             ],
             "life_areas": {
                 "personality": "Charming, artistic, diplomatic, pleasure-loving",
                 "appearance": "Attractive and well-groomed with natural grace",
                 "relationships": "Success in love and marriage; popular socially",
-                "career": "Arts, beauty, fashion, hospitality, luxury goods"
-            }
+                "career": "Arts, beauty, fashion, hospitality, luxury goods",
+            },
         },
         2: {
             "verses": "24.54",
@@ -1419,25 +1379,25 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Family life harmonious and prosperous",
                 "Income from creative or luxury goods",
                 "Good food habits and culinary appreciation",
-                "Education in arts or humanities likely"
+                "Education in arts or humanities likely",
             ],
             "positive_effects": [
                 "Natural ability for poetry, singing, or eloquent expression",
                 "Financial prosperity through Venusian pursuits",
                 "Happy family relationships",
                 "Refined taste in food, clothing, possessions",
-                "Can earn through counseling, beauty, arts"
+                "Can earn through counseling, beauty, arts",
             ],
             "challenging_effects": [
                 "May spend excessively on luxuries",
                 "Tendency to prioritize pleasure over savings",
-                "Sweet speech may sometimes lack directness"
+                "Sweet speech may sometimes lack directness",
             ],
             "remedies": [
                 "Practice financial discipline",
                 "Share wealth with family and needy",
-                "Use eloquence for teaching and uplifting others"
-            ]
+                "Use eloquence for teaching and uplifting others",
+            ],
         },
         3: {
             "verses": "24.55",
@@ -1448,20 +1408,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Strained sibling relationships",
                 "Travels for pleasure or arts",
                 "Self-made success in arts",
-                "Courage in creative expression"
+                "Courage in creative expression",
             ],
             "positive_effects": [
                 "Creative communication",
                 "Artistic writing or media",
                 "Success through own efforts",
-                "Travels bring pleasure"
+                "Travels bring pleasure",
             ],
             "challenging_effects": [
                 "Sibling conflicts",
                 "Marital challenges",
                 "May be stingy",
-                "Relationship issues with relatives"
-            ]
+                "Relationship issues with relatives",
+            ],
         },
         4: {
             "verses": "24.56",
@@ -1472,20 +1432,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Mother cultured or artistic",
                 "Comfortable domestic environment",
                 "Property through or for spouse",
-                "Inner contentment"
+                "Inner contentment",
             ],
             "positive_effects": [
                 "Excellent domestic happiness",
                 "Luxurious home and vehicles",
                 "Property and comforts",
                 "Harmonious family",
-                "Emotional fulfillment"
+                "Emotional fulfillment",
             ],
             "challenging_effects": [
                 "May be overly attached to comforts",
                 "Expensive tastes in home decor",
-                "Sensual indulgence at home"
-            ]
+                "Sensual indulgence at home",
+            ],
         },
         5: {
             "verses": "24.57",
@@ -1496,20 +1456,16 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success in creative fields",
                 "Good fortune and blessings",
                 "Romantic fulfillment",
-                "Speculative gains if strong"
+                "Speculative gains if strong",
             ],
             "positive_effects": [
                 "Blessed with good children",
                 "Creative and artistic talents",
                 "Romantic happiness",
                 "Good fortune",
-                "Fame through arts"
+                "Fame through arts",
             ],
-            "challenging_effects": [
-                "May overindulge in pleasures",
-                "Excessive romance",
-                "Speculation risks if weak"
-            ]
+            "challenging_effects": ["May overindulge in pleasures", "Excessive romance", "Speculation risks if weak"],
         },
         6: {
             "verses": "24.58",
@@ -1520,20 +1476,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Health issues related to Venus",
                 "Defeats enemies through charm",
                 "Maternal uncle conflicts",
-                "Relationship complications"
+                "Relationship complications",
             ],
             "positive_effects": [
                 "Overcomes obstacles eventually",
                 "Service in beauty/arts/healing",
-                "Diplomatic conflict resolution"
+                "Diplomatic conflict resolution",
             ],
             "challenging_effects": [
                 "Marital unhappiness",
                 "Reproductive health issues",
                 "Extramarital attractions",
                 "Enemies and conflicts",
-                "Diabetes or kidney issues"
-            ]
+                "Diabetes or kidney issues",
+            ],
         },
         7: {
             "verses": "24.59",
@@ -1546,7 +1502,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Diplomatic skills in negotiations",
                 "May have multiple relationships or attraction from many",
                 "Wealth through spouse or partnerships",
-                "Travel and luxury through relationships"
+                "Travel and luxury through relationships",
             ],
             "positive_effects": [
                 "Very auspicious for love marriage",
@@ -1554,32 +1510,32 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Happy, harmonious married life",
                 "Success in partnership businesses",
                 "Social popularity as a couple",
-                "Material comforts through spouse"
+                "Material comforts through spouse",
             ],
             "challenging_effects": [
                 "Excessive focus on romantic/sexual pleasures",
                 "May face financial losses through spouse or relationships",
                 "Tendency to idealize partner",
                 "Possible complications from multiple attractions",
-                "Spouse may be demanding or expensive"
+                "Spouse may be demanding or expensive",
             ],
             "remedies": [
                 "Respect and honor spouse",
                 "Balance romantic life with spiritual practices",
                 "Be prudent with finances in partnerships",
-                "Practice fidelity and loyalty"
+                "Practice fidelity and loyalty",
             ],
             "life_areas": {
                 "marriage": "Excellent - beautiful spouse, happy married life",
                 "partnerships": "Success in business partnerships, diplomatic skills",
                 "relationships": "Popular, attractive to opposite sex",
-                "wealth": "Gains through partnerships but watch expenditures"
+                "wealth": "Gains through partnerships but watch expenditures",
             },
             "timing": "Marriage likely during Venus mahadasha or favorable transits. Effects strongest in youth and middle age.",
             "notable_yogas": [
                 "Can form Malavya Yoga if Venus in own sign (Taurus/Libra)",
-                "Contributes to relationship and wealth yogas"
-            ]
+                "Contributes to relationship and wealth yogas",
+            ],
         },
         8: {
             "verses": "24.60",
@@ -1590,21 +1546,21 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Inheritance matters",
                 "Hidden relationships possible",
                 "Transformation through relationships",
-                "Research in beauty/arts"
+                "Research in beauty/arts",
             ],
             "positive_effects": [
                 "Occult knowledge",
                 "Inheritance possible",
                 "Deep transformative relationships",
-                "Mystical artistic expression"
+                "Mystical artistic expression",
             ],
             "challenging_effects": [
                 "Sudden relationship crises",
                 "Hidden affairs complications",
                 "Reproductive health issues",
                 "Financial instability",
-                "Longevity concerns"
-            ]
+                "Longevity concerns",
+            ],
         },
         9: {
             "verses": "24.61",
@@ -1615,20 +1571,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Cultured and refined beliefs",
                 "Father artistic or wealthy",
                 "Higher education in arts",
-                "Dharma through beauty"
+                "Dharma through beauty",
             ],
             "positive_effects": [
                 "Fortunate in life",
                 "Success in foreign lands",
                 "Artistic wisdom",
                 "Higher education in arts",
-                "Wealth and prosperity"
+                "Wealth and prosperity",
             ],
             "challenging_effects": [
                 "Marital challenges possible",
                 "May seek relationships outside marriage",
-                "Religious indulgence"
-            ]
+                "Religious indulgence",
+            ],
         },
         10: {
             "verses": "24.62",
@@ -1641,7 +1597,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Harmonious relationships with authority figures",
                 "Government or public sector work involving culture/arts",
                 "Fame through creative or aesthetic contributions",
-                "Professional life enhances social standing"
+                "Professional life enhances social standing",
             ],
             "positive_effects": [
                 "Career success in Venusian fields (arts, beauty, luxury)",
@@ -1649,23 +1605,23 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Harmonious work environment",
                 "Recognition for creative or diplomatic skills",
                 "Financial prosperity through career",
-                "May work with women or for women-centric industries"
+                "May work with women or for women-centric industries",
             ],
             "challenging_effects": [
                 "May prioritize popularity over hard work",
                 "Career may lack discipline or structure",
-                "Tendency to avoid conflict at professional cost"
+                "Tendency to avoid conflict at professional cost",
             ],
             "remedies": [
                 "Balance charm with competence",
                 "Use creative talents for social benefit",
-                "Maintain professional ethics in relationships"
+                "Maintain professional ethics in relationships",
             ],
             "life_areas": {
                 "career": "Arts, entertainment, fashion, beauty, luxury goods, hospitality",
                 "reputation": "Popular, admired for taste and refinement",
-                "authority": "Diplomatic approach; harmonious with superiors"
-            }
+                "authority": "Diplomatic approach; harmonious with superiors",
+            },
         },
         11: {
             "verses": "24.63",
@@ -1676,20 +1632,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Desires fulfilled",
                 "Artistic social network",
                 "Elder siblings supportive",
-                "Goals achieved"
+                "Goals achieved",
             ],
             "positive_effects": [
                 "High income through Venus pursuits",
                 "Social popularity",
                 "Desires fulfilled",
                 "Artistic friends",
-                "Financial prosperity"
+                "Financial prosperity",
             ],
             "challenging_effects": [
                 "May spend gains on pleasures",
                 "Expensive social circle",
-                "Romantic complications in groups"
-            ]
+                "Romantic complications in groups",
+            ],
         },
         12: {
             "verses": "24.64",
@@ -1702,38 +1658,37 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Hidden romantic affairs or secret relationships",
                 "Wealth spent on charitable or spiritual causes",
                 "May find happiness in solitude or meditation",
-                "Hospital, hotel, or spa work favorable"
+                "Hospital, hotel, or spa work favorable",
             ],
             "positive_effects": [
                 "Strong spiritual or artistic inclinations",
                 "Success in foreign lands",
                 "Charitable disposition toward women and arts",
                 "Hidden talents in mystical or occult arts",
-                "Liberation through renunciation of pleasures"
+                "Liberation through renunciation of pleasures",
             ],
             "challenging_effects": [
                 "Marital unhappiness or separation",
                 "Excessive expenditure on pleasures",
                 "Secret affairs may create complications",
                 "Health issues related to reproductive system",
-                "Financial losses through women or pleasures"
+                "Financial losses through women or pleasures",
             ],
             "remedies": [
                 "Practice detachment from material pleasures",
                 "Channel Venusian energy into spiritual arts",
                 "Support charitable causes for women",
                 "Worship Goddess Lakshmi for marital harmony",
-                "Consider celibacy or monastic life if inclined"
+                "Consider celibacy or monastic life if inclined",
             ],
             "life_areas": {
                 "marriage": "Challenges likely; may prefer solitude or spiritual life",
                 "spirituality": "Strong inclination; artistic spiritual expression",
                 "expenses": "High spending on pleasures, foreign travel, charity",
-                "foreign": "Success or happiness in foreign lands"
-            }
-        }
+                "foreign": "Success or happiness in foreign lands",
+            },
+        },
     },
-    
     "Jupiter": {
         1: {
             "verses": "24.40",
@@ -1745,7 +1700,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Ethical, righteous character",
                 "Interest in higher knowledge and spirituality",
                 "Generally fortunate and protected",
-                "Respected for wisdom and good character"
+                "Respected for wisdom and good character",
             ],
             "positive_effects": [
                 "Generally fortunate life with divine grace",
@@ -1754,13 +1709,13 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Inclined toward righteous action",
                 "Good health and longevity",
                 "Success in education and spiritual pursuits",
-                "Beneficial for children and family life"
+                "Beneficial for children and family life",
             ],
             "challenging_effects": [
                 "May become overly idealistic",
                 "Tendency toward excess (weight gain, overindulgence)",
-                "Can be judgmental or preachy"
-            ]
+                "Can be judgmental or preachy",
+            ],
         },
         2: {
             "verses": "24.41",
@@ -1771,20 +1726,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Strong family values",
                 "Good education and learning",
                 "Financial prosperity",
-                "Ethical approach to wealth"
+                "Ethical approach to wealth",
             ],
             "positive_effects": [
                 "Excellent financial prosperity",
                 "Wise speech brings respect",
                 "Happy family life",
                 "Educational success",
-                "Ethical wealth accumulation"
+                "Ethical wealth accumulation",
             ],
             "challenging_effects": [
                 "May overindulge in food",
                 "Tendency to be overly generous",
-                "Weight gain possible"
-            ]
+                "Weight gain possible",
+            ],
         },
         3: {
             "verses": "24.42",
@@ -1795,19 +1750,19 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Writing and teaching abilities",
                 "Philosophical communication",
                 "Courage with wisdom",
-                "Self-made success"
+                "Self-made success",
             ],
             "positive_effects": [
                 "Wise communication",
                 "Teaching through writing",
                 "Philosophical courage",
-                "Self-reliant success"
+                "Self-reliant success",
             ],
             "challenging_effects": [
                 "Strained sibling relationships",
                 "May lack initiative",
-                "Difficulty with physical effort"
-            ]
+                "Difficulty with physical effort",
+            ],
         },
         4: {
             "verses": "24.43",
@@ -1818,20 +1773,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Property and vehicles",
                 "Emotional contentment",
                 "Teaching from home",
-                "Strong foundation"
+                "Strong foundation",
             ],
             "positive_effects": [
                 "Happy relationship with mother",
                 "Property and comforts",
                 "Educational environment",
                 "Inner peace and contentment",
-                "Strong family foundation"
+                "Strong family foundation",
             ],
             "challenging_effects": [
                 "May be overly attached to home",
                 "Tendency toward complacency",
-                "Weight gain from comfort"
-            ]
+                "Weight gain from comfort",
+            ],
         },
         5: {
             "verses": "24.44",
@@ -1842,19 +1797,16 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Advisory and ministerial roles",
                 "Success in speculation with ethics",
                 "Good fortune and grace",
-                "Spiritual knowledge"
+                "Spiritual knowledge",
             ],
             "positive_effects": [
                 "Blessed with good children",
                 "Exceptional intelligence",
                 "Advisory positions",
                 "Good fortune",
-                "Spiritual wisdom"
+                "Spiritual wisdom",
             ],
-            "challenging_effects": [
-                "May be overly optimistic in speculation",
-                "Can be too idealistic with children"
-            ]
+            "challenging_effects": ["May be overly optimistic in speculation", "Can be too idealistic with children"],
         },
         6: {
             "verses": "24.45",
@@ -1865,20 +1817,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Legal and advisory work favorable",
                 "Good health despite house",
                 "Uncle support possible",
-                "Ethical approach to conflicts"
+                "Ethical approach to conflicts",
             ],
             "positive_effects": [
                 "Defeats enemies ethically",
                 "Success in law, counseling, medicine",
                 "Generally good health",
                 "Respected advisor",
-                "Service with wisdom"
+                "Service with wisdom",
             ],
             "challenging_effects": [
                 "Conflicts with service",
                 "Liver or weight issues",
-                "May be overly generous to opponents"
-            ]
+                "May be overly generous to opponents",
+            ],
         },
         7: {
             "verses": "24.46",
@@ -1889,20 +1841,16 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success in partnerships",
                 "Good children",
                 "Wealth through partnerships",
-                "Diplomatic wisdom"
+                "Diplomatic wisdom",
             ],
             "positive_effects": [
                 "Outstanding spouse - virtuous and wise",
                 "Happy marriage",
                 "Success in business partnerships",
                 "Good children and family",
-                "Wealth and prosperity"
+                "Wealth and prosperity",
             ],
-            "challenging_effects": [
-                "May idealize partner",
-                "Spouse may be dominating",
-                "Weight gain after marriage"
-            ]
+            "challenging_effects": ["May idealize partner", "Spouse may be dominating", "Weight gain after marriage"],
         },
         8: {
             "verses": "24.47",
@@ -1913,20 +1861,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Inheritance and legacy gains",
                 "Research abilities",
                 "Transformation through wisdom",
-                "Hidden knowledge"
+                "Hidden knowledge",
             ],
             "positive_effects": [
                 "Long life",
                 "Occult wisdom",
                 "Inheritance benefits",
                 "Deep research abilities",
-                "Spiritual transformation"
+                "Spiritual transformation",
             ],
             "challenging_effects": [
                 "Sudden changes in fortune",
                 "Inheritance disputes possible",
-                "Liver health issues"
-            ]
+                "Liver health issues",
+            ],
         },
         9: {
             "verses": "24.48",
@@ -1937,7 +1885,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Spiritual and religious inclination",
                 "Father wise and supportive",
                 "Higher education success",
-                "Dharmic life path"
+                "Dharmic life path",
             ],
             "positive_effects": [
                 "Exceptional fortune and blessings",
@@ -1945,13 +1893,9 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Higher education excellence",
                 "Good father relationship",
                 "Advisory positions",
-                "Foreign travel beneficial"
+                "Foreign travel beneficial",
             ],
-            "challenging_effects": [
-                "May become overly religious",
-                "Can be dogmatic",
-                "Weight gain possible"
-            ]
+            "challenging_effects": ["May become overly religious", "Can be dogmatic", "Weight gain possible"],
         },
         10: {
             "verses": "24.49",
@@ -1963,7 +1907,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Recognition for wisdom and expertise",
                 "Government positions or working with authorities",
                 "Father-figure in professional sphere",
-                "Natural mentor and guide to colleagues"
+                "Natural mentor and guide to colleagues",
             ],
             "positive_effects": [
                 "Career based on wisdom, knowledge, ethics",
@@ -1971,13 +1915,13 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Opportunities to guide and teach others",
                 "Financial prosperity through legitimate means",
                 "Blessings from superiors and government",
-                "Children support career success"
+                "Children support career success",
             ],
             "notable_yogas": [
                 "Can form Hamsa Yoga if in own sign or exaltation",
                 "Strong contributor to Raja Yogas",
-                "Gaja Kesari Yoga if Moon is in kendra"
-            ]
+                "Gaja Kesari Yoga if Moon is in kendra",
+            ],
         },
         11: {
             "verses": "24.50",
@@ -1989,19 +1933,16 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Good children",
                 "Wise social network",
                 "Goals achieved through ethics",
-                "Elder siblings supportive"
+                "Elder siblings supportive",
             ],
             "positive_effects": [
                 "High income through wisdom",
                 "Desires fulfilled ethically",
                 "Blessed with children",
                 "Wise friends and network",
-                "Long life and prosperity"
+                "Long life and prosperity",
             ],
-            "challenging_effects": [
-                "May be overly optimistic about gains",
-                "Tendency to overextend financially"
-            ]
+            "challenging_effects": ["May be overly optimistic about gains", "Tendency to overextend financially"],
         },
         12: {
             "verses": "24.51",
@@ -2013,7 +1954,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Teaching or healing in isolation",
                 "Hidden blessings and grace",
                 "Liberation orientation",
-                "Work in ashrams, hospitals, universities abroad"
+                "Work in ashrams, hospitals, universities abroad",
             ],
             "positive_effects": [
                 "Strong spiritual inclination",
@@ -2021,18 +1962,17 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Charitable and generous nature",
                 "Moksha orientation",
                 "Teaching spirituality",
-                "Divine grace despite losses"
+                "Divine grace despite losses",
             ],
             "challenging_effects": [
                 "Financial losses or high expenses",
                 "Difficulty with children",
                 "May lack material focus",
                 "Liver health issues",
-                "Isolation from family"
-            ]
-        }
+                "Isolation from family",
+            ],
+        },
     },
-    
     "Saturn": {
         1: {
             "verses": "24.66",
@@ -2046,7 +1986,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Reserved, introverted nature",
                 "Late bloomer - success comes with time and effort",
                 "Karmic lessons through self and identity",
-                "Patient, enduring, and hardworking"
+                "Patient, enduring, and hardworking",
             ],
             "positive_effects": [
                 "Exceptional discipline and work ethic",
@@ -2055,7 +1995,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success through sustained effort over time",
                 "Spiritual maturity and detachment",
                 "Leadership through responsibility and duty",
-                "Respected for integrity and persistence"
+                "Respected for integrity and persistence",
             ],
             "challenging_effects": [
                 "Chronic health issues or physical limitations",
@@ -2063,7 +2003,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Delays and obstacles in personal goals",
                 "Difficulty with self-confidence in youth",
                 "Separation or loneliness",
-                "Early life hardships and struggles"
+                "Early life hardships and struggles",
             ],
             "remedies": [
                 "Practice patience and acceptance",
@@ -2071,15 +2011,15 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Worship Lord Shani and Hanuman",
                 "Donate black items or sesame on Saturdays",
                 "Strengthen through discipline and meditation",
-                "Accept delays as divine timing"
+                "Accept delays as divine timing",
             ],
             "life_areas": {
                 "personality": "Serious, disciplined, mature, responsible, reserved",
                 "health": "Watch for chronic issues, joint problems, vitality",
                 "life_path": "Success through perseverance; late bloomer",
-                "spirituality": "Strong karmic lessons; spiritual growth through hardship"
+                "spirituality": "Strong karmic lessons; spiritual growth through hardship",
             },
-            "timing": "Difficulties in youth (up to age 36), improvement after Sade Sati completion. Saturn mahadasha brings karmic lessons."
+            "timing": "Difficulties in youth (up to age 36), improvement after Sade Sati completion. Saturn mahadasha brings karmic lessons.",
         },
         2: {
             "verses": "24.67",
@@ -2090,20 +2030,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Family responsibilities heavy",
                 "Self-made wealth through effort",
                 "Dental or facial issues",
-                "Learns value of money through scarcity"
+                "Learns value of money through scarcity",
             ],
             "positive_effects": [
                 "Builds wealth through discipline",
                 "Learns financial responsibility",
-                "Self-reliant earning"
+                "Self-reliant earning",
             ],
             "challenging_effects": [
                 "Financial struggles",
                 "Harsh speech",
                 "Family conflicts",
                 "Dental problems",
-                "Difficulty accumulating wealth"
-            ]
+                "Difficulty accumulating wealth",
+            ],
         },
         3: {
             "verses": "24.68",
@@ -2114,19 +2054,15 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Sibling relationships mature over time",
                 "Writing and communication skills develop",
                 "Self-made success",
-                "Slow but steady progress"
+                "Slow but steady progress",
             ],
             "positive_effects": [
                 "Disciplined courage",
                 "Success through persistence",
                 "Mature communication",
-                "Self-reliance"
+                "Self-reliance",
             ],
-            "challenging_effects": [
-                "Sibling conflicts initially",
-                "Slow progress in efforts",
-                "Communication delays"
-            ]
+            "challenging_effects": ["Sibling conflicts initially", "Slow progress in efforts", "Communication delays"],
         },
         4: {
             "verses": "24.69",
@@ -2137,19 +2073,15 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Emotional heaviness",
                 "Frequent residence changes",
                 "Service-oriented career",
-                "Inner peace requires work"
+                "Inner peace requires work",
             ],
-            "positive_effects": [
-                "Self-made property eventually",
-                "Emotional maturity",
-                "Service with dedication"
-            ],
+            "positive_effects": ["Self-made property eventually", "Emotional maturity", "Service with dedication"],
             "challenging_effects": [
                 "Mother relationship strained",
                 "Lack of emotional peace",
                 "Property struggles",
-                "Vehicle problems"
-            ]
+                "Vehicle problems",
+            ],
         },
         5: {
             "verses": "24.70",
@@ -2160,19 +2092,15 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Speculation risky",
                 "Past life karmas",
                 "Romantic delays",
-                "Digestive issues"
+                "Digestive issues",
             ],
-            "positive_effects": [
-                "Disciplined intelligence",
-                "Mature children eventually",
-                "Wisdom through experience"
-            ],
+            "positive_effects": ["Disciplined intelligence", "Mature children eventually", "Wisdom through experience"],
             "challenging_effects": [
                 "Difficulty with children",
                 "Romantic obstacles",
                 "Speculation losses",
-                "Creative blocks"
-            ]
+                "Creative blocks",
+            ],
         },
         6: {
             "verses": "24.71",
@@ -2183,20 +2111,16 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success in service professions",
                 "Good health despite challenges",
                 "Wealth through hard work",
-                "Litigation success"
+                "Litigation success",
             ],
             "positive_effects": [
                 "Defeats enemies methodically",
                 "Service success",
                 "Wealth through effort",
                 "Overcomes diseases",
-                "Fame through work"
+                "Fame through work",
             ],
-            "challenging_effects": [
-                "Chronic health issues possible",
-                "Work-related stress",
-                "Digestive problems"
-            ]
+            "challenging_effects": ["Chronic health issues possible", "Work-related stress", "Digestive problems"],
         },
         7: {
             "verses": "24.72",
@@ -2209,7 +2133,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Business partnerships require patience",
                 "Foreign spouse or marriage abroad possible",
                 "Marital responsibilities feel heavy",
-                "Separation or distance from spouse at times"
+                "Separation or distance from spouse at times",
             ],
             "positive_effects": [
                 "Mature, stable marriage when it occurs",
@@ -2217,7 +2141,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Long-lasting committed relationships",
                 "Success in structured business partnerships",
                 "Learns responsibility through relationships",
-                "Foreign connections beneficial"
+                "Foreign connections beneficial",
             ],
             "challenging_effects": [
                 "Significant delays in marriage",
@@ -2225,20 +2149,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Spouse may have health issues or be demanding",
                 "Business partnership disputes",
                 "Loneliness or isolation from partner",
-                "Karmic debts through relationships"
+                "Karmic debts through relationships",
             ],
             "remedies": [
                 "Marry after age 28-30 for better results",
                 "Practice patience and commitment in relationships",
                 "Serve partner's needs selflessly",
                 "Worship Saturn deities for marital harmony",
-                "Accept marital responsibilities with maturity"
+                "Accept marital responsibilities with maturity",
             ],
             "life_areas": {
                 "marriage": "Delayed; older or karmic spouse; requires patience",
                 "partnerships": "Structured, long-term business partnerships",
-                "relationships": "Serious, committed; learns through challenges"
-            }
+                "relationships": "Serious, committed; learns through challenges",
+            },
         },
         8: {
             "verses": "24.73",
@@ -2249,21 +2173,21 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Chronic health issues",
                 "Inheritance delays or denials",
                 "Transformation through suffering",
-                "Research abilities"
+                "Research abilities",
             ],
             "positive_effects": [
                 "Deep occult knowledge",
                 "Longevity if strong",
                 "Transformative wisdom",
-                "Research skills"
+                "Research skills",
             ],
             "challenging_effects": [
                 "Chronic ailments",
                 "Sudden crises",
                 "Inheritance problems",
                 "Hidden obstacles",
-                "Sexual difficulties"
-            ]
+                "Sexual difficulties",
+            ],
         },
         9: {
             "verses": "24.74",
@@ -2274,20 +2198,20 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Foreign travel for work",
                 "Higher education delays",
                 "Self-made fortune",
-                "Karmic spiritual path"
+                "Karmic spiritual path",
             ],
             "positive_effects": [
                 "Disciplined spirituality",
                 "Success abroad eventually",
                 "Wisdom through hardship",
-                "Self-reliant fortune"
+                "Self-reliant fortune",
             ],
             "challenging_effects": [
                 "Father relationship distant",
                 "Religious doubts",
                 "Delayed fortune",
-                "Obstacles in higher learning"
-            ]
+                "Obstacles in higher learning",
+            ],
         },
         10: {
             "verses": "24.75",
@@ -2300,7 +2224,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Government service, administration, or heavy industries favorable",
                 "Long-term career stability and recognition",
                 "Respect for integrity and work ethic",
-                "Late career success brings lasting results"
+                "Late career success brings lasting results",
             ],
             "positive_effects": [
                 "Outstanding career achievement through sustained effort",
@@ -2309,32 +2233,32 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success in Saturnian careers (engineering, mining, oil, government)",
                 "Longevity in profession; career stability",
                 "Recognition for discipline and hard work",
-                "Able to handle pressure and long-term projects"
+                "Able to handle pressure and long-term projects",
             ],
             "challenging_effects": [
                 "Career progress is slow and requires patience",
                 "Heavy workload and professional responsibilities",
                 "May face obstacles from superiors initially",
                 "Work-related stress and pressure",
-                "Career success comes late in life"
+                "Career success comes late in life",
             ],
             "remedies": [
                 "Practice patience in career advancement",
                 "Accept responsibility and work diligently",
                 "Serve in positions helping the underprivileged",
-                "Maintain professional ethics and integrity"
+                "Maintain professional ethics and integrity",
             ],
             "life_areas": {
                 "career": "Engineering, government, administration, construction, mining, agriculture",
                 "reputation": "Respected for discipline, reliability, integrity",
                 "authority": "Gains authority through responsibility and proven competence",
-                "timing": "Career peaks after age 36; sustained success"
+                "timing": "Career peaks after age 36; sustained success",
             },
             "notable_yogas": [
                 "Can form Sasa Yoga if Saturn in own sign or exaltation",
                 "Strong for Karma Yoga - duty-based success",
-                "Contributes to Dhana Yogas through 10th house strength"
-            ]
+                "Contributes to Dhana Yogas through 10th house strength",
+            ],
         },
         11: {
             "verses": "24.76",
@@ -2345,20 +2269,16 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Long life",
                 "Elder siblings supportive",
                 "Goals achieved through discipline",
-                "Slow but steady gains"
+                "Slow but steady gains",
             ],
             "positive_effects": [
                 "High income through discipline",
                 "Long life and prosperity",
                 "Goals achieved",
                 "Fame through work",
-                "Steady gains"
+                "Steady gains",
             ],
-            "challenging_effects": [
-                "Gains come slowly",
-                "Few friends",
-                "Serious social circles"
-            ]
+            "challenging_effects": ["Gains come slowly", "Few friends", "Serious social circles"],
         },
         12: {
             "verses": "24.77",
@@ -2371,7 +2291,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Hidden enemies or chronic health issues",
                 "Sleep disturbances or eye problems",
                 "Work in foreign lands beneficial",
-                "Liberation through renunciation"
+                "Liberation through renunciation",
             ],
             "positive_effects": [
                 "Strong spiritual growth through detachment",
@@ -2379,7 +2299,7 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Work in charitable institutions favorable",
                 "Meditation and solitude beneficial",
                 "Karmic completion and liberation",
-                "Research or behind-the-scenes work"
+                "Research or behind-the-scenes work",
             ],
             "challenging_effects": [
                 "Chronic health issues or hospitalizations",
@@ -2387,40 +2307,41 @@ BPHS_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Loneliness or separation from family",
                 "Sleep disorders or anxiety",
                 "Hidden obstacles and enemies",
-                "Delayed or denied progeny"
+                "Delayed or denied progeny",
             ],
             "remedies": [
                 "Practice spiritual discipline and meditation",
                 "Serve in hospitals, prisons, or ashrams",
                 "Donate to charitable causes regularly",
                 "Accept losses as karmic cleansing",
-                "Worship Saturn deities for protection"
+                "Worship Saturn deities for protection",
             ],
             "life_areas": {
                 "spirituality": "Strong inclination; liberation through renunciation",
                 "expenses": "High spending on health, foreign travel, charity",
                 "foreign": "Success in foreign lands; possible settlement abroad",
-                "health": "Watch for chronic issues, sleep problems"
-            }
-        }
-    }
+                "health": "Watch for chronic issues, sleep problems",
+            },
+        },
+    },
 }
+
 
 def get_planet_in_house_interpretation(planet: str, house: int) -> Dict[str, Any]:
     """
     Retrieve BPHS interpretation for planet in house.
-    
+
     Args:
         planet: Planet name (Sun, Moon, Mars, Mercury, Jupiter, Venus, Saturn)
         house: House number (1-12)
-        
+
     Returns:
         Dictionary with interpretation data and verse references
     """
     if planet not in BPHS_PLANETS_IN_HOUSES:
         return None
-    
+
     if house not in BPHS_PLANETS_IN_HOUSES[planet]:
         return None
-    
+
     return BPHS_PLANETS_IN_HOUSES[planet][house]

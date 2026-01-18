@@ -6,41 +6,50 @@ Version: 1.0.0
 """
 
 from datetime import datetime, timedelta
-from typing import Optional, Dict, Any
+from enum import Enum
+from typing import Any, Dict, Optional
+
+from app.db.repositories.user import UserRepository
+from app.models.user import UserInDB, UserRole
 from fastapi import Depends, HTTPException, Security, status
 from fastapi.security import OAuth2PasswordBearer, SecurityScopes
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from pydantic import BaseModel, ValidationError
-from enum import Enum
-from app.models.user import UserInDB, UserRole
-from app.db.repositories.user import UserRepository
+
 
 class SecurityLevel(str, Enum):
     """Security clearance levels"""
-    PUBLIC = "public"         # Public APIs
-    BASIC = "basic"          # Basic authenticated access
-    ELEVATED = "elevated"    # Elevated privileges
-    ADMIN = "admin"          # Administrative access
-    SYSTEM = "system"        # System-level access
+
+    PUBLIC = "public"  # Public APIs
+    BASIC = "basic"  # Basic authenticated access
+    ELEVATED = "elevated"  # Elevated privileges
+    ADMIN = "admin"  # Administrative access
+    SYSTEM = "system"  # System-level access
+
 
 class TokenType(str, Enum):
     """Token types for different authentication contexts"""
+
     ACCESS = "access"
     REFRESH = "refresh"
     API = "api"
     SYSTEM = "system"
 
+
 class AuthToken(BaseModel):
     """Authentication token model"""
+
     access_token: str
     refresh_token: str
     token_type: str = "bearer"
     expires_in: int
     scope: str
 
+
 class TokenData(BaseModel):
     """Token payload data"""
+
     sub: str
     scopes: list[str] = []
     security_level: SecurityLevel
@@ -49,13 +58,15 @@ class TokenData(BaseModel):
     device_id: Optional[str] = None
     ip_address: Optional[str] = None
 
+
 class AuthConfig:
     """Authentication configuration"""
+
     SECRET_KEY = "your-secret-key-here"  # Should be loaded from environment
     ALGORITHM = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES = 30
     REFRESH_TOKEN_EXPIRE_DAYS = 7
-    
+
     # Security settings
     REQUIRE_2FA = True
     MAX_FAILED_ATTEMPTS = 3
@@ -69,31 +80,27 @@ class AuthConfig:
         UserRole.ADMIN: SecurityLevel.ADMIN,
     }
 
+
 class AuthContext:
     """Authentication context manager"""
-    
+
     def __init__(self):
         self.pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
         self.oauth2_scheme = OAuth2PasswordBearer(
-            tokenUrl="token",
-            scopes={
-                "read": "Read access",
-                "write": "Write access",
-                "admin": "Admin access"
-            }
+            tokenUrl="token", scopes={"read": "Read access", "write": "Write access", "admin": "Admin access"}
         )
         self._failed_attempts: Dict[str, int] = {}
         self._lockouts: Dict[str, datetime] = {}
         self._token_blacklist: set = set()
-    
+
     def verify_password(self, plain_password: str, hashed_password: str) -> bool:
         """Verify password against hash"""
         return self.pwd_context.verify(plain_password, hashed_password)
-    
+
     def get_password_hash(self, password: str) -> str:
         """Generate password hash"""
         return self.pwd_context.hash(password)
-    
+
     async def create_token(
         self,
         subject: str,
@@ -101,7 +108,7 @@ class AuthContext:
         security_level: SecurityLevel,
         token_type: TokenType = TokenType.ACCESS,
         device_id: Optional[str] = None,
-        ip_address: Optional[str] = None
+        ip_address: Optional[str] = None,
     ) -> AuthToken:
         """Create new authentication token"""
         # Determine expiration
@@ -111,7 +118,7 @@ class AuthContext:
             expires_delta = timedelta(days=AuthConfig.REFRESH_TOKEN_EXPIRE_DAYS)
 
         expire = datetime.utcnow() + expires_delta
-        
+
         # Create token data
         token_data = {
             "sub": subject,
@@ -121,30 +128,24 @@ class AuthContext:
             "jti": str(datetime.utcnow().timestamp()),
             "type": token_type,
         }
-        
+
         if device_id:
             token_data["device_id"] = device_id
         if ip_address:
             token_data["ip_address"] = ip_address
 
         # Create tokens
-        access_token = jwt.encode(
-            token_data,
-            AuthConfig.SECRET_KEY,
-            algorithm=AuthConfig.ALGORITHM
-        )
-        
+        access_token = jwt.encode(token_data, AuthConfig.SECRET_KEY, algorithm=AuthConfig.ALGORITHM)
+
         refresh_token = jwt.encode(
-            {**token_data, "type": TokenType.REFRESH},
-            AuthConfig.SECRET_KEY,
-            algorithm=AuthConfig.ALGORITHM
+            {**token_data, "type": TokenType.REFRESH}, AuthConfig.SECRET_KEY, algorithm=AuthConfig.ALGORITHM
         )
 
         return AuthToken(
             access_token=access_token,
             refresh_token=refresh_token,
             expires_in=expires_delta.total_seconds(),
-            scope=" ".join(scopes)
+            scope=" ".join(scopes),
         )
 
     async def verify_token(
@@ -161,13 +162,9 @@ class AuthContext:
             )
 
         try:
-            payload = jwt.decode(
-                token,
-                AuthConfig.SECRET_KEY,
-                algorithms=[AuthConfig.ALGORITHM]
-            )
+            payload = jwt.decode(token, AuthConfig.SECRET_KEY, algorithms=[AuthConfig.ALGORITHM])
             token_data = TokenData(**payload)
-            
+
             # Check if token is expired
             if datetime.utcnow() > token_data.exp:
                 raise HTTPException(
@@ -201,7 +198,7 @@ class AuthContext:
     ) -> UserInDB:
         """Get current authenticated user"""
         token_data = await self.verify_token(token, security_scopes)
-        
+
         user = await UserRepository.get_user_by_id(token_data.sub)
         if not user:
             raise HTTPException(
@@ -233,25 +230,27 @@ class AuthContext:
                 return False
             del self._lockouts[user_id]
             self._failed_attempts[user_id] = 0
-            
+
         return True
 
     def record_failed_attempt(self, user_id: str):
         """Record failed login attempt"""
         self._failed_attempts[user_id] = self._failed_attempts.get(user_id, 0) + 1
-        
-        if self._failed_attempts[user_id] >= AuthConfig.MAX_FAILED_ATTEMPTS:
-            self._lockouts[user_id] = datetime.utcnow() + timedelta(
-                minutes=AuthConfig.LOCKOUT_DURATION_MINUTES
-            )
 
-# Global authentication context
+        if self._failed_attempts[user_id] >= AuthConfig.MAX_FAILED_ATTEMPTS:
+            self._lockouts[user_id] = datetime.utcnow() + timedelta(minutes=AuthConfig.LOCKOUT_DURATION_MINUTES)
+
+
+# Global auth context
 auth_context = AuthContext()
+
+# OAuth2 scheme for dependency injection
+oauth2_scheme = auth_context.oauth2_scheme
 
 # Dependency for getting current user
 async def get_current_user(
     security_scopes: SecurityScopes,
-    token: str = Depends(auth_context.oauth2_scheme),
+    token: str = Depends(oauth2_scheme),
 ) -> UserInDB:
     return await auth_context.get_current_user(security_scopes, token)
 
@@ -263,11 +262,9 @@ async def get_current_active_user(
     ),
 ) -> UserInDB:
     if not current_user.is_active:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Inactive user"
-        )
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Inactive user")
     return current_user
+
 
 # Dependency for getting current admin user
 async def get_current_admin_user(
@@ -277,8 +274,5 @@ async def get_current_admin_user(
     ),
 ) -> UserInDB:
     if current_user.role != UserRole.ADMIN:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Not enough permissions"
-        )
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not enough permissions")
     return current_user

@@ -3,13 +3,16 @@ Source Attribution Schema
 ==========================
 Pydantic models for knowledge source tracking and citation.
 """
-from typing import Optional, List, Dict, Any
+
 from enum import Enum
+from typing import Any, Dict, List, Optional
+
 from pydantic import BaseModel, Field
 
 
 class SourceType(str, Enum):
     """Type of knowledge source"""
+
     CLASSICAL_TEXT = "classical_text"
     COMMENTARY = "commentary"
     MODERN_REFERENCE = "modern_reference"
@@ -18,15 +21,17 @@ class SourceType(str, Enum):
 
 class ConfidenceLevel(str, Enum):
     """Confidence level for interpretation"""
-    DIRECT_QUOTE = "direct_quote"          # Exact verse/passage from text
+
+    DIRECT_QUOTE = "direct_quote"  # Exact verse/passage from text
     DIRECT_INTERPRETATION = "direct_interpretation"  # Clear traditional interpretation
-    SYNTHESIZED = "synthesized"            # Combined from multiple sources
-    INFERRED = "inferred"                  # Logical inference from principles
-    COMPUTATIONAL = "computational"        # Derived from calculations
+    SYNTHESIZED = "synthesized"  # Combined from multiple sources
+    INFERRED = "inferred"  # Logical inference from principles
+    COMPUTATIONAL = "computational"  # Derived from calculations
 
 
 class ClassicalText(str, Enum):
     """Canonical classical texts"""
+
     BPHS = "Brihat Parashara Hora Shastra"
     SARAVALI = "Saravali"
     PHALADEEPIKA = "Phaladeepika"
@@ -40,6 +45,7 @@ class ClassicalText(str, Enum):
 
 class SourceCitation(BaseModel):
     """Citation for a knowledge source"""
+
     text: ClassicalText = Field(..., description="Source text name")
     chapter: Optional[int] = Field(None, description="Chapter number")
     verses: Optional[str] = Field(None, description="Verse range (e.g., '3-4' or '10')")
@@ -47,7 +53,7 @@ class SourceCitation(BaseModel):
     translator: Optional[str] = Field(None, description="Translation source (e.g., 'Santhanam', 'Raman')")
     edition: Optional[str] = Field(None, description="Edition/publication details")
     page: Optional[int] = Field(None, description="Page number in edition")
-    
+
     def format_citation(self) -> str:
         """Format as human-readable citation"""
         parts = [self.text.value]
@@ -62,6 +68,7 @@ class SourceCitation(BaseModel):
 
 class SourcedContent(BaseModel):
     """Content with source attribution"""
+
     content: str = Field(..., description="The actual interpretation/content")
     citation: SourceCitation = Field(..., description="Source citation")
     confidence: ConfidenceLevel = Field(..., description="Confidence level")
@@ -71,19 +78,11 @@ class SourcedContent(BaseModel):
 
 class InterpretationSource(BaseModel):
     """Complete source information for an interpretation"""
-    primary_sources: List[SourcedContent] = Field(
-        default_factory=list,
-        description="Primary classical text sources"
-    )
-    supporting_sources: List[SourcedContent] = Field(
-        default_factory=list,
-        description="Supporting references"
-    )
-    synthesis_note: Optional[str] = Field(
-        None,
-        description="Note on how multiple sources were synthesized"
-    )
-    
+
+    primary_sources: List[SourcedContent] = Field(default_factory=list, description="Primary classical text sources")
+    supporting_sources: List[SourcedContent] = Field(default_factory=list, description="Supporting references")
+    synthesis_note: Optional[str] = Field(None, description="Note on how multiple sources were synthesized")
+
     def get_all_citations(self) -> List[str]:
         """Get all formatted citations"""
         citations = []
@@ -96,6 +95,7 @@ class InterpretationSource(BaseModel):
 
 class InterpretationMetadata(BaseModel):
     """Metadata for an interpretation"""
+
     interpretation_type: str = Field(..., description="Type (planet_in_house, yoga, dasha, etc.)")
     confidence_score: float = Field(..., ge=0.0, le=1.0, description="Overall confidence (0-1)")
     last_updated: str = Field(..., description="ISO datetime of last update")

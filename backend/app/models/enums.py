@@ -1,9 +1,11 @@
 """Enums for astrological calculations."""
+
 from enum import Enum, auto
 
 
 class Planet(Enum):
     """Planets used in astrological calculations."""
+
     SUN = 0
     MOON = 1
     MARS = 2
@@ -17,6 +19,7 @@ class Planet(Enum):
 
 class House(Enum):
     """Houses in astrological chart."""
+
     FIRST = 1
     SECOND = 2
     THIRD = 3
@@ -33,6 +36,7 @@ class House(Enum):
 
 class Aspect(Enum):
     """Planetary aspects."""
+
     CONJUNCTION = 0
     SEXTILE = 60
     SQUARE = 90

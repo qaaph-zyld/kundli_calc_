@@ -1,15 +1,15 @@
 """Dasha periods model module."""
-from sqlalchemy import Column, String, DateTime, ForeignKey
-from sqlalchemy.orm import relationship
 
 from app.models.base import BaseModel
+from sqlalchemy import Column, DateTime, ForeignKey, String
+from sqlalchemy.orm import relationship
 
 
 class DashaPeriod(BaseModel):
     """Dasha period model."""
 
     __tablename__ = "dasha_periods"
-    __table_args__ = {'extend_existing': True}
+    __table_args__ = {"extend_existing": True}
 
     birth_chart_id = Column(String(36), ForeignKey("birth_charts.id"))
     dasha_type = Column(String(50), nullable=False)  # Maha, Antara, etc.

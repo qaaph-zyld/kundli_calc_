@@ -1,25 +1,27 @@
-from fastapi import APIRouter, Depends, HTTPException
 from typing import List
+
+from app.core.engine.calculator import KundliCalculator
+from app.core.engine.matcher import KundliMatcher
+from app.core.engine.predictor import KundliPredictor
+from app.core.security import get_current_user
+from app.db.repositories.kundli import KundliRepository
 from app.models.kundli import (
+    KundliPredictions,
     KundliRequest,
     KundliResponse,
-    KundliPredictions,
-    TransitRequest,
-    TransitResponse,
     MatchingRequest,
     MatchingResponse,
+    TransitRequest,
+    TransitResponse,
 )
-from app.core.engine.calculator import KundliCalculator
-from app.core.engine.predictor import KundliPredictor
-from app.core.engine.matcher import KundliMatcher
-from app.db.repositories.kundli import KundliRepository
-from app.core.security import get_current_user
 from app.models.user import UserInDB
+from fastapi import APIRouter, Depends, HTTPException
 
 router = APIRouter()
 calculator = KundliCalculator()
 predictor = KundliPredictor()
 matcher = KundliMatcher()
+
 
 @router.post("/calculate", response_model=KundliResponse)
 async def calculate_kundli(
@@ -29,18 +31,14 @@ async def calculate_kundli(
     try:
         # Calculate all requested charts
         charts = calculator.calculate_all_charts(request)
-        
+
         # Save to database
-        kundli = await KundliRepository.create_kundli(
-            current_user.id, request
-        )
-        
+        kundli = await KundliRepository.create_kundli(current_user.id, request)
+
         return kundli
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to calculate kundli: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to calculate kundli: {str(e)}")
+
 
 @router.get("/{kundli_id}", response_model=KundliResponse)
 async def get_kundli(
@@ -49,11 +47,9 @@ async def get_kundli(
 ):
     kundli = await KundliRepository.get_kundli(kundli_id)
     if not kundli:
-        raise HTTPException(
-            status_code=404,
-            detail="Kundli not found"
-        )
+        raise HTTPException(status_code=404, detail="Kundli not found")
     return kundli
+
 
 @router.get("/user/list", response_model=List[KundliResponse])
 async def list_user_kundlis(
@@ -61,10 +57,9 @@ async def list_user_kundlis(
     limit: int = 10,
     current_user: UserInDB = Depends(get_current_user),
 ):
-    kundlis = await KundliRepository.list_user_kundlis(
-        current_user.id, skip, limit
-    )
+    kundlis = await KundliRepository.list_user_kundlis(current_user.id, skip, limit)
     return kundlis
+
 
 @router.post("/{kundli_id}/predict", response_model=KundliPredictions)
 async def generate_predictions(
@@ -73,22 +68,16 @@ async def generate_predictions(
 ):
     # Check if user has premium access
     if current_user.role != "premium":
-        raise HTTPException(
-            status_code=403,
-            detail="Premium subscription required for predictions"
-        )
+        raise HTTPException(status_code=403, detail="Premium subscription required for predictions")
 
     kundli = await KundliRepository.get_kundli(kundli_id)
     if not kundli:
-        raise HTTPException(
-            status_code=404,
-            detail="Kundli not found"
-        )
+        raise HTTPException(status_code=404, detail="Kundli not found")
 
     try:
         # Generate predictions for the main chart
         predictions = predictor.generate_predictions(kundli.charts[0])
-        
+
         # Save predictions
         saved_predictions = await KundliRepository.save_predictions(
             kundli_id,
@@ -97,13 +86,11 @@ async def generate_predictions(
                 predictions=predictions,
             ),
         )
-        
+
         return saved_predictions
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to generate predictions: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to generate predictions: {str(e)}")
+
 
 @router.post("/transit", response_model=TransitResponse)
 async def calculate_transit(
@@ -112,17 +99,11 @@ async def calculate_transit(
 ):
     # Check if user has premium access
     if current_user.role != "premium":
-        raise HTTPException(
-            status_code=403,
-            detail="Premium subscription required for transit analysis"
-        )
+        raise HTTPException(status_code=403, detail="Premium subscription required for transit analysis")
 
     birth_kundli = await KundliRepository.get_kundli(request.birth_kundli_id)
     if not birth_kundli:
-        raise HTTPException(
-            status_code=404,
-            detail="Birth kundli not found"
-        )
+        raise HTTPException(status_code=404, detail="Birth kundli not found")
 
     try:
         # Create transit kundli request
@@ -151,10 +132,8 @@ async def calculate_transit(
         saved_transit = await KundliRepository.save_transit(request, response)
         return saved_transit
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to calculate transit: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to calculate transit: {str(e)}")
+
 
 @router.post("/match", response_model=MatchingResponse)
 async def match_kundlis(
@@ -163,20 +142,14 @@ async def match_kundlis(
 ):
     # Check if user has premium access
     if current_user.role != "premium":
-        raise HTTPException(
-            status_code=403,
-            detail="Premium subscription required for matching"
-        )
+        raise HTTPException(status_code=403, detail="Premium subscription required for matching")
 
     # Get both kundlis
     kundli1 = await KundliRepository.get_kundli(request.kundli1_id)
     kundli2 = await KundliRepository.get_kundli(request.kundli2_id)
 
     if not kundli1 or not kundli2:
-        raise HTTPException(
-            status_code=404,
-            detail="One or both kundlis not found"
-        )
+        raise HTTPException(status_code=404, detail="One or both kundlis not found")
 
     try:
         # Calculate compatibility
@@ -186,7 +159,4 @@ async def match_kundlis(
         saved_matching = await KundliRepository.save_matching(request, response)
         return saved_matching
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Failed to calculate compatibility: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Failed to calculate compatibility: {str(e)}")

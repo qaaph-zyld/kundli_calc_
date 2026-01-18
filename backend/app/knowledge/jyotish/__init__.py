@@ -13,5 +13,5 @@ Modules:
 - interpretation: Step-by-step chart reading methodology
 """
 
-from .fundamentals import *
 from .dignities import *
+from .fundamentals import *

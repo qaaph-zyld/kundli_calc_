@@ -1,0 +1,332 @@
+{
+  "schema_version": "1.0",
+  "description": "Standard test birth data covering diverse cases for validation",
+  "categories": {
+    "standard": "Normal cases for baseline validation",
+    "edge": "Boundary conditions and unusual scenarios",
+    "historical": "Famous charts for verification"
+  },
+  "charts": [
+    {
+      "id": "chart_001",
+      "category": "standard",
+      "description": "Standard case - Delhi afternoon",
+      "birth_data": {
+        "name": "Test Chart 001",
+        "year": 1985,
+        "month": 3,
+        "day": 15,
+        "hour": 14,
+        "minute": 30,
+        "second": 0,
+        "latitude": 28.6139,
+        "longitude": 77.2090,
+        "timezone_offset": 5.5,
+        "timezone_name": "Asia/Kolkata",
+        "location_name": "New Delhi, India",
+        "dst": false
+      },
+      "notes": "Mid-afternoon, no DST, standard timezone"
+    },
+    {
+      "id": "chart_002",
+      "category": "standard",
+      "description": "Standard case - Mumbai morning",
+      "birth_data": {
+        "name": "Test Chart 002",
+        "year": 1990,
+        "month": 7,
+        "day": 22,
+        "hour": 6,
+        "minute": 15,
+        "second": 0,
+        "latitude": 19.0760,
+        "longitude": 72.8777,
+        "timezone_offset": 5.5,
+        "timezone_name": "Asia/Kolkata",
+        "location_name": "Mumbai, India",
+        "dst": false
+      },
+      "notes": "Early morning, summer month"
+    },
+    {
+      "id": "chart_003",
+      "category": "standard",
+      "description": "Standard case - London with DST",
+      "birth_data": {
+        "name": "Test Chart 003",
+        "year": 1988,
+        "month": 6,
+        "day": 21,
+        "hour": 23,
+        "minute": 45,
+        "second": 0,
+        "latitude": 51.5074,
+        "longitude": -0.1278,
+        "timezone_offset": 1.0,
+        "timezone_name": "Europe/London",
+        "location_name": "London, UK",
+        "dst": true
+      },
+      "notes": "Late night, summer solstice, DST active"
+    },
+    {
+      "id": "chart_004",
+      "category": "edge",
+      "description": "Edge case - Year boundary (Dec 31 23:59)",
+      "birth_data": {
+        "name": "Test Chart 004 - Year Boundary",
+        "year": 1999,
+        "month": 12,
+        "day": 31,
+        "hour": 23,
+        "minute": 59,
+        "second": 30,
+        "latitude": 28.6139,
+        "longitude": 77.2090,
+        "timezone_offset": 5.5,
+        "timezone_name": "Asia/Kolkata",
+        "location_name": "New Delhi, India",
+        "dst": false
+      },
+      "notes": "Just before Y2K, tests year boundary handling"
+    },
+    {
+      "id": "chart_005",
+      "category": "edge",
+      "description": "Edge case - Midnight exactly",
+      "birth_data": {
+        "name": "Test Chart 005 - Midnight",
+        "year": 1995,
+        "month": 8,
+        "day": 15,
+        "hour": 0,
+        "minute": 0,
+        "second": 0,
+        "latitude": 13.0827,
+        "longitude": 80.2707,
+        "timezone_offset": 5.5,
+        "timezone_name": "Asia/Kolkata",
+        "location_name": "Chennai, India",
+        "dst": false
+      },
+      "notes": "Exact midnight, tests day boundary"
+    },
+    {
+      "id": "chart_006",
+      "category": "edge",
+      "description": "Edge case - High latitude (Iceland)",
+      "birth_data": {
+        "name": "Test Chart 006 - Polar",
+        "year": 2000,
+        "month": 6,
+        "day": 21,
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "latitude": 64.1466,
+        "longitude": -21.9426,
+        "timezone_offset": 0.0,
+        "timezone_name": "Atlantic/Reykjavik",
+        "location_name": "Reykjavik, Iceland",
+        "dst": false
+      },
+      "notes": "High latitude (64°N), summer solstice, midnight sun region"
+    },
+    {
+      "id": "chart_007",
+      "category": "edge",
+      "description": "Edge case - Extreme east timezone",
+      "birth_data": {
+        "name": "Test Chart 007 - Kiritimati",
+        "year": 2010,
+        "month": 1,
+        "day": 1,
+        "hour": 0,
+        "minute": 1,
+        "second": 0,
+        "latitude": 1.8721,
+        "longitude": -157.4278,
+        "timezone_offset": 14.0,
+        "timezone_name": "Pacific/Kiritimati",
+        "location_name": "Kiritimati, Kiribati",
+        "dst": false
+      },
+      "notes": "UTC+14, first place to see new year"
+    },
+    {
+      "id": "chart_008",
+      "category": "edge",
+      "description": "Edge case - Extreme west timezone",
+      "birth_data": {
+        "name": "Test Chart 008 - Baker Island",
+        "year": 2010,
+        "month": 1,
+        "day": 1,
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "latitude": 0.1936,
+        "longitude": -176.4769,
+        "timezone_offset": -12.0,
+        "timezone_name": "Etc/GMT+12",
+        "location_name": "Baker Island",
+        "dst": false
+      },
+      "notes": "UTC-12, last timezone"
+    },
+    {
+      "id": "chart_009",
+      "category": "edge",
+      "description": "Edge case - Equator",
+      "birth_data": {
+        "name": "Test Chart 009 - Equator",
+        "year": 1992,
+        "month": 3,
+        "day": 20,
+        "hour": 12,
+        "minute": 0,
+        "second": 0,
+        "latitude": 0.0,
+        "longitude": 0.0,
+        "timezone_offset": 0.0,
+        "timezone_name": "UTC",
+        "location_name": "Gulf of Guinea (0°, 0°)",
+        "dst": false
+      },
+      "notes": "Exact equator and prime meridian, vernal equinox"
+    },
+    {
+      "id": "chart_010",
+      "category": "edge",
+      "description": "Edge case - Southern hemisphere",
+      "birth_data": {
+        "name": "Test Chart 010 - Sydney",
+        "year": 1987,
+        "month": 12,
+        "day": 25,
+        "hour": 8,
+        "minute": 30,
+        "second": 0,
+        "latitude": -33.8688,
+        "longitude": 151.2093,
+        "timezone_offset": 11.0,
+        "timezone_name": "Australia/Sydney",
+        "location_name": "Sydney, Australia",
+        "dst": true
+      },
+      "notes": "Southern hemisphere, summer (December), DST active"
+    },
+    {
+      "id": "chart_011",
+      "category": "edge",
+      "description": "Edge case - Fractional timezone",
+      "birth_data": {
+        "name": "Test Chart 011 - Nepal",
+        "year": 1994,
+        "month": 4,
+        "day": 14,
+        "hour": 9,
+        "minute": 15,
+        "second": 0,
+        "latitude": 27.7172,
+        "longitude": 85.3240,
+        "timezone_offset": 5.75,
+        "timezone_name": "Asia/Kathmandu",
+        "location_name": "Kathmandu, Nepal",
+        "dst": false
+      },
+      "notes": "UTC+5:45, tests fractional timezone handling"
+    },
+    {
+      "id": "chart_012",
+      "category": "edge",
+      "description": "Edge case - 19th century",
+      "birth_data": {
+        "name": "Test Chart 012 - Historical",
+        "year": 1879,
+        "month": 3,
+        "day": 14,
+        "hour": 11,
+        "minute": 30,
+        "second": 0,
+        "latitude": 48.2082,
+        "longitude": 16.3738,
+        "timezone_offset": 1.0,
+        "timezone_name": "Europe/Vienna",
+        "location_name": "Ulm, Germany (historical)",
+        "dst": false
+      },
+      "notes": "19th century date, tests historical ephemeris data"
+    },
+    {
+      "id": "chart_013",
+      "category": "edge",
+      "description": "Edge case - Far future",
+      "birth_data": {
+        "name": "Test Chart 013 - Future",
+        "year": 2050,
+        "month": 7,
+        "day": 4,
+        "hour": 15,
+        "minute": 0,
+        "second": 0,
+        "latitude": 40.7128,
+        "longitude": -74.0060,
+        "timezone_offset": -4.0,
+        "timezone_name": "America/New_York",
+        "location_name": "New York, USA",
+        "dst": true
+      },
+      "notes": "Future date, tests ephemeris extrapolation"
+    },
+    {
+      "id": "chart_014",
+      "category": "standard",
+      "description": "Standard case - US Pacific",
+      "birth_data": {
+        "name": "Test Chart 014 - LA",
+        "year": 1982,
+        "month": 11,
+        "day": 8,
+        "hour": 7,
+        "minute": 45,
+        "second": 0,
+        "latitude": 34.0522,
+        "longitude": -118.2437,
+        "timezone_offset": -8.0,
+        "timezone_name": "America/Los_Angeles",
+        "location_name": "Los Angeles, USA",
+        "dst": false
+      },
+      "notes": "West coast US, standard time (November)"
+    },
+    {
+      "id": "chart_015",
+      "category": "standard",
+      "description": "Standard case - Retrograde planet period",
+      "birth_data": {
+        "name": "Test Chart 015 - Retrograde",
+        "year": 1991,
+        "month": 2,
+        "day": 18,
+        "hour": 10,
+        "minute": 30,
+        "second": 0,
+        "latitude": 28.6139,
+        "longitude": 77.2090,
+        "timezone_offset": 5.5,
+        "timezone_name": "Asia/Kolkata",
+        "location_name": "New Delhi, India",
+        "dst": false
+      },
+      "notes": "Mercury retrograde period, verify retrograde detection"
+    }
+  ],
+  "usage_notes": {
+    "accuracy_testing": "Use charts 001-003 for baseline, 004-013 for edge cases",
+    "dasha_testing": "Use charts 001-003 with known dasha reference",
+    "varga_testing": "Use any chart, compare all 16 vargas against JHora",
+    "performance_testing": "Run all 15 charts in batch, measure total time"
+  }
+}

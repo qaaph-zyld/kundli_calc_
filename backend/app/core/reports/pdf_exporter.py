@@ -6,132 +6,125 @@ Professional PDF generation with formatting, charts, and citations.
 Uses WeasyPrint for HTML-to-PDF conversion.
 """
 
-from weasyprint import HTML, CSS
-from typing import Dict, Any, Optional
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, Optional
+
+from weasyprint import CSS, HTML
 
 from .report_generator import ComprehensiveReport
 
 
 class PDFExporter:
     """Export comprehensive reports to professional PDF format"""
-    
+
     def __init__(self):
         self.template_dir = Path(__file__).parent / "templates"
         self.static_dir = Path(__file__).parent / "static"
-        
+
         # Ensure directories exist
         self.template_dir.mkdir(exist_ok=True)
         self.static_dir.mkdir(exist_ok=True)
-    
+
     def export_to_pdf(
-        self,
-        report: ComprehensiveReport,
-        template: str = "professional",
-        include_charts: bool = False
+        self, report: ComprehensiveReport, template: str = "professional", include_charts: bool = False
     ) -> bytes:
         """
         Export report to PDF using ReportLab.
-        
+
         Args:
             report: ComprehensiveReport object
             template: Template style
             include_charts: Include chart diagrams
-            
+
         Returns:
             PDF file as bytes
         """
-        
+
         # Create PDF in memory
         buffer = BytesIO()
         doc = SimpleDocTemplate(buffer, pagesize=A4)
         story = []
         styles = getSampleStyleSheet()
-        
+
         # Add custom styles
-        styles.add(ParagraphStyle(
-            name='CustomTitle',
-            parent=styles['Heading1'],
-            fontSize=24,
-            textColor=colors.HexColor('#1a1a1a'),
-            spaceAfter=30
-        ))
-        
+        styles.add(
+            ParagraphStyle(
+                name="CustomTitle",
+                parent=styles["Heading1"],
+                fontSize=24,
+                textColor=colors.HexColor("#1a1a1a"),
+                spaceAfter=30,
+            )
+        )
+
         # Cover page
-        story.append(Paragraph("Comprehensive Astrological Analysis", styles['CustomTitle']))
-        story.append(Spacer(1, 0.5*inch))
-        story.append(Paragraph(f"<b>{report.chart_owner}</b>", styles['Heading2']))
-        story.append(Spacer(1, 0.3*inch))
-        story.append(Paragraph(
-            f"Report Generated: {report.generated_at.strftime('%B %d, %Y')}",
-            styles['Normal']
-        ))
+        story.append(Paragraph("Comprehensive Astrological Analysis", styles["CustomTitle"]))
+        story.append(Spacer(1, 0.5 * inch))
+        story.append(Paragraph(f"<b>{report.chart_owner}</b>", styles["Heading2"]))
+        story.append(Spacer(1, 0.3 * inch))
+        story.append(Paragraph(f"Report Generated: {report.generated_at.strftime('%B %d, %Y')}", styles["Normal"]))
         story.append(PageBreak())
-        
+
         # Executive Summary
-        story.append(Paragraph("Executive Summary", styles['Heading1']))
-        story.append(Spacer(1, 0.2*inch))
-        story.append(Paragraph(
-            f"<b>Overall Chart Strength: {report.executive_summary.overall_strength:.1f}/100</b>",
-            styles['Heading3']
-        ))
-        story.append(Spacer(1, 0.2*inch))
-        
+        story.append(Paragraph("Executive Summary", styles["Heading1"]))
+        story.append(Spacer(1, 0.2 * inch))
+        story.append(
+            Paragraph(
+                f"<b>Overall Chart Strength: {report.executive_summary.overall_strength:.1f}/100</b>",
+                styles["Heading3"],
+            )
+        )
+        story.append(Spacer(1, 0.2 * inch))
+
         # Key Strengths
-        story.append(Paragraph("<b>Key Strengths:</b>", styles['Heading3']))
+        story.append(Paragraph("<b>Key Strengths:</b>", styles["Heading3"]))
         for strength in report.executive_summary.key_strengths:
-            story.append(Paragraph(f"• {strength}", styles['Normal']))
-        story.append(Spacer(1, 0.2*inch))
-        
+            story.append(Paragraph(f"• {strength}", styles["Normal"]))
+        story.append(Spacer(1, 0.2 * inch))
+
         # Key Challenges
-        story.append(Paragraph("<b>Key Challenges:</b>", styles['Heading3']))
+        story.append(Paragraph("<b>Key Challenges:</b>", styles["Heading3"]))
         for challenge in report.executive_summary.key_challenges:
-            story.append(Paragraph(f"• {challenge}", styles['Normal']))
-        story.append(Spacer(1, 0.2*inch))
-        
+            story.append(Paragraph(f"• {challenge}", styles["Normal"]))
+        story.append(Spacer(1, 0.2 * inch))
+
         # Synthesis
-        story.append(Paragraph("<b>Synthesis:</b>", styles['Heading3']))
-        story.append(Paragraph(report.executive_summary.synthesis, styles['Normal']))
+        story.append(Paragraph("<b>Synthesis:</b>", styles["Heading3"]))
+        story.append(Paragraph(report.executive_summary.synthesis, styles["Normal"]))
         story.append(PageBreak())
-        
+
         # Life Areas
-        story.append(Paragraph("Life Area Analysis", styles['Heading1']))
+        story.append(Paragraph("Life Area Analysis", styles["Heading1"]))
         for area_name, area_report in report.life_areas.items():
-            story.append(Paragraph(area_name.title(), styles['Heading2']))
-            story.append(Paragraph(
-                f"<b>Strength Score: {area_report.strength_score:.1f}/100</b>",
-                styles['Normal']
-            ))
-            story.append(Spacer(1, 0.1*inch))
-            story.append(Paragraph(area_report.content, styles['Normal']))
-            story.append(Spacer(1, 0.2*inch))
-        
+            story.append(Paragraph(area_name.title(), styles["Heading2"]))
+            story.append(Paragraph(f"<b>Strength Score: {area_report.strength_score:.1f}/100</b>", styles["Normal"]))
+            story.append(Spacer(1, 0.1 * inch))
+            story.append(Paragraph(area_report.content, styles["Normal"]))
+            story.append(Spacer(1, 0.2 * inch))
+
         story.append(PageBreak())
-        
+
         # Bibliography
-        story.append(Paragraph("Bibliography & Classical Sources", styles['Heading1']))
-        story.append(Paragraph(
-            "All interpretations sourced from classical Vedic astrology texts:",
-            styles['Normal']
-        ))
-        story.append(Spacer(1, 0.2*inch))
-        
+        story.append(Paragraph("Bibliography & Classical Sources", styles["Heading1"]))
+        story.append(Paragraph("All interpretations sourced from classical Vedic astrology texts:", styles["Normal"]))
+        story.append(Spacer(1, 0.2 * inch))
+
         for i, citation in enumerate(report.bibliography, 1):
-            story.append(Paragraph(f"{i}. {citation}", styles['Normal']))
-        
+            story.append(Paragraph(f"{i}. {citation}", styles["Normal"]))
+
         # Build PDF
         doc.build(story)
-        
+
         # Get PDF bytes
         pdf_bytes = buffer.getvalue()
         buffer.close()
-        
+
         return pdf_bytes
-    
+
     def _generate_html(self, report: ComprehensiveReport, template: str) -> str:
         """Generate HTML from report data"""
-        
+
         html = f"""
         <!DOCTYPE html>
         <html>
@@ -204,7 +197,7 @@ class PDFExporter:
             <div class="section">
                 <h2>Life Area Analysis</h2>
         """
-        
+
         # Life Areas
         for area_name, area_report in report.life_areas.items():
             html += f"""
@@ -227,9 +220,9 @@ class PDFExporter:
                 <p>{area_report.timing_forecast}</p>
             </div>
             """
-        
+
         html += '</div><div class="page-break"></div>'
-        
+
         # Timing Forecast
         html += f"""
         <div class="section">
@@ -240,7 +233,7 @@ class PDFExporter:
             
             <h3>Year-by-Year Forecast</h3>
         """
-        
+
         for year, forecast in sorted(report.timing_forecast.year_by_year.items()):
             html += f"""
             <div class="year-forecast">
@@ -249,9 +242,9 @@ class PDFExporter:
                 <p>{forecast.synthesis}</p>
             </div>
             """
-        
+
         html += '</div><div class="page-break"></div>'
-        
+
         # Bibliography
         html += """
         <div class="section">
@@ -259,10 +252,10 @@ class PDFExporter:
             <p>All interpretations sourced from classical Vedic astrology texts:</p>
             <ol class="bibliography">
         """
-        
+
         for citation in report.bibliography:
-            html += f'<li>{citation}</li>'
-        
+            html += f"<li>{citation}</li>"
+
         html += """
             </ol>
             
@@ -278,12 +271,12 @@ class PDFExporter:
         </body>
         </html>
         """
-        
+
         return html
-    
+
     def _load_css(self, template: str) -> str:
         """Load CSS styling"""
-        
+
         css = """
         @page {
             size: A4;
@@ -353,9 +346,9 @@ class PDFExporter:
             color: #666;
         }
         """
-        
+
         return css
-    
+
     def save_pdf(self, pdf_bytes: bytes, filename: str) -> str:
         """Save PDF to file"""
         filepath = Path(filename)

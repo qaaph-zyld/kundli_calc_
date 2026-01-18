@@ -1,9 +1,12 @@
 """Environment configuration module."""
-from functools import lru_cache
-from typing import Dict, Any
+
 import os
+from functools import lru_cache
 from pathlib import Path
+from typing import Any, Dict
+
 from dotenv import load_dotenv
+
 
 class Environment:
     """Environment configuration manager."""
@@ -28,7 +31,7 @@ class Environment:
             "REDIS_URL",
             "SECRET_KEY",
         ]
-        
+
         missing_vars = [var for var in required_vars if not os.getenv(var)]
         if missing_vars:
             raise ValueError(f"Missing required environment variables: {', '.join(missing_vars)}")
@@ -78,10 +81,12 @@ class Environment:
             "BACKUP_S3_BUCKET": os.getenv("BACKUP_S3_BUCKET"),
         }
 
+
 @lru_cache()
 def get_environment() -> Environment:
     """Get cached environment instance."""
     return Environment()
+
 
 # Create global instance
 env = get_environment()

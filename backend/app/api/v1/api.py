@@ -5,13 +5,13 @@ Gate: GATE_4
 Version: 1.0.0
 """
 
-from fastapi import APIRouter
+from app.api.v1.endpoints.birth_charts import birth_charts
 from app.api.v1.endpoints.health import router_health
 from app.api.v1.endpoints.kundli import router as kundli_router
 from app.api.v1.endpoints.login import login
 from app.api.v1.endpoints.users import users
-from app.api.v1.endpoints.birth_charts import birth_charts
 from app.api.v1.knowledge import router as knowledge_router
+from fastapi import APIRouter
 
 api_router = APIRouter()
 

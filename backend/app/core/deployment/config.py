@@ -5,27 +5,30 @@ Gate: GATE_9
 Version: 1.0.0
 """
 
-from typing import Dict, Any
+from typing import Any, Dict
+
 from .framework import (
     DeploymentConfig,
     DeploymentEnvironment,
     DeploymentMode,
-    ServiceType,
-    ServiceConfig,
+    HealthCheck,
     ResourceRequirements,
-    HealthCheck
+    ServiceConfig,
+    ServiceType,
 )
+
 
 def get_deployment_config(environment: DeploymentEnvironment) -> DeploymentConfig:
     """Get deployment configuration for environment"""
-    
+
     # Base configuration
     base_config = {
         "environment": environment,
-        "mode": DeploymentMode.DOCKER if environment in [
-            DeploymentEnvironment.LOCAL,
-            DeploymentEnvironment.DEVELOPMENT
-        ] else DeploymentMode.KUBERNETES,
+        "mode": (
+            DeploymentMode.DOCKER
+            if environment in [DeploymentEnvironment.LOCAL, DeploymentEnvironment.DEVELOPMENT]
+            else DeploymentMode.KUBERNETES
+        ),
         "namespace": f"vedic-astrology-{environment}",
         "network": f"vedic-astrology-{environment}",
         "registry": "vedic-astrology" if environment != DeploymentEnvironment.LOCAL else None,
@@ -33,13 +36,12 @@ def get_deployment_config(environment: DeploymentEnvironment) -> DeploymentConfi
         "logging": environment != DeploymentEnvironment.LOCAL,
         "global_env_vars": {
             "ENV": environment,
-            "LOG_LEVEL": "DEBUG" if environment in [
-                DeploymentEnvironment.LOCAL,
-                DeploymentEnvironment.DEVELOPMENT
-            ] else "INFO"
-        }
+            "LOG_LEVEL": (
+                "DEBUG" if environment in [DeploymentEnvironment.LOCAL, DeploymentEnvironment.DEVELOPMENT] else "INFO"
+            ),
+        },
     }
-    
+
     # Service configurations
     services = {
         "api": ServiceConfig(
@@ -52,20 +54,16 @@ def get_deployment_config(environment: DeploymentEnvironment) -> DeploymentConfi
                 "API_TITLE": "Vedic Astrology API",
                 "API_VERSION": "1.0.0",
                 "DATABASE_URL": get_database_url(environment),
-                "REDIS_URL": get_redis_url(environment)
+                "REDIS_URL": get_redis_url(environment),
             },
             resources=ResourceRequirements(
                 cpu="100m" if environment == DeploymentEnvironment.LOCAL else "500m",
                 memory="128Mi" if environment == DeploymentEnvironment.LOCAL else "512Mi",
-                replicas=1 if environment in [
-                    DeploymentEnvironment.LOCAL,
-                    DeploymentEnvironment.DEVELOPMENT
-                ] else 3,
+                replicas=1 if environment in [DeploymentEnvironment.LOCAL, DeploymentEnvironment.DEVELOPMENT] else 3,
                 min_replicas=1,
-                max_replicas=1 if environment in [
-                    DeploymentEnvironment.LOCAL,
-                    DeploymentEnvironment.DEVELOPMENT
-                ] else 5
+                max_replicas=(
+                    1 if environment in [DeploymentEnvironment.LOCAL, DeploymentEnvironment.DEVELOPMENT] else 5
+                ),
             ),
             health_check=HealthCheck(
                 path="/health",
@@ -74,11 +72,10 @@ def get_deployment_config(environment: DeploymentEnvironment) -> DeploymentConfi
                 period=10,
                 timeout=5,
                 success_threshold=1,
-                failure_threshold=3
+                failure_threshold=3,
             ),
-            dependencies=["cache", "database"]
+            dependencies=["cache", "database"],
         ),
-        
         "worker": ServiceConfig(
             name="worker",
             type=ServiceType.WORKER,
@@ -88,15 +85,12 @@ def get_deployment_config(environment: DeploymentEnvironment) -> DeploymentConfi
             env_vars={
                 "WORKER_CONCURRENCY": "1" if environment == DeploymentEnvironment.LOCAL else "5",
                 "DATABASE_URL": get_database_url(environment),
-                "REDIS_URL": get_redis_url(environment)
+                "REDIS_URL": get_redis_url(environment),
             },
             resources=ResourceRequirements(
                 cpu="100m" if environment == DeploymentEnvironment.LOCAL else "500m",
                 memory="128Mi" if environment == DeploymentEnvironment.LOCAL else "512Mi",
-                replicas=1 if environment in [
-                    DeploymentEnvironment.LOCAL,
-                    DeploymentEnvironment.DEVELOPMENT
-                ] else 2
+                replicas=1 if environment in [DeploymentEnvironment.LOCAL, DeploymentEnvironment.DEVELOPMENT] else 2,
             ),
             health_check=HealthCheck(
                 path="/health",
@@ -105,11 +99,10 @@ def get_deployment_config(environment: DeploymentEnvironment) -> DeploymentConfi
                 period=10,
                 timeout=5,
                 success_threshold=1,
-                failure_threshold=3
+                failure_threshold=3,
             ),
-            dependencies=["cache", "database"]
+            dependencies=["cache", "database"],
         ),
-        
         "cache": ServiceConfig(
             name="cache",
             type=ServiceType.CACHE,
@@ -119,22 +112,13 @@ def get_deployment_config(environment: DeploymentEnvironment) -> DeploymentConfi
             resources=ResourceRequirements(
                 cpu="100m" if environment == DeploymentEnvironment.LOCAL else "200m",
                 memory="128Mi" if environment == DeploymentEnvironment.LOCAL else "256Mi",
-                replicas=1
+                replicas=1,
             ),
             health_check=HealthCheck(
-                path="/",
-                port=6379,
-                initial_delay=5,
-                period=10,
-                timeout=5,
-                success_threshold=1,
-                failure_threshold=3
+                path="/", port=6379, initial_delay=5, period=10, timeout=5, success_threshold=1, failure_threshold=3
             ),
-            volumes={
-                "./data/redis": "/data"
-            }
+            volumes={"./data/redis": "/data"},
         ),
-        
         "database": ServiceConfig(
             name="database",
             type=ServiceType.DATABASE,
@@ -144,44 +128,29 @@ def get_deployment_config(environment: DeploymentEnvironment) -> DeploymentConfi
             env_vars={
                 "POSTGRES_DB": "vedic_astrology",
                 "POSTGRES_USER": "vedic",
-                "POSTGRES_PASSWORD": get_database_password(environment)
+                "POSTGRES_PASSWORD": get_database_password(environment),
             },
             resources=ResourceRequirements(
                 cpu="100m" if environment == DeploymentEnvironment.LOCAL else "500m",
                 memory="256Mi" if environment == DeploymentEnvironment.LOCAL else "1Gi",
-                replicas=1
+                replicas=1,
             ),
             health_check=HealthCheck(
-                path="/",
-                port=5432,
-                initial_delay=30,
-                period=10,
-                timeout=5,
-                success_threshold=1,
-                failure_threshold=3
+                path="/", port=5432, initial_delay=30, period=10, timeout=5, success_threshold=1, failure_threshold=3
             ),
-            volumes={
-                "./data/postgres": "/var/lib/postgresql/data"
-            }
+            volumes={"./data/postgres": "/var/lib/postgresql/data"},
         ),
-        
         "frontend": ServiceConfig(
             name="frontend",
             type=ServiceType.FRONTEND,
             image="vedic-astrology/frontend",
             tag="latest",
             port=3000,
-            env_vars={
-                "REACT_APP_API_URL": get_api_url(environment),
-                "REACT_APP_ENV": environment
-            },
+            env_vars={"REACT_APP_API_URL": get_api_url(environment), "REACT_APP_ENV": environment},
             resources=ResourceRequirements(
                 cpu="100m" if environment == DeploymentEnvironment.LOCAL else "200m",
                 memory="128Mi" if environment == DeploymentEnvironment.LOCAL else "256Mi",
-                replicas=1 if environment in [
-                    DeploymentEnvironment.LOCAL,
-                    DeploymentEnvironment.DEVELOPMENT
-                ] else 2
+                replicas=1 if environment in [DeploymentEnvironment.LOCAL, DeploymentEnvironment.DEVELOPMENT] else 2,
             ),
             health_check=HealthCheck(
                 path="/health",
@@ -190,16 +159,14 @@ def get_deployment_config(environment: DeploymentEnvironment) -> DeploymentConfi
                 period=10,
                 timeout=5,
                 success_threshold=1,
-                failure_threshold=3
+                failure_threshold=3,
             ),
-            dependencies=["api"]
-        )
+            dependencies=["api"],
+        ),
     }
-    
-    return DeploymentConfig(
-        **base_config,
-        services=services
-    )
+
+    return DeploymentConfig(**base_config, services=services)
+
 
 def get_database_url(environment: DeploymentEnvironment) -> str:
     """Get database URL for environment"""
@@ -208,9 +175,11 @@ def get_database_url(environment: DeploymentEnvironment) -> str:
     else:
         return f"postgresql://vedic:{get_database_password(environment)}@database:5432/vedic_astrology"
 
+
 def get_redis_url(environment: DeploymentEnvironment) -> str:
     """Get Redis URL for environment"""
     return "redis://cache:6379/0"
+
 
 def get_api_url(environment: DeploymentEnvironment) -> str:
     """Get API URL for environment"""
@@ -222,6 +191,7 @@ def get_api_url(environment: DeploymentEnvironment) -> str:
         return "https://staging-api.vedic-astrology.com"
     else:
         return "https://api.vedic-astrology.com"
+
 
 def get_database_password(environment: DeploymentEnvironment) -> str:
     """Get database password for environment"""

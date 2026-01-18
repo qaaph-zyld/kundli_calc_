@@ -1,15 +1,15 @@
 """Birth chart model module."""
-from sqlalchemy import Column, String, DateTime, Float, ForeignKey
-from sqlalchemy.orm import relationship
 
 from app.models.base import BaseModel
+from sqlalchemy import Column, DateTime, Float, ForeignKey, String
+from sqlalchemy.orm import relationship
 
 
 class BirthChart(BaseModel):
     """Birth chart model."""
 
     __tablename__ = "birth_charts"
-    __table_args__ = {'extend_existing': True}
+    __table_args__ = {"extend_existing": True}
 
     user_id = Column(String(36), ForeignKey("users.id"))
     name = Column(String(255), nullable=False)

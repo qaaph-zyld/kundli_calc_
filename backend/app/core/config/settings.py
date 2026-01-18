@@ -1,10 +1,12 @@
 """Settings module."""
+
 import os
+from pathlib import Path
 from typing import List, Optional
+
+from dotenv import load_dotenv
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
-from dotenv import load_dotenv
-from pathlib import Path
 
 # Load environment-specific .env file
 env = os.getenv("ENV", "development")
@@ -14,9 +16,10 @@ load_dotenv(env_file)
 
 class Settings(BaseSettings):
     """Application settings."""
+
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = "kundli_calculation_webservice"
-    
+
     # Environment
     ENV: str = os.getenv("ENV", "development")
     DEBUG: bool = True
@@ -38,7 +41,7 @@ class Settings(BaseSettings):
     # Security
     SECRET_KEY: str = os.getenv("SECRET_KEY", "your-secret-key-here")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30"))
-    
+
     # CORS
     BACKEND_CORS_ORIGINS: List[str] = [
         "http://localhost:8000",
@@ -70,7 +73,7 @@ class Settings(BaseSettings):
     # Ephemeris settings
     EPHEMERIS_PATH: str = Field(
         default=str(Path(__file__).parent.parent.parent.parent / "data" / "ephe"),
-        description="Path to Swiss Ephemeris data files"
+        description="Path to Swiss Ephemeris data files",
     )
 
     model_config = SettingsConfigDict(env_file=env_file, case_sensitive=True, extra="ignore")
@@ -87,4 +90,3 @@ else:
         f"postgresql://{settings.POSTGRES_USER}:{settings.POSTGRES_PASSWORD}"
         f"@{settings.POSTGRES_HOST}:{settings.POSTGRES_PORT}/{settings.POSTGRES_DB}"
     )
-

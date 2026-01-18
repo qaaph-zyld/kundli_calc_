@@ -1,0 +1,144 @@
+{
+  "schema_version": "1.0",
+  "extraction_date": "2026-01-18T03:52:00+01:00",
+  "jhora_version": "8.0",
+  "source": "JHora export - test_data/Kundlis/Nikola_Jelacic.txt",
+  "birth_data": {
+    "id": "chart_016",
+    "name": "Nikola Jelacic",
+    "year": 1990,
+    "month": 10,
+    "day": 9,
+    "hour": 9,
+    "minute": 10,
+    "second": 0,
+    "latitude": 44.5333,
+    "longitude": 19.2167,
+    "timezone_offset": 1.0,
+    "timezone_name": "Europe/Belgrade",
+    "location_name": "Loznica, Yugoslavia",
+    "dst": false
+  },
+  "settings": {
+    "ayanamsa": "Lahiri",
+    "ayanamsa_value": 23.712542,
+    "house_system": "Whole Sign"
+  },
+  "planetary_positions": [
+    {
+      "planet": "Sun",
+      "longitude": 172.068494,
+      "sign": "Virgo",
+      "sign_num": 6,
+      "degree_in_sign": 22.068494,
+      "nakshatra": "Hasta",
+      "nakshatra_pada": 4,
+      "retrograde": false,
+      "karaka": "BK"
+    },
+    {
+      "planet": "Moon",
+      "longitude": 58.348689,
+      "sign": "Taurus",
+      "sign_num": 2,
+      "degree_in_sign": 28.348689,
+      "nakshatra": "Mrigasira",
+      "nakshatra_pada": 2,
+      "retrograde": false,
+      "karaka": "AK"
+    },
+    {
+      "planet": "Mars",
+      "longitude": 49.917178,
+      "sign": "Taurus",
+      "sign_num": 2,
+      "degree_in_sign": 19.917178,
+      "nakshatra": "Rohini",
+      "nakshatra_pada": 3,
+      "retrograde": false,
+      "karaka": "PiK"
+    },
+    {
+      "planet": "Mercury",
+      "longitude": 162.604600,
+      "sign": "Virgo",
+      "sign_num": 6,
+      "degree_in_sign": 12.604600,
+      "nakshatra": "Hasta",
+      "nakshatra_pada": 1,
+      "retrograde": false,
+      "karaka": "DK"
+    },
+    {
+      "planet": "Jupiter",
+      "longitude": 105.858014,
+      "sign": "Cancer",
+      "sign_num": 4,
+      "degree_in_sign": 15.858014,
+      "nakshatra": "Pushya",
+      "nakshatra_pada": 4,
+      "retrograde": false,
+      "karaka": "GK"
+    },
+    {
+      "planet": "Venus",
+      "longitude": 166.069264,
+      "sign": "Virgo",
+      "sign_num": 6,
+      "degree_in_sign": 16.069264,
+      "nakshatra": "Hasta",
+      "nakshatra_pada": 2,
+      "retrograde": false,
+      "karaka": "PK"
+    },
+    {
+      "planet": "Saturn",
+      "longitude": 265.204447,
+      "sign": "Sagittarius",
+      "sign_num": 9,
+      "degree_in_sign": 25.204447,
+      "nakshatra": "Purva Ashadha",
+      "nakshatra_pada": 4,
+      "retrograde": false,
+      "karaka": "AmK"
+    },
+    {
+      "planet": "Rahu",
+      "longitude": 279.847600,
+      "sign": "Capricorn",
+      "sign_num": 10,
+      "degree_in_sign": 9.847600,
+      "nakshatra": "Uttara Ashadha",
+      "nakshatra_pada": 4,
+      "retrograde": true,
+      "karaka": "MK"
+    },
+    {
+      "planet": "Ketu",
+      "longitude": 99.847600,
+      "sign": "Cancer",
+      "sign_num": 4,
+      "degree_in_sign": 9.847600,
+      "nakshatra": "Pushya",
+      "nakshatra_pada": 2,
+      "retrograde": true,
+      "karaka": null
+    }
+  ],
+  "lagna": {
+    "longitude": 208.948903,
+    "sign": "Libra",
+    "sign_num": 7,
+    "degree_in_sign": 28.948903,
+    "nakshatra": "Vishakha",
+    "nakshatra_pada": 3
+  },
+  "panchanga": {
+    "tithi": "Krishna Shashthi",
+    "nakshatra": "Mrigasira",
+    "yoga": "Variyan",
+    "karana": "Vanija",
+    "weekday": "Tuesday"
+  },
+  "notes": "Real user chart - gold standard reference for accuracy validation"
+}

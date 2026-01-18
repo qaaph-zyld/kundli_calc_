@@ -10,8 +10,8 @@ Source: Rajan Publications
 Each planetary period (dasha) produces specific effects based on the planet's
 nature, placement, and lordship in the natal chart.
 """
-from typing import Dict, Any, List
 
+from typing import Any, Dict, List
 
 # BPHS Chapters 47-49: Vimshottari Dasha Effects
 
@@ -29,35 +29,34 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Spiritual inclination and dharmic activities",
                 "Father's blessings and support",
                 "Improvement in health and vitality",
-                "Acquisition of land and property"
+                "Acquisition of land and property",
             ],
             "challenging": [
                 "Ego conflicts and arrogance if Sun afflicted",
                 "Issues with authority figures",
                 "Health problems related to eyes, bones, heart",
                 "Separation from father or paternal issues",
-                "Obstacles from government or legal matters"
-            ]
+                "Obstacles from government or legal matters",
+            ],
         },
         "effects_by_house": {
             1: "Excellent for personal growth, authority, health improvement",
             10: "Outstanding career advancement, fame, government positions",
             4: "Issues with peace of mind, but gains of property possible",
-            7: "Marital challenges but professional partnerships favorable"
+            7: "Marital challenges but professional partnerships favorable",
         },
         "timing_within_dasha": {
             "first_third": "Building foundation, initial challenges",
             "middle_third": "Peak effects, maximum results",
-            "last_third": "Consolidation, preparation for next dasha"
+            "last_third": "Consolidation, preparation for next dasha",
         },
         "remedies": [
             "Worship Sun deity (Surya) with Aditya Hridayam",
             "Donate wheat, jaggery, copper on Sundays",
             "Practice humility and service to father/elders",
-            "Wear ruby if recommended by expert astrologer"
-        ]
+            "Wear ruby if recommended by expert astrologer",
+        ],
     },
-    
     "Moon": {
         "chapter": 47,
         "verses": "47.9-14",
@@ -71,36 +70,35 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Gains through mother and maternal connections",
                 "Acquisition of property, vehicles, comforts",
                 "Marriage and family happiness",
-                "Successful travels, especially to water bodies"
+                "Successful travels, especially to water bodies",
             ],
             "challenging": [
                 "Emotional instability and mood swings",
                 "Mental stress and anxiety",
                 "Issues with mother or maternal relationships",
                 "Health problems related to fluids, stomach, lungs",
-                "Tendency toward depression if Moon afflicted"
-            ]
+                "Tendency toward depression if Moon afflicted",
+            ],
         },
         "effects_by_dignity": {
             "waxing_strong": "Excellent results, emotional fulfillment, prosperity",
-            "waning_weak": "Emotional challenges, health issues, mental stress"
+            "waning_weak": "Emotional challenges, health issues, mental stress",
         },
         "career_effects": [
             "Success in hospitality, nursing, counseling",
             "Public-facing roles and mass communication",
             "Real estate and property dealings",
             "Food and beverage industries",
-            "Travel and tourism"
+            "Travel and tourism",
         ],
         "remedies": [
             "Worship Moon deity (Chandra) on Mondays",
             "Maintain emotional balance through meditation",
             "Strengthen relationship with mother",
             "Wear pearl (Moti) if recommended",
-            "Donate white items and rice"
-        ]
+            "Donate white items and rice",
+        ],
     },
-    
     "Mars": {
         "chapter": 47,
         "verses": "47.15-20",
@@ -114,7 +112,7 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Support from siblings and friends",
                 "Victory over enemies and competitors",
                 "Success in Mars-related careers (military, sports, surgery)",
-                "Acquisition of vehicles and machinery"
+                "Acquisition of vehicles and machinery",
             ],
             "challenging": [
                 "Accidents, injuries, and surgeries",
@@ -122,8 +120,8 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Blood-related health issues",
                 "Legal disputes and property conflicts",
                 "Impulsive decisions leading to losses",
-                "Marital discord if Mars afflicted"
-            ]
+                "Marital discord if Mars afflicted",
+            ],
         },
         "career_focus": [
             "Military, police, and security services",
@@ -131,23 +129,22 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
             "Engineering and technical work",
             "Surgery and medical procedures",
             "Real estate and construction",
-            "Metals and machinery business"
+            "Metals and machinery business",
         ],
         "health_watch": [
             "Blood pressure and blood disorders",
             "Accidents and injuries, especially head",
             "Inflammations and fevers",
-            "Surgical procedures may be necessary"
+            "Surgical procedures may be necessary",
         ],
         "remedies": [
             "Worship Mars deity (Mangal) on Tuesdays",
             "Donate red items, lentils, copper",
             "Practice anger management and patience",
             "Recite Hanuman Chalisa",
-            "Wear red coral if recommended"
-        ]
+            "Wear red coral if recommended",
+        ],
     },
-    
     "Mercury": {
         "chapter": 48,
         "verses": "48.1-6",
@@ -161,15 +158,15 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Educational achievements and certifications",
                 "Multiple income sources",
                 "Success in intellectual and analytical work",
-                "Good relationships with friends and relatives"
+                "Good relationships with friends and relatives",
             ],
             "challenging": [
                 "Mental stress from overthinking",
                 "Nervous system and respiratory issues",
                 "Deception in business if Mercury afflicted",
                 "Scattered focus and indecisiveness",
-                "Skin problems and allergies"
-            ]
+                "Skin problems and allergies",
+            ],
         },
         "career_peak": [
             "Business and entrepreneurship",
@@ -178,24 +175,23 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
             "IT and technology fields",
             "Consulting and advisory",
             "Accounting and finance",
-            "Communication industries"
+            "Communication industries",
         ],
         "life_areas_activated": [
             "Education and skill development",
             "Business ventures and trade",
             "Communication and networking",
             "Travel for business",
-            "Intellectual pursuits"
+            "Intellectual pursuits",
         ],
         "remedies": [
             "Worship Mercury deity (Budha) on Wednesdays",
             "Study and teach sacred knowledge",
             "Donate green items, books, educational materials",
             "Practice ethical business dealings",
-            "Wear emerald if recommended"
-        ]
+            "Wear emerald if recommended",
+        ],
     },
-    
     "Jupiter": {
         "chapter": 48,
         "verses": "48.7-12",
@@ -210,14 +206,14 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Respect and recognition in society",
                 "Religious and charitable activities",
                 "Guidance from teachers and mentors",
-                "Divine protection and good fortune"
+                "Divine protection and good fortune",
             ],
             "challenging": [
                 "Over-optimism and excessive indulgence",
                 "Weight gain and liver issues",
                 "Financial overextension",
-                "Tendency toward complacency"
-            ]
+                "Tendency toward complacency",
+            ],
         },
         "optimal_for": [
             "Marriage and starting family",
@@ -226,7 +222,7 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
             "Long-term investments",
             "Establishing institutions",
             "Legal matters and justice",
-            "Advisory and counseling roles"
+            "Advisory and counseling roles",
         ],
         "wealth_effects": "Generally brings prosperity through legitimate means. Good for investments and long-term financial planning.",
         "spiritual_effects": "Strong period for spiritual initiation, studying scriptures, and connecting with teachers.",
@@ -235,10 +231,9 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
             "Study and share wisdom",
             "Practice generosity and charity",
             "Donate yellow items, turmeric, gold",
-            "Wear yellow sapphire if recommended"
-        ]
+            "Wear yellow sapphire if recommended",
+        ],
     },
-    
     "Venus": {
         "chapter": 48,
         "verses": "48.13-18",
@@ -252,15 +247,15 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Enhanced beauty and charm",
                 "Profitable partnerships and alliances",
                 "Vehicles and expensive possessions",
-                "Social popularity and refined lifestyle"
+                "Social popularity and refined lifestyle",
             ],
             "challenging": [
                 "Excessive indulgence in sensual pleasures",
                 "Relationship complications and infidelity risks",
                 "Financial losses through luxury spending",
                 "Reproductive health issues",
-                "Tendency toward materialism"
-            ]
+                "Tendency toward materialism",
+            ],
         },
         "relationship_focus": "Prime time for marriage, romance, and partnership formation. But guard against over-attachment and sensual excess.",
         "career_opportunities": [
@@ -269,7 +264,7 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
             "Luxury goods and hospitality",
             "Jewelry and precious items",
             "Relationship counseling",
-            "Design and decoration"
+            "Design and decoration",
         ],
         "wealth_pattern": "Gains through Venusian means - arts, partnerships, luxury goods. Tendency to spend on comforts.",
         "remedies": [
@@ -277,10 +272,9 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
             "Practice moderation in pleasures",
             "Use charm for benevolent purposes",
             "Donate white items, sugar, clothes",
-            "Wear diamond if recommended"
-        ]
+            "Wear diamond if recommended",
+        ],
     },
-    
     "Saturn": {
         "chapter": 49,
         "verses": "49.1-6",
@@ -294,7 +288,7 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Long-term career stability",
                 "Service to underprivileged brings merit",
                 "Wisdom gained through hardship",
-                "Late but lasting achievements"
+                "Late but lasting achievements",
             ],
             "challenging": [
                 "Delays and obstacles in all matters",
@@ -303,8 +297,8 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Financial struggles and poverty if Saturn weak",
                 "Depression and pessimism",
                 "Professional setbacks initially",
-                "Family conflicts and responsibilities"
-            ]
+                "Family conflicts and responsibilities",
+            ],
         },
         "life_pattern": "First half often difficult with obstacles and delays. Second half brings rewards for patience and hard work.",
         "career_guidance": [
@@ -313,7 +307,7 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
             "Engineering and construction",
             "Work with elderly or underprivileged",
             "Research and solitary work",
-            "Long-term projects bear fruit"
+            "Long-term projects bear fruit",
         ],
         "spiritual_opportunity": "Excellent period for spiritual discipline, meditation, and renunciation. Detachment from worldly matters.",
         "health_focus": [
@@ -321,7 +315,7 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
             "Joint and bone problems",
             "Dental issues",
             "Depression and mental health",
-            "Vitality may be low"
+            "Vitality may be low",
         ],
         "remedies": [
             "Worship Saturn deity (Shani) on Saturdays",
@@ -329,10 +323,9 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
             "Practice patience and acceptance",
             "Donate black items, sesame, iron",
             "Worship Lord Hanuman",
-            "Accept delays as divine timing"
-        ]
+            "Accept delays as divine timing",
+        ],
     },
-    
     "Rahu": {
         "chapter": 49,
         "verses": "49.7-12",
@@ -346,7 +339,7 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Political connections and influence",
                 "Material prosperity and luxury",
                 "Unconventional success paths",
-                "Mass appeal and popularity"
+                "Mass appeal and popularity",
             ],
             "challenging": [
                 "Confusion and lack of direction",
@@ -355,8 +348,8 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Addictions and obsessions",
                 "Legal troubles and scandals",
                 "Family separations",
-                "Mental instability"
-            ]
+                "Mental instability",
+            ],
         },
         "unique_opportunities": [
             "Foreign lands and cultures",
@@ -364,24 +357,23 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
             "Politics and mass movements",
             "Occult and mystical studies",
             "Media and entertainment",
-            "Sudden wealth opportunities"
+            "Sudden wealth opportunities",
         ],
         "warnings": [
             "Avoid shortcuts and unethical means",
             "Guard against addictions",
             "Maintain mental clarity",
             "Be cautious in speculative ventures",
-            "Verify all dealings carefully"
+            "Verify all dealings carefully",
         ],
         "remedies": [
             "Worship Rahu deity on Saturdays",
             "Practice meditation for mental clarity",
             "Donate to outcasts and marginalized",
             "Wear Gomed (hessonite) if recommended",
-            "Recite Rahu mantras"
-        ]
+            "Recite Rahu mantras",
+        ],
     },
-    
     "Ketu": {
         "chapter": 49,
         "verses": "49.13-18",
@@ -395,7 +387,7 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Liberation from past karmas",
                 "Success in occult and spiritual fields",
                 "Sudden insights and wisdom",
-                "Service to spiritual causes"
+                "Service to spiritual causes",
             ],
             "challenging": [
                 "Loss and separation from worldly attachments",
@@ -404,8 +396,8 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Financial instability",
                 "Accidents and sudden events",
                 "Isolation and loneliness",
-                "Difficulty with material achievements"
-            ]
+                "Difficulty with material achievements",
+            ],
         },
         "spiritual_focus": "Excellent for meditation, yoga, spiritual practices. Time to let go of material attachments.",
         "material_effects": "Generally difficult for material progress. Focus shifts to inner world.",
@@ -414,7 +406,7 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
             "Research and investigation",
             "Healing and alternative medicine",
             "Occult and astrology",
-            "Difficulty in conventional careers"
+            "Difficulty in conventional careers",
         ],
         "remedies": [
             "Worship Ketu deity and Ganesha",
@@ -422,19 +414,19 @@ BPHS_MAHADASHA_EFFECTS: Dict[str, Dict[str, Any]] = {
             "Donate to spiritual causes",
             "Wear cat's eye if recommended",
             "Accept losses as spiritual lessons",
-            "Engage in selfless service"
-        ]
-    }
+            "Engage in selfless service",
+        ],
+    },
 }
 
 
 def get_mahadasha_interpretation(planet: str) -> Dict[str, Any]:
     """
     Retrieve BPHS interpretation for a planet's mahadasha.
-    
+
     Args:
         planet: Planet name
-        
+
     Returns:
         Dictionary with mahadasha effects and guidance
     """

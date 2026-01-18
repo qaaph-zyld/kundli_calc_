@@ -7,8 +7,7 @@ Retrograde = Apparent backward motion from Earth's perspective
 Effects differ from direct motion per classical texts
 """
 
-from typing import Dict, Any
-
+from typing import Any, Dict
 
 RETROGRADE_EFFECTS: Dict[str, Dict[str, Any]] = {
     "Mercury": {
@@ -23,22 +22,17 @@ RETROGRADE_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Profound insights and wisdom",
                 "Secretive tendencies",
                 "Excellence in research and investigation",
-                "Unconventional intelligence"
+                "Unconventional intelligence",
             ],
             "positive_effects": [
                 "Deep thinking and analysis",
                 "Research abilities",
                 "Profound insights",
-                "Unconventional wisdom"
+                "Unconventional wisdom",
             ],
-            "challenging_effects": [
-                "Communication delays",
-                "Misunderstandings",
-                "Secretive nature",
-                "Overthinking"
-            ],
+            "challenging_effects": ["Communication delays", "Misunderstandings", "Secretive nature", "Overthinking"],
             "remedial_notes": "Retrograde Mercury often indicates past-life intellectual karma",
-            "confidence": "high"
+            "confidence": "high",
         }
     },
     "Venus": {
@@ -53,22 +47,22 @@ RETROGRADE_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Profound capacity for love",
                 "Unique aesthetic sense",
                 "Introspective about relationships",
-                "May revisit past relationships"
+                "May revisit past relationships",
             ],
             "positive_effects": [
                 "Deep artistic talents",
                 "Profound love capacity",
                 "Unique aesthetic vision",
-                "Relationship wisdom"
+                "Relationship wisdom",
             ],
             "challenging_effects": [
                 "Marriage delays",
                 "Unconventional relationships",
                 "Relationship introspection",
-                "Past relationship patterns"
+                "Past relationship patterns",
             ],
             "remedial_notes": "Retrograde Venus indicates relationship karma from past lives",
-            "confidence": "high"
+            "confidence": "high",
         }
     },
     "Mars": {
@@ -83,22 +77,22 @@ RETROGRADE_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Suppressed energy initially",
                 "Decisive action when committed",
                 "Unconventional courage",
-                "Past-life warrior karma"
+                "Past-life warrior karma",
             ],
             "positive_effects": [
                 "Strategic thinking",
                 "Calculated courage",
                 "Powerful delayed action",
-                "Controlled aggression"
+                "Controlled aggression",
             ],
             "challenging_effects": [
                 "Suppressed anger",
                 "Action delays",
                 "Internal conflicts",
-                "Passive-aggressive tendencies"
+                "Passive-aggressive tendencies",
             ],
             "remedial_notes": "Retrograde Mars indicates unresolved courage/conflict karma",
-            "confidence": "high"
+            "confidence": "high",
         }
     },
     "Jupiter": {
@@ -113,22 +107,22 @@ RETROGRADE_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Profound philosophical insights",
                 "Spiritual rebel or reformer",
                 "Teaching through experience",
-                "Past-life spiritual karma"
+                "Past-life spiritual karma",
             ],
             "positive_effects": [
                 "Deep spiritual wisdom",
                 "Philosophical insights",
                 "Unconventional teaching",
-                "Spiritual depth"
+                "Spiritual depth",
             ],
             "challenging_effects": [
                 "Questioning traditional wisdom",
                 "Spiritual confusion initially",
                 "Delayed blessings",
-                "Unconventional path"
+                "Unconventional path",
             ],
             "remedial_notes": "Retrograde Jupiter indicates spiritual lessons from past lives",
-            "confidence": "high"
+            "confidence": "high",
         }
     },
     "Saturn": {
@@ -143,35 +137,30 @@ RETROGRADE_EFFECTS: Dict[str, Dict[str, Any]] = {
                 "Deep discipline required",
                 "Rewards after sustained effort",
                 "Past-life karma resolution",
-                "Introspective about responsibilities"
+                "Introspective about responsibilities",
             ],
-            "positive_effects": [
-                "Deep discipline",
-                "Karmic resolution",
-                "Wisdom through hardship",
-                "Eventual mastery"
-            ],
+            "positive_effects": ["Deep discipline", "Karmic resolution", "Wisdom through hardship", "Eventual mastery"],
             "challenging_effects": [
                 "Intensified delays",
                 "Repeated obstacles",
                 "Heavy karmic burden",
-                "Prolonged struggles"
+                "Prolonged struggles",
             ],
             "remedial_notes": "Retrograde Saturn indicates significant past-life karma to resolve",
             "confidence": "high",
-            "notes": "Most karmic of all retrogrades - requires patience and discipline"
+            "notes": "Most karmic of all retrogrades - requires patience and discipline",
         }
-    }
+    },
 }
 
 
 def get_retrograde_effect(planet: str) -> Dict[str, Any]:
     """
     Get retrograde effects for a planet.
-    
+
     Args:
         planet: Planet name
-        
+
     Returns:
         Dictionary with retrograde interpretation
     """

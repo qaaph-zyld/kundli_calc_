@@ -1,7 +1,6 @@
 """Birth chart endpoints."""
+
 from typing import Any, List
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_active_user, get_db
 from app.core.cache import cache_response, invalidate_cache
@@ -9,6 +8,8 @@ from app.core.config.settings import settings
 from app.crud import birth_chart as crud
 from app.models.users import User
 from app.schemas.birth_chart import BirthChart, BirthChartCreate, BirthChartUpdate
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
 
 router = APIRouter()
 
@@ -22,9 +23,7 @@ async def read_birth_charts(
     current_user: User = Depends(get_current_active_user),
 ) -> Any:
     """Retrieve birth charts."""
-    birth_charts = crud.get_birth_charts_by_user(
-        db=db, user_id=current_user.id, skip=skip, limit=limit
-    )
+    birth_charts = crud.get_birth_charts_by_user(db=db, user_id=current_user.id, skip=skip, limit=limit)
     return birth_charts
 
 
@@ -36,9 +35,7 @@ async def create_birth_chart(
     current_user: User = Depends(get_current_active_user),
 ) -> Any:
     """Create new birth chart."""
-    birth_chart = crud.create_birth_chart(
-        db=db, birth_chart=birth_chart_in, user_id=current_user.id
-    )
+    birth_chart = crud.create_birth_chart(db=db, birth_chart=birth_chart_in, user_id=current_user.id)
     # Invalidate user's birth charts cache
     invalidate_cache("user_birth_charts", current_user.id)
     return birth_chart
@@ -75,9 +72,7 @@ async def update_birth_chart(
         raise HTTPException(status_code=404, detail="Birth chart not found")
     if birth_chart.user_id != current_user.id:
         raise HTTPException(status_code=400, detail="Not enough permissions")
-    birth_chart = crud.update_birth_chart(
-        db=db, birth_chart_id=birth_chart_id, birth_chart=birth_chart_in
-    )
+    birth_chart = crud.update_birth_chart(db=db, birth_chart_id=birth_chart_id, birth_chart=birth_chart_in)
     # Invalidate caches
     invalidate_cache("birth_chart", birth_chart_id)
     invalidate_cache("user_birth_charts", current_user.id)

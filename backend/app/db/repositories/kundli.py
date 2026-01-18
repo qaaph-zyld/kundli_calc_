@@ -1,16 +1,18 @@
 from datetime import datetime
 from typing import List, Optional
-from bson import ObjectId
+
 from app.db.mongodb import MongoDB
 from app.models.kundli import (
+    KundliPredictions,
     KundliRequest,
     KundliResponse,
-    KundliPredictions,
-    TransitRequest,
-    TransitResponse,
     MatchingRequest,
     MatchingResponse,
+    TransitRequest,
+    TransitResponse,
 )
+from bson import ObjectId
+
 
 class KundliRepository:
     collection = MongoDB.db.kundlis
@@ -21,10 +23,12 @@ class KundliRepository:
     @classmethod
     async def create_kundli(cls, user_id: str, request: KundliRequest) -> KundliResponse:
         kundli_dict = request.dict()
-        kundli_dict.update({
-            "user_id": user_id,
-            "created_at": datetime.utcnow(),
-        })
+        kundli_dict.update(
+            {
+                "user_id": user_id,
+                "created_at": datetime.utcnow(),
+            }
+        )
         result = await cls.collection.insert_one(kundli_dict)
         return await cls.get_kundli(str(result.inserted_id))
 
@@ -37,9 +41,7 @@ class KundliRepository:
         return None
 
     @classmethod
-    async def list_user_kundlis(
-        cls, user_id: str, skip: int = 0, limit: int = 10
-    ) -> List[KundliResponse]:
+    async def list_user_kundlis(cls, user_id: str, skip: int = 0, limit: int = 10) -> List[KundliResponse]:
         cursor = cls.collection.find({"user_id": user_id})
         cursor.skip(skip).limit(limit).sort("created_at", -1)
         kundlis = []
@@ -49,9 +51,7 @@ class KundliRepository:
         return kundlis
 
     @classmethod
-    async def save_predictions(
-        cls, kundli_id: str, predictions: KundliPredictions
-    ) -> KundliPredictions:
+    async def save_predictions(cls, kundli_id: str, predictions: KundliPredictions) -> KundliPredictions:
         predictions_dict = predictions.dict()
         predictions_dict["kundli_id"] = kundli_id
         result = await cls.predictions_collection.insert_one(predictions_dict)
@@ -59,18 +59,14 @@ class KundliRepository:
 
     @classmethod
     async def get_predictions(cls, prediction_id: str) -> Optional[KundliPredictions]:
-        prediction = await cls.predictions_collection.find_one(
-            {"_id": ObjectId(prediction_id)}
-        )
+        prediction = await cls.predictions_collection.find_one({"_id": ObjectId(prediction_id)})
         if prediction:
             prediction["id"] = str(prediction.pop("_id"))
             return KundliPredictions(**prediction)
         return None
 
     @classmethod
-    async def save_transit(
-        cls, request: TransitRequest, response: TransitResponse
-    ) -> TransitResponse:
+    async def save_transit(cls, request: TransitRequest, response: TransitResponse) -> TransitResponse:
         transit_dict = {
             "request": request.dict(),
             "response": response.dict(),
@@ -88,9 +84,7 @@ class KundliRepository:
         return None
 
     @classmethod
-    async def save_matching(
-        cls, request: MatchingRequest, response: MatchingResponse
-    ) -> MatchingResponse:
+    async def save_matching(cls, request: MatchingRequest, response: MatchingResponse) -> MatchingResponse:
         matching_dict = {
             "request": request.dict(),
             "response": response.dict(),
@@ -101,9 +95,7 @@ class KundliRepository:
 
     @classmethod
     async def get_matching(cls, matching_id: str) -> Optional[MatchingResponse]:
-        matching = await cls.matching_collection.find_one(
-            {"_id": ObjectId(matching_id)}
-        )
+        matching = await cls.matching_collection.find_one({"_id": ObjectId(matching_id)})
         if matching:
             matching["id"] = str(matching.pop("_id"))
             return MatchingResponse(**matching["response"])

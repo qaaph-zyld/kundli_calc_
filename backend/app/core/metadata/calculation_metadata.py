@@ -12,12 +12,13 @@ Author: Kundli Calculation Engine
 Date: 2024-12-31
 """
 
-from typing import Dict, List, Optional, Any
 from enum import Enum
+from typing import Any, Dict, List, Optional
 
 
 class CalculationType(str, Enum):
     """Types of calculations performed."""
+
     PLANETARY_POSITION = "planetary_position"
     HOUSE_CALCULATION = "house_calculation"
     DIVISIONAL_CHART = "divisional_chart"
@@ -35,7 +36,7 @@ class CalculationType(str, Enum):
 
 class CalculationMetadata:
     """Provides metadata for various astrological calculations."""
-    
+
     @staticmethod
     def get_planetary_position_metadata() -> Dict[str, Any]:
         """Metadata for planetary position calculations."""
@@ -49,10 +50,10 @@ class CalculationMetadata:
             "notes": [
                 "Uses JPL DE431 ephemeris data",
                 "Sub-arc-second precision for modern dates",
-                "Accounts for nutation and aberration"
-            ]
+                "Accounts for nutation and aberration",
+            ],
         }
-    
+
     @staticmethod
     def get_ayanamsa_metadata(system: str = "Lahiri") -> Dict[str, Any]:
         """Metadata for ayanamsa calculations."""
@@ -61,9 +62,9 @@ class CalculationMetadata:
             "system": system,
             "method": "Swiss Ephemeris calculation",
             "accuracy": "±0.001 degrees",
-            "annual_precession": "~50.27 arc seconds/year"
+            "annual_precession": "~50.27 arc seconds/year",
         }
-        
+
         system_specific = {
             "Lahiri": {
                 "full_name": "Lahiri Chitrapaksha",
@@ -75,8 +76,8 @@ class CalculationMetadata:
                 "notes": [
                     "Official ayanamsa for Indian ephemeris",
                     "Based on Spica (Chitra) at 180°",
-                    "Matches BPHS traditional calculations"
-                ]
+                    "Matches BPHS traditional calculations",
+                ],
             },
             "KP": {
                 "full_name": "Krishnamurti Paddhati",
@@ -84,37 +85,31 @@ class CalculationMetadata:
                 "reference_value": "22.362222 degrees",
                 "source": "K.S. Krishnamurti",
                 "formula": "Ayanamsa = 22.3622° + (Year - 1900) × 50.27″/year",
-                "notes": [
-                    "~6 arc minutes less than Lahiri",
-                    "Used in KP system exclusively"
-                ]
+                "notes": ["~6 arc minutes less than Lahiri", "Used in KP system exclusively"],
             },
             "Raman": {
                 "full_name": "B.V. Raman's Ayanamsa",
                 "reference_year": 1900,
                 "reference_value": "22.38 degrees",
                 "source": "B.V. Raman",
-                "notes": [
-                    "Slight variation from Lahiri",
-                    "Popular in South Indian astrology"
-                ]
-            }
+                "notes": ["Slight variation from Lahiri", "Popular in South Indian astrology"],
+            },
         }
-        
+
         if system in system_specific:
             metadata.update(system_specific[system])
-        
+
         return metadata
-    
+
     @staticmethod
     def get_house_system_metadata(system: str = "Whole Sign") -> Dict[str, Any]:
         """Metadata for house system calculations."""
         metadata = {
             "type": CalculationType.HOUSE_CALCULATION,
             "system": system,
-            "method": "Mathematical division of ecliptic"
+            "method": "Mathematical division of ecliptic",
         }
-        
+
         system_specific = {
             "Whole Sign": {
                 "formula": "Each sign (30°) = One house",
@@ -124,40 +119,33 @@ class CalculationMetadata:
                 "advantages": [
                     "Simplest and most ancient system",
                     "No house size variation",
-                    "Clear sign-house correlation"
+                    "Clear sign-house correlation",
                 ],
                 "calculation": "House N = (Ascendant_Sign + N - 1) mod 12",
                 "notes": [
                     "Default system in Vedic astrology",
                     "Each house exactly 30 degrees",
-                    "Ascendant degree determines all house cusps"
-                ]
+                    "Ascendant degree determines all house cusps",
+                ],
             },
             "Placidus": {
                 "formula": "Trisection of semi-arcs",
                 "source": "Placidus de Titis (1688)",
                 "calculation": "Based on time divisions of Earth's rotation",
-                "notes": [
-                    "Most popular in Western astrology",
-                    "Variable house sizes",
-                    "Difficult at high latitudes"
-                ]
+                "notes": ["Most popular in Western astrology", "Variable house sizes", "Difficult at high latitudes"],
             },
             "Equal": {
                 "formula": "30° divisions from Ascendant degree",
                 "calculation": "House N = Ascendant_Long + (N - 1) × 30°",
-                "notes": [
-                    "Equal 30° houses",
-                    "Different from Whole Sign (uses degree, not sign)"
-                ]
-            }
+                "notes": ["Equal 30° houses", "Different from Whole Sign (uses degree, not sign)"],
+            },
         }
-        
+
         if system in system_specific:
             metadata.update(system_specific[system])
-        
+
         return metadata
-    
+
     @staticmethod
     def get_shadbala_metadata() -> Dict[str, Any]:
         """Metadata for Shadbala calculations."""
@@ -174,27 +162,28 @@ class CalculationMetadata:
                         "Saptavargaja Bala (7 divisional charts)",
                         "Ojhayugma Bala (Odd/even sign)",
                         "Kendra Bala (Angular house)",
-                        "Drekkana Bala (Decanate)"
+                        "Drekkana Bala (Decanate)",
                     ],
-                    "formula": "Sum of 5 sub-components"
+                    "formula": "Sum of 5 sub-components",
                 },
                 "Dig Bala": {
                     "description": "Directional strength",
                     "max_value": "60 Shashtiamsas",
                     "best_houses": {
-                        "Sun": 10, "Moon": 4, "Mars": 10,
-                        "Mercury": 1, "Jupiter": 1, "Venus": 4, "Saturn": 7
+                        "Sun": 10,
+                        "Moon": 4,
+                        "Mars": 10,
+                        "Mercury": 1,
+                        "Jupiter": 1,
+                        "Venus": 4,
+                        "Saturn": 7,
                     },
-                    "formula": "60 × (1 - angular_distance/180°)"
+                    "formula": "60 × (1 - angular_distance/180°)",
                 },
                 "Kala Bala": {
                     "description": "Temporal strength",
-                    "sub_components": [
-                        "Nathonnatha (Day/night)",
-                        "Paksha (Lunar fortnight)",
-                        "Vara (Weekday)"
-                    ],
-                    "notes": ["Time-dependent strength"]
+                    "sub_components": ["Nathonnatha (Day/night)", "Paksha (Lunar fortnight)", "Vara (Weekday)"],
+                    "notes": ["Time-dependent strength"],
                 },
                 "Chesta Bala": {
                     "description": "Motional strength",
@@ -202,34 +191,42 @@ class CalculationMetadata:
                     "notes": [
                         "Not applicable to Sun and Moon",
                         "Maximum for retrograde planets",
-                        "Based on daily speed variation"
-                    ]
+                        "Based on daily speed variation",
+                    ],
                 },
                 "Naisargika Bala": {
                     "description": "Natural/inherent strength",
                     "values": {
-                        "Sun": 60.0, "Moon": 51.43, "Mars": 17.14,
-                        "Mercury": 25.71, "Jupiter": 34.29,
-                        "Venus": 42.86, "Saturn": 8.57
+                        "Sun": 60.0,
+                        "Moon": 51.43,
+                        "Mars": 17.14,
+                        "Mercury": 25.71,
+                        "Jupiter": 34.29,
+                        "Venus": 42.86,
+                        "Saturn": 8.57,
                     },
-                    "notes": ["Fixed values per BPHS"]
+                    "notes": ["Fixed values per BPHS"],
                 },
                 "Drik Bala": {
                     "description": "Aspectual strength",
                     "notes": [
                         "Based on aspects received",
                         "Benefic aspects add strength",
-                        "Malefic aspects reduce strength"
-                    ]
-                }
+                        "Malefic aspects reduce strength",
+                    ],
+                },
             },
             "minimum_required": {
                 "description": "Minimum Shadbala in Rupas for planet to be strong",
                 "values": {
-                    "Sun": 6.5, "Moon": 6.0, "Mars": 5.0,
-                    "Mercury": 7.0, "Jupiter": 6.5,
-                    "Venus": 5.5, "Saturn": 5.0
-                }
+                    "Sun": 6.5,
+                    "Moon": 6.0,
+                    "Mars": 5.0,
+                    "Mercury": 7.0,
+                    "Jupiter": 6.5,
+                    "Venus": 5.5,
+                    "Saturn": 5.0,
+                },
             },
             "interpretation": {
                 ">=150%": "Excellent strength",
@@ -237,10 +234,10 @@ class CalculationMetadata:
                 "100-120%": "Good strength (meets minimum)",
                 "80-100%": "Fair strength (slightly weak)",
                 "60-80%": "Weak",
-                "<60%": "Very weak"
-            }
+                "<60%": "Very weak",
+            },
         }
-    
+
     @staticmethod
     def get_ashtakavarga_metadata() -> Dict[str, Any]:
         """Metadata for Ashtakavarga calculations."""
@@ -250,14 +247,11 @@ class CalculationMetadata:
             "source": "Brihat Parashara Hora Shastra, Chapters 51-52",
             "reference": "Also: Phaladeepika Ch. 9, Saravali Ch. 38",
             "description": "Measures benefic points (bindus) contributed to each house",
-            "reference_points": [
-                "Lagna", "Sun", "Moon", "Mars",
-                "Mercury", "Jupiter", "Venus", "Saturn"
-            ],
+            "reference_points": ["Lagna", "Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"],
             "calculation": {
                 "method": "Count benefic contributions from 8 reference points",
                 "formula": "For each house: Sum bindus from all reference points",
-                "tables": "Per BPHS predefined benefic position tables"
+                "tables": "Per BPHS predefined benefic position tables",
             },
             "sarvashtakavarga": {
                 "description": "Combined ashtakavarga of all planets",
@@ -267,22 +261,22 @@ class CalculationMetadata:
                     ">=35": "Very strong house",
                     "30-34": "Strong house",
                     "25-29": "Moderate house",
-                    "<25": "Weak house"
-                }
+                    "<25": "Weak house",
+                },
             },
             "usage": {
                 "transit_analysis": "Planet transits give results in high-bindu houses",
                 "dasha_results": "Modulates Vimshottari dasha predictions",
-                "timing": "Events likely when transits hit high-bindu houses"
+                "timing": "Events likely when transits hit high-bindu houses",
             },
             "notes": [
                 "Traditional system for measuring house strength",
                 "Each planet has individual ashtakavarga",
                 "Combines all for Sarvashtakavarga",
-                "Critical for transit predictions"
-            ]
+                "Critical for transit predictions",
+            ],
         }
-    
+
     @staticmethod
     def get_divisional_chart_metadata(division: int) -> Dict[str, Any]:
         """Metadata for divisional chart calculations."""
@@ -302,11 +296,11 @@ class CalculationMetadata:
             30: ("Trimsamsa", "Evils", "Misfortunes, obstacles"),
             40: ("Khavedamsa", "Auspicious/Inauspicious", "Maternal legacy"),
             45: ("Akshavedamsa", "Character", "Conduct, behavior"),
-            60: ("Shashtyamsa", "Karma", "Past life, general well-being")
+            60: ("Shashtyamsa", "Karma", "Past life, general well-being"),
         }
-        
+
         name, signification, area = chart_names.get(division, (f"D{division}", "Various", "See texts"))
-        
+
         return {
             "type": CalculationType.DIVISIONAL_CHART,
             "division": division,
@@ -320,82 +314,91 @@ class CalculationMetadata:
                 f"1. Multiply sidereal longitude by {division}",
                 "2. Take modulo 360",
                 "3. Divide by 30 to get sign number",
-                "4. Degree within varga sign = (step2 mod 30)"
+                "4. Degree within varga sign = (step2 mod 30)",
             ],
             "notes": [
                 f"D{division} divides each sign into {division} parts",
                 "Each planet's position recalculated",
-                f"Shows {area.lower()} matters specifically"
-            ]
+                f"Shows {area.lower()} matters specifically",
+            ],
         }
-    
+
     @staticmethod
     def get_dasha_metadata(system: str = "Vimshottari") -> Dict[str, Any]:
         """Metadata for dasha system calculations."""
         metadata = {
             "type": CalculationType.DASHA_SYSTEM,
             "system": system,
-            "source": "Brihat Parashara Hora Shastra, Chapters 45-46"
+            "source": "Brihat Parashara Hora Shastra, Chapters 45-46",
         }
-        
+
         system_specific = {
             "Vimshottari": {
                 "description": "120-year cycle dasha system",
                 "basis": "Moon's nakshatra at birth",
                 "cycle_years": 120,
                 "planet_periods": {
-                    "Sun": 6, "Moon": 10, "Mars": 7,
-                    "Rahu": 18, "Jupiter": 16, "Saturn": 19,
-                    "Mercury": 17, "Ketu": 7, "Venus": 20
+                    "Sun": 6,
+                    "Moon": 10,
+                    "Mars": 7,
+                    "Rahu": 18,
+                    "Jupiter": 16,
+                    "Saturn": 19,
+                    "Mercury": 17,
+                    "Ketu": 7,
+                    "Venus": 20,
                 },
                 "formula": "Balance of dasha = Remaining portion of nakshatra",
                 "calculation": [
                     "1. Determine Moon's nakshatra",
                     "2. Find nakshatra lord",
                     "3. Calculate elapsed portion (Moon_Long mod 13.333...)",
-                    "4. Balance = Total_years × (1 - elapsed%)"
+                    "4. Balance = Total_years × (1 - elapsed%)",
                 ],
                 "subdivisions": {
                     "Mahadasha": "Main period",
                     "Antardasha": "Sub-period (1/9 of mahadasha)",
                     "Pratyantardasha": "Sub-sub-period",
                     "Sookshma": "Sub-sub-sub-period",
-                    "Prana": "Sub-sub-sub-sub-period"
+                    "Prana": "Sub-sub-sub-sub-period",
                 },
                 "notes": [
                     "Most popular dasha system",
                     "Used for timing predictions",
-                    "Sequence: Sun→Moon→Mars→Rahu→Jupiter→Saturn→Mercury→Ketu→Venus"
-                ]
+                    "Sequence: Sun→Moon→Mars→Rahu→Jupiter→Saturn→Mercury→Ketu→Venus",
+                ],
             }
         }
-        
+
         if system in system_specific:
             metadata.update(system_specific[system])
-        
+
         return metadata
-    
+
     @staticmethod
     def get_calculation_metadata(calc_type: CalculationType, **kwargs) -> Dict[str, Any]:
         """Get metadata for any calculation type."""
         metadata_functions = {
             CalculationType.PLANETARY_POSITION: CalculationMetadata.get_planetary_position_metadata,
-            CalculationType.AYANAMSA: lambda: CalculationMetadata.get_ayanamsa_metadata(kwargs.get('system', 'Lahiri')),
-            CalculationType.HOUSE_CALCULATION: lambda: CalculationMetadata.get_house_system_metadata(kwargs.get('system', 'Whole Sign')),
+            CalculationType.AYANAMSA: lambda: CalculationMetadata.get_ayanamsa_metadata(kwargs.get("system", "Lahiri")),
+            CalculationType.HOUSE_CALCULATION: lambda: CalculationMetadata.get_house_system_metadata(
+                kwargs.get("system", "Whole Sign")
+            ),
             CalculationType.SHADBALA: CalculationMetadata.get_shadbala_metadata,
             CalculationType.ASHTAKAVARGA: CalculationMetadata.get_ashtakavarga_metadata,
-            CalculationType.DIVISIONAL_CHART: lambda: CalculationMetadata.get_divisional_chart_metadata(kwargs.get('division', 9)),
-            CalculationType.DASHA_SYSTEM: lambda: CalculationMetadata.get_dasha_metadata(kwargs.get('system', 'Vimshottari'))
+            CalculationType.DIVISIONAL_CHART: lambda: CalculationMetadata.get_divisional_chart_metadata(
+                kwargs.get("division", 9)
+            ),
+            CalculationType.DASHA_SYSTEM: lambda: CalculationMetadata.get_dasha_metadata(
+                kwargs.get("system", "Vimshottari")
+            ),
         }
-        
+
         if calc_type in metadata_functions:
             return metadata_functions[calc_type]()
-        
-        return {
-            "type": calc_type,
-            "message": "Metadata not yet documented for this calculation type"
-        }
-    
+
+        return {"type": calc_type, "message": "Metadata not yet documented for this calculation type"}
+
     @staticmethod
     def get_all_sources() -> List[Dict[str, str]]:
         """Get list of all sources and references used."""
@@ -405,14 +408,14 @@ class CalculationMetadata:
                 "type": "Computational",
                 "url": "https://www.astro.com/swisseph/",
                 "description": "High-precision planetary ephemeris",
-                "license": "AGPL/Dual"
+                "license": "AGPL/Dual",
             },
             {
                 "name": "Brihat Parashara Hora Shastra (BPHS)",
                 "type": "Classical Text",
                 "author": "Sage Parashara",
                 "description": "Foundation text of Vedic astrology",
-                "topics": "Houses, dashas, yogas, strength calculations"
+                "topics": "Houses, dashas, yogas, strength calculations",
             },
             {
                 "name": "Jagannatha Hora",
@@ -420,24 +423,24 @@ class CalculationMetadata:
                 "author": "P.V.R. Narasimha Rao",
                 "url": "https://www.vedicastrologer.org/jh/",
                 "description": "Desktop software for accuracy verification",
-                "usage": "Calculation verification standard"
+                "usage": "Calculation verification standard",
             },
             {
                 "name": "Phaladeepika",
                 "type": "Classical Text",
                 "author": "Mantreswara",
-                "description": "Classical text on predictive astrology"
+                "description": "Classical text on predictive astrology",
             },
             {
                 "name": "Saravali",
                 "type": "Classical Text",
                 "author": "Kalyana Varma",
-                "description": "Comprehensive classical text"
+                "description": "Comprehensive classical text",
             },
             {
                 "name": "Jataka Parijata",
                 "type": "Classical Text",
                 "author": "Vaidyanatha Dikshita",
-                "description": "Classical text on horoscopy"
-            }
+                "description": "Classical text on horoscopy",
+            },
         ]

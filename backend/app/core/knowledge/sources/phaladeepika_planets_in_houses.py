@@ -11,8 +11,7 @@ Phaladeepika (Light on Results) is a classical Vedic astrology text
 focusing on practical predictive techniques.
 """
 
-from typing import Dict, Any
-
+from typing import Any, Dict
 
 # Phaladeepika Chapters 10-21: Planet-in-House Interpretations
 
@@ -28,21 +27,18 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Quick to anger",
                 "Tall stature with large hands and feet",
                 "Bilious constitution (Pitta dominant)",
-                "Right eye weakness or defect"
+                "Right eye weakness or defect",
             ],
-            "positive_effects": [
-                "Tall and commanding presence",
-                "Strong will and determination"
-            ],
+            "positive_effects": ["Tall and commanding presence", "Strong will and determination"],
             "challenging_effects": [
                 "Tendency toward laziness",
                 "Quick temper and anger",
                 "Eye health issues",
-                "Health vulnerabilities"
+                "Health vulnerabilities",
             ],
             "timing": "Effects manifest throughout life, intensify during Sun dasha",
             "tags": ["personality", "health", "appearance", "temperament"],
-            "confidence": "high"
+            "confidence": "high",
         },
         2: {
             "chapter": 10,
@@ -53,20 +49,18 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial struggles despite education",
                 "Irregular food habits",
                 "Dominated by women",
-                "Wife may be masculine in nature or virtues"
+                "Wife may be masculine in nature or virtues",
             ],
-            "positive_effects": [
-                "Scholarly and educated"
-            ],
+            "positive_effects": ["Scholarly and educated"],
             "challenging_effects": [
                 "Wrathful and angry nature",
                 "Financial difficulties",
                 "Marital challenges",
-                "Food insecurity"
+                "Food insecurity",
             ],
             "timing": "Financial and marital effects throughout life",
             "tags": ["wealth", "speech", "personality", "marriage"],
-            "confidence": "high"
+            "confidence": "high",
         },
         3: {
             "chapter": 10,
@@ -77,18 +71,18 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Liberal and generous nature",
                 "Wealthy and famous",
                 "Victory over enemies",
-                "Strong courage and initiative"
+                "Strong courage and initiative",
             ],
             "positive_effects": [
                 "Power and energy",
                 "Wealth and fame",
                 "Courage and bravery",
-                "Victory over adversaries"
+                "Victory over adversaries",
             ],
             "challenging_effects": [],
             "timing": "Courage and initiative throughout life, peak during Sun dasha",
             "tags": ["courage", "siblings", "wealth", "fame"],
-            "confidence": "high"
+            "confidence": "high",
         },
         4: {
             "chapter": 10,
@@ -99,7 +93,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Mother's early death or separation",
                 "Loss of property and vehicles",
                 "Few friends or relatives",
-                "Service position if Sun is weak"
+                "Service position if Sun is weak",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -107,11 +101,11 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Loss of mother",
                 "Property losses",
                 "Social isolation",
-                "Servitude if weak"
+                "Servitude if weak",
             ],
             "timing": "Mother-related effects in youth, property issues throughout",
             "tags": ["mother", "property", "happiness", "vehicles"],
-            "confidence": "high"
+            "confidence": "high",
         },
         5: {
             "chapter": 10,
@@ -122,21 +116,18 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Difficulty with children",
                 "High intelligence",
                 "Tendency to wander or travel",
-                "Quick temper"
+                "Quick temper",
             ],
-            "positive_effects": [
-                "High intelligence",
-                "Love of nature and travel"
-            ],
+            "positive_effects": ["High intelligence", "Love of nature and travel"],
             "challenging_effects": [
                 "Lack of happiness",
                 "Financial struggles",
                 "Issues with progeny",
-                "Anger problems"
+                "Anger problems",
             ],
             "timing": "Children-related effects during procreative years",
             "tags": ["children", "intelligence", "wealth", "temperament"],
-            "confidence": "high"
+            "confidence": "high",
         },
         6: {
             "chapter": 10,
@@ -148,21 +139,18 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealthy and prosperous",
                 "Victory over adversaries",
                 "Digestive issues or stomach problems",
-                "Prone to anger"
+                "Prone to anger",
             ],
             "positive_effects": [
                 "Physical strength",
                 "Authority and power",
                 "Wealth accumulation",
-                "Victory over enemies"
+                "Victory over enemies",
             ],
-            "challenging_effects": [
-                "Stomach and digestive disorders",
-                "Anger issues"
-            ],
+            "challenging_effects": ["Stomach and digestive disorders", "Anger issues"],
             "timing": "Strength and authority throughout life, health issues may develop",
             "tags": ["health", "enemies", "authority", "wealth"],
-            "confidence": "high"
+            "confidence": "high",
         },
         7: {
             "chapter": 10,
@@ -173,7 +161,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Marital difficulties or loss of spouse",
                 "Financial losses",
                 "Life in foreign places",
-                "Health problems"
+                "Health problems",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -181,11 +169,11 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Marital problems",
                 "Wealth losses",
                 "Foreign residence",
-                "Diseased constitution"
+                "Diseased constitution",
             ],
             "timing": "Marital effects after marriage, health issues throughout",
             "tags": ["marriage", "wealth", "health", "foreign"],
-            "confidence": "high"
+            "confidence": "high",
         },
         8: {
             "chapter": 10,
@@ -197,7 +185,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Few or no friends",
                 "Lacking compassion",
                 "Dependent on others",
-                "Reduced longevity"
+                "Reduced longevity",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -205,11 +193,11 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial dependency",
                 "Social isolation",
                 "Hard-hearted nature",
-                "Short lifespan"
+                "Short lifespan",
             ],
             "timing": "Challenges throughout life, longevity concerns in later years",
             "tags": ["longevity", "wealth", "health", "eyes"],
-            "confidence": "high"
+            "confidence": "high",
         },
         9: {
             "chapter": 10,
@@ -220,7 +208,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Issues with children",
                 "Marital problems",
                 "Lack of religious inclination",
-                "Conflict with father"
+                "Conflict with father",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -228,11 +216,11 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Loss of progeny",
                 "Marital discord",
                 "Irreligious tendencies",
-                "Father-son conflict"
+                "Father-son conflict",
             ],
             "timing": "Father-related effects in youth, dharma issues throughout",
             "tags": ["dharma", "father", "children", "wealth"],
-            "confidence": "high"
+            "confidence": "high",
         },
         10: {
             "chapter": 10,
@@ -245,19 +233,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth accumulation",
                 "Fame and recognition",
                 "Virtuous character and actions",
-                "Property and vehicles"
+                "Property and vehicles",
             ],
             "positive_effects": [
                 "Career excellence",
                 "Fame and recognition",
                 "Wealth and prosperity",
                 "Virtuous nature",
-                "Property ownership"
+                "Property ownership",
             ],
             "challenging_effects": [],
             "timing": "Career peaks during Sun mahadasha, recognition throughout life",
             "tags": ["career", "fame", "wealth", "virtue"],
-            "confidence": "high"
+            "confidence": "high",
         },
         11: {
             "chapter": 10,
@@ -269,7 +257,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Good children",
                 "Strong health (minimal diseases)",
                 "Courageous nature",
-                "Multiple income streams"
+                "Multiple income streams",
             ],
             "positive_effects": [
                 "Wealth and prosperity",
@@ -277,12 +265,12 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Healthy progeny",
                 "Good health",
                 "Courage",
-                "Diverse income"
+                "Diverse income",
             ],
             "challenging_effects": [],
             "timing": "Wealth gains throughout life, peak during Sun dasha",
             "tags": ["wealth", "gains", "longevity", "children"],
-            "confidence": "high"
+            "confidence": "high",
         },
         12: {
             "chapter": 10,
@@ -293,7 +281,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Eye problems or blindness",
                 "Financial losses through authority/enemies",
                 "Life away from homeland",
-                "Loss of spouse and children"
+                "Loss of spouse and children",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -301,14 +289,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Vision loss",
                 "Wealth losses",
                 "Foreign residence",
-                "Loss of family"
+                "Loss of family",
             ],
             "timing": "Challenges throughout life, losses in later years",
             "tags": ["losses", "foreign", "health", "marriage"],
-            "confidence": "high"
-        }
+            "confidence": "high",
+        },
     },
-    
     "Moon": {
         1: {
             "chapter": 11,
@@ -320,22 +307,18 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Attractive appearance",
                 "Income from liquids/water businesses",
                 "Kind and compassionate",
-                "Soft and pleasant speech"
+                "Soft and pleasant speech",
             ],
             "positive_effects": [
                 "Beautiful appearance",
                 "Kind-hearted nature",
                 "Soft speech",
-                "Wealth from water-related activities"
+                "Wealth from water-related activities",
             ],
-            "challenging_effects": [
-                "Mental fickleness",
-                "Changeable moods",
-                "Excessive thirst"
-            ],
+            "challenging_effects": ["Mental fickleness", "Changeable moods", "Excessive thirst"],
             "timing": "Effects prominent throughout life, intensify during Moon dasha",
             "tags": ["personality", "appearance", "wealth", "temperament"],
-            "confidence": "high"
+            "confidence": "high",
         },
         2: {
             "chapter": 11,
@@ -346,19 +329,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Sweet and melodious speech",
                 "Wealth accumulation",
                 "Enjoyment of good food",
-                "Large and prosperous family"
+                "Large and prosperous family",
             ],
             "positive_effects": [
                 "Attractive face",
                 "Pleasant speech",
                 "Financial prosperity",
                 "Good food and nourishment",
-                "Large family"
+                "Large family",
             ],
             "challenging_effects": [],
             "timing": "Wealth gains during Moon dasha, family growth throughout",
             "tags": ["wealth", "speech", "family", "appearance"],
-            "confidence": "high"
+            "confidence": "high",
         },
         3: {
             "chapter": 11,
@@ -369,20 +352,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Miserly with money",
                 "Proud and arrogant",
                 "Strong devotion to siblings/relatives",
-                "Courageous and brave"
+                "Courageous and brave",
             ],
-            "positive_effects": [
-                "Courage and bravery",
-                "Devotion to family"
-            ],
-            "challenging_effects": [
-                "Cruel tendencies",
-                "Miserliness",
-                "Pride and arrogance"
-            ],
+            "positive_effects": ["Courage and bravery", "Devotion to family"],
+            "challenging_effects": ["Cruel tendencies", "Miserliness", "Pride and arrogance"],
             "timing": "Sibling relationships important throughout life",
             "tags": ["courage", "siblings", "temperament", "wealth"],
-            "confidence": "high"
+            "confidence": "high",
         },
         4: {
             "chapter": 11,
@@ -394,7 +370,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Vehicles and properties",
                 "Emotional fulfillment from family",
                 "Strong connection with mother",
-                "Good friendships"
+                "Good friendships",
             ],
             "positive_effects": [
                 "Domestic bliss",
@@ -402,12 +378,12 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Property and vehicles",
                 "Emotional security",
                 "Wealth accumulation",
-                "Strong friendships"
+                "Strong friendships",
             ],
             "challenging_effects": [],
             "timing": "Home acquisition during Moon dasha, family happiness throughout",
             "tags": ["mother", "property", "happiness", "vehicles"],
-            "confidence": "high"
+            "confidence": "high",
         },
         5: {
             "chapter": 11,
@@ -418,19 +394,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Blessed with many sons",
                 "Devotion to Lord Shiva",
                 "General happiness and contentment",
-                "Creative and imaginative mind"
+                "Creative and imaginative mind",
             ],
-            "positive_effects": [
-                "Intelligence",
-                "Good progeny",
-                "Spiritual devotion",
-                "Happiness",
-                "Creativity"
-            ],
+            "positive_effects": ["Intelligence", "Good progeny", "Spiritual devotion", "Happiness", "Creativity"],
             "challenging_effects": [],
             "timing": "Children born during Moon dasha, intelligence throughout",
             "tags": ["children", "intelligence", "spirituality", "happiness"],
-            "confidence": "high"
+            "confidence": "high",
         },
         6: {
             "chapter": 11,
@@ -441,7 +411,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Digestive and stomach problems",
                 "Many adversaries and enemies",
                 "Mental anxiety and distress",
-                "Health challenges"
+                "Health challenges",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -449,11 +419,11 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Stomach disorders",
                 "Enemy problems",
                 "Mental distress",
-                "Health issues"
+                "Health issues",
             ],
             "timing": "Health issues may develop, enemy conflicts throughout",
             "tags": ["health", "enemies", "mental_health", "temperament"],
-            "confidence": "high"
+            "confidence": "high",
         },
         7: {
             "chapter": 11,
@@ -464,21 +434,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Passionate and romantic nature",
                 "Wealth accumulation",
                 "Frequent travels",
-                "Water-related health issues"
+                "Water-related health issues",
             ],
-            "positive_effects": [
-                "Beautiful partner",
-                "Passionate nature",
-                "Wealth",
-                "Travel opportunities"
-            ],
-            "challenging_effects": [
-                "Water-related diseases",
-                "Excessive passion may cause issues"
-            ],
+            "positive_effects": ["Beautiful partner", "Passionate nature", "Wealth", "Travel opportunities"],
+            "challenging_effects": ["Water-related diseases", "Excessive passion may cause issues"],
             "timing": "Marriage during Moon dasha, travel throughout life",
             "tags": ["marriage", "wealth", "travel", "health"],
-            "confidence": "high"
+            "confidence": "high",
         },
         8: {
             "chapter": 11,
@@ -489,7 +451,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Sorrow and grief",
                 "Financial dependency",
                 "Reduced longevity",
-                "Emotional suffering"
+                "Emotional suffering",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -497,11 +459,11 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Mental sorrow",
                 "Dependency on others",
                 "Short lifespan",
-                "Emotional pain"
+                "Emotional pain",
             ],
             "timing": "Health challenges throughout, longevity concerns in later years",
             "tags": ["longevity", "health", "sorrow", "dependency"],
-            "confidence": "high"
+            "confidence": "high",
         },
         9: {
             "chapter": 11,
@@ -512,19 +474,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Virtuous and righteous character",
                 "Devotion to gods and spirituality",
                 "Good relationship with father",
-                "Fortune and blessings"
+                "Fortune and blessings",
             ],
             "positive_effects": [
                 "Wealth",
                 "Virtue and righteousness",
                 "Spiritual devotion",
                 "Father's blessings",
-                "Good fortune"
+                "Good fortune",
             ],
             "challenging_effects": [],
             "timing": "Fortune throughout life, spiritual growth during Moon dasha",
             "tags": ["dharma", "father", "wealth", "spirituality"],
-            "confidence": "high"
+            "confidence": "high",
         },
         10: {
             "chapter": 11,
@@ -535,19 +497,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "High intelligence",
                 "Fame and recognition",
                 "Virtuous actions",
-                "Social respect and honor"
+                "Social respect and honor",
             ],
-            "positive_effects": [
-                "Career success",
-                "Intelligence",
-                "Fame",
-                "Virtue",
-                "Respect"
-            ],
+            "positive_effects": ["Career success", "Intelligence", "Fame", "Virtue", "Respect"],
             "challenging_effects": [],
             "timing": "Career success during Moon dasha, recognition throughout",
             "tags": ["career", "fame", "intelligence", "virtue"],
-            "confidence": "high"
+            "confidence": "high",
         },
         11: {
             "chapter": 11,
@@ -558,19 +514,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Long lifespan",
                 "Good and virtuous children",
                 "Strong health",
-                "Large network of friends"
+                "Large network of friends",
             ],
-            "positive_effects": [
-                "Wealth and gains",
-                "Longevity",
-                "Good progeny",
-                "Health",
-                "Friendships"
-            ],
+            "positive_effects": ["Wealth and gains", "Longevity", "Good progeny", "Health", "Friendships"],
             "challenging_effects": [],
             "timing": "Gains throughout life, peak during Moon dasha",
             "tags": ["wealth", "gains", "longevity", "children"],
-            "confidence": "high"
+            "confidence": "high",
         },
         12: {
             "chapter": 11,
@@ -581,24 +531,20 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Conflict with mother",
                 "Heavy expenditures",
                 "Life in foreign countries",
-                "Losses and expenses"
+                "Losses and expenses",
             ],
-            "positive_effects": [
-                "Spiritual inclinations",
-                "Foreign opportunities"
-            ],
+            "positive_effects": ["Spiritual inclinations", "Foreign opportunities"],
             "challenging_effects": [
                 "Eye health issues",
                 "Mother-child conflict",
                 "Financial losses",
-                "Foreign residence"
+                "Foreign residence",
             ],
             "timing": "Expenses throughout, foreign residence possible",
             "tags": ["losses", "foreign", "health", "mother"],
-            "confidence": "high"
-        }
+            "confidence": "high",
+        },
     },
-    
     "Mars": {
         1: {
             "chapter": 12,
@@ -610,22 +556,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Dietary indiscretions",
                 "Quarrelsome and aggressive",
                 "Physical scars or marks on body",
-                "Strained relationship with mother"
+                "Strained relationship with mother",
             ],
-            "positive_effects": [
-                "Courage and bravery",
-                "Adventurous spirit",
-                "Physical strength"
-            ],
-            "challenging_effects": [
-                "Cruel tendencies",
-                "Quarrelsome nature",
-                "Physical scars",
-                "Conflict with mother"
-            ],
+            "positive_effects": ["Courage and bravery", "Adventurous spirit", "Physical strength"],
+            "challenging_effects": ["Cruel tendencies", "Quarrelsome nature", "Physical scars", "Conflict with mother"],
             "timing": "Aggressive tendencies throughout life, peak during Mars dasha",
             "tags": ["personality", "aggression", "health", "mother"],
-            "confidence": "high"
+            "confidence": "high",
         },
         2: {
             "chapter": 12,
@@ -636,7 +573,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial losses",
                 "Harsh or abusive speech",
                 "Dependent on others for sustenance",
-                "Family disputes and conflicts"
+                "Family disputes and conflicts",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -644,11 +581,11 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth losses",
                 "Harsh speech",
                 "Food dependency",
-                "Family conflicts"
+                "Family conflicts",
             ],
             "timing": "Financial and speech issues throughout life",
             "tags": ["wealth", "speech", "health", "family"],
-            "confidence": "high"
+            "confidence": "high",
         },
         3: {
             "chapter": 12,
@@ -659,19 +596,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth accumulation",
                 "Good relationship with siblings",
                 "Leadership qualities",
-                "Victory over adversaries"
+                "Victory over adversaries",
             ],
-            "positive_effects": [
-                "Courage",
-                "Wealth",
-                "Sibling harmony",
-                "Leadership",
-                "Victory over enemies"
-            ],
+            "positive_effects": ["Courage", "Wealth", "Sibling harmony", "Leadership", "Victory over enemies"],
             "challenging_effects": [],
             "timing": "Courage and leadership throughout life",
             "tags": ["courage", "siblings", "wealth", "leadership"],
-            "confidence": "high"
+            "confidence": "high",
         },
         4: {
             "chapter": 12,
@@ -682,7 +613,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Harm to mother or early separation",
                 "Property losses",
                 "Loss of vehicles",
-                "Few relatives or strained relations"
+                "Few relatives or strained relations",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -690,11 +621,11 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Mother's suffering",
                 "Property losses",
                 "Vehicle losses",
-                "Relative conflicts"
+                "Relative conflicts",
             ],
             "timing": "Mother-related effects in youth, property issues throughout",
             "tags": ["mother", "property", "happiness", "vehicles"],
-            "confidence": "high"
+            "confidence": "high",
         },
         5: {
             "chapter": 12,
@@ -705,20 +636,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial struggles",
                 "Difficulty with children or childlessness",
                 "High intelligence",
-                "Quick temper and anger"
+                "Quick temper and anger",
             ],
-            "positive_effects": [
-                "High intelligence"
-            ],
-            "challenging_effects": [
-                "Unhappiness",
-                "Poverty",
-                "Children issues",
-                "Anger problems"
-            ],
+            "positive_effects": ["High intelligence"],
+            "challenging_effects": ["Unhappiness", "Poverty", "Children issues", "Anger problems"],
             "timing": "Children-related effects during procreative years",
             "tags": ["children", "intelligence", "wealth", "temperament"],
-            "confidence": "high"
+            "confidence": "high",
         },
         6: {
             "chapter": 12,
@@ -729,20 +653,14 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Victory over adversaries",
                 "Overall happiness",
                 "Strong and healthy body",
-                "Leadership and authority"
+                "Leadership and authority",
             ],
-            "positive_effects": [
-                "Wealth",
-                "Victory over enemies",
-                "Happiness",
-                "Physical strength",
-                "Leadership"
-            ],
+            "positive_effects": ["Wealth", "Victory over enemies", "Happiness", "Physical strength", "Leadership"],
             "challenging_effects": [],
             "timing": "Strength and victory throughout life",
             "tags": ["health", "enemies", "wealth", "leadership"],
             "confidence": "high",
-            "notes": "Mars in 6th (Upachaya) is very strong and favorable"
+            "notes": "Mars in 6th (Upachaya) is very strong and favorable",
         },
         7: {
             "chapter": 12,
@@ -753,7 +671,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial problems",
                 "Health issues and diseases",
                 "Life away from homeland",
-                "Conflicts in partnerships"
+                "Conflicts in partnerships",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -761,12 +679,12 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth issues",
                 "Health problems",
                 "Foreign residence",
-                "Partnership conflicts"
+                "Partnership conflicts",
             ],
             "timing": "Marital effects after marriage, health issues throughout",
             "tags": ["marriage", "wealth", "health", "foreign"],
             "confidence": "high",
-            "notes": "Mars in 7th (Kuja Dosha) harms marriage and partnerships"
+            "notes": "Mars in 7th (Kuja Dosha) harms marriage and partnerships",
         },
         8: {
             "chapter": 12,
@@ -777,7 +695,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Poverty and financial struggles",
                 "Lack of friends",
                 "Dependent on others",
-                "Reduced longevity"
+                "Reduced longevity",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -785,11 +703,11 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial losses",
                 "Social isolation",
                 "Dependency",
-                "Short lifespan"
+                "Short lifespan",
             ],
             "timing": "Challenges throughout life, longevity concerns",
             "tags": ["longevity", "wealth", "health", "eyes"],
-            "confidence": "high"
+            "confidence": "high",
         },
         9: {
             "chapter": 12,
@@ -800,7 +718,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Lack of fortune and luck",
                 "Irreligious tendencies",
                 "Sinful actions",
-                "Obstacles in dharma"
+                "Obstacles in dharma",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -808,11 +726,11 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Loss of fortune",
                 "Irreligious nature",
                 "Sinful tendencies",
-                "Dharma obstacles"
+                "Dharma obstacles",
             ],
             "timing": "Father-related effects in youth, dharma issues throughout",
             "tags": ["dharma", "father", "fortune", "spirituality"],
-            "confidence": "high"
+            "confidence": "high",
         },
         10: {
             "chapter": 12,
@@ -823,20 +741,14 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Career success and leadership",
                 "Fame and recognition",
                 "Exceptional courage",
-                "Virtuous actions"
+                "Virtuous actions",
             ],
-            "positive_effects": [
-                "Wealth",
-                "Career success",
-                "Fame",
-                "Courage",
-                "Virtue"
-            ],
+            "positive_effects": ["Wealth", "Career success", "Fame", "Courage", "Virtue"],
             "challenging_effects": [],
             "timing": "Career peaks during Mars dasha",
             "tags": ["career", "fame", "wealth", "leadership"],
             "confidence": "high",
-            "notes": "Mars in 10th (Kendra/Kona) is very strong for career"
+            "notes": "Mars in 10th (Kendra/Kona) is very strong for career",
         },
         11: {
             "chapter": 12,
@@ -847,19 +759,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Long life",
                 "Overall happiness",
                 "Multiple income streams",
-                "Courageous nature"
+                "Courageous nature",
             ],
-            "positive_effects": [
-                "Wealth and gains",
-                "Longevity",
-                "Happiness",
-                "Multiple incomes",
-                "Courage"
-            ],
+            "positive_effects": ["Wealth and gains", "Longevity", "Happiness", "Multiple incomes", "Courage"],
             "challenging_effects": [],
             "timing": "Gains throughout life, peak during Mars dasha",
             "tags": ["wealth", "gains", "longevity", "courage"],
-            "confidence": "high"
+            "confidence": "high",
         },
         12: {
             "chapter": 12,
@@ -870,7 +776,7 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial losses through adversaries",
                 "Life in foreign lands",
                 "Physical suffering and diseases",
-                "Expenses and losses"
+                "Expenses and losses",
             ],
             "positive_effects": [],
             "challenging_effects": [
@@ -878,14 +784,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth losses",
                 "Foreign residence",
                 "Physical suffering",
-                "Heavy expenses"
+                "Heavy expenses",
             ],
             "timing": "Losses and expenses throughout life",
             "tags": ["losses", "foreign", "health", "eyes"],
-            "confidence": "high"
-        }
+            "confidence": "high",
+        },
     },
-    
     "Mercury": {
         1: {
             "chapter": 13,
@@ -896,19 +801,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Artistic and creative abilities",
                 "Sharp intellect and quick learning",
                 "Attractive features, especially eyes",
-                "Longevity and good health"
+                "Longevity and good health",
             ],
-            "positive_effects": [
-                "Eloquence",
-                "Intelligence",
-                "Artistic talents",
-                "Longevity",
-                "Beautiful eyes"
-            ],
+            "positive_effects": ["Eloquence", "Intelligence", "Artistic talents", "Longevity", "Beautiful eyes"],
             "challenging_effects": [],
             "timing": "Intellectual pursuits throughout life",
             "tags": ["intelligence", "communication", "arts", "longevity"],
-            "confidence": "high"
+            "confidence": "high",
         },
         2: {
             "chapter": 13,
@@ -919,18 +818,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Sweet and pleasant speech",
                 "Good education",
                 "Family happiness",
-                "Financial prosperity"
+                "Financial prosperity",
             ],
-            "positive_effects": [
-                "Wealth",
-                "Sweet speech",
-                "Education",
-                "Family harmony"
-            ],
+            "positive_effects": ["Wealth", "Sweet speech", "Education", "Family harmony"],
             "challenging_effects": [],
             "timing": "Wealth gains during Mercury dasha",
             "tags": ["wealth", "speech", "education", "family"],
-            "confidence": "high"
+            "confidence": "high",
         },
         3: {
             "chapter": 13,
@@ -941,19 +835,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth through communication",
                 "Good sibling relationships",
                 "High intelligence",
-                "Success in endeavors"
+                "Success in endeavors",
             ],
-            "positive_effects": [
-                "Courage",
-                "Wealth",
-                "Sibling harmony",
-                "Intelligence",
-                "Success"
-            ],
+            "positive_effects": ["Courage", "Wealth", "Sibling harmony", "Intelligence", "Success"],
             "challenging_effects": [],
             "timing": "Communication skills peak during Mercury dasha",
             "tags": ["courage", "siblings", "wealth", "intelligence"],
-            "confidence": "high"
+            "confidence": "high",
         },
         4: {
             "chapter": 13,
@@ -964,19 +852,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Good education",
                 "Mother's blessings",
                 "Property ownership",
-                "Vehicles and comforts"
+                "Vehicles and comforts",
             ],
-            "positive_effects": [
-                "Happiness",
-                "Education",
-                "Mother's grace",
-                "Property",
-                "Vehicles"
-            ],
+            "positive_effects": ["Happiness", "Education", "Mother's grace", "Property", "Vehicles"],
             "challenging_effects": [],
             "timing": "Property acquisition during Mercury dasha",
             "tags": ["mother", "property", "education", "happiness"],
-            "confidence": "high"
+            "confidence": "high",
         },
         5: {
             "chapter": 13,
@@ -987,19 +869,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Good and intelligent children",
                 "Wealth accumulation",
                 "Overall happiness",
-                "Success in speculation/investments"
+                "Success in speculation/investments",
             ],
-            "positive_effects": [
-                "Intelligence",
-                "Good progeny",
-                "Wealth",
-                "Happiness",
-                "Speculation success"
-            ],
+            "positive_effects": ["Intelligence", "Good progeny", "Wealth", "Happiness", "Speculation success"],
             "challenging_effects": [],
             "timing": "Children and investments during Mercury dasha",
             "tags": ["children", "intelligence", "wealth", "speculation"],
-            "confidence": "high"
+            "confidence": "high",
         },
         6: {
             "chapter": 13,
@@ -1010,19 +886,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth accumulation",
                 "Good health",
                 "High intelligence",
-                "Leadership abilities"
+                "Leadership abilities",
             ],
-            "positive_effects": [
-                "Victory over enemies",
-                "Wealth",
-                "Health",
-                "Intelligence",
-                "Leadership"
-            ],
+            "positive_effects": ["Victory over enemies", "Wealth", "Health", "Intelligence", "Leadership"],
             "challenging_effects": [],
             "timing": "Success throughout life",
             "tags": ["health", "enemies", "wealth", "intelligence"],
-            "confidence": "high"
+            "confidence": "high",
         },
         7: {
             "chapter": 13,
@@ -1033,19 +903,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Marital happiness",
                 "Wealth through partnerships",
                 "High intelligence",
-                "Diplomatic and negotiation skills"
+                "Diplomatic and negotiation skills",
             ],
-            "positive_effects": [
-                "Beautiful spouse",
-                "Marital bliss",
-                "Wealth",
-                "Intelligence",
-                "Diplomacy"
-            ],
+            "positive_effects": ["Beautiful spouse", "Marital bliss", "Wealth", "Intelligence", "Diplomacy"],
             "challenging_effects": [],
             "timing": "Marriage during Mercury dasha",
             "tags": ["marriage", "wealth", "intelligence", "diplomacy"],
-            "confidence": "high"
+            "confidence": "high",
         },
         8: {
             "chapter": 13,
@@ -1056,18 +920,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Fame and recognition",
                 "Wealth through inheritance",
                 "Occult and mystical knowledge",
-                "Research abilities"
+                "Research abilities",
             ],
-            "positive_effects": [
-                "Longevity",
-                "Fame",
-                "Inheritance",
-                "Occult knowledge"
-            ],
+            "positive_effects": ["Longevity", "Fame", "Inheritance", "Occult knowledge"],
             "challenging_effects": [],
             "timing": "Occult interests during Mercury dasha",
             "tags": ["longevity", "wealth", "occult", "fame"],
-            "confidence": "high"
+            "confidence": "high",
         },
         9: {
             "chapter": 13,
@@ -1078,19 +937,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Virtuous character",
                 "Religious devotion",
                 "Father's blessings",
-                "Good fortune"
+                "Good fortune",
             ],
-            "positive_effects": [
-                "Wealth",
-                "Virtue",
-                "Devotion",
-                "Father's grace",
-                "Fortune"
-            ],
+            "positive_effects": ["Wealth", "Virtue", "Devotion", "Father's grace", "Fortune"],
             "challenging_effects": [],
             "timing": "Fortune throughout life",
             "tags": ["dharma", "father", "wealth", "spirituality"],
-            "confidence": "high"
+            "confidence": "high",
         },
         10: {
             "chapter": 13,
@@ -1101,19 +954,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Fame and recognition",
                 "Career success",
                 "Wealth accumulation",
-                "Virtuous actions"
+                "Virtuous actions",
             ],
-            "positive_effects": [
-                "Intelligence",
-                "Fame",
-                "Career success",
-                "Wealth",
-                "Virtue"
-            ],
+            "positive_effects": ["Intelligence", "Fame", "Career success", "Wealth", "Virtue"],
             "challenging_effects": [],
             "timing": "Career peaks during Mercury dasha",
             "tags": ["career", "fame", "intelligence", "wealth"],
-            "confidence": "high"
+            "confidence": "high",
         },
         11: {
             "chapter": 13,
@@ -1124,19 +971,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Substantial wealth",
                 "Overall happiness",
                 "Multiple income streams",
-                "Desire fulfillment"
+                "Desire fulfillment",
             ],
-            "positive_effects": [
-                "Education",
-                "Wealth",
-                "Happiness",
-                "Multiple incomes",
-                "Desires fulfilled"
-            ],
+            "positive_effects": ["Education", "Wealth", "Happiness", "Multiple incomes", "Desires fulfilled"],
             "challenging_effects": [],
             "timing": "Gains throughout life, peak during Mercury dasha",
             "tags": ["wealth", "gains", "education", "happiness"],
-            "confidence": "high"
+            "confidence": "high",
         },
         12: {
             "chapter": 13,
@@ -1147,24 +988,15 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial losses",
                 "Life in foreign lands",
                 "Learning and education",
-                "Spiritual knowledge"
-            ],
-            "positive_effects": [
-                "Learning",
                 "Spiritual knowledge",
-                "Foreign opportunities"
             ],
-            "challenging_effects": [
-                "Expenses",
-                "Losses",
-                "Foreign residence"
-            ],
+            "positive_effects": ["Learning", "Spiritual knowledge", "Foreign opportunities"],
+            "challenging_effects": ["Expenses", "Losses", "Foreign residence"],
             "timing": "Expenses throughout, spiritual growth during Mercury dasha",
             "tags": ["losses", "foreign", "education", "spirituality"],
-            "confidence": "high"
-        }
+            "confidence": "high",
+        },
     },
-    
     "Jupiter": {
         1: {
             "chapter": 14,
@@ -1175,20 +1007,17 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Ethical and virtuous nature",
                 "Long and prosperous life",
                 "Loyal friendships",
-                "Blessed with children"
+                "Blessed with children",
             ],
             "positive_effects": [
                 "Wisdom and learning",
                 "Virtuous character",
                 "Longevity",
                 "Good children",
-                "Loyal friends"
+                "Loyal friends",
             ],
-            "challenging_effects": [
-                "May be overly optimistic at times",
-                "Tendency toward weight gain"
-            ],
-            "timing": "Spiritual growth and wisdom during Jupiter dasha"
+            "challenging_effects": ["May be overly optimistic at times", "Tendency toward weight gain"],
+            "timing": "Spiritual growth and wisdom during Jupiter dasha",
         },
         2: {
             "chapter": 14,
@@ -1200,22 +1029,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Beautiful facial features",
                 "Good education and learning",
                 "Happy family life",
-                "Enjoyment of good food"
+                "Enjoyment of good food",
             ],
             "positive_effects": [
                 "Wealth and prosperity",
                 "Eloquent speech",
                 "Beautiful face",
                 "Learning and wisdom",
-                "Family happiness"
+                "Family happiness",
             ],
-            "challenging_effects": [
-                "May overindulge in food",
-                "Can be overly optimistic about finances"
-            ],
+            "challenging_effects": ["May overindulge in food", "Can be overly optimistic about finances"],
             "timing": "Wealth increases during Jupiter dasha",
             "tags": ["wealth", "speech", "family", "learning"],
-            "confidence": "high"
+            "confidence": "high",
         },
         3: {
             "chapter": 14,
@@ -1227,22 +1053,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Intelligence and wisdom",
                 "Limited sibling harmony",
                 "Success in communications",
-                "Teaching abilities"
+                "Teaching abilities",
             ],
             "positive_effects": [
                 "Courage and bravery",
                 "Wealth through effort",
                 "Intelligence",
                 "Communication skills",
-                "Teaching talents"
+                "Teaching talents",
             ],
-            "challenging_effects": [
-                "Limited happiness from siblings",
-                "Sibling conflicts possible"
-            ],
+            "challenging_effects": ["Limited happiness from siblings", "Sibling conflicts possible"],
             "timing": "Courage and wealth develop during Jupiter dasha",
             "tags": ["courage", "siblings", "wealth", "intelligence"],
-            "confidence": "high"
+            "confidence": "high",
         },
         4: {
             "chapter": 14,
@@ -1254,21 +1077,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Vehicles and conveyances",
                 "Good education",
                 "Mother's blessings",
-                "Comfortable home life"
+                "Comfortable home life",
             ],
             "positive_effects": [
                 "Domestic happiness",
                 "Property and vehicles",
                 "Good education",
                 "Mother's grace",
-                "Comfortable living"
+                "Comfortable living",
             ],
-            "challenging_effects": [
-                "May be too attached to comforts"
-            ],
+            "challenging_effects": ["May be too attached to comforts"],
             "timing": "Property gains during Jupiter dasha",
             "tags": ["property", "mother", "education", "happiness"],
-            "confidence": "high"
+            "confidence": "high",
         },
         5: {
             "chapter": 14,
@@ -1280,21 +1101,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success in speculation",
                 "Spiritual knowledge",
                 "Creative intelligence",
-                "Good fortune"
+                "Good fortune",
             ],
             "positive_effects": [
                 "Good children",
                 "Intelligence and wisdom",
                 "Speculative gains",
                 "Spiritual knowledge",
-                "Fortune"
+                "Fortune",
             ],
-            "challenging_effects": [
-                "May be overly optimistic in speculation"
-            ],
+            "challenging_effects": ["May be overly optimistic in speculation"],
             "timing": "Children during Jupiter dasha, spiritual growth",
             "tags": ["children", "intelligence", "speculation", "spirituality"],
-            "confidence": "high"
+            "confidence": "high",
         },
         6: {
             "chapter": 14,
@@ -1306,23 +1125,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success in service professions",
                 "Limited happiness from children",
                 "Some financial difficulties",
-                "Health generally good"
+                "Health generally good",
             ],
-            "positive_effects": [
-                "Defeats enemies",
-                "Fame",
-                "Success in service",
-                "Good health",
-                "Victory in disputes"
-            ],
-            "challenging_effects": [
-                "Limited happiness from children",
-                "Financial challenges",
-                "Work-related stress"
-            ],
+            "positive_effects": ["Defeats enemies", "Fame", "Success in service", "Good health", "Victory in disputes"],
+            "challenging_effects": ["Limited happiness from children", "Financial challenges", "Work-related stress"],
             "timing": "Victory over enemies during Jupiter dasha",
             "tags": ["enemies", "fame", "service", "health"],
-            "confidence": "high"
+            "confidence": "high",
         },
         7: {
             "chapter": 14,
@@ -1334,21 +1143,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth through partnerships",
                 "Success in business partnerships",
                 "Diplomatic abilities",
-                "Good fortune"
+                "Good fortune",
             ],
             "positive_effects": [
                 "Excellent marriage",
                 "Beautiful spouse",
                 "Partnership success",
                 "Wealth",
-                "Diplomatic skills"
+                "Diplomatic skills",
             ],
-            "challenging_effects": [
-                "May have high expectations from spouse"
-            ],
+            "challenging_effects": ["May have high expectations from spouse"],
             "timing": "Marriage during Jupiter dasha, partnership success",
             "tags": ["marriage", "partnerships", "wealth", "spouse"],
-            "confidence": "high"
+            "confidence": "high",
         },
         8: {
             "chapter": 14,
@@ -1360,23 +1167,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial ups and downs",
                 "Spiritual wisdom",
                 "Transformative experiences",
-                "Research abilities"
+                "Research abilities",
             ],
             "positive_effects": [
                 "Longevity",
                 "Spiritual wisdom",
                 "Occult knowledge",
                 "Transformative growth",
-                "Research skills"
+                "Research skills",
             ],
-            "challenging_effects": [
-                "Financial instability",
-                "Sudden changes",
-                "Inheritance issues"
-            ],
+            "challenging_effects": ["Financial instability", "Sudden changes", "Inheritance issues"],
             "timing": "Spiritual transformation during Jupiter dasha",
             "tags": ["longevity", "occult", "transformation", "spirituality"],
-            "confidence": "high"
+            "confidence": "high",
         },
         9: {
             "chapter": 14,
@@ -1387,19 +1190,17 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth from righteous means",
                 "Deep spiritual knowledge",
                 "Good relationship with father",
-                "Religious and philosophical inclinations"
+                "Religious and philosophical inclinations",
             ],
             "positive_effects": [
                 "Exceptional fortune",
                 "Wealth and prosperity",
                 "Spiritual wisdom",
                 "Father's blessings",
-                "Religious inclination"
+                "Religious inclination",
             ],
-            "challenging_effects": [
-                "May be overly idealistic"
-            ],
-            "timing": "Fortune manifests during Jupiter dasha, pilgrimage during this period"
+            "challenging_effects": ["May be overly idealistic"],
+            "timing": "Fortune manifests during Jupiter dasha, pilgrimage during this period",
         },
         10: {
             "chapter": 14,
@@ -1411,22 +1212,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Fame and recognition",
                 "Virtuous professional conduct",
                 "Respect from society",
-                "Government favor"
+                "Government favor",
             ],
-            "positive_effects": [
-                "Career excellence",
-                "Authority",
-                "Fame",
-                "Virtuous conduct",
-                "Social respect"
-            ],
-            "challenging_effects": [
-                "High expectations from career",
-                "Pressure to maintain status"
-            ],
+            "positive_effects": ["Career excellence", "Authority", "Fame", "Virtuous conduct", "Social respect"],
+            "challenging_effects": ["High expectations from career", "Pressure to maintain status"],
             "timing": "Career peaks during Jupiter dasha",
             "tags": ["career", "authority", "fame", "virtue"],
-            "confidence": "high"
+            "confidence": "high",
         },
         11: {
             "chapter": 14,
@@ -1438,21 +1230,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Long and healthy life",
                 "Fulfillment of desires",
                 "Social success",
-                "Multiple income sources"
+                "Multiple income sources",
             ],
             "positive_effects": [
                 "Wealth and prosperity",
                 "Many children",
                 "Longevity",
                 "Achievement of goals",
-                "Social success"
+                "Social success",
             ],
-            "challenging_effects": [
-                "May be overly optimistic about gains"
-            ],
+            "challenging_effects": ["May be overly optimistic about gains"],
             "timing": "Gains increase during Jupiter dasha",
             "tags": ["wealth", "gains", "children", "longevity"],
-            "confidence": "high"
+            "confidence": "high",
         },
         12: {
             "chapter": 14,
@@ -1464,26 +1254,21 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success in foreign lands",
                 "Expenses on good causes",
                 "Limited wealth",
-                "Interest in meditation"
+                "Interest in meditation",
             ],
             "positive_effects": [
                 "Spiritual growth",
                 "Charitable nature",
                 "Foreign success",
                 "Wisdom",
-                "Moksha orientation"
+                "Moksha orientation",
             ],
-            "challenging_effects": [
-                "Financial losses",
-                "Expenses exceed income",
-                "Limited material wealth"
-            ],
+            "challenging_effects": ["Financial losses", "Expenses exceed income", "Limited material wealth"],
             "timing": "Spiritual growth during Jupiter dasha, foreign travel",
             "tags": ["spirituality", "expenses", "foreign", "charity"],
-            "confidence": "high"
-        }
+            "confidence": "high",
+        },
     },
-    
     "Venus": {
         1: {
             "chapter": 15,
@@ -1495,19 +1280,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Happiness and contentment",
                 "Poetic and artistic nature",
                 "Enjoyment of life's pleasures",
-                "Good fortune"
+                "Good fortune",
             ],
-            "positive_effects": [
-                "Beauty",
-                "Charm",
-                "Happiness",
-                "Artistic talents",
-                "Fortune"
-            ],
+            "positive_effects": ["Beauty", "Charm", "Happiness", "Artistic talents", "Fortune"],
             "challenging_effects": [],
             "timing": "Romance and arts throughout life",
             "tags": ["beauty", "arts", "happiness", "fortune"],
-            "confidence": "high"
+            "confidence": "high",
         },
         2: {
             "chapter": 15,
@@ -1518,19 +1297,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Sweet and melodious speech",
                 "Beautiful facial features",
                 "Enjoyment of good food",
-                "Family happiness"
+                "Family happiness",
             ],
-            "positive_effects": [
-                "Wealth",
-                "Sweet speech",
-                "Beauty",
-                "Good food",
-                "Family harmony"
-            ],
+            "positive_effects": ["Wealth", "Sweet speech", "Beauty", "Good food", "Family harmony"],
             "challenging_effects": [],
             "timing": "Wealth gains during Venus dasha",
             "tags": ["wealth", "speech", "family", "beauty"],
-            "confidence": "high"
+            "confidence": "high",
         },
         3: {
             "chapter": 15,
@@ -1541,19 +1314,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Good sibling relationships",
                 "Wealth accumulation",
                 "Artistic and creative talents",
-                "Success in endeavors"
+                "Success in endeavors",
             ],
-            "positive_effects": [
-                "Courage",
-                "Sibling harmony",
-                "Wealth",
-                "Arts",
-                "Success"
-            ],
+            "positive_effects": ["Courage", "Sibling harmony", "Wealth", "Arts", "Success"],
             "challenging_effects": [],
             "timing": "Artistic success during Venus dasha",
             "tags": ["courage", "siblings", "wealth", "arts"],
-            "confidence": "high"
+            "confidence": "high",
         },
         4: {
             "chapter": 15,
@@ -1565,20 +1332,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Property and land",
                 "Vehicles and conveyances",
                 "Material comforts",
-                "Good education"
+                "Good education",
             ],
-            "positive_effects": [
-                "Happiness",
-                "Mother's grace",
-                "Property",
-                "Vehicles",
-                "Comforts",
-                "Education"
-            ],
+            "positive_effects": ["Happiness", "Mother's grace", "Property", "Vehicles", "Comforts", "Education"],
             "challenging_effects": [],
             "timing": "Property acquisition during Venus dasha",
             "tags": ["mother", "property", "happiness", "vehicles"],
-            "confidence": "high"
+            "confidence": "high",
         },
         5: {
             "chapter": 15,
@@ -1589,19 +1349,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "High intelligence",
                 "Wealth accumulation",
                 "Overall happiness",
-                "Success in speculation"
+                "Success in speculation",
             ],
-            "positive_effects": [
-                "Good progeny",
-                "Intelligence",
-                "Wealth",
-                "Happiness",
-                "Speculation success"
-            ],
+            "positive_effects": ["Good progeny", "Intelligence", "Wealth", "Happiness", "Speculation success"],
             "challenging_effects": [],
             "timing": "Children during Venus dasha",
             "tags": ["children", "intelligence", "wealth", "happiness"],
-            "confidence": "high"
+            "confidence": "high",
         },
         6: {
             "chapter": 15,
@@ -1612,18 +1366,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth accumulation",
                 "Good health",
                 "Overall happiness",
-                "Success in service"
+                "Success in service",
             ],
-            "positive_effects": [
-                "Victory over enemies",
-                "Wealth",
-                "Health",
-                "Happiness"
-            ],
+            "positive_effects": ["Victory over enemies", "Wealth", "Health", "Happiness"],
             "challenging_effects": [],
             "timing": "Success throughout life",
             "tags": ["health", "enemies", "wealth", "happiness"],
-            "confidence": "high"
+            "confidence": "high",
         },
         7: {
             "chapter": 15,
@@ -1634,19 +1383,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Harmonious marital life",
                 "Success through partnerships",
                 "Diplomatic abilities",
-                "Material gains from marriage"
+                "Material gains from marriage",
             ],
             "positive_effects": [
                 "Beautiful spouse",
                 "Marital happiness",
                 "Partnership success",
                 "Diplomacy",
-                "Wealth from marriage"
+                "Wealth from marriage",
             ],
             "challenging_effects": [],
             "timing": "Marriage during Venus dasha",
             "tags": ["marriage", "wealth", "partnerships", "happiness"],
-            "confidence": "high"
+            "confidence": "high",
         },
         8: {
             "chapter": 15,
@@ -1657,18 +1406,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Wealth through inheritance",
                 "Occult and mystical knowledge",
                 "Interest in mysteries",
-                "Research abilities"
+                "Research abilities",
             ],
-            "positive_effects": [
-                "Longevity",
-                "Inheritance",
-                "Occult knowledge",
-                "Mystical interests"
-            ],
+            "positive_effects": ["Longevity", "Inheritance", "Occult knowledge", "Mystical interests"],
             "challenging_effects": [],
             "timing": "Inheritance during Venus dasha",
             "tags": ["longevity", "wealth", "occult", "inheritance"],
-            "confidence": "high"
+            "confidence": "high",
         },
         9: {
             "chapter": 15,
@@ -1680,20 +1424,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Religious devotion",
                 "Father's blessings",
                 "Good fortune",
-                "Overall happiness"
+                "Overall happiness",
             ],
-            "positive_effects": [
-                "Wealth",
-                "Virtue",
-                "Devotion",
-                "Father's grace",
-                "Fortune",
-                "Happiness"
-            ],
+            "positive_effects": ["Wealth", "Virtue", "Devotion", "Father's grace", "Fortune", "Happiness"],
             "challenging_effects": [],
             "timing": "Fortune throughout life",
             "tags": ["dharma", "father", "wealth", "happiness"],
-            "confidence": "high"
+            "confidence": "high",
         },
         10: {
             "chapter": 15,
@@ -1704,19 +1441,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Career success",
                 "Wealth accumulation",
                 "Overall happiness",
-                "Virtuous actions"
+                "Virtuous actions",
             ],
-            "positive_effects": [
-                "Fame",
-                "Career success",
-                "Wealth",
-                "Happiness",
-                "Virtue"
-            ],
+            "positive_effects": ["Fame", "Career success", "Wealth", "Happiness", "Virtue"],
             "challenging_effects": [],
             "timing": "Career peaks during Venus dasha",
             "tags": ["career", "fame", "wealth", "happiness"],
-            "confidence": "high"
+            "confidence": "high",
         },
         11: {
             "chapter": 15,
@@ -1727,19 +1458,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Overall happiness",
                 "Multiple income streams",
                 "Desire fulfillment",
-                "Social success"
+                "Social success",
             ],
             "positive_effects": [
                 "Wealth and gains",
                 "Happiness",
                 "Multiple incomes",
                 "Desires fulfilled",
-                "Social connections"
+                "Social connections",
             ],
             "challenging_effects": [],
             "timing": "Gains throughout life",
             "tags": ["wealth", "gains", "happiness", "desires"],
-            "confidence": "high"
+            "confidence": "high",
         },
         12: {
             "chapter": 15,
@@ -1750,24 +1481,15 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Life in foreign lands",
                 "Spiritual inclinations",
                 "Financial losses",
-                "Comfort-seeking nature"
+                "Comfort-seeking nature",
             ],
-            "positive_effects": [
-                "Spiritual growth",
-                "Foreign opportunities",
-                "Luxury enjoyment"
-            ],
-            "challenging_effects": [
-                "Heavy expenses",
-                "Financial losses",
-                "Foreign residence"
-            ],
+            "positive_effects": ["Spiritual growth", "Foreign opportunities", "Luxury enjoyment"],
+            "challenging_effects": ["Heavy expenses", "Financial losses", "Foreign residence"],
             "timing": "Expenses throughout, spiritual growth during Venus dasha",
             "tags": ["losses", "foreign", "spirituality", "luxury"],
-            "confidence": "high"
-        }
+            "confidence": "high",
+        },
     },
-    
     "Saturn": {
         1: {
             "chapter": 16,
@@ -1778,21 +1500,21 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Potential health challenges",
                 "Slow but steady approach",
                 "Hardworking disposition",
-                "Challenges in early life"
+                "Challenges in early life",
             ],
             "positive_effects": [
                 "Discipline and perseverance",
                 "Depth of character",
                 "Ability to endure hardships",
-                "Wisdom through experience"
+                "Wisdom through experience",
             ],
             "challenging_effects": [
                 "Health vulnerabilities",
                 "Slow progress",
                 "Pessimistic tendencies",
-                "Early life difficulties"
+                "Early life difficulties",
             ],
-            "timing": "Challenges in youth, improvement during and after Saturn dasha"
+            "timing": "Challenges in youth, improvement during and after Saturn dasha",
         },
         2: {
             "chapter": 16,
@@ -1804,23 +1526,23 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Limited formal education",
                 "Harsh or slow speech",
                 "Poor dietary habits",
-                "Family difficulties"
+                "Family difficulties",
             ],
             "positive_effects": [
                 "Discipline in finances",
                 "Frugality and careful resource management",
-                "Wisdom in speech when mature"
+                "Wisdom in speech when mature",
             ],
             "challenging_effects": [
                 "Financial difficulties",
                 "Ugly face",
                 "Lack of education",
                 "Harsh speech",
-                "Poor food quality"
+                "Poor food quality",
             ],
             "timing": "Financial struggles early, improvement after age 36",
             "tags": ["wealth", "speech", "family", "education"],
-            "confidence": "high"
+            "confidence": "high",
         },
         3: {
             "chapter": 16,
@@ -1832,23 +1554,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Intelligence and discipline",
                 "Limited sibling harmony",
                 "Success through self-effort",
-                "Long-term initiatives"
+                "Long-term initiatives",
             ],
             "positive_effects": [
                 "Courage and perseverance",
                 "Wealth through effort",
                 "Intelligence",
                 "Disciplined approach",
-                "Self-made success"
+                "Self-made success",
             ],
-            "challenging_effects": [
-                "Limited happiness from siblings",
-                "Sibling loss or conflicts",
-                "Slow progress"
-            ],
+            "challenging_effects": ["Limited happiness from siblings", "Sibling loss or conflicts", "Slow progress"],
             "timing": "Wealth develops slowly through persistent effort",
             "tags": ["courage", "siblings", "wealth", "effort"],
-            "confidence": "high"
+            "confidence": "high",
         },
         4: {
             "chapter": 16,
@@ -1860,23 +1578,23 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Property difficulties",
                 "Few or old vehicles",
                 "Emotional distance from family",
-                "Heart health concerns"
+                "Heart health concerns",
             ],
             "positive_effects": [
                 "Independence and self-reliance",
                 "Discipline in domestic matters",
-                "Property gains after age 36"
+                "Property gains after age 36",
             ],
             "challenging_effects": [
                 "Lack of domestic happiness",
                 "Mother's loss",
                 "Property problems",
                 "Few vehicles",
-                "Emotional coldness"
+                "Emotional coldness",
             ],
             "timing": "Domestic challenges throughout life, property gains delayed",
             "tags": ["mother", "property", "happiness", "vehicles"],
-            "confidence": "high"
+            "confidence": "high",
         },
         5: {
             "chapter": 16,
@@ -1888,23 +1606,23 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Pessimistic mindset",
                 "Digestive health issues",
                 "Creative blocks",
-                "Speculative losses"
+                "Speculative losses",
             ],
             "positive_effects": [
                 "Discipline in creative pursuits",
                 "Philosophical wisdom",
-                "Adopted children may bring happiness"
+                "Adopted children may bring happiness",
             ],
             "challenging_effects": [
                 "Lack of children",
                 "Financial problems",
                 "Negative thinking",
                 "Stomach diseases",
-                "Unhappiness"
+                "Unhappiness",
             ],
             "timing": "Children delayed or absent, financial struggles",
             "tags": ["children", "wealth", "health", "creativity"],
-            "confidence": "high"
+            "confidence": "high",
         },
         6: {
             "chapter": 16,
@@ -1916,23 +1634,13 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Strong health",
                 "Success in service professions",
                 "Disciplined work approach",
-                "Longevity"
+                "Longevity",
             ],
-            "positive_effects": [
-                "Defeats enemies",
-                "Fame",
-                "Good health",
-                "Success in service",
-                "Discipline"
-            ],
-            "challenging_effects": [
-                "Chronic health issues if afflicted",
-                "Slow victory",
-                "Work stress"
-            ],
+            "positive_effects": ["Defeats enemies", "Fame", "Good health", "Success in service", "Discipline"],
+            "challenging_effects": ["Chronic health issues if afflicted", "Slow victory", "Work stress"],
             "timing": "Victory over enemies during Saturn dasha",
             "tags": ["enemies", "fame", "health", "service"],
-            "confidence": "high"
+            "confidence": "high",
         },
         7: {
             "chapter": 16,
@@ -1944,23 +1652,23 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Late marriage",
                 "Health issues",
                 "Partnership difficulties",
-                "Chronic diseases"
+                "Chronic diseases",
             ],
             "positive_effects": [
                 "Discipline in partnerships",
                 "Long-lasting relationships when formed",
-                "Success with mature partners"
+                "Success with mature partners",
             ],
             "challenging_effects": [
                 "Loss of wife",
                 "Marital discord",
                 "Chronic diseases",
                 "Partnership conflicts",
-                "Unhappiness"
+                "Unhappiness",
             ],
             "timing": "Marriage challenges, late marriage common",
             "tags": ["marriage", "partnerships", "health", "spouse"],
-            "confidence": "high"
+            "confidence": "high",
         },
         8: {
             "chapter": 16,
@@ -1972,24 +1680,24 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial instability",
                 "Physical defects",
                 "Interest in occult",
-                "Inheritance issues"
+                "Inheritance issues",
             ],
             "positive_effects": [
                 "Deep research abilities",
                 "Occult knowledge",
                 "Transformative wisdom",
-                "Discipline in crises"
+                "Discipline in crises",
             ],
             "challenging_effects": [
                 "Short lifespan",
                 "Chronic diseases",
                 "Financial problems",
                 "Physical defects",
-                "Sudden losses"
+                "Sudden losses",
             ],
             "timing": "Health challenges throughout life",
             "tags": ["longevity", "health", "wealth", "occult"],
-            "confidence": "high"
+            "confidence": "high",
         },
         9: {
             "chapter": 16,
@@ -2001,23 +1709,23 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Financial difficulties",
                 "Marital challenges",
                 "Difficulties with children",
-                "Foreign travel problems"
+                "Foreign travel problems",
             ],
             "positive_effects": [
                 "Independent philosophy",
                 "Discipline in spiritual pursuits when mature",
-                "Wisdom through hardship"
+                "Wisdom through hardship",
             ],
             "challenging_effects": [
                 "Father's loss or separation",
                 "Financial problems",
                 "Marital difficulties",
                 "Lack of spirituality",
-                "Unhappiness"
+                "Unhappiness",
             ],
             "timing": "Father-related issues, spiritual awakening delayed",
             "tags": ["father", "spirituality", "wealth", "marriage"],
-            "confidence": "high"
+            "confidence": "high",
         },
         10: {
             "chapter": 16,
@@ -2028,21 +1736,17 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Success through hard work",
                 "Gains from land and agriculture",
                 "Social respect and recognition",
-                "Sustained career growth"
+                "Sustained career growth",
             ],
             "positive_effects": [
                 "Authority and power",
                 "Career success through effort",
                 "Land and property gains",
                 "Social respect",
-                "Leadership abilities"
+                "Leadership abilities",
             ],
-            "challenging_effects": [
-                "Slow career progression",
-                "Heavy responsibilities",
-                "Delays in recognition"
-            ],
-            "timing": "Authority peaks during Saturn dasha, recognition in later life"
+            "challenging_effects": ["Slow career progression", "Heavy responsibilities", "Delays in recognition"],
+            "timing": "Authority peaks during Saturn dasha, recognition in later life",
         },
         11: {
             "chapter": 16,
@@ -2054,23 +1758,19 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Few but responsible children",
                 "Gains through discipline",
                 "Social success",
-                "Multiple income sources"
+                "Multiple income sources",
             ],
             "positive_effects": [
                 "Wealth and gains",
                 "Longevity",
                 "Achievement of goals",
                 "Social success",
-                "Disciplined approach"
+                "Disciplined approach",
             ],
-            "challenging_effects": [
-                "Limited children",
-                "Slow gains",
-                "Serious friendships"
-            ],
+            "challenging_effects": ["Limited children", "Slow gains", "Serious friendships"],
             "timing": "Gains increase with age, prosperity after 36",
             "tags": ["wealth", "gains", "longevity", "children"],
-            "confidence": "high"
+            "confidence": "high",
         },
         12: {
             "chapter": 16,
@@ -2082,37 +1782,37 @@ PHALADEEPIKA_PLANETS_IN_HOUSES: Dict[str, Dict[int, Dict[str, Any]]] = {
                 "Unhappiness and sorrow",
                 "Service to others",
                 "Spiritual inclinations develop",
-                "Interest in isolation"
+                "Interest in isolation",
             ],
             "positive_effects": [
                 "Spiritual growth",
                 "Service to humanity",
                 "Success in foreign lands",
-                "Discipline in spiritual practices"
+                "Discipline in spiritual practices",
             ],
             "challenging_effects": [
                 "Financial difficulties",
                 "Lack of education",
                 "Unhappiness",
                 "Serving others",
-                "Expenses and losses"
+                "Expenses and losses",
             ],
             "timing": "Expenses throughout life, spiritual growth in later years",
             "tags": ["expenses", "spirituality", "foreign", "service"],
-            "confidence": "high"
-        }
-    }
+            "confidence": "high",
+        },
+    },
 }
 
 
 def get_phaladeepika_interpretation(planet: str, house: int) -> Dict[str, Any]:
     """
     Get Phaladeepika interpretation for planet in house.
-    
+
     Args:
         planet: Planet name
         house: House number (1-12)
-        
+
     Returns:
         Dictionary with interpretation data or None if not available
     """

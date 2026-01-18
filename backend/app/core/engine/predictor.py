@@ -1,10 +1,12 @@
-from typing import List, Dict, Any
+from typing import Any, Dict, List
+
 from app.models.kundli import (
+    House,
     KundliChart,
     Planet,
-    House,
     Prediction,
 )
+
 
 class KundliPredictor:
     ASPECTS = {
@@ -68,7 +70,7 @@ class KundliPredictor:
     def _calculate_aspects(self, planets: List[Planet]) -> List[Dict[str, Any]]:
         aspects = []
         for i, p1 in enumerate(planets):
-            for p2 in planets[i + 1:]:
+            for p2 in planets[i + 1 :]:
                 angle = abs(p1.longitude - p2.longitude) % 360
                 if angle > 180:
                     angle = 360 - angle
@@ -76,19 +78,19 @@ class KundliPredictor:
                 for aspect_name, aspect_angle in self.ASPECTS.items():
                     orb = self.ASPECT_ORBS[aspect_name]
                     if abs(angle - aspect_angle) <= orb:
-                        aspects.append({
-                            "planet1": p1.name,
-                            "planet2": p2.name,
-                            "aspect": aspect_name,
-                            "angle": angle,
-                            "orb": abs(angle - aspect_angle),
-                        })
+                        aspects.append(
+                            {
+                                "planet1": p1.name,
+                                "planet2": p2.name,
+                                "aspect": aspect_name,
+                                "angle": angle,
+                                "orb": abs(angle - aspect_angle),
+                            }
+                        )
 
         return aspects
 
-    def _calculate_planet_strengths(
-        self, planets: List[Planet], houses: List[House]
-    ) -> Dict[str, float]:
+    def _calculate_planet_strengths(self, planets: List[Planet], houses: List[House]) -> Dict[str, float]:
         strengths = {}
         for planet in planets:
             base_strength = 0.5  # Default strength
@@ -116,12 +118,10 @@ class KundliPredictor:
 
     def generate_predictions(self, chart: KundliChart) -> List[Prediction]:
         predictions = []
-        
+
         # Calculate aspects and planet strengths
         aspects = self._calculate_aspects(chart.planets)
-        planet_strengths = self._calculate_planet_strengths(
-            chart.planets, chart.houses
-        )
+        planet_strengths = self._calculate_planet_strengths(chart.planets, chart.houses)
 
         # Generate predictions based on planet placements
         for planet in chart.planets:
@@ -158,11 +158,7 @@ class KundliPredictor:
             key = f"{aspect['planet1']}_{aspect['planet2']}_{aspect['aspect']}"
             if key in self.prediction_rules["aspects"]:
                 rule = self.prediction_rules["aspects"][key]
-                strength = (
-                    rule["strength"] *
-                    planet_strengths[aspect["planet1"]] *
-                    planet_strengths[aspect["planet2"]]
-                )
+                strength = rule["strength"] * planet_strengths[aspect["planet1"]] * planet_strengths[aspect["planet2"]]
                 predictions.append(
                     Prediction(
                         category=rule["category"],

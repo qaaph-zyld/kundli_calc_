@@ -3,19 +3,20 @@ Rate Limiting Middleware
 ========================
 Implements rate limiting using slowapi to prevent API abuse.
 """
-from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_remote_address
-from slowapi.errors import RateLimitExceeded
-from fastapi import Request, Response
-from typing import Callable
-import os
 
+import os
+from typing import Callable
+
+from fastapi import Request, Response
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 
 # Initialize rate limiter
 limiter = Limiter(
     key_func=get_remote_address,
     default_limits=["60/minute"],  # Default: 60 requests per minute per IP
-    enabled=os.getenv("RATE_LIMIT_ENABLED", "true").lower() == "true"
+    enabled=os.getenv("RATE_LIMIT_ENABLED", "true").lower() == "true",
 )
 
 
@@ -55,33 +56,33 @@ async def rate_limit_middleware(request: Request, call_next: Callable) -> Respon
     Middleware to add rate limiting headers to all responses
     """
     response = await call_next(request)
-    
+
     # Add rate limit headers for transparency
     config = get_rate_limit_config()
     if config["enabled"]:
         response.headers["X-RateLimit-Limit"] = str(config["per_minute"])
         response.headers["X-RateLimit-Remaining"] = "Unknown"  # slowapi tracks this
         response.headers["X-RateLimit-Reset"] = "60"  # seconds until reset
-    
+
     return response
 
 
 def setup_rate_limiting(app):
     """
     Setup rate limiting for FastAPI application
-    
+
     Args:
         app: FastAPI application instance
     """
     from fastapi import FastAPI
-    
+
     # Add rate limiter to app state
     app.state.limiter = limiter
-    
+
     # Add exception handler for rate limit exceeded
     app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
-    
+
     # Add middleware for rate limit headers
     app.middleware("http")(rate_limit_middleware)
-    
+
     return app

@@ -77,7 +77,6 @@ jobs:
     
     - name: Run linters
       run: |
-        flake8 backend/app --max-line-length=120 --extend-ignore=E203,W503 || true
-        black backend --check --line-length=120 || true
-        isort backend --check-only || true
-      continue-on-error: true
+        flake8 backend/app --max-line-length=120 --extend-ignore=E203,W503,F401,F841,E501
+        black backend --check --line-length=120
+        isort backend --check-only --profile black --line-length 120

@@ -1,16 +1,19 @@
 """Database models module."""
-from datetime import datetime
-from sqlalchemy import Column, String, DateTime, Boolean, ForeignKey, Integer, Float, JSON
-from sqlalchemy.orm import relationship
-from .base import BaseModel
+
 import uuid
+from datetime import datetime
+
+from sqlalchemy import JSON, Boolean, Column, DateTime, Float, ForeignKey, Integer, String
+from sqlalchemy.orm import relationship
+
+from .base import BaseModel
 
 
 class User(BaseModel):
     """User model."""
 
     __tablename__ = "users"
-    __table_args__ = {'extend_existing': True}
+    __table_args__ = {"extend_existing": True}
 
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     email = Column(String(255), unique=True, nullable=False, index=True)
@@ -30,7 +33,7 @@ class BirthChart(BaseModel):
     """Birth chart model."""
 
     __tablename__ = "birth_charts"
-    __table_args__ = {'extend_existing': True}
+    __table_args__ = {"extend_existing": True}
 
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     name = Column(String(255), nullable=False)
@@ -40,11 +43,11 @@ class BirthChart(BaseModel):
     timezone = Column(String(50), nullable=False)
     description = Column(String(1000))
     altitude = Column(Float, default=0)
-    
+
     # Calculation settings
     ayanamsa = Column(Integer, default=1)
-    house_system = Column(String(10), default='P')
-    
+    house_system = Column(String(10), default="P")
+
     # Calculated data
     planetary_positions = Column(JSON, nullable=False)
     houses = Column(JSON, nullable=False)
@@ -70,7 +73,7 @@ class HouseSystem(BaseModel):
     """House system model."""
 
     __tablename__ = "house_systems"
-    __table_args__ = {'extend_existing': True}
+    __table_args__ = {"extend_existing": True}
 
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     system_name = Column(String(50), nullable=False)
@@ -91,7 +94,7 @@ class PlanetaryPosition(BaseModel):
     """Planetary position model."""
 
     __tablename__ = "planetary_positions"
-    __table_args__ = {'extend_existing': True}
+    __table_args__ = {"extend_existing": True}
 
     id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()))
     planet = Column(String(20), nullable=False)

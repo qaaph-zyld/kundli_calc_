@@ -1,8 +1,6 @@
 """User endpoints."""
+
 from typing import Any, List
-from fastapi import APIRouter, Body, Depends, HTTPException
-from fastapi.encoders import jsonable_encoder
-from sqlalchemy.orm import Session
 
 from app.api.deps import (
     get_current_active_superuser,
@@ -20,6 +18,9 @@ from app.crud.user import (
 from app.models.database_models import User
 from app.schemas.user import User as UserSchema
 from app.schemas.user import UserCreate, UserUpdate
+from fastapi import APIRouter, Body, Depends, HTTPException
+from fastapi.encoders import jsonable_encoder
+from sqlalchemy.orm import Session
 
 router = APIRouter()
 
@@ -85,9 +86,7 @@ def read_user_by_id(
     if user == current_user:
         return user
     if not current_user.is_superuser:
-        raise HTTPException(
-            status_code=400, detail="The user doesn't have enough privileges"
-        )
+        raise HTTPException(status_code=400, detail="The user doesn't have enough privileges")
     return user
 
 

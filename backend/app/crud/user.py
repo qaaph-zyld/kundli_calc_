@@ -1,11 +1,12 @@
 """User CRUD operations."""
-from typing import Optional
-from sqlalchemy.orm import Session
+
 import uuid
+from typing import Optional
 
 from app.core.security import get_password_hash, verify_password
 from app.models.database_models import User
 from app.schemas.user import UserCreate, UserUpdate
+from sqlalchemy.orm import Session
 
 
 def get_user(db: Session, user_id: str) -> Optional[User]:
@@ -44,10 +45,10 @@ def update_user(db: Session, db_user: User, user: UserUpdate) -> User:
     update_data = user.model_dump(exclude_unset=True)
     if "password" in update_data:
         update_data["hashed_password"] = get_password_hash(update_data.pop("password"))
-    
+
     for field, value in update_data.items():
         setattr(db_user, field, value)
-    
+
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

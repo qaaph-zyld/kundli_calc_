@@ -1,5 +1,6 @@
 """Metrics module initialization"""
-from .performance_metrics import PerformanceMetrics, MetricsTimer
+
+from .performance_metrics import MetricsTimer, PerformanceMetrics
 
 # Global metrics instance
 metrics = PerformanceMetrics()

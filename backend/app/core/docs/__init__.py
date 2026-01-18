@@ -5,24 +5,15 @@ Gate: GATE_8
 Version: 1.0.0
 """
 
-from .framework import (
-    DocType,
-    DocFormat,
-    DocSection,
-    Documentation,
-    DocGenerator
-)
-from .generator import (
-    DocumentationGenerator,
-    generate_docs
-)
+from .framework import DocFormat, DocGenerator, DocSection, DocType, Documentation
+from .generator import DocumentationGenerator, generate_docs
 
 __all__ = [
-    'DocType',
-    'DocFormat',
-    'DocSection',
-    'Documentation',
-    'DocGenerator',
-    'DocumentationGenerator',
-    'generate_docs'
+    "DocType",
+    "DocFormat",
+    "DocSection",
+    "Documentation",
+    "DocGenerator",
+    "DocumentationGenerator",
+    "generate_docs",
 ]

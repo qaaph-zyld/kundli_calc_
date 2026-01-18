@@ -5,26 +5,48 @@ Gate: GATE_4
 Version: 1.0.0
 """
 
-from contextlib import asynccontextmanager
-from pathlib import Path
-from fastapi import FastAPI, Request, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 import logging
 import time
-import yaml
+from contextlib import asynccontextmanager
 from datetime import datetime
+from pathlib import Path
 
-from .core.config import settings
-from .middleware.rate_limiter import setup_rate_limiting
+import yaml
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 
 from .api.endpoints import (
-    charts, health, ayanamsa, panchang, dasha, geo, divisional, debug, location, famous_charts,
-    lal_kitab, varshphal, yogas, transits, kp_system, shadbala, ashtakavarga, bhava, prediction,
-    additional_dashas, horoscope, compatibility, system_health, traditional, interpretations
+    additional_dashas,
+    ashtakavarga,
+    ayanamsa,
+    bhava,
+    charts,
+    compatibility,
+    dasha,
+    debug,
+    divisional,
+    famous_charts,
+    geo,
+    health,
+    horoscope,
+    interpretations,
+    kp_system,
+    lal_kitab,
+    location,
+    panchang,
+    prediction,
+    shadbala,
+    system_health,
+    traditional,
+    transits,
+    varshphal,
+    yogas,
 )
+from .core.config import settings
 from .core.errors.handlers import ErrorHandler
 from .db.mongodb import MongoDB
+from .middleware.rate_limiter import setup_rate_limiting
 
 
 @asynccontextmanager
@@ -38,6 +60,7 @@ async def lifespan(app: FastAPI):
     yield
     # Shutdown
     await MongoDB.close_database_connection()
+
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -58,17 +81,19 @@ app.add_middleware(
 # Setup rate limiting
 setup_rate_limiting(app)
 
+
 # Load custom OpenAPI schema
 def custom_openapi():
     openapi_path = Path(__file__).parent / "api" / "openapi.yaml"
     if app.openapi_schema:
         return app.openapi_schema
-    
+
     with open(openapi_path) as f:
         openapi_schema = yaml.safe_load(f)
-    
+
     app.openapi_schema = openapi_schema
     return app.openapi_schema
+
 
 app.openapi = custom_openapi
 
@@ -79,158 +104,59 @@ app.add_exception_handler(HTTPException, ErrorHandler.handle_http_exception)
 # Middleware temporarily disabled for endpoint validation
 
 # Include routers
-app.include_router(
-    charts.router,
-    prefix="/api/v1/charts",
-    tags=["charts"]
-)
+app.include_router(charts.router, prefix="/api/v1/charts", tags=["charts"])
 
-app.include_router(
-    ayanamsa.router,
-    prefix="/api/v1/ayanamsa",
-    tags=["ayanamsa"]
-)
+app.include_router(ayanamsa.router, prefix="/api/v1/ayanamsa", tags=["ayanamsa"])
 
-app.include_router(
-    panchang.router,
-    prefix="/api/v1/panchang",
-    tags=["panchang"]
-)
+app.include_router(panchang.router, prefix="/api/v1/panchang", tags=["panchang"])
 
-app.include_router(
-    health.router,
-    prefix="/api/v1/health",
-    tags=["health"]
-)
+app.include_router(health.router, prefix="/api/v1/health", tags=["health"])
 
-app.include_router(
-    system_health.router,
-    prefix="/api/v1/system",
-    tags=["system"]
-)
+app.include_router(system_health.router, prefix="/api/v1/system", tags=["system"])
 
-app.include_router(
-    dasha.router,
-    prefix="/api/v1/dasha",
-    tags=["dasha"]
-)
+app.include_router(dasha.router, prefix="/api/v1/dasha", tags=["dasha"])
 
-app.include_router(
-    geo.router,
-    prefix="/api/v1",
-    tags=["geo"]
-)
+app.include_router(geo.router, prefix="/api/v1", tags=["geo"])
 
-app.include_router(
-    divisional.router,
-    prefix="/api/v1",
-    tags=["divisional"]
-)
+app.include_router(divisional.router, prefix="/api/v1", tags=["divisional"])
 
-app.include_router(
-    debug.router,
-    prefix="/api/v1/debug",
-    tags=["debug"]
-)
+app.include_router(debug.router, prefix="/api/v1/debug", tags=["debug"])
 
-app.include_router(
-    location.router,
-    prefix="/api/v1/location",
-    tags=["location"]
-)
+app.include_router(location.router, prefix="/api/v1/location", tags=["location"])
 
-app.include_router(
-    famous_charts.router,
-    prefix="/api/v1/famous-charts",
-    tags=["famous-charts"]
-)
+app.include_router(famous_charts.router, prefix="/api/v1/famous-charts", tags=["famous-charts"])
 
-app.include_router(
-    lal_kitab.router,
-    prefix="/api/v1",
-    tags=["lal-kitab"]
-)
+app.include_router(lal_kitab.router, prefix="/api/v1", tags=["lal-kitab"])
 
-app.include_router(
-    varshphal.router,
-    prefix="/api/v1",
-    tags=["varshphal"]
-)
+app.include_router(varshphal.router, prefix="/api/v1", tags=["varshphal"])
 
-app.include_router(
-    yogas.router,
-    prefix="/api/v1/yogas",
-    tags=["yogas"]
-)
+app.include_router(yogas.router, prefix="/api/v1/yogas", tags=["yogas"])
 
-app.include_router(
-    transits.router,
-    prefix="/api/v1/transits",
-    tags=["transits"]
-)
+app.include_router(transits.router, prefix="/api/v1/transits", tags=["transits"])
 
-app.include_router(
-    kp_system.router,
-    prefix="/api/v1/kp",
-    tags=["kp-system"]
-)
+app.include_router(kp_system.router, prefix="/api/v1/kp", tags=["kp-system"])
 
-app.include_router(
-    shadbala.router,
-    prefix="/api/v1/shadbala",
-    tags=["shadbala"]
-)
+app.include_router(shadbala.router, prefix="/api/v1/shadbala", tags=["shadbala"])
 
-app.include_router(
-    ashtakavarga.router,
-    prefix="/api/v1/ashtakavarga",
-    tags=["ashtakavarga"]
-)
+app.include_router(ashtakavarga.router, prefix="/api/v1/ashtakavarga", tags=["ashtakavarga"])
 
-app.include_router(
-    bhava.router,
-    prefix="/api/v1/bhava",
-    tags=["bhava"]
-)
+app.include_router(bhava.router, prefix="/api/v1/bhava", tags=["bhava"])
 
-app.include_router(
-    traditional.router,
-    prefix="/api/v1/traditional",
-    tags=["traditional"]
-)
+app.include_router(traditional.router, prefix="/api/v1/traditional", tags=["traditional"])
 
-app.include_router(
-    interpretations.router,
-    prefix="/api/v1/interpret",
-    tags=["interpretations"]
-)
+app.include_router(interpretations.router, prefix="/api/v1/interpret", tags=["interpretations"])
 
-app.include_router(
-    prediction.router,
-    prefix="/api/v1/prediction",
-    tags=["prediction"]
-)
+app.include_router(prediction.router, prefix="/api/v1/prediction", tags=["prediction"])
 
-app.include_router(
-    additional_dashas.router,
-    prefix="/api/v1/dashas",
-    tags=["additional-dashas"]
-)
+app.include_router(additional_dashas.router, prefix="/api/v1/dashas", tags=["additional-dashas"])
 
-app.include_router(
-    horoscope.router,
-    prefix="/api/v1/horoscope",
-    tags=["horoscope"]
-)
+app.include_router(horoscope.router, prefix="/api/v1/horoscope", tags=["horoscope"])
 
-app.include_router(
-    compatibility.router,
-    prefix="/api/v1",
-    tags=["compatibility"]
-)
+app.include_router(compatibility.router, prefix="/api/v1", tags=["compatibility"])
 
 # Include new authentication and kundli routes
 # Note: Startup/shutdown handled by lifespan context manager above
+
 
 @app.get("/")
 async def root():
@@ -239,5 +165,5 @@ async def root():
         "message": "Welcome to South Indian Kundli Calculator API",
         "version": "0.1.0",
         "docs": "/api/docs",
-        "redoc": "/api/redoc"
+        "redoc": "/api/redoc",
     }
