@@ -3,29 +3,27 @@
 from datetime import datetime
 from typing import Any, Dict
 
-from fastapi import APIRouter, HTTPException
-
-from app.core.calculations.birth_rectification import rectify_birth_time
-from app.core.calculations.sahamas import calculate_sahamas
-from app.core.calculations.critical_points import analyze_all_critical_points
-from app.core.calculations.latta_system import analyze_latta
-from app.core.calculations.transit_search import search_transits
-from app.core.calculations.numerology import calculate_numerology
-from app.core.calculations.extended_dashas import calculate_all_extended_dashas
-from app.core.calculations.jaimini_dashas import calculate_all_jaimini_dashas
-from app.core.calculations.extended_chakras import calculate_all_chakras
-from app.core.calculations.prashna import analyze_prashna_chart
+from app.core.calculations.additional_chakras import calculate_additional_chakras
 from app.core.calculations.advanced_dashas import AdvancedDashaCalculator
 from app.core.calculations.advanced_divisional import AdvancedDivisionalCalculator
-from app.core.calculations.complete_yogas import calculate_complete_yogas
-from app.core.calculations.dasa_pravesh import calculate_dasa_pravesh
-from app.core.calculations.tajaka_system import calculate_tajaka_annual
-from app.core.calculations.mundane_astrology import calculate_mundane_chart
+from app.core.calculations.birth_rectification import rectify_birth_time
 from app.core.calculations.chart_superimposition import ChartSuperimposition
-from app.core.calculations.additional_chakras import calculate_additional_chakras
-from app.core.calculations.panchang import PanchangCalculator
 from app.core.calculations.compatibility import calculate_compatibility
-
+from app.core.calculations.complete_yogas import calculate_complete_yogas
+from app.core.calculations.critical_points import analyze_all_critical_points
+from app.core.calculations.dasa_pravesh import calculate_dasa_pravesh
+from app.core.calculations.extended_chakras import calculate_all_chakras
+from app.core.calculations.extended_dashas import calculate_all_extended_dashas
+from app.core.calculations.jaimini_dashas import calculate_all_jaimini_dashas
+from app.core.calculations.latta_system import analyze_latta
+from app.core.calculations.mundane_astrology import calculate_mundane_chart
+from app.core.calculations.numerology import calculate_numerology
+from app.core.calculations.panchang import PanchangCalculator
+from app.core.calculations.prashna import analyze_prashna_chart
+from app.core.calculations.sahamas import calculate_sahamas
+from app.core.calculations.tajaka_system import calculate_tajaka_annual
+from app.core.calculations.transit_search import search_transits
+from fastapi import APIRouter, HTTPException
 
 router = APIRouter()
 
@@ -126,9 +124,7 @@ async def debug_verify() -> Dict[str, Any]:
         )
         results["birth_rectification"] = _ok(
             {
-                "recommended_time": rect["recommended_time"].isoformat()
-                if rect.get("recommended_time")
-                else None,
+                "recommended_time": rect["recommended_time"].isoformat() if rect.get("recommended_time") else None,
                 "overall_confidence": rect.get("overall_confidence"),
                 "methods": list(rect.get("methods", {}).keys()),
             }
@@ -362,9 +358,7 @@ async def debug_verify() -> Dict[str, Any]:
     # 20) Additional Chakras
     try:
         add_ch = calculate_additional_chakras(SAMPLE_PLANETS["Moon"], weekday=2)
-        results["additional_chakras"] = _ok(
-            {name: {"chakra_name": v["chakra_name"]} for name, v in add_ch.items()}
-        )
+        results["additional_chakras"] = _ok({name: {"chakra_name": v["chakra_name"]} for name, v in add_ch.items()})
     except Exception as e:
         results["additional_chakras"] = _err(e)
 

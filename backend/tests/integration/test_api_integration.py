@@ -11,7 +11,7 @@ from app.core.security import create_access_token
 from app.models.user import UserRole
 
 # Load test data
-with open(os.path.join(os.path.dirname(__file__), '../../tests/data/test_data/birth_data.json')) as f:
+with open(os.path.join(os.path.dirname(__file__), 'test_data/birth_data.json')) as f:
     TEST_BIRTH_DATA = json.load(f)
 
 @pytest.fixture

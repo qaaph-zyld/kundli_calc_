@@ -1,9 +1,11 @@
 """Ayanamsa calculation endpoints."""
+
+from datetime import datetime
 from typing import Dict
+
+import swisseph as swe
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
-from datetime import datetime
-import swisseph as swe
 
 router = APIRouter()
 
@@ -12,10 +14,7 @@ class AyanamsaRequest(BaseModel):
     """Request model for ayanamsa calculation."""
 
     date: datetime = Field(..., description="Date for ayanamsa calculation")
-    ayanamsa_type: str = Field(
-        "lahiri",
-        description="Type of ayanamsa (lahiri, raman, krishnamurti, etc.)"
-    )
+    ayanamsa_type: str = Field("lahiri", description="Type of ayanamsa (lahiri, raman, krishnamurti, etc.)")
 
 
 @router.post("/calculate", response_model=Dict[str, float])
@@ -50,7 +49,4 @@ async def calculate_ayanamsa(request: AyanamsaRequest):
         val = float(swe.get_ayanamsa_ut(jd))
         return {"ayanamsa": val}
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error calculating ayanamsa: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error calculating ayanamsa: {str(e)}")

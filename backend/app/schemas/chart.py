@@ -1,6 +1,8 @@
-from pydantic import BaseModel, UUID4, Field
 from datetime import datetime
 from typing import Dict, List, Optional
+
+from pydantic import BaseModel, ConfigDict, Field, UUID4
+
 
 class BirthChartBase(BaseModel):
     name: Optional[str] = None
@@ -10,7 +12,8 @@ class BirthChartBase(BaseModel):
     altitude: float = Field(default=0)
     timezone: str
     ayanamsa: int = Field(default=1)
-    house_system: str = Field(default='P')
+    house_system: str = Field(default="P")
+
 
 class BirthChartCreate(BirthChartBase):
     planetary_positions: Dict
@@ -18,8 +21,10 @@ class BirthChartCreate(BirthChartBase):
     aspects: List[Dict]
     nakshatras: Dict
 
+
 class BirthChartUpdate(BirthChartBase):
     pass
+
 
 class BirthChart(BirthChartBase):
     id: UUID4
@@ -31,5 +36,4 @@ class BirthChart(BirthChartBase):
     created_at: datetime
     updated_at: datetime
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

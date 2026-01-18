@@ -6,16 +6,17 @@ Provides structured chart data for frontend rendering.
 Includes planets, houses, aspects, yogas in JSON format optimized for D3.js/Canvas/SVG.
 """
 
-from typing import List, Dict, Any, Optional
+from typing import Any, Dict, List, Optional
+
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
-
 
 router = APIRouter()
 
 
 class PlanetVisualization(BaseModel):
     """Planet data for visualization"""
+
     name: str
     longitude: float = Field(..., ge=0, lt=360)
     sign: str
@@ -27,6 +28,7 @@ class PlanetVisualization(BaseModel):
 
 class HouseVisualization(BaseModel):
     """House data for visualization"""
+
     number: int = Field(..., ge=1, le=12)
     sign: str
     cusp_longitude: float = Field(..., ge=0, lt=360)
@@ -34,6 +36,7 @@ class HouseVisualization(BaseModel):
 
 class AspectVisualization(BaseModel):
     """Aspect data for visualization"""
+
     from_planet: str
     to_planet: str
     aspect_type: str
@@ -43,6 +46,7 @@ class AspectVisualization(BaseModel):
 
 class YogaVisualization(BaseModel):
     """Yoga data for visualization"""
+
     name: str
     planets_involved: List[str]
     houses_involved: List[int]
@@ -52,6 +56,7 @@ class YogaVisualization(BaseModel):
 
 class ChartVisualizationResponse(BaseModel):
     """Complete chart visualization data"""
+
     chart_id: str
     planets: List[PlanetVisualization]
     houses: List[HouseVisualization]
@@ -93,14 +98,14 @@ class ChartVisualizationResponse(BaseModel):
     - Highlight yogas visually
     - Show aspect lines
     - Enable click-to-interpret functionality
-    """
+    """,
 )
 async def get_chart_visualization(chart_id: str):
     """Get structured chart data for frontend visualization"""
     try:
         # In production, retrieve from database
         # For now, return structured example data
-        
+
         example_chart = ChartVisualizationResponse(
             chart_id=chart_id,
             planets=[
@@ -111,7 +116,7 @@ async def get_chart_visualization(chart_id: str):
                     house=10,
                     dignity="neutral",
                     retrograde=False,
-                    degree_in_sign=15.23
+                    degree_in_sign=15.23,
                 ),
                 PlanetVisualization(
                     name="Moon",
@@ -120,7 +125,7 @@ async def get_chart_visualization(chart_id: str):
                     house=4,
                     dignity="own_sign",
                     retrograde=False,
-                    degree_in_sign=15.67
+                    degree_in_sign=15.67,
                 ),
                 PlanetVisualization(
                     name="Jupiter",
@@ -129,22 +134,35 @@ async def get_chart_visualization(chart_id: str):
                     house=9,
                     dignity="own_sign",
                     retrograde=False,
-                    degree_in_sign=15.89
-                )
+                    degree_in_sign=15.89,
+                ),
             ],
             houses=[
-                HouseVisualization(number=i, sign=signs[(i-1) % 12], cusp_longitude=i*30.0)
-                for i, signs in [(j, ["Leo", "Virgo", "Libra", "Scorpio", "Sagittarius", "Capricorn",
-                                      "Aquarius", "Pisces", "Aries", "Taurus", "Gemini", "Cancer"])]
+                HouseVisualization(number=i, sign=signs[(i - 1) % 12], cusp_longitude=i * 30.0)
+                for i, signs in [
+                    (
+                        j,
+                        [
+                            "Leo",
+                            "Virgo",
+                            "Libra",
+                            "Scorpio",
+                            "Sagittarius",
+                            "Capricorn",
+                            "Aquarius",
+                            "Pisces",
+                            "Aries",
+                            "Taurus",
+                            "Gemini",
+                            "Cancer",
+                        ],
+                    )
+                ]
                 for j in range(1, 13)
             ],
             aspects=[
                 AspectVisualization(
-                    from_planet="Jupiter",
-                    to_planet="Sun",
-                    aspect_type="5th_aspect",
-                    strength=85.0,
-                    is_benefic=True
+                    from_planet="Jupiter", to_planet="Sun", aspect_type="5th_aspect", strength=85.0, is_benefic=True
                 )
             ],
             yogas=[
@@ -153,20 +171,17 @@ async def get_chart_visualization(chart_id: str):
                     planets_involved=["Jupiter", "Moon"],
                     houses_involved=[9, 4],
                     formation_strength=87.5,
-                    category="Raja Yoga"
+                    category="Raja Yoga",
                 )
             ],
             ascendant_sign="Leo",
-            ascendant_degree=0.0
+            ascendant_degree=0.0,
         )
-        
+
         return example_chart
-        
+
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error generating chart visualization: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error generating chart visualization: {str(e)}")
 
 
 @router.post("/visualization/generate")
@@ -175,15 +190,12 @@ async def generate_chart_visualization(birth_data: Dict[str, Any]):
     try:
         # This would calculate actual positions using Swiss Ephemeris
         # For now, return structured format
-        
+
         return {
             "status": "success",
             "message": "Chart visualization data generated",
-            "note": "Integrate with calculation engine for real positions"
+            "note": "Integrate with calculation engine for real positions",
         }
-        
+
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Error: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Error: {str(e)}")

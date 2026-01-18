@@ -1,32 +1,81 @@
 """Panchang calculation endpoints."""
+
+import math
+from datetime import datetime
 from typing import Dict
+
+import swisseph as swe
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
-from datetime import datetime
-import math
-import swisseph as swe
 
 router = APIRouter()
 
 NAKSHATRAS = [
-    "Ashwini", "Bharani", "Krittika", "Rohini", "Mrigashira", "Ardra",
-    "Punarvasu", "Pushya", "Ashlesha", "Magha", "Purva Phalguni",
-    "Uttara Phalguni", "Hasta", "Chitra", "Swati", "Vishakha", "Anuradha",
-    "Jyeshtha", "Mula", "Purva Ashadha", "Uttara Ashadha", "Shravana",
-    "Dhanishta", "Shatabhisha", "Purva Bhadrapada", "Uttara Bhadrapada", "Revati"
+    "Ashwini",
+    "Bharani",
+    "Krittika",
+    "Rohini",
+    "Mrigashira",
+    "Ardra",
+    "Punarvasu",
+    "Pushya",
+    "Ashlesha",
+    "Magha",
+    "Purva Phalguni",
+    "Uttara Phalguni",
+    "Hasta",
+    "Chitra",
+    "Swati",
+    "Vishakha",
+    "Anuradha",
+    "Jyeshtha",
+    "Mula",
+    "Purva Ashadha",
+    "Uttara Ashadha",
+    "Shravana",
+    "Dhanishta",
+    "Shatabhisha",
+    "Purva Bhadrapada",
+    "Uttara Bhadrapada",
+    "Revati",
 ]
 
 YOGAS = [
-    "Vishkambha", "Priti", "Ayushman", "Saubhagya", "Shobhana", "Atiganda",
-    "Sukarma", "Dhriti", "Shula", "Ganda", "Vriddhi", "Dhruva",
-    "Vyaghata", "Harshana", "Vajra", "Siddhi", "Vyatipata", "Variyana",
-    "Parigha", "Shiva", "Siddha", "Sadhya", "Shubha", "Shukla",
-    "Brahma", "Indra", "Vaidhriti"
+    "Vishkambha",
+    "Priti",
+    "Ayushman",
+    "Saubhagya",
+    "Shobhana",
+    "Atiganda",
+    "Sukarma",
+    "Dhriti",
+    "Shula",
+    "Ganda",
+    "Vriddhi",
+    "Dhruva",
+    "Vyaghata",
+    "Harshana",
+    "Vajra",
+    "Siddhi",
+    "Vyatipata",
+    "Variyana",
+    "Parigha",
+    "Shiva",
+    "Siddha",
+    "Sadhya",
+    "Shubha",
+    "Shukla",
+    "Brahma",
+    "Indra",
+    "Vaidhriti",
 ]
+
 
 class PanchangRequest(BaseModel):
     """Request model for Panchang calculation."""
+
     date_time: datetime = Field(..., description="Date and time in UTC")
+
 
 class PanchangResponse(BaseModel):
     tithi_number: int
@@ -38,14 +87,17 @@ class PanchangResponse(BaseModel):
     yoga_number: int
     karana_number: int
 
+
 class SunTimesRequest(BaseModel):
     date: datetime = Field(..., description="Date in UTC (time ignored; sunrise/sunset computed for that day)")
     latitude: float = Field(..., description="Latitude")
     longitude: float = Field(..., description="Longitude")
 
+
 class SunTimesResponse(BaseModel):
     sunrise_utc: datetime
     sunset_utc: datetime
+
 
 @router.post("/calculate", response_model=PanchangResponse)
 async def calculate_panchang(request: PanchangRequest):
@@ -93,6 +145,7 @@ async def calculate_panchang(request: PanchangRequest):
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Error calculating Panchang: {str(e)}")
 
+
 @router.post("/sun_times", response_model=SunTimesResponse)
 async def calculate_sun_times(request: SunTimesRequest):
     """
@@ -104,17 +157,17 @@ async def calculate_sun_times(request: SunTimesRequest):
         # Ensure all parameters are correct types
         lat = float(request.latitude)
         lon = float(request.longitude)
-        
+
         # Calculate using simpler approach: find when Sun altitude crosses horizon
         # Search for sunrise around 6am local time
         jd_sunrise = jd0 + 0.25  # 6am UTC
         # Calculate Sun's position
         sun_pos = swe.calc_ut(jd_sunrise, swe.SUN, swe.FLG_SWIEPH | swe.FLG_EQUATORIAL)[0]
-        
+
         # For more accurate sunrise/sunset, iterate to find horizon crossing
         # Simplified: use approximate calculation based on Sun's declination
         # This is a basic implementation - production should use swe.rise_trans correctly
-        
+
         # Rough sunrise/sunset calculation
         # Hour angle at sunrise: cos(H) = -tan(lat)*tan(decl)
         sun_ecl = swe.calc_ut(jd0 + 0.5, swe.SUN, swe.FLG_SWIEPH)[0]  # noon position
@@ -123,7 +176,7 @@ async def calculate_sun_times(request: SunTimesRequest):
         sun_eq = swe.calc_ut(jd0 + 0.5, swe.SUN, swe.FLG_SWIEPH | swe.FLG_EQUATORIAL)[0]
         decl = sun_eq[1] * math.pi / 180.0  # declination in radians
         lat_rad = lat * math.pi / 180.0
-        
+
         # Hour angle calculation (simplified, ignores refraction and sun's radius)
         cos_h = -math.tan(lat_rad) * math.tan(decl)
         if cos_h < -1:
@@ -134,15 +187,15 @@ async def calculate_sun_times(request: SunTimesRequest):
             h_angle = 0
         else:
             h_angle = math.acos(cos_h)
-        
+
         # Convert hour angle to time
         sunrise_hour = 12.0 - (h_angle * 180.0 / math.pi) / 15.0 - lon / 15.0
         sunset_hour = 12.0 + (h_angle * 180.0 / math.pi) / 15.0 - lon / 15.0
-        
+
         # Build datetime objects from calculated JD
         sr_jd = jd0 + sunrise_hour / 24.0
         ss_jd = jd0 + sunset_hour / 24.0
-        
+
         # Convert JD to datetime
         y, m, day, ut = swe.revjul(sr_jd)
         hr = int(ut)
@@ -150,15 +203,16 @@ async def calculate_sun_times(request: SunTimesRequest):
         sec_float = ((ut - hr) * 60 - mi) * 60
         se = min(59, max(0, int(round(sec_float))))  # Clamp to 0-59
         sunrise = datetime(int(round(y)), int(round(m)), int(round(day)), hr, mi, se)
-        
+
         y2, m2, day2, ut2 = swe.revjul(ss_jd)
         hr2 = int(ut2)
         mi2 = int((ut2 - hr2) * 60)
         sec_float2 = ((ut2 - hr2) * 60 - mi2) * 60
         se2 = min(59, max(0, int(round(sec_float2))))  # Clamp to 0-59
         sunset = datetime(int(round(y2)), int(round(m2)), int(round(day2)), hr2, mi2, se2)
-        
+
         return SunTimesResponse(sunrise_utc=sunrise, sunset_utc=sunset)
     except Exception as e:
         import traceback
+
         raise HTTPException(status_code=400, detail=f"Error calculating sun times: {str(e)}\n{traceback.format_exc()}")

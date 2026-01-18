@@ -3,26 +3,28 @@ API Endpoints Package
 All endpoint routers exported here
 """
 
-from . import health
-from . import ashtakavarga
-from . import bhava
-from . import interpretations
-from . import comprehensive_interpretation
-from . import shadbala
-from . import kp_system
-from . import yogas
-from . import transits
-from . import additional_dashas
-from . import dasha
-from . import panchang
-from . import charts
-from . import horoscope
-from . import divisional
-from . import debug
-from . import location
-from . import famous_charts
-from . import system_health
-from . import traditional
+from . import (
+    additional_dashas,
+    ashtakavarga,
+    bhava,
+    charts,
+    comprehensive_interpretation,
+    dasha,
+    debug,
+    divisional,
+    famous_charts,
+    health,
+    horoscope,
+    interpretations,
+    kp_system,
+    location,
+    panchang,
+    shadbala,
+    system_health,
+    traditional,
+    transits,
+    yogas,
+)
 
 __all__ = [
     "health",

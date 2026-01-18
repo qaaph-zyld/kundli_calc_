@@ -3,25 +3,25 @@ Famous Charts API Endpoints
 Reference charts from notable personalities.
 """
 
-from typing import List, Optional
-from fastapi import APIRouter, HTTPException, Query
-from pydantic import BaseModel
 from datetime import datetime
+from typing import List, Optional
 
 from app.core.data.famous_charts import (
+    FamousChart,
+    get_categories,
     get_famous_chart,
     list_famous_charts,
-    get_categories,
     search_famous_charts,
-    FamousChart,
 )
-
+from fastapi import APIRouter, HTTPException, Query
+from pydantic import BaseModel
 
 router = APIRouter()
 
 
 class FamousChartResponse(BaseModel):
     """Famous chart response model"""
+
     key: str
     name: str
     birth_date: str
@@ -35,6 +35,7 @@ class FamousChartResponse(BaseModel):
 
 class FamousChartListItem(BaseModel):
     """List item for famous charts"""
+
     key: str
     name: str
     birth_date: str
@@ -44,9 +45,7 @@ class FamousChartListItem(BaseModel):
 
 
 @router.get("/list", response_model=List[FamousChartListItem])
-async def list_charts(
-    category: Optional[str] = Query(None, description="Filter by category")
-):
+async def list_charts(category: Optional[str] = Query(None, description="Filter by category")):
     """
     List all famous charts.
     Optionally filter by category (Politics, Science, Spiritual, Entertainment, Sports, Business).
@@ -62,9 +61,7 @@ async def get_chart_categories():
 
 
 @router.get("/search", response_model=List[FamousChartListItem])
-async def search_charts(
-    q: str = Query(..., description="Search query")
-):
+async def search_charts(q: str = Query(..., description="Search query")):
     """Search famous charts by name or description"""
     return search_famous_charts(q)
 
@@ -76,10 +73,10 @@ async def get_chart(chart_key: str):
     Use the key from the list endpoint.
     """
     chart = get_famous_chart(chart_key)
-    
+
     if not chart:
         raise HTTPException(status_code=404, detail=f"Chart '{chart_key}' not found")
-    
+
     return FamousChartResponse(
         key=chart_key,
         name=chart.name,

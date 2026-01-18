@@ -8,12 +8,13 @@ https://huggingface.co/datasets/vedastro-org/15000-Famous-People-Birth-Date-Loca
 
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Dict, List, Optional, Any
+from typing import Any, Dict, List, Optional
 
 
 @dataclass
 class FamousChart:
     """A famous person's birth data"""
+
     name: str
     birth_date: datetime
     birth_place: str
@@ -68,7 +69,6 @@ FAMOUS_CHARTS: Dict[str, FamousChart] = {
         category="Politics",
         description="Prime Minister of India",
     ),
-    
     # Scientists & Thinkers
     "albert_einstein": FamousChart(
         name="Albert Einstein",
@@ -100,7 +100,6 @@ FAMOUS_CHARTS: Dict[str, FamousChart] = {
         category="Science",
         description="Missile Man of India, President",
     ),
-    
     # Spiritual Leaders
     "swami_vivekananda": FamousChart(
         name="Swami Vivekananda",
@@ -132,7 +131,6 @@ FAMOUS_CHARTS: Dict[str, FamousChart] = {
         category="Spiritual",
         description="Author of Autobiography of a Yogi",
     ),
-    
     # Entertainment
     "amitabh_bachchan": FamousChart(
         name="Amitabh Bachchan",
@@ -174,7 +172,6 @@ FAMOUS_CHARTS: Dict[str, FamousChart] = {
         category="Entertainment",
         description="Music Composer, Oscar Winner",
     ),
-    
     # Sports
     "sachin_tendulkar": FamousChart(
         name="Sachin Tendulkar",
@@ -206,7 +203,6 @@ FAMOUS_CHARTS: Dict[str, FamousChart] = {
         category="Sports",
         description="Former Indian Cricket Captain",
     ),
-    
     # Business
     "mukesh_ambani": FamousChart(
         name="Mukesh Ambani",
@@ -228,7 +224,6 @@ FAMOUS_CHARTS: Dict[str, FamousChart] = {
         category="Business",
         description="Chairman Emeritus of Tata Sons",
     ),
-    
     # International
     "steve_jobs": FamousChart(
         name="Steve Jobs",
@@ -271,20 +266,22 @@ def get_famous_chart(key: str) -> Optional[FamousChart]:
 def list_famous_charts(category: Optional[str] = None) -> List[Dict[str, Any]]:
     """List all famous charts, optionally filtered by category"""
     charts = []
-    
+
     for key, chart in FAMOUS_CHARTS.items():
         if category and chart.category.lower() != category.lower():
             continue
-        
-        charts.append({
-            "key": key,
-            "name": chart.name,
-            "birth_date": chart.birth_date.isoformat(),
-            "birth_place": chart.birth_place,
-            "category": chart.category,
-            "description": chart.description,
-        })
-    
+
+        charts.append(
+            {
+                "key": key,
+                "name": chart.name,
+                "birth_date": chart.birth_date.isoformat(),
+                "birth_place": chart.birth_place,
+                "category": chart.category,
+                "description": chart.description,
+            }
+        )
+
     return sorted(charts, key=lambda x: x["name"])
 
 
@@ -298,16 +295,18 @@ def search_famous_charts(query: str) -> List[Dict[str, Any]]:
     """Search famous charts by name"""
     query_lower = query.lower()
     results = []
-    
+
     for key, chart in FAMOUS_CHARTS.items():
         if query_lower in chart.name.lower() or query_lower in chart.description.lower():
-            results.append({
-                "key": key,
-                "name": chart.name,
-                "birth_date": chart.birth_date.isoformat(),
-                "birth_place": chart.birth_place,
-                "category": chart.category,
-                "description": chart.description,
-            })
-    
+            results.append(
+                {
+                    "key": key,
+                    "name": chart.name,
+                    "birth_date": chart.birth_date.isoformat(),
+                    "birth_place": chart.birth_place,
+                    "category": chart.category,
+                    "description": chart.description,
+                }
+            )
+
     return results

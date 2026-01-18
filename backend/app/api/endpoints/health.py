@@ -9,10 +9,12 @@ from fastapi import APIRouter, HTTPException
 
 router = APIRouter()
 
+
 @router.get("")
 async def health_check():
     """Health check endpoint"""
     return {"status": "healthy"}
+
 
 @router.get("/simulate-error")
 async def simulate_error():

@@ -4,28 +4,25 @@ from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 import pytz
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel, Field, field_validator
-
+from app.core.analysis.bhava_analysis import create_comprehensive_bhava_report
+from app.core.astronomical import AstronomicalCalculator as SweCalculator
 from app.core.astronomical import (
-    AstronomicalCalculator as SweCalculator,
     AyanamsaSystem,
     CelestialBody,
     GeoLocation,
 )
+from app.core.calculations.ashtakavarga_complete import calculate_complete_ashtakavarga
 from app.core.calculations.aspects import EnhancedAspectCalculator
 from app.core.calculations.dasha_system import VimshottariDasha
+from app.core.calculations.gochara_transits import GocharaSystem
+from app.core.calculations.houses import HouseCalculator
+from app.core.calculations.jaimini_complete import calculate_complete_jaimini_analysis
 from app.core.calculations.shadbala import ShadbalaSystem
 from app.core.calculations.transit_analysis import get_current_transit_positions
-from app.core.calculations.houses import HouseCalculator
-
-from app.core.calculations.ashtakavarga_complete import calculate_complete_ashtakavarga
-from app.core.calculations.gochara_transits import GocharaSystem
-from app.core.calculations.jaimini_complete import calculate_complete_jaimini_analysis
-from app.core.analysis.bhava_analysis import create_comprehensive_bhava_report
 from app.core.remedies.gemstone_system import recommend_gemstones_for_chart
 from app.core.remedies.mantra_charity_system import create_complete_remedial_plan
-
+from fastapi import APIRouter, HTTPException
+from pydantic import BaseModel, Field, field_validator
 
 router = APIRouter()
 
@@ -109,7 +106,9 @@ class TraditionalReportRequest(BaseModel):
 
     include_ashtakavarga_reductions: bool = Field(default=True)
     include_current_transits: bool = Field(default=True)
-    transit_datetime_utc: Optional[datetime] = Field(default=None, description="Optional UTC datetime for transit snapshot")
+    transit_datetime_utc: Optional[datetime] = Field(
+        default=None, description="Optional UTC datetime for transit snapshot"
+    )
 
     @field_validator("date")
     @classmethod
@@ -167,7 +166,11 @@ async def traditional_report(req: TraditionalReportRequest) -> Dict[str, Any]:
         natal_lons: Dict[str, float] = {}
         natal_speeds: Dict[str, float] = {}
         for body, pos in positions.items():
-            name = body.value.title() if body.value not in ["rahu", "ketu"] else ("Rahu" if body == CelestialBody.RAHU else "Ketu")
+            name = (
+                body.value.title()
+                if body.value not in ["rahu", "ketu"]
+                else ("Rahu" if body == CelestialBody.RAHU else "Ketu")
+            )
             if name in ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn", "Rahu", "Ketu"]:
                 natal_lons[name] = float(pos.longitude)
                 natal_speeds[name] = float(pos.speed)
@@ -239,9 +242,7 @@ async def traditional_report(req: TraditionalReportRequest) -> Dict[str, Any]:
         # Remedies
         functional_benefics = _functional_benefics(asc_lon)
         current_maha = (
-            current_dasha.get("mahadasha", {}).get("planet")
-            if isinstance(current_dasha, dict)
-            else None
+            current_dasha.get("mahadasha", {}).get("planet") if isinstance(current_dasha, dict) else None
         ) or dasha_at_birth["dasha_sequence"][0]["planet"]
 
         gemstones = recommend_gemstones_for_chart(
@@ -261,7 +262,9 @@ async def traditional_report(req: TraditionalReportRequest) -> Dict[str, Any]:
                 target_datetime=transit_snapshot_dt,
                 ayanamsa_type=req.ayanamsa,
             )
-            current_positions_map = current_positions.get("positions", {}) if isinstance(current_positions, dict) else {}
+            current_positions_map = (
+                current_positions.get("positions", {}) if isinstance(current_positions, dict) else {}
+            )
             current_lons = {
                 p: float(v["longitude"])
                 for p, v in current_positions_map.items()

@@ -1,54 +1,45 @@
 """
 API endpoints for Prediction Engine
 """
+
 from datetime import datetime
 from typing import Dict, List, Optional
+
+from app.core.calculations.prediction_engine import PredictionEngine
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field, field_validator
 
-from app.core.calculations.prediction_engine import PredictionEngine
-
 router = APIRouter()
+
 
 class MuhurtaRequest(BaseModel):
     """Request model for Muhurta calculation"""
+
     datetime_utc: str = Field(..., description="UTC datetime string")
     activity_type: str = Field(..., description="Type of activity")
-    planet_positions: Dict[str, float] = Field(
-        ..., 
-        description="Current planetary positions"
-    )
-    planet_strengths: Dict[str, float] = Field(
-        ..., 
-        description="Current planetary strengths"
-    )
-    
-    @field_validator('datetime_utc')
+    planet_positions: Dict[str, float] = Field(..., description="Current planetary positions")
+    planet_strengths: Dict[str, float] = Field(..., description="Current planetary strengths")
+
+    @field_validator("datetime_utc")
     @classmethod
     def validate_datetime(cls, v: str) -> datetime:
         try:
             return datetime.fromisoformat(v)
         except ValueError:
             raise ValueError("Invalid datetime format")
-    
-    @field_validator('activity_type')
+
+    @field_validator("activity_type")
     @classmethod
     def validate_activity(cls, v: str) -> str:
-        valid_activities = {
-            'business', 'marriage', 'travel',
-            'education', 'medical', 'spiritual'
-        }
+        valid_activities = {"business", "marriage", "travel", "education", "medical", "spiritual"}
         if v not in valid_activities:
             raise ValueError(f"Invalid activity type. Must be one of: {valid_activities}")
         return v
-    
-    @field_validator('planet_positions')
+
+    @field_validator("planet_positions")
     @classmethod
     def validate_positions(cls, v: Dict[str, float]) -> Dict[str, float]:
-        valid_planets = {
-            'sun', 'moon', 'mars', 'mercury',
-            'jupiter', 'venus', 'saturn'
-        }
+        valid_planets = {"sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"}
         for planet in v:
             if planet.lower() not in valid_planets:
                 raise ValueError(f"Invalid planet: {planet}")
@@ -56,72 +47,58 @@ class MuhurtaRequest(BaseModel):
                 raise ValueError(f"Invalid position for {planet}: {v[planet]}")
         return v
 
+
 class NextSuitableTimeRequest(MuhurtaRequest):
     """Request model for finding next suitable time"""
-    max_days: int = Field(
-        7, 
-        ge=1, 
-        le=30, 
-        description="Maximum days to look ahead"
-    )
+
+    max_days: int = Field(7, ge=1, le=30, description="Maximum days to look ahead")
+
 
 class TransitPeriodRequest(BaseModel):
     """Request model for transit period analysis"""
+
     start_time: str = Field(..., description="Period start time (UTC)")
     end_time: str = Field(..., description="Period end time (UTC)")
     planet: str = Field(..., description="Planet to analyze")
-    natal_position: float = Field(
-        ..., 
-        ge=0, 
-        lt=360, 
-        description="Planet's natal position"
-    )
-    transit_positions: List[Dict[str, str]] = Field(
-        ..., 
-        description="List of transit positions with times"
-    )
-    
-    @field_validator('start_time', 'end_time')
+    natal_position: float = Field(..., ge=0, lt=360, description="Planet's natal position")
+    transit_positions: List[Dict[str, str]] = Field(..., description="List of transit positions with times")
+
+    @field_validator("start_time", "end_time")
     @classmethod
     def validate_datetime(cls, v: str) -> datetime:
         try:
             return datetime.fromisoformat(v)
         except ValueError:
             raise ValueError("Invalid datetime format")
-    
-    @field_validator('planet')
+
+    @field_validator("planet")
     @classmethod
     def validate_planet(cls, v: str) -> str:
-        valid_planets = {
-            'sun', 'moon', 'mars', 'mercury',
-            'jupiter', 'venus', 'saturn'
-        }
+        valid_planets = {"sun", "moon", "mars", "mercury", "jupiter", "venus", "saturn"}
         if v.lower() not in valid_planets:
             raise ValueError(f"Invalid planet: {v}")
         return v
-    
-    @field_validator('transit_positions')
+
+    @field_validator("transit_positions")
     @classmethod
     def validate_transit_positions(cls, v: List[Dict[str, str]]) -> List:
         try:
-            return [(datetime.fromisoformat(pos['time']), float(pos['position']))
-                    for pos in v]
+            return [(datetime.fromisoformat(pos["time"]), float(pos["position"])) for pos in v]
         except (KeyError, ValueError) as e:
             raise ValueError(f"Invalid transit position format: {e}")
+
 
 @router.post("/muhurta/calculate", tags=["Prediction"])
 async def calculate_muhurta(request: MuhurtaRequest):
     """Calculate Muhurta suitability for given time and activity"""
     try:
         result = PredictionEngine.calculate_muhurta(
-            request.datetime_utc,
-            request.activity_type,
-            request.planet_positions,
-            request.planet_strengths
+            request.datetime_utc, request.activity_type, request.planet_positions, request.planet_strengths
         )
         return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
 
 @router.post("/muhurta/next-suitable", tags=["Prediction"])
 async def find_next_suitable_time(request: NextSuitableTimeRequest):
@@ -132,29 +109,23 @@ async def find_next_suitable_time(request: NextSuitableTimeRequest):
             request.activity_type,
             request.planet_positions,
             request.planet_strengths,
-            request.max_days
+            request.max_days,
         )
-        
+
         if result is None:
-            raise HTTPException(
-                status_code=404,
-                detail="No suitable time found within specified period"
-            )
-            
+            raise HTTPException(status_code=404, detail="No suitable time found within specified period")
+
         return result
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
+
 
 @router.post("/transit/analyze", tags=["Prediction"])
 async def analyze_transit_period(request: TransitPeriodRequest):
     """Analyze transit period effects"""
     try:
         result = PredictionEngine.analyze_transit_period(
-            request.start_time,
-            request.end_time,
-            request.planet,
-            request.natal_position,
-            request.transit_positions
+            request.start_time, request.end_time, request.planet, request.natal_position, request.transit_positions
         )
         return result
     except Exception as e:

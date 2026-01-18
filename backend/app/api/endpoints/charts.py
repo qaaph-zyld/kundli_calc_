@@ -1,25 +1,27 @@
-from fastapi import APIRouter, HTTPException, Depends, Query
+import json
 from datetime import datetime
-from typing import Optional, Dict, Any, List
 from decimal import Decimal
+from typing import Any, Dict, List, Optional
 
-from ..models import ChartRequest, ChartResponse
+import swisseph as swe
+from fastapi import APIRouter, Depends, HTTPException, Query
+
+from ...core.astronomical import AstronomicalCalculator as SweCalculator
 from ...core.astronomical import (
-    AstronomicalCalculator as SweCalculator,
-    GeoLocation,
     AyanamsaSystem,
     CelestialBody,
+    GeoLocation,
 )
-from ...core.calculations.houses import HouseCalculator
-from ...core.calculations.aspects import EnhancedAspectCalculator
-from ...core.calculations.nakshatra import NakshatraCalculator
-from ...core.calculations.divisional_charts import DivisionalChartEngine
-import json
 from ...core.cache import redis_cache as cache
+from ...core.calculations.aspects import EnhancedAspectCalculator
+from ...core.calculations.divisional_charts import DivisionalChartEngine
+from ...core.calculations.houses import HouseCalculator
+from ...core.calculations.nakshatra import NakshatraCalculator
 from ...core.config import settings
-import swisseph as swe
+from ..models import ChartRequest, ChartResponse
 
 router = APIRouter()
+
 
 @router.post(
     "/calculate",
@@ -40,11 +42,9 @@ router = APIRouter()
     - Planetary aspects
     - Ayanamsa value used in calculations
     """,
-    response_description="Complete birth chart data"
+    response_description="Complete birth chart data",
 )
-async def calculate_chart(
-    request: ChartRequest
-) -> ChartResponse:
+async def calculate_chart(request: ChartRequest) -> ChartResponse:
     """Calculate a Vedic birth chart."""
     try:
         cache_key = (
@@ -52,7 +52,7 @@ async def calculate_chart(
             f":{request.latitude}:{request.longitude}:{request.altitude}"
             f":{request.ayanamsa}:{request.house_system}"
         )
-        
+
         # Try to get from cache
         cached_json = cache.get(cache_key)
         if cached_json:
@@ -61,14 +61,14 @@ async def calculate_chart(
                 return ChartResponse(**cached_obj)
             except Exception:
                 pass
-        
+
         # Build GeoLocation
         geo = GeoLocation(
             latitude=float(request.latitude),
             longitude=float(request.longitude),
             altitude=float(request.altitude),
         )
-        
+
         # Ayanamsa mapping (int or string)
         ay_map_int = {
             1: AyanamsaSystem.LAHIRI,
@@ -88,10 +88,10 @@ async def calculate_chart(
             ay_system = ay_map_int.get(int(request.ayanamsa or 1), AyanamsaSystem.LAHIRI)
         swe_calc = SweCalculator(ayanamsa_system=ay_system)
         house_calc = HouseCalculator()
-        
+
         # Planetary positions via Swiss Ephemeris
         positions = swe_calc.calculate_all_positions(request.date_time, geo)
-        
+
         # Convert to API-friendly dict
         def body_name(b: CelestialBody) -> str:
             name_map = {
@@ -112,16 +112,26 @@ async def calculate_chart(
 
         # Sign names for frontend yoga detection
         signs = [
-            "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
-            "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+            "Aries",
+            "Taurus",
+            "Gemini",
+            "Cancer",
+            "Leo",
+            "Virgo",
+            "Libra",
+            "Scorpio",
+            "Sagittarius",
+            "Capricorn",
+            "Aquarius",
+            "Pisces",
         ]
-        
+
         planetary_positions_api: Dict[str, Dict[str, Decimal]] = {}
         planetary_positions_for_aspects: Dict[str, Dict[str, Any]] = {}
         for body, pos in positions.items():
             name = body_name(body)
             sign_num = int(float(pos.longitude) / 30)
-            
+
             planetary_positions_api[name] = {
                 "longitude": Decimal(str(pos.longitude)),
                 "latitude": Decimal(str(pos.latitude)),
@@ -137,30 +147,21 @@ async def calculate_chart(
                 "house": 1,
                 "dignity": "neutral",
             }
-        
+
         # Houses
-        hs_code_map = {
-            "P": "PLACIDUS",
-            "K": "KOCH",
-            "E": "EQUAL",
-            "W": "WHOLE_SIGN",
-            "R": "REGIOMONTANUS",
-            "C": "CAMPANUS",
-        }
-        hs_name = hs_code_map.get(request.house_system, "PLACIDUS")
         houses_dict = house_calc.calculate_houses(
             request.date_time,
             float(request.latitude),
             float(request.longitude),
-            hs_name,
+            request.house_system,
         )
-        
+
         # Pre-calculate house numbers for all planets (optimization)
         planet_houses_for_aspects = {
             pname: house_calc.get_house_for_longitude(pdata["longitude"], houses_dict["cusps"])
             for pname, pdata in planetary_positions_for_aspects.items()
         }
-        
+
         # Aspects - use pre-calculated house numbers
         aspect_calc = EnhancedAspectCalculator()
         for pname, pdata in planetary_positions_for_aspects.items():
@@ -169,13 +170,15 @@ async def calculate_chart(
         aspects_list = aspect_calc.calculate_aspects(planetary_positions_for_aspects)
         aspects_api: List[Dict[str, Any]] = []
         for a in aspects_list:
-            aspects_api.append({
-                "aspect_type": a.aspect.name,
-                "strength": Decimal(str(a.total_influence)),
-                "is_beneficial": bool(a.aspect.benefic_nature >= 0),
-                "special_effects": None,
-            })
-        
+            aspects_api.append(
+                {
+                    "aspect_type": a.aspect.name,
+                    "strength": Decimal(str(a.total_influence)),
+                    "is_beneficial": bool(a.aspect.benefic_nature >= 0),
+                    "special_effects": None,
+                }
+            )
+
         # Ayanamsa value
         jd = swe.julday(
             request.date_time.year,
@@ -187,12 +190,13 @@ async def calculate_chart(
 
         # Planetary strengths - optimized batch calculation
         from ...core.calculations.planetary_strength import PlanetaryStrengthCalculator
+
         psc = PlanetaryStrengthCalculator()
         planetary_strengths: Dict[str, Dict[str, Decimal]] = {}
-        
+
         # Reuse pre-calculated house numbers from aspects section
         planet_houses = planet_houses_for_aspects
-        
+
         # Batch strength calculation
         for pname, pdata in planetary_positions_api.items():
             strength = psc.calculate_strength(
@@ -217,7 +221,7 @@ async def calculate_chart(
             "lon": float(request.longitude),
             "alt": float(request.altitude),
         }
-        
+
         # Only calculate D9 for performance (D10 can be calculated on-demand)
         d9 = div_engine.calculate_chart(request.date_time, 9, geo_dict)
         d10 = div_engine.calculate_chart(request.date_time, 10, geo_dict)
@@ -225,7 +229,7 @@ async def calculate_chart(
         # Add house numbers to planetary positions (for frontend yoga detection)
         asc_deg = float(houses_dict["ascendant"])
         asc_sign_num = int(asc_deg / 30)
-        
+
         # Add house numbers and nakshatra data to planetary positions
         nak_calc = NakshatraCalculator()
         for pname, pdata in planetary_positions_api.items():
@@ -233,7 +237,7 @@ async def calculate_chart(
             # Whole Sign house calculation
             house_num = ((planet_sign_num - asc_sign_num) % 12) + 1
             pdata["house"] = house_num
-            
+
             # Add nakshatra data
             nak_data = nak_calc.calculate_nakshatra(pdata["longitude"])
             pdata["nakshatra"] = nak_data["name"]
@@ -284,7 +288,7 @@ async def calculate_chart(
             },
         }
         result = ChartResponse(**result_payload)
-        
+
         # Cache the result
         try:
             cache.set(
@@ -294,11 +298,8 @@ async def calculate_chart(
             )
         except Exception:
             pass
-        
+
         return result
-        
+
     except Exception as e:
-        raise HTTPException(
-            status_code=400,
-            detail=f"Error calculating birth chart: {str(e)}"
-        )
+        raise HTTPException(status_code=400, detail=f"Error calculating birth chart: {str(e)}")
